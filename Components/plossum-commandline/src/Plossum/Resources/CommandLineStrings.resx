@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="EndOfInput" xml:space="preserve">
+    <value>End of input</value>
+  </data>
+  <data name="UnexpectedEndOfString" xml:space="preserve">
+    <value>Unexpected end of string</value>
+  </data>
+  <data name="MissingClosingQuote" xml:space="preserve">
+    <value>Missing closing quote</value>
+  </data>
+  <data name="MissingClosingQuoteForValue0" xml:space="preserve">
+    <value>Missing closing quote for quote command line value: {0}</value>
+  </data>
+  <data name="DefaultCommandLineExceptionErrorMessage" xml:space="preserve">
+    <value>Error in commandline</value>
+  </data>
+  <data name="DefaultMissingOptionNameExceptionMessage" xml:space="preserve">
+    <value>Missing option name for switch on command line</value>
+  </data>
+  <data name="Option0MustNotBeSpecifiedMultipleTimes" xml:space="preserve">
+    <value>Option "{0}" must not be specified multiple times</value>
+  </data>
+  <data name="Option0MustNotBeSpecifiedMoreThan1Times" xml:space="preserve">
+    <value>Option "{0}" must not be specified more than {1} times</value>
+  </data>
+  <data name="ValueFor03OutOfRangeExpectedNumericBetween1And2" xml:space="preserve">
+    <value>Value specified for "{0}" ({3}) is out of range; expected a numeric value between {1} and {2}</value>
+  </data>
+  <data name="InvalidValue0ForOption1" xml:space="preserve">
+    <value>Invalid value ({0}) for option "{1}"</value>
+  </data>
+  <data name="InternalErrorUnimplementedBoolFunction0UsedInOption1" xml:space="preserve">
+    <value>Internal error; unimplemented BoolFunction {0} used in option "{1}"</value>
+  </data>
+  <data name="MissingRequiredValueForOption0" xml:space="preserve">
+    <value>Missing required value for option "{0}"</value>
+  </data>
+  <data name="Option0DoesNotAcceptAValue" xml:space="preserve">
+    <value>Option "{0}" does not accept a value</value>
+  </data>
+  <data name="Option0MayNotBeSpecifiedTogetherWithOption1" xml:space="preserve">
+    <value>Option "{0}" may not be specified together with option "{1}"</value>
+  </data>
+  <data name="AssignmentCharactersMustNotBeChangedWhileParseInProgress" xml:space="preserve">
+    <value>Assignment characters must not be changed while parse in progress</value>
+  </data>
+  <data name="UndefinedOption0ReferencedFromProhibitionSectionOfOption1" xml:space="preserve">
+    <value>Undefined option "{0}" referenced from prohibition section of option "{1}"</value>
+  </data>
+  <data name="InternalErrorOptionSpecifiedInProhibitionDoesNotExist" xml:space="preserve">
+    <value>Internal error; option specified in prohibition does not exist</value>
+  </data>
+  <data name="Alias0IsInvalidForOption1BoolFunctionIsSetTo2AndThe3OptionStyleIsEnabledWhichProhibitsAnyNameLongerThanOneCharacter" xml:space="preserve">
+    <value>Alias "{0}" is invalid for option "{1}"; BoolFunction is set to {2} and the {3} option style is enabled which prohibits any name longer than one character</value>
+  </data>
+  <data name="AliasName0IsAlreadyInUseByAnotherOption" xml:space="preserve">
+    <value>Alias name "{0}" is already in use by another option</value>
+  </data>
+  <data name="BoolFunctionCanNotBeSetTo0ForOptionWithANameLongerThanOneCharacterWhenOptionStyle1IsSpecifiedInThe2Attribute" xml:space="preserve">
+    <value>BoolFunction can not be set to '{0}' for option with a name longer than one character when option style '{1}' is specified in the {2} attribute</value>
+  </data>
+  <data name="BoolFunctionMayNotBeSetTo0WhenOptionStyle1IsSpecifiedInThe2Attribute" xml:space="preserve">
+    <value>BoolFunction may not be set to '{0}' when option style '{1}' is specified in the {2} attribute</value>
+  </data>
+  <data name="BoolFunctionMayNotBeSetTo0WhenOptionStyle1IsNotSpecifiedInThe2Attribute" xml:space="preserve">
+    <value>BoolFunction may not be set to '{0}' when option style '{1}' is not specified in the {2} attribute</value>
+  </data>
+  <data name="RedefinitionOfCommandLineOptionWithParameterName01" xml:space="preserve">
+    <value>Redefinition of command line option with parameter name "{0}" ({1})</value>
+  </data>
+  <data name="UsingCaseSensitiveNames" xml:space="preserve">
+    <value>using case sensitive names</value>
+  </data>
+  <data name="UsingCaseInsensitiveNames" xml:space="preserve">
+    <value>using case insensitive names</value>
+  </data>
+  <data name="RedefinitionOfGroupWithId01" xml:space="preserve">
+    <value>Redefinition of group with id "{0}" ({1})</value>
+  </data>
+  <data name="InvalidIdOfGroupIdMustNotBeNullOrEmpty" xml:space="preserve">
+    <value>invalid Id of group; Id must not be null or empty</value>
+  </data>
+  <data name="MissingRequiredAttributeForACommandLineManagerObjectCommandLineManagerAttribute" xml:space="preserve">
+    <value>Missing required attribute for a command line manager object: CommandLineManagerAttribute</value>
+  </data>
+  <data name="MissingClosingQuoteForQuotedValue" xml:space="preserve">
+    <value>Missing closing quote for quoted value</value>
+  </data>
+  <data name="EmptyOptionNameIsNotAllowed" xml:space="preserve">
+    <value>Empty option name is not allowed</value>
+  </data>
+  <data name="FileNotFound0" xml:space="preserve">
+    <value>File not found ("{0}")</value>
+  </data>
+  <data name="TheSpecifiedPath0IsInvalid" xml:space="preserve">
+    <value>The specified path ("{0}") is invalid</value>
+  </data>
+  <data name="AccessToTheSpecifiedFile0IsDenied" xml:space="preserve">
+    <value>Access to the specified file ("{0}") is denied</value>
+  </data>
+  <data name="TheSpecifiedPath0IsTooLong" xml:space="preserve">
+    <value>The specified path ("{0}") is too long</value>
+  </data>
+  <data name="UnknownOption0" xml:space="preserve">
+    <value>Unknown option "{0}"</value>
+  </data>
+  <data name="Unexpected0CharacterOnCommandLine" xml:space="preserve">
+    <value>unexpected '{0}' character on command line</value>
+  </data>
+  <data name="InternalErrorUnimplementedTokenTypeReturnedToCommandLineParser" xml:space="preserve">
+    <value>Internal error; Unimplemented token type returned to CommandLineParser</value>
+  </data>
+  <data name="MissingRequiredOption0" xml:space="preserve">
+    <value>Missing required option "{0}".</value>
+  </data>
+  <data name="Only0OccurenceSOfOption1FoundItMustBeSpecifiedExactly2TimeS" xml:space="preserve">
+    <value>Only {0} occurence(s) of option "{1}" found; it must be specified exactly {2} time(s)</value>
+  </data>
+  <data name="Only0OccurenceSOfOption1FoundItMustBeSpecifiedAtLeast2TimeS" xml:space="preserve">
+    <value>Only {0} occurence(s) of option "{1}" found; it must be specified at least {2} time(s)</value>
+  </data>
+  <data name="AtMostOneOfTheOptions0MayBeSpecifiedAtOnce" xml:space="preserve">
+    <value>At most one of the options {0} may be specified at once</value>
+  </data>
+  <data name="AtLeastOneOfTheOption0MustBeSpecified" xml:space="preserve">
+    <value>At least one of the option {0} must be specified</value>
+  </data>
+  <data name="OneOfTheOptions0MustBeSpecified" xml:space="preserve">
+    <value>One of the options {0} must be specified</value>
+  </data>
+  <data name="OnlyOneOfTheOptions0MayBeSpecified" xml:space="preserve">
+    <value>Only one of the options {0} may be specified</value>
+  </data>
+  <data name="AllOfTheOptions0MustBeSpecified" xml:space="preserve">
+    <value>All of the options {0} must be specified</value>
+  </data>
+  <data name="InternalErrorNonImplementedGroupRequirementSpecified" xml:space="preserve">
+    <value>Internal error; non-implemented group requirement specified</value>
+  </data>
+  <data name="ValueWasEitherTooLargeOrTooSmallForThisOptionType" xml:space="preserve">
+    <value>Value was either too large or too small for this option type</value>
+  </data>
+  <data name="Options" xml:space="preserve">
+    <value>Options:</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>version</value>
+  </data>
+  <data name="LastItemOfExclusiveList" xml:space="preserve">
+    <value>or "{0}"</value>
+  </data>
+  <data name="InvalidValue0ForOption1TheValueMustBeOneOf2" xml:space="preserve">
+    <value>Invalid value "{0}" for option "{1}"; The value must be one of {2}</value>
+  </data>
+  <data name="InvalidEnumerationValue0" xml:space="preserve">
+    <value>Invalid enumeration value "{0}"</value>
+  </data>
+  <data name="InternalErrorOptionValueWasSetMoreThanMaxOccursNumberOfTimes" xml:space="preserve">
+    <value>Internal error; Option.Value was set more than MaxOccurs number of times</value>
+  </data>
+  <data name="ArgMustBeGreaterThanZero" xml:space="preserve">
+    <value>{0} must be greater than zero</value>
+  </data>
+  <data name="ArgMustBeNonNegative" xml:space="preserve">
+    <value>{0} must be non-negative</value>
+  </data>
+  <data name="InternalErrorUnimplementedVerticalAlignmentUsed" xml:space="preserve">
+    <value>Internal error; Unimplemented VerticalAlignment used</value>
+  </data>
+  <data name="WidthMustNotBeLessThan0" xml:space="preserve">
+    <value>width must not be less than {0}</value>
+  </data>
+  <data name="Arg0MustNotBeLessThan1" xml:space="preserve">
+    <value>{0} must not be less than {1}</value>
+  </data>
+  <data name="OnLine0InFile1" xml:space="preserve">
+    <value> (on line {0} in {1})</value>
+  </data>
+</root>

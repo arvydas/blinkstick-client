@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ItemType>PackagingProject</ItemType>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0D23B27F-1DF4-4D03-9C1E-07F2B6275D5E}</ProjectGuid>
+    <Packages>
+      <Packages>
+        <Package name="Linux Binaries">
+          <Builder targetFile="..\BlinkStick.tar.gz" platform="Linux" configuration="Release|x86" ctype="BinariesZipPackageBuilder">
+            <ChildEntries>
+              <SolutionItemReference path="..\BlinkStick\BlinkStick.csproj" />
+              <SolutionItemReference path="..\BlinkStick.CLI\BlinkStick.CLI.csproj" />
+              <SolutionItemReference path="..\BlinkStick.Hid\BlinkStick.Hid.csproj" />
+              <SolutionItemReference path="..\BlinkStick.Bayeux\BlinkStick.Bayeux.csproj" />
+              <SolutionItemReference path="..\BlinkStick.CometClient\BlinkStick.CometClient.csproj" />
+              <SolutionItemReference path="..\Components\HidLibrary\src\HidLibrary\HidLibrary.csproj" />
+              <SolutionItemReference path="..\BlinkStick.Platform.Windows\BlinkStick.Platform.Windows.csproj" />
+            </ChildEntries>
+            <RootEntry path="..\BlinkStick.sln" id=":root:" />
+          </Builder>
+        </Package>
+      </Packages>
+    </Packages>
+  </PropertyGroup>
+</Project>

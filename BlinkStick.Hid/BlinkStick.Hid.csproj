@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7AAEBEBE-E38D-47B1-A04C-A055DCEB0757}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BlinkStick.Hid</RootNamespace>
+    <AssemblyName>BlinkStick.Hid</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="AbstractBlinkstickHid.cs" />
+    <Compile Include="LinuxBlinkstickHid.cs" />
+    <Compile Include="BlinkstickDeviceFinder.cs" />
+    <Compile Include="UsbMonitor.cs" />
+    <Compile Include="WindowsBlinkstickHid.cs" />
+    <Compile Include="WinUsbDeviceMonitor.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <ProjectReference Include="..\Components\HidLibrary\src\HidLibrary\HidLibrary.csproj">
+      <Project>{9E8F1D50-74EA-4C60-BD5C-AB2C5B53BC66}</Project>
+      <Name>HidLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibWinUsb\LibUsbDotNet.csproj">
+      <Project>{0A78F6FF-5586-4052-8104-E23FF83A7CE1}</Project>
+      <Name>LibUsbDotNet</Name>
+    </ProjectReference>
+  </ItemGroup>
+</Project>

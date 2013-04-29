@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{59397BA2-2777-4E79-A4F0-8DD0E89B8308}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>BlinkStick</RootNamespace>
+    <AssemblyName>BlinkStick</AssemblyName>
+    <StartupObject>BlinkStick.MainClass</StartupObject>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Components\Json.Net\Bin\Net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Posix" />
+    <Reference Include="log4net">
+      <HintPath>..\Components\log4net-1.2.11\bin\mono\2.0\release\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="MainWindow.cs" />
+    <Compile Include="gtk-gui\MainWindow.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="HSLColor.cs" />
+    <Compile Include="LedController.cs" />
+    <Compile Include="RgbColor.cs" />
+    <Compile Include="Classes\Enumerators.cs" />
+    <Compile Include="gtk-gui\BlinkStick.GoogleEmailSettingsWidget.cs" />
+    <Compile Include="Widgets\GoogleEmailSettingsWidget.cs" />
+    <Compile Include="Utils\MessageBox.cs" />
+    <Compile Include="Widgets\ImapEmailSettingsWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStick.ImapEmailSettingsWidget.cs" />
+    <Compile Include="Imap\Imap.cs" />
+    <Compile Include="Imap\ImapBase.cs" />
+    <Compile Include="Imap\ImapException.cs" />
+    <Compile Include="Classes\CustomNotification.cs" />
+    <Compile Include="Forms\EditNotificationForm.cs" />
+    <Compile Include="Forms\SelectNotificationTypeForm.cs" />
+    <Compile Include="gtk-gui\BlinkStick.SelectNotificationTypeForm.cs" />
+    <Compile Include="gtk-gui\BlinkStick.EditNotificationForm.cs" />
+    <Compile Include="Classes\GoogleEmailNotification.cs" />
+    <Compile Include="Classes\ImapEmailNotification.cs" />
+    <Compile Include="Classes\NotificationManager.cs" />
+    <Compile Include="Classes\NotificationWidget.cs" />
+    <Compile Include="Widgets\HistoryItemWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStick.HistoryItemWidget.cs" />
+    <Compile Include="Widgets\HistoryWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStick.HistoryWidget.cs" />
+    <Compile Include="Classes\HistoryItem.cs" />
+    <Compile Include="Classes\BlinkstickService.cs" />
+    <Compile Include="Widgets\BlinkstickServiceSettingsWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStick.BlinkstickServiceSettingsWidget.cs" />
+    <Compile Include="Forms\BlinkStickTestForm.cs" />
+    <Compile Include="gtk-gui\BlinkStick.BlinkStickTestForm.cs" />
+    <Compile Include="Forms\BlinkStickManageForm.cs" />
+    <Compile Include="gtk-gui\BlinkStick.BlinkStickManageForm.cs" />
+    <Compile Include="Classes\DeviceEntity.cs" />
+    <Compile Include="Classes\CpuUsageNotification.cs" />
+    <Compile Include="gtk-gui\BlinkStick.AboutDialog.cs" />
+    <Compile Include="Forms\AboutDialog.cs" />
+    <Compile Include="Classes\AmbiLightNotification.cs" />
+    <Compile Include="Utils\AbstractScreenCapture.cs" />
+    <Compile Include="Utils\WindowsScreenCapture.cs" />
+    <Compile Include="Utils\XorgAPI.cs" />
+    <Compile Include="Utils\LinuxScreenCapture.cs" />
+    <Compile Include="Utils\Event.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BlinkStick.Hid\BlinkStick.Hid.csproj">
+      <Project>{7AAEBEBE-E38D-47B1-A04C-A055DCEB0757}</Project>
+      <Name>BlinkStick.Hid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlinkStick.Bayeux\BlinkStick.Bayeux.csproj">
+      <Project>{2E6D4FBF-99F5-4424-9555-BD211545A5FA}</Project>
+      <Name>BlinkStick.Bayeux</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Components\HidLibrary\src\HidLibrary\HidLibrary.csproj">
+      <Project>{9E8F1D50-74EA-4C60-BD5C-AB2C5B53BC66}</Project>
+      <Name>HidLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icon.png">
+      <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="App.config" />
+  </ItemGroup>
+</Project>
