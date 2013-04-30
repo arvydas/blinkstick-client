@@ -11,7 +11,7 @@ namespace BlinkStick
 		private global::Gtk.EventBox eventbox1;
 		private global::Gtk.Label label3;
 		private global::Gtk.Button buttonCancel;
-		
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);

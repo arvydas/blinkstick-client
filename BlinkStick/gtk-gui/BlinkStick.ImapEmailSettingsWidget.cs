@@ -11,7 +11,7 @@ namespace BlinkStick
 		private global::Gtk.Label labelImapUsername;
 		private global::Gtk.Label labelPassword;
 		private global::Gtk.Label labelServerAddress;
-		
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);

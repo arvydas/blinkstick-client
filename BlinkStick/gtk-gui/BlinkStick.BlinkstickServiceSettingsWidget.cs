@@ -8,7 +8,7 @@ namespace BlinkStick
 		private global::Gtk.Button buttonPaste;
 		private global::Gtk.Entry entryAccessCode;
 		private global::Gtk.Label label1;
-		
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);

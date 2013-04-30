@@ -13,7 +13,7 @@ namespace BlinkStick
 		private global::Gtk.RadioButton radiobuttonAmbilight;
 		private global::Gtk.Button buttonCancel;
 		private global::Gtk.Button buttonOk;
-		
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
@@ -33,7 +33,7 @@ namespace BlinkStick
 			this.vbox3.Spacing = 6;
 			this.vbox3.BorderWidth = ((uint)(12));
 			// Container child vbox3.Gtk.Box+BoxChild
-			this.radiobuttonCustom = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("Custom"));
+			this.radiobuttonCustom = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString("Custom"));
 			this.radiobuttonCustom.CanFocus = true;
 			this.radiobuttonCustom.Name = "radiobuttonCustom";
 			this.radiobuttonCustom.DrawIndicator = true;
@@ -45,7 +45,7 @@ namespace BlinkStick
 			w2.Expand = false;
 			w2.Fill = false;
 			// Container child vbox3.Gtk.Box+BoxChild
-			this.radiobuttonGmail = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("GMail email account"));
+			this.radiobuttonGmail = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString("GMail email account"));
 			this.radiobuttonGmail.CanFocus = true;
 			this.radiobuttonGmail.Name = "radiobuttonGmail";
 			this.radiobuttonGmail.DrawIndicator = true;
@@ -57,7 +57,7 @@ namespace BlinkStick
 			w3.Expand = false;
 			w3.Fill = false;
 			// Container child vbox3.Gtk.Box+BoxChild
-			this.radiobuttonImap = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("Imap email account"));
+			this.radiobuttonImap = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString("Imap email account"));
 			this.radiobuttonImap.CanFocus = true;
 			this.radiobuttonImap.Name = "radiobuttonImap";
 			this.radiobuttonImap.DrawIndicator = true;
@@ -69,7 +69,7 @@ namespace BlinkStick
 			w4.Expand = false;
 			w4.Fill = false;
 			// Container child vbox3.Gtk.Box+BoxChild
-			this.radiobuttonBlinkstickService = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("Blinkstick.com"));
+			this.radiobuttonBlinkstickService = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString("Blinkstick.com"));
 			this.radiobuttonBlinkstickService.CanFocus = true;
 			this.radiobuttonBlinkstickService.Name = "radiobuttonBlinkstickService";
 			this.radiobuttonBlinkstickService.DrawIndicator = true;
@@ -81,7 +81,7 @@ namespace BlinkStick
 			w5.Expand = false;
 			w5.Fill = false;
 			// Container child vbox3.Gtk.Box+BoxChild
-			this.radiobuttonCpuUsage = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("CPU Usage"));
+			this.radiobuttonCpuUsage = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString("CPU Usage"));
 			this.radiobuttonCpuUsage.CanFocus = true;
 			this.radiobuttonCpuUsage.Name = "radiobuttonCpuUsage";
 			this.radiobuttonCpuUsage.DrawIndicator = true;
@@ -93,7 +93,7 @@ namespace BlinkStick
 			w6.Expand = false;
 			w6.Fill = false;
 			// Container child vbox3.Gtk.Box+BoxChild
-			this.radiobuttonAmbilight = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("AmbiLight"));
+			this.radiobuttonAmbilight = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString("AmbiLight"));
 			this.radiobuttonAmbilight.CanFocus = true;
 			this.radiobuttonAmbilight.Name = "radiobuttonAmbilight";
 			this.radiobuttonAmbilight.DrawIndicator = true;
