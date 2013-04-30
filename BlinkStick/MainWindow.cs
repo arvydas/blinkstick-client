@@ -104,7 +104,10 @@ public partial class MainWindow: Gtk.Window
 	
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
-		SetupSingleInstanceEvent();
+		if (!BlinkstickDeviceFinder.IsUnix())
+		{
+			SetupSingleInstanceEvent();
+		}
 
 		Build ();
 
@@ -277,7 +280,10 @@ public partial class MainWindow: Gtk.Window
 #endif
 		BlinkstickDeviceFinder.FreeUsbResources();
 
-		instanceExistsEvent.Cancel();
+		if (!BlinkstickDeviceFinder.IsUnix())
+		{
+			instanceExistsEvent.Cancel();
+		}
 	}
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
