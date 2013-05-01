@@ -50,7 +50,26 @@ you will not be able to desgin any Gtk# forms/dialogs, because Visual Studio doe
 How to build (Linux)
 --------------------
 
-_Will be written once source code is compatible with Linux OS._
+You will need a recent version of Linux distribution, 
+for example [Linux Mint 14](http://www.linuxmint.com/) or [Ubuntu](http://www.ubuntu.com/).
+
+```
+sudo add-apt-repository ppa:keks9n/monodevelop-latest && sudo apt-get update && sudo apt-get install monodevelop-latest
+```
+
+Install libusb:
+
+```
+sudo apt-get install libusb-1.0-0-dev
+```
+
+Clone this repository using Git.
+
+```
+git clone https://github.com/arvydas/blinkstick-client.git
+```
+
+Open BlinkStick.sln in MonoDevelop 4.0 and do a _Build -> Build All_, then _Run -> Start Debugging_.
 
 How to build (Mac OSX)
 ----------------------
