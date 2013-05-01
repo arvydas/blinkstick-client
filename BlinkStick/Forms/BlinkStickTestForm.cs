@@ -27,6 +27,7 @@ namespace BlinkStick
 		private LedController SelectedController;
 		private NotificationManager Manager;
 		private List<DeviceEntity> DeviceEntities;
+        private CustomNotification TestNotification;
 
 		public BlinkStickTestForm ()
 		{
@@ -100,12 +101,19 @@ namespace BlinkStick
 
 		protected void OnButtonPulseColorClicked (object sender, System.EventArgs e)
 		{
-			SelectedController.PulsateSingleColor(1, 
-			                                 RgbColor.FromGdkColor(
-												colorSelection.CurrentColor.Red, 
-												colorSelection.CurrentColor.Green, 
-												colorSelection.CurrentColor.Blue)
-			                                 );
+            if (TestNotification == null)
+            {
+                TestNotification = new CustomNotification();
+                TestNotification.BlinkCount = 1;
+                TestNotification.BlinkSpeed = BlinkSpeedEnum.Normal;
+            }
+
+            TestNotification.Color = RgbColor.FromGdkColor(
+                colorSelection.CurrentColor.Red, 
+                colorSelection.CurrentColor.Green, 
+                colorSelection.CurrentColor.Blue);
+
+            SelectedController.ExecuteEvent(TestNotification);
 		}
 
 		protected void OnButtonSwitchToColorClicked (object sender, System.EventArgs e)

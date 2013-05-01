@@ -181,9 +181,12 @@ namespace BlinkStick
 
  		public void ExecuteEvent (CustomNotification e)
 		{
-			Animating = true;
+			if (Animating)
+            {
+                return;
+            }
 
-			if (e.NotificationType == NotificationTypeEnum.Blink) {
+            if (e.NotificationType == NotificationTypeEnum.Blink) {
 				switch (e.BlinkSpeed) {
 				case BlinkSpeedEnum.VerySlow:
 					AnimationSpeed = 0.001;
@@ -282,8 +285,11 @@ namespace BlinkStick
                 moodWorker = new BackgroundWorker();
                 moodWorker.DoWork += new DoWorkEventHandler(moodWorker_DoWork);
                 moodWorker.WorkerSupportsCancellation = true;
+                moodWorker.RunWorkerCompleted += (object sender, RunWorkerCompletedEventArgs e) => {
+                    moodWorker = null;
+                };
+                moodWorker.RunWorkerAsync();
             }
-			moodWorker.RunWorkerAsync();
 		}
 		
 		public void Stop()
