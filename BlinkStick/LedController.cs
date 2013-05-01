@@ -186,7 +186,7 @@ namespace BlinkStick
                 return;
             }
 
-            if (e.NotificationType == NotificationTypeEnum.Blink) {
+            if (e.NotificationType == NotificationTypeEnum.Pulse) {
 				switch (e.BlinkSpeed) {
 				case BlinkSpeedEnum.VerySlow:
 					AnimationSpeed = 0.001;
@@ -211,7 +211,7 @@ namespace BlinkStick
 				}
 
 				PulsateSingleColor (e.BlinkCount, e.VisibleColor);
-			} else if (e.NotificationType == NotificationTypeEnum.Pulse) {
+            } else if (e.NotificationType == NotificationTypeEnum.Blink) {
 				switch (e.BlinkSpeed) {
 				case BlinkSpeedEnum.VerySlow:
 					AnimationSpeed = 5000;
