@@ -30,7 +30,7 @@ namespace BlinkStick
 		private global::Gtk.Button buttonTest;
 		private global::Gtk.Button buttonCancel;
 		private global::Gtk.Button buttonOk;
-
+		
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
@@ -73,12 +73,12 @@ namespace BlinkStick
 			w2.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child tableControls.Gtk.Table+TableChild
 			this.comboboxBlinkSpeed = global::Gtk.ComboBox.NewText ();
-			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString("Very Very Fast"));
-			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString("Very Fast"));
-			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString("Fast"));
-			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString("Normal"));
-			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString("Slow"));
-			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString("Very Slow"));
+			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Very Very Fast"));
+			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Very Fast"));
+			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Fast"));
+			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Normal"));
+			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Slow"));
+			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Very Slow"));
 			this.comboboxBlinkSpeed.Name = "comboboxBlinkSpeed";
 			this.tableControls.Add (this.comboboxBlinkSpeed);
 			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.tableControls [this.comboboxBlinkSpeed]));
@@ -101,9 +101,9 @@ namespace BlinkStick
 			w4.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child tableControls.Gtk.Table+TableChild
 			this.comboboxPriority = global::Gtk.ComboBox.NewText ();
-			this.comboboxPriority.AppendText (global::Mono.Unix.Catalog.GetString("Low"));
-			this.comboboxPriority.AppendText (global::Mono.Unix.Catalog.GetString("Normal"));
-			this.comboboxPriority.AppendText (global::Mono.Unix.Catalog.GetString("High"));
+			this.comboboxPriority.AppendText (global::Mono.Unix.Catalog.GetString ("Low"));
+			this.comboboxPriority.AppendText (global::Mono.Unix.Catalog.GetString ("Normal"));
+			this.comboboxPriority.AppendText (global::Mono.Unix.Catalog.GetString ("High"));
 			this.comboboxPriority.Name = "comboboxPriority";
 			this.tableControls.Add (this.comboboxPriority);
 			global::Gtk.Table.TableChild w5 = ((global::Gtk.Table.TableChild)(this.tableControls [this.comboboxPriority]));
@@ -155,13 +155,13 @@ namespace BlinkStick
 			this.hbox2.Name = "hbox2";
 			this.hbox2.Spacing = 6;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.spinbuttonBlinkCount = new global::Gtk.SpinButton (1, 10, 1);
+			this.spinbuttonBlinkCount = new global::Gtk.SpinButton (1D, 10D, 1D);
 			this.spinbuttonBlinkCount.CanFocus = true;
 			this.spinbuttonBlinkCount.Name = "spinbuttonBlinkCount";
-			this.spinbuttonBlinkCount.Adjustment.PageIncrement = 2;
-			this.spinbuttonBlinkCount.ClimbRate = 1;
+			this.spinbuttonBlinkCount.Adjustment.PageIncrement = 2D;
+			this.spinbuttonBlinkCount.ClimbRate = 1D;
 			this.spinbuttonBlinkCount.Numeric = true;
-			this.spinbuttonBlinkCount.Value = 1;
+			this.spinbuttonBlinkCount.Value = 1D;
 			this.hbox2.Add (this.spinbuttonBlinkCount);
 			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.spinbuttonBlinkCount]));
 			w9.Position = 0;
@@ -259,10 +259,9 @@ namespace BlinkStick
 			this.vbox2.Name = "vbox2";
 			this.vbox2.Spacing = 6;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.radiobuttonBlink = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString("Blink"));
+			this.radiobuttonBlink = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("Blink"));
 			this.radiobuttonBlink.CanFocus = true;
 			this.radiobuttonBlink.Name = "radiobuttonBlink";
-			this.radiobuttonBlink.Active = true;
 			this.radiobuttonBlink.DrawIndicator = true;
 			this.radiobuttonBlink.UseUnderline = true;
 			this.radiobuttonBlink.Group = new global::GLib.SList (global::System.IntPtr.Zero);
@@ -272,7 +271,7 @@ namespace BlinkStick
 			w18.Expand = false;
 			w18.Fill = false;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.radiobuttonPulse = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString("Pulse"));
+			this.radiobuttonPulse = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("Pulse"));
 			this.radiobuttonPulse.CanFocus = true;
 			this.radiobuttonPulse.Name = "radiobuttonPulse";
 			this.radiobuttonPulse.DrawIndicator = true;
@@ -284,7 +283,7 @@ namespace BlinkStick
 			w19.Expand = false;
 			w19.Fill = false;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.radiobuttonMorph = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString("Morph"));
+			this.radiobuttonMorph = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("Morph"));
 			this.radiobuttonMorph.CanFocus = true;
 			this.radiobuttonMorph.Name = "radiobuttonMorph";
 			this.radiobuttonMorph.DrawIndicator = true;
