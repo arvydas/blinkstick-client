@@ -32,6 +32,7 @@ AppCopyright=Agile Innovative Ltd
 UninstallDisplayName=Uninstall BlinkStick
 UninstallDisplayIcon={app}\icon.ico
 MinVersion=0,5.01sp3
+LicenseFile=..\LICENSE.txt
 
 [Languages]
 Name: "en"; MessagesFile: "compiler:Default.isl"
