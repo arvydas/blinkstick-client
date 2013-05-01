@@ -104,6 +104,7 @@ namespace BlinkStick
             if (TestNotification == null)
             {
                 TestNotification = new CustomNotification();
+                TestNotification.NotificationType = NotificationTypeEnum.Pulse;
                 TestNotification.BlinkCount = 1;
                 TestNotification.BlinkSpeed = BlinkSpeedEnum.Normal;
             }
