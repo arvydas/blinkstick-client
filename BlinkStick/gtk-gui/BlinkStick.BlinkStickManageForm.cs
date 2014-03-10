@@ -22,7 +22,7 @@ namespace BlinkStick
 		private global::Gtk.Label labelSerialNumber;
 		private global::Gtk.Label labelSerialNumberValue;
 		private global::Gtk.Button buttonCancel;
-		
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
@@ -59,7 +59,7 @@ namespace BlinkStick
 			this.table1.BorderWidth = ((uint)(12));
 			// Container child table1.Gtk.Table+TableChild
 			this.comboboxControl = global::Gtk.ComboBox.NewText ();
-			this.comboboxControl.AppendText (global::Mono.Unix.Catalog.GetString ("Normal"));
+			this.comboboxControl.AppendText (global::Mono.Unix.Catalog.GetString ("Normal\r"));
 			this.comboboxControl.AppendText (global::Mono.Unix.Catalog.GetString ("Inverse"));
 			this.comboboxControl.Name = "comboboxControl";
 			this.table1.Add (this.comboboxControl);

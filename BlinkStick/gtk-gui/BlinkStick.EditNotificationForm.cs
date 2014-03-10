@@ -30,7 +30,7 @@ namespace BlinkStick
 		private global::Gtk.Button buttonTest;
 		private global::Gtk.Button buttonCancel;
 		private global::Gtk.Button buttonOk;
-		
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
@@ -73,11 +73,11 @@ namespace BlinkStick
 			w2.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child tableControls.Gtk.Table+TableChild
 			this.comboboxBlinkSpeed = global::Gtk.ComboBox.NewText ();
-			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Very Very Fast"));
-			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Very Fast"));
-			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Fast"));
-			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Normal"));
-			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Slow"));
+			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Very Very Fast\r"));
+			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Very Fast\r"));
+			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Fast\r"));
+			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Normal\r"));
+			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Slow\r"));
 			this.comboboxBlinkSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Very Slow"));
 			this.comboboxBlinkSpeed.Name = "comboboxBlinkSpeed";
 			this.tableControls.Add (this.comboboxBlinkSpeed);
@@ -101,8 +101,8 @@ namespace BlinkStick
 			w4.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child tableControls.Gtk.Table+TableChild
 			this.comboboxPriority = global::Gtk.ComboBox.NewText ();
-			this.comboboxPriority.AppendText (global::Mono.Unix.Catalog.GetString ("Low"));
-			this.comboboxPriority.AppendText (global::Mono.Unix.Catalog.GetString ("Normal"));
+			this.comboboxPriority.AppendText (global::Mono.Unix.Catalog.GetString ("Low\r"));
+			this.comboboxPriority.AppendText (global::Mono.Unix.Catalog.GetString ("Normal\r"));
 			this.comboboxPriority.AppendText (global::Mono.Unix.Catalog.GetString ("High"));
 			this.comboboxPriority.Name = "comboboxPriority";
 			this.tableControls.Add (this.comboboxPriority);
@@ -262,6 +262,7 @@ namespace BlinkStick
 			this.radiobuttonBlink = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("Blink"));
 			this.radiobuttonBlink.CanFocus = true;
 			this.radiobuttonBlink.Name = "radiobuttonBlink";
+			this.radiobuttonBlink.Active = true;
 			this.radiobuttonBlink.DrawIndicator = true;
 			this.radiobuttonBlink.UseUnderline = true;
 			this.radiobuttonBlink.Group = new global::GLib.SList (global::System.IntPtr.Zero);

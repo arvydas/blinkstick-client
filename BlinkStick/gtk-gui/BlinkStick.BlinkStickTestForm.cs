@@ -16,7 +16,7 @@ namespace BlinkStick
 		private global::Gtk.Button buttonPulseColor;
 		private global::Gtk.Button buttonAllOff;
 		private global::Gtk.Button buttonCancel;
-		
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
