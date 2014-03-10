@@ -39,7 +39,7 @@ namespace HidLibrary
 
         public delegate void WriteCallback(bool success);
 
-        internal HidDevice(string devicePath, string description = null)
+		internal HidDevice(string devicePath, string description = null)
         {
             _deviceEventMonitor = new HidDeviceEventMonitor(this);
             _deviceEventMonitor.Inserted += DeviceEventMonitorInserted;
@@ -391,7 +391,7 @@ namespace HidLibrary
             return buffer;
         }
 
-        private static HidDeviceAttributes GetDeviceAttributes(IntPtr hidHandle)
+		public static HidDeviceAttributes GetDeviceAttributes(IntPtr hidHandle)
         {
             var deviceAttributes = default(NativeMethods.HIDD_ATTRIBUTES);
             deviceAttributes.Size = Marshal.SizeOf(deviceAttributes);
@@ -568,12 +568,12 @@ namespace HidLibrary
             return new HidDeviceData(buffer, status);
         }
 
-        private static IntPtr OpenDeviceIO(string devicePath, uint deviceAccess)
+		public static IntPtr OpenDeviceIO(string devicePath, uint deviceAccess)
         {
             return OpenDeviceIO(devicePath, DeviceMode.NonOverlapped, deviceAccess);
         }
 
-        private static IntPtr OpenDeviceIO(string devicePath, DeviceMode deviceMode, uint deviceAccess)
+		public static IntPtr OpenDeviceIO(string devicePath, DeviceMode deviceMode, uint deviceAccess)
         {
             var security = new NativeMethods.SECURITY_ATTRIBUTES();
             var flags = 0;
@@ -587,7 +587,7 @@ namespace HidLibrary
             return NativeMethods.CreateFile(devicePath, deviceAccess, NativeMethods.FILE_SHARE_READ | NativeMethods.FILE_SHARE_WRITE, ref security, NativeMethods.OPEN_EXISTING, flags, 0);
         }
 
-        private static void CloseDeviceIO(IntPtr handle)
+		public static void CloseDeviceIO(IntPtr handle)
         {
 			//This function is only available in Vista and up
 			if (IsWinVistaOrHigher())

@@ -32,7 +32,8 @@ namespace HidLibrary
 
         public static IEnumerable<HidDevice> Enumerate(int vendorId, params int[] productIds)
         {
-            return EnumerateDevices().Select(x => {
+			/*
+			return EnumerateDevices().Select(x => {
 			    try
 				{
 					return new HidDevice(x.Path, x.Description);
@@ -42,6 +43,32 @@ namespace HidLibrary
 					return null;
 				}
 			}).Where(x => x != null && x.Attributes.VendorId == vendorId && productIds.Contains(x.Attributes.ProductId));
+			*/
+
+			List<HidDevice> result = new List<HidDevice>();
+
+			foreach (DeviceInfo info in EnumerateDevices())
+			{
+				try
+				{
+					var hidHandle = HidDevice.OpenDeviceIO(info.Path, NativeMethods.ACCESS_NONE);
+
+					HidDeviceAttributes deviceAttributes = HidDevice.GetDeviceAttributes(hidHandle);
+
+					if (deviceAttributes.VendorId == vendorId && productIds.Contains(deviceAttributes.ProductId))
+					{
+						result.Add(new HidDevice(info.Path));
+					}
+
+					HidDevice.CloseDeviceIO(hidHandle);
+				}
+				catch
+				{
+					//hide errors
+				}
+			}
+
+			return result;
         }
 
         public static IEnumerable<HidDevice> Enumerate(int vendorId)
@@ -74,9 +101,11 @@ namespace HidLibrary
                     {
                         deviceInterfaceIndex++;
                         var devicePath = GetDevicePath(deviceInfoSet, deviceInterfaceData);
-                        var description = GetBusReportedDeviceDescription(deviceInfoSet, ref deviceInfoData) ?? 
+						/*
+						var description = GetBusReportedDeviceDescription(deviceInfoSet, ref deviceInfoData) ?? 
                                           GetDeviceDescription(deviceInfoSet, ref deviceInfoData);
-                        devices.Add(new DeviceInfo { Path = devicePath, Description = description });
+                        */
+						devices.Add(new DeviceInfo { Path = devicePath/*, Description = description */});
                     }
                 }
                 NativeMethods.SetupDiDestroyDeviceInfoList(deviceInfoSet);
