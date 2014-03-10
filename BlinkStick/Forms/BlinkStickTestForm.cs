@@ -19,13 +19,14 @@
 using System;
 using System.Collections.Generic;
 using BlinkStick.Classes;
+using Gtk;
 
 namespace BlinkStick
 {
 	public partial class BlinkStickTestForm : Gtk.Dialog
 	{
 		private LedController SelectedController;
-		private NotificationManager Manager;
+		public NotificationManager Manager;
 		private List<DeviceEntity> DeviceEntities;
         private CustomNotification TestNotification;
 
@@ -48,20 +49,51 @@ namespace BlinkStick
 
 		public void PopulateForm ()
 		{
+			//for (int i = 0; i < comboboxDevices.Model.IterNChildren(); i++)
+			//	comboboxDevices.RemoveText(i);
+			/*
 			List<String> deviceNames = new List<string> ();
 			foreach (LedController controller in Manager.Controllers) {
 				deviceNames.Add (controller.DeviceVisibleName);
 			}
 			deviceNames.Sort ();
+			*/
+			string previousDeviceSerial = "";
+			if (comboboxDevices.Active >= 0)
+				previousDeviceSerial = DeviceEntities[comboboxDevices.Active].Serial;
 
+			ListStore store = new ListStore(typeof (string));
+			comboboxDevices.Model = store;
 
 			DeviceEntities = Manager.GetOnlineDeviceList();
 
+			int previousDeviceIndex = -1;
+			int index = -1;
 			foreach (DeviceEntity entity in DeviceEntities) {
-				comboboxDevices.AppendText(entity.ToString());
+				store.AppendValues(entity.ToString());
+
+				index++;
+
+				if (entity.ToString() == previousDeviceSerial)
+				{
+					previousDeviceIndex = index;
+				}
 			}
 
-			UpdateFormComponents();
+			SelectedController = null;
+
+			if (store.IterNChildren() >= 1 && previousDeviceIndex == -1)
+			{
+				comboboxDevices.Active = 0;
+			}
+			else if (previousDeviceIndex >= 0)
+			{
+				comboboxDevices.Active = previousDeviceIndex;
+			}
+			else
+			{
+				UpdateFormComponents();
+			}
 		}
 
 		public void UpdateFormComponents()

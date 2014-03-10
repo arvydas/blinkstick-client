@@ -47,6 +47,7 @@ public partial class MainWindow: Gtk.Window
 	private StatusIcon trayIcon;
 #endif
 	UsbMonitor DeviceMonitor;
+	BlinkStickTestForm testForm;
 
 	private Menu popupMenu;
 	public CustomNotification _SelectedNotification = null;
@@ -163,6 +164,11 @@ public partial class MainWindow: Gtk.Window
 		DeviceMonitor.UsbDeviceAdded += (object sender, EventArgs e) => {
 			Gtk.Application.Invoke (delegate {
 				Manager.UpdateControllers();
+
+				if (testForm != null)
+				{
+					testForm.PopulateForm();
+				}
 			});
 		};
 		DeviceMonitor.Start ();
@@ -365,7 +371,14 @@ public partial class MainWindow: Gtk.Window
 
 	protected void OnTestActionActivated (object sender, EventArgs e)
 	{
-		BlinkStickTestForm.ShowForm(Manager);
+		testForm = new BlinkStickTestForm ();
+		testForm.Manager = this.Manager;
+		testForm.PopulateForm();
+		testForm.Run ();
+		testForm.Destroy();
+		testForm = null;
+
+		//BlinkStickTestForm.ShowForm(Manager);
 	}
 	protected void OnCopyActionActivated (object sender, EventArgs e)
 	{
