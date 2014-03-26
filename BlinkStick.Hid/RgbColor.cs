@@ -18,7 +18,7 @@
 
 using System;
 
-namespace BlinkStick
+namespace BlinkStick.Hid
 {
 	public class RgbColor
 	{

@@ -42,6 +42,8 @@
     <Compile Include="UsbMonitor.cs" />
     <Compile Include="WindowsBlinkstickHid.cs" />
     <Compile Include="WinUsbDeviceMonitor.cs" />
+    <Compile Include="RgbColor.cs" />
+    <Compile Include="HSLColor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

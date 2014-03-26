@@ -22,6 +22,7 @@ using Gtk;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using log4net;
+using BlinkStick.Hid;
 
 namespace BlinkStick.Classes
 {

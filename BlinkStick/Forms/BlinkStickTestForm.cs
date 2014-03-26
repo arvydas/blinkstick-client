@@ -20,6 +20,7 @@ using System;
 using System.Collections.Generic;
 using BlinkStick.Classes;
 using Gtk;
+using BlinkStick.Hid;
 
 namespace BlinkStick
 {

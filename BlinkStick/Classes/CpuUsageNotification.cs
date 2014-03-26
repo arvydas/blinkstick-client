@@ -22,6 +22,7 @@ using System.Diagnostics;
 using System.Management;
 #endif
 using log4net;
+using BlinkStick.Hid;
 
 namespace BlinkStick.Classes
 {

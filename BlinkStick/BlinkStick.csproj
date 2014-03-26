@@ -2,7 +2,7 @@
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-   <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{59397BA2-2777-4E79-A4F0-8DD0E89B8308}</ProjectGuid>
@@ -82,9 +82,7 @@
     <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="HSLColor.cs" />
     <Compile Include="LedController.cs" />
-    <Compile Include="RgbColor.cs" />
     <Compile Include="Classes\Enumerators.cs" />
     <Compile Include="gtk-gui\BlinkStick.GoogleEmailSettingsWidget.cs" />
     <Compile Include="Widgets\GoogleEmailSettingsWidget.cs" />

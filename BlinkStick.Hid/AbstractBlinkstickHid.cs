@@ -191,6 +191,7 @@ namespace BlinkStick.Hid
 		{
 			throw new Exception("Not implemented");
 		}
+
 	}
 }
 
