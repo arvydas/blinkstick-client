@@ -165,7 +165,7 @@ namespace BlinkStick.Hid
         {
             if (connectedToDriver)
             {
-                byte [] data = new byte[33];
+                byte [] data = new byte[4];
                 data[0] = 1;
                 data[1] = r;
                 data[2] = g;
