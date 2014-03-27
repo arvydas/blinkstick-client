@@ -34,12 +34,7 @@ namespace BlinkStick.Hid
 
 		public static AbstractBlinkstickHid[] FindDevices ()
 		{
-			if (IsUnix ()) {
-                //return LinuxBlinkstickHid.AllDevices();
-                return new AbstractBlinkstickHid[0];
-			} else {
-				return WindowsBlinkstickHid.AllDevices();
-			}
+            return WindowsBlinkstickHid.AllDevices();
 		}
 
 		public static void FreeUsbResources ()
