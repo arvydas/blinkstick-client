@@ -139,14 +139,14 @@ namespace BlinkStick.Hid
 			Boolean result = GetInfoBlock (id, out dataBytes);
 
 			if (result) {
-				for (int i = 0; i < dataBytes.Length; i++) {
+                for (int i = 1; i < dataBytes.Length; i++) {
 					if (dataBytes [i] == 0) {
 						Array.Resize (ref dataBytes, i);
 						break;
 					}
 				}
 
-				data = Encoding.ASCII.GetString (dataBytes);
+                data = Encoding.ASCII.GetString (dataBytes, 1, dataBytes.Length - 1);
 			} else {
 				data = "";
 			}

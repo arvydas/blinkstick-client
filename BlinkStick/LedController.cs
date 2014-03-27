@@ -24,7 +24,6 @@ using System.Collections.Generic;
 using System.Linq;
 using BlinkStick.Classes;
 using BlinkStick.Hid;
-using HidLibrary;
 
 namespace BlinkStick
 {

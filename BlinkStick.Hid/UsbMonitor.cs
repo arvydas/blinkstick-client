@@ -17,7 +17,7 @@
 #endregion
 
 using System;
-using LibUsbDotNet.DeviceNotify;
+//!!!using LibUsbDotNet.DeviceNotify;
 
 namespace BlinkStick.Hid
 {
@@ -34,7 +34,7 @@ namespace BlinkStick.Hid
 		}
 
 		private WinUsbDeviceMonitor winUsbDeviceMonitor;
-		public IDeviceNotifier UsbDeviceNotifier;
+        //!!public IDeviceNotifier UsbDeviceNotifier;
 
 		public Boolean Monitoring {
 			get;
@@ -44,8 +44,8 @@ namespace BlinkStick.Hid
 		public UsbMonitor (IntPtr mainWindowHandle)
 		{
 			if (BlinkstickDeviceFinder.IsUnix ()) {
-				UsbDeviceNotifier = DeviceNotifier.OpenDeviceNotifier();
-				UsbDeviceNotifier.OnDeviceNotify += OnDeviceNotifyEvent;
+                //!!UsbDeviceNotifier = DeviceNotifier.OpenDeviceNotifier();
+                //!!UsbDeviceNotifier.OnDeviceNotify += OnDeviceNotifyEvent;
 			} else {
 				winUsbDeviceMonitor = new WinUsbDeviceMonitor();
 				winUsbDeviceMonitor.DeviceListChanged += HandleDeviceListChanged;
@@ -59,23 +59,28 @@ namespace BlinkStick.Hid
 
 		public void Start ()
 		{
+            /*
 			if (UsbDeviceNotifier != null) {
 				UsbDeviceNotifier.Enabled = true;
 			}
+   */         
 			Monitoring = true;
 		}
 
 		public void Stop ()
 		{
-			if (UsbDeviceNotifier != null) {
+            /*
+            if (UsbDeviceNotifier != null) {
 				UsbDeviceNotifier.Enabled = false;  // Disable the device notifier
 
 				UsbDeviceNotifier.OnDeviceNotify -= OnDeviceNotifyEvent;
 			}
+*/
 
 			Monitoring = false;
 		}
 
+        /*
 		private void OnDeviceNotifyEvent(object sender, DeviceNotifyEventArgs e)
         {
             Console.WriteLine(e.ToString()); // Dump the event info to output.
@@ -84,6 +89,7 @@ namespace BlinkStick.Hid
 
 			OnUsbDeviceAdded();
         }
+        */
 
 		~UsbMonitor ()
 		{

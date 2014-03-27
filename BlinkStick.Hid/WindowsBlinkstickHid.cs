@@ -21,7 +21,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
-using HidLibrary;
+using HidSharp;
 using System.Text.RegularExpressions;
 
 namespace BlinkStick.Hid
@@ -29,18 +29,20 @@ namespace BlinkStick.Hid
 	public class WindowsBlinkstickHid : AbstractBlinkstickHid, IDisposable
     {
         private HidDevice device;
+        private HidStream stream;
+
         private bool attached = false;
         
         private bool disposed = false;
 
 		protected override String GetSerial()
 		{
-			return device.Serial;
+            return device.SerialNumber;
 		}
 		
 		protected override String GetManufacturer()
 		{
-			return device.ManufacturerName;
+            return device.Manufacturer;
 		}
 
         /// Occurs when a BlinkStick device is attached.
@@ -68,7 +70,8 @@ namespace BlinkStick.Hid
         public override bool OpenDevice ()
 		{
 			if (this.device == null) {
-				HidDevice adevice = HidDevices.Enumerate (VendorId, ProductId).FirstOrDefault ();
+                HidDeviceLoader loader = new HidDeviceLoader();
+                HidDevice adevice = loader.GetDevices(VendorId, ProductId).FirstOrDefault();
 				return OpenDevice (adevice);
 			} else {
 				return OpenCurrentDevice();
@@ -89,17 +92,29 @@ namespace BlinkStick.Hid
 
 		private bool OpenCurrentDevice()
 		{
-		    connectedToDriver = true;
-            device.OpenDevice();
+            connectedToDriver = true;
+            device.TryOpen(out stream);
 
-            device.Inserted += DeviceAttachedHandler;
- 			device.Removed += DeviceRemovedHandler;
+            //!!!device.Inserted += DeviceAttachedHandler;
+            //!!!device.Removed += DeviceRemovedHandler;
 
 			return true;
 		}
 
         public static WindowsBlinkstickHid[] AllDevices ()
 		{
+            List<WindowsBlinkstickHid> result = new List<WindowsBlinkstickHid>();
+
+            HidDeviceLoader loader = new HidDeviceLoader();
+            foreach (HidDevice adevice in loader.GetDevices(VendorId, ProductId).ToArray())
+            {
+                WindowsBlinkstickHid hid = new WindowsBlinkstickHid();
+                hid.device = adevice;
+                result.Add(hid);
+            }
+
+            return result.ToArray();
+            /*
 			List<WindowsBlinkstickHid> result = new List<WindowsBlinkstickHid>();
 			foreach (HidDevice device in HidDevices.Enumerate(VendorId, ProductId).ToArray<HidDevice>()) {
 				WindowsBlinkstickHid hid = new WindowsBlinkstickHid();
@@ -108,6 +123,7 @@ namespace BlinkStick.Hid
 				result.Add(hid);
 			}
 			return result.ToArray();
+            */         
         }
 
         /// <summary>
@@ -115,7 +131,8 @@ namespace BlinkStick.Hid
         /// </summary>
         public override void CloseDevice()
         {
-            device.CloseDevice();
+            stream.Close();
+            device = null;
             connectedToDriver = false;
         }
 
@@ -134,8 +151,6 @@ namespace BlinkStick.Hid
 
             if (DeviceAttached != null)
                 DeviceAttached(this, EventArgs.Empty);
-
-            device.ReadReport(OnReport);
         }
 
         private void DeviceRemovedHandler()
@@ -146,59 +161,29 @@ namespace BlinkStick.Hid
                 DeviceRemoved(this, EventArgs.Empty);
         }
 
-
-        private void OnReport(HidReport report)
-        {
-            if (attached == false) { return; }
-
-				/*
-            if (report.Data.Length >= 6)
-            {
-                PowerMateState state = ParseState(report.Data);
-                if (!state.IsValid)
-                {
-                    System.Diagnostics.Debug.WriteLine("Invalid PowerMate state");
-                }
-                else
-                {
-                    GenerateEvents(state);
-
-                    if (debugPrintRawMessages)
-                    {
-                        System.Diagnostics.Debug.Write("PowerMate raw data: ");
-                        for (int i = 0; i < report.Data.Length; i++)
-                        {
-                            System.Diagnostics.Debug.Write(String.Format("{0:000} ", report.Data[i]));
-                        }
-                        System.Diagnostics.Debug.WriteLine("");
-                    }
-                }
-            }
-*/
-
-            //device.ReadReport(OnReport);
-        }
-  
         public override void SetLedColor(byte r, byte g, byte b)
         {
             if (connectedToDriver)
             {
-                byte [] data = new byte[4];
+                byte [] data = new byte[33];
                 data[0] = 1;
                 data[1] = r;
                 data[2] = g;
                 data[3] = b;
 
-                HidReport report = new HidReport(4, new HidDeviceData(data, HidDeviceData.ReadStatus.Success));
-                device.WriteFeatureData(data);
+                stream.SetFeature(data);
             }
         }
 
 		public override Boolean GetLedColor (out byte r, out byte g, out byte b)
 		{
-			byte[] report; 
+            byte[] report = new byte[33]; 
+            report[0] = 1;
 
-			if (connectedToDriver && device.ReadFeatureData (1, out report)) {
+            if (connectedToDriver) {
+                //!!!!
+                stream.GetFeature(report);
+
 				r = report [1];
 				g = report [2];
 				b = report [3];
@@ -243,8 +228,7 @@ namespace BlinkStick.Hid
 
                 data[0] = id;
 
-                HidReport report = new HidReport(33, new HidDeviceData(data, HidDeviceData.ReadStatus.Success));
-                device.WriteFeatureData(data);
+                stream.SetFeature(data);
 			} else {
 				throw new Exception("Invalid info block id");
 			}
@@ -253,11 +237,14 @@ namespace BlinkStick.Hid
 		public override Boolean GetInfoBlock (byte id, out byte[] data)
 		{
 			if (id == 2 || id == 3) {
-				if (connectedToDriver && device.ReadFeatureData (id, out data))
+                data = new byte[33];
+                data[0] = id;
+
+                if (connectedToDriver)
 				{
-                    HidReport report = new HidReport(33, new HidDeviceData(data, HidDeviceData.ReadStatus.Success));
-                    data = report.Data;
-					return true;
+                    //!!!!
+                    stream.GetFeature(data);
+                	return true;
 				}
 				else
 				{

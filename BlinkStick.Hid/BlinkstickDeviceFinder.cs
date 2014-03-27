@@ -17,8 +17,6 @@
 #endregion
 
 using System;
-using LibUsbDotNet;
-//using LibUsbDotNet.Main;
 
 namespace BlinkStick.Hid
 {
@@ -37,7 +35,8 @@ namespace BlinkStick.Hid
 		public static AbstractBlinkstickHid[] FindDevices ()
 		{
 			if (IsUnix ()) {
-				return LinuxBlinkstickHid.AllDevices();
+                //return LinuxBlinkstickHid.AllDevices();
+                return new AbstractBlinkstickHid[0];
 			} else {
 				return WindowsBlinkstickHid.AllDevices();
 			}
@@ -47,7 +46,7 @@ namespace BlinkStick.Hid
 		{
 			// Free usb resources
 			if (IsUnix ()) {
-				UsbDevice.Exit ();
+                //UsbDevice.Exit ();
 			}
 		}
 	}

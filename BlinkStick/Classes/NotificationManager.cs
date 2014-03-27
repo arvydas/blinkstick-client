@@ -25,7 +25,6 @@ using BlinkStick.Hid;
 using BlinkStick.Bayeux;
 using BlinkStick.Classes;
 using BlinkStick.Utils;
-using HidLibrary;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;

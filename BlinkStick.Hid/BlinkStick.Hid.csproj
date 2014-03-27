@@ -37,7 +37,6 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="AbstractBlinkstickHid.cs" />
-    <Compile Include="LinuxBlinkstickHid.cs" />
     <Compile Include="BlinkstickDeviceFinder.cs" />
     <Compile Include="UsbMonitor.cs" />
     <Compile Include="WindowsBlinkstickHid.cs" />
@@ -46,16 +45,6 @@
     <Compile Include="HSLColor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <ProjectReference Include="..\Components\HidLibrary\src\HidLibrary\HidLibrary.csproj">
-      <Project>{9E8F1D50-74EA-4C60-BD5C-AB2C5B53BC66}</Project>
-      <Name>HidLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LibWinUsb\LibUsbDotNet.csproj">
-      <Project>{0A78F6FF-5586-4052-8104-E23FF83A7CE1}</Project>
-      <Name>LibUsbDotNet</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
@@ -66,4 +55,10 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <ProjectReference Include="..\Components\HidSharp\HidSharp.csproj">
+      <Project>{0DB86674-2A7B-4BDC-93C1-3F7DC771426C}</Project>
+      <Name>HidSharp</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
