@@ -181,7 +181,6 @@ namespace BlinkStick.Hid
             report[0] = 1;
 
             if (connectedToDriver) {
-                //!!!!
                 stream.GetFeature(report);
 
 				r = report [1];
@@ -242,7 +241,6 @@ namespace BlinkStick.Hid
 
                 if (connectedToDriver)
 				{
-                    //!!!!
                     stream.GetFeature(data);
                 	return true;
 				}

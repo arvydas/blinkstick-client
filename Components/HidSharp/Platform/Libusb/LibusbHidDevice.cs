@@ -53,21 +53,6 @@ namespace HidSharp
 				return false;
 			}
 
-			var data = new byte[4];
-
-			data[0] = 0x00;
-			data[1] = 255;
-			data[2] = 0;
-			data[3] = 0;
-
-			IntPtr dat = Marshal.AllocHGlobal(4);
-			Marshal.Copy(data,0,dat,4);
-
-			UsbSetupPacket packet = new UsbSetupPacket(0x20, 0x09, (short)0x01, 0, 0);
-			int transferred;
-
-			device.ControlTransfer(ref packet, dat, data.Length, out transferred);
-
 			if (device == null || !device.IsOpen)
 				return false;
 

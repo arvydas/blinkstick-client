@@ -135,6 +135,10 @@
       <Project>{2E6D4FBF-99F5-4424-9555-BD211545A5FA}</Project>
       <Name>BlinkStick.Bayeux</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Components\HidSharp\HidSharp.csproj">
+      <Project>{0DB86674-2A7B-4BDC-93C1-3F7DC771426C}</Project>
+      <Name>HidSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico">

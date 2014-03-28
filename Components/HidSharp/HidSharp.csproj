@@ -96,6 +96,7 @@
     <Compile Include="ReportDescriptors\Units\UnitSystem.cs" />
     <Compile Include="Platform\Libusb\LibusbHidDevice.cs" />
     <Compile Include="Platform\Libusb\LibusbHidStream.cs" />
+    <Compile Include="Platform\PlatformDetector.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

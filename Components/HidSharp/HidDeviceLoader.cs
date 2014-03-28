@@ -92,5 +92,9 @@ namespace HidSharp
         {
             return GetDevices(vendorID, productID, productVersion, serialNumber).FirstOrDefault();
         }
+
+		public static void FreeUsbResources() {
+			Platform.HidSelector.FreeUsbResources();
+		}
     }
 }

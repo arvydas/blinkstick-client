@@ -15,6 +15,7 @@
 #endregion
 
 using System.Threading;
+using LibUsbDotNet;
 
 namespace HidSharp.Platform
 {
@@ -23,14 +24,37 @@ namespace HidSharp.Platform
         public static readonly HidManager Instance;
         static readonly Thread ManagerThread; 
 
-        static HidSelector()
-        {
+        static HidSelector ()
+		{
+			if (Instance != null) {
+				return;	
+			}
+
+			switch (PlatformDetector.RunningPlatform()) {
+				case PlatformDetector.Platform.Linux:
+					Instance = new Libusb.LibusbHidManager();
+					break;
+				case PlatformDetector.Platform.Mac:
+					Instance = new MacOS.MacHidManager();
+					break;
+				case PlatformDetector.Platform.Windows:
+					Instance = new Windows.WinHidManager();
+					break;
+			}
+            
+			var readyEvent = new ManualResetEvent(false);
+            ManagerThread = new Thread(Instance.RunImpl);
+            ManagerThread.IsBackground = true;
+            ManagerThread.Start(readyEvent);
+            readyEvent.WaitOne();
+
+			/*
             foreach (var hidManager in new HidManager[]
                 {
                     new Windows.WinHidManager(),
-                    new Libusb.LibusbHidManager(),
-                    new Linux.LinuxHidManager(),
+                    //new Linux.LinuxHidManager(), //Disabled, because BlinkStick does not use this
                     new MacOS.MacHidManager(),
+                    new Libusb.LibusbHidManager(),
                     new Unsupported.UnsupportedHidManager()
                 })
             {
@@ -47,6 +71,15 @@ namespace HidSharp.Platform
                     break;
                 }
             }
+            */
         }
-    }
+
+		public static void FreeUsbResources ()
+		{
+			// Free usb resources
+			if (PlatformDetector.RunningPlatform() == PlatformDetector.Platform.Linux) {
+				UsbDevice.Exit ();
+			}
+		}
+	}
 }
