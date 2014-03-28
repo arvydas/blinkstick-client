@@ -80,7 +80,7 @@ namespace HidSharp.Platform.Linux
         {
             get
             {
-                try
+                //try
                 {
 					string sysname; Version release; string machine;
 					if (NativeMethods.uname(out sysname, out release, out machine))
@@ -93,6 +93,7 @@ namespace HidSharp.Platform.Linux
 						}
 					}
                 }
+				/*
 				catch
 				{
 					
@@ -101,6 +102,7 @@ namespace HidSharp.Platform.Linux
                 {
 
                 }
+                */
 
                 return false;
             }

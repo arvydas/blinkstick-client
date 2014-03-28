@@ -15,12 +15,50 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
+using LibUsbDotNet;
+using LibUsbDotNet.Main;
 
 namespace HidSharp.Platform.Libusb
 {
-	class LibusbHidManager
+	class LibusbHidManager : HidManager
 	{
-		// TODO
+		protected override object[] Refresh ()
+		{
+			List<UsbRegistry> result = new List<UsbRegistry>();
+
+			foreach (UsbRegistry device in UsbDevice.AllDevices) {
+				result.Add(device);
+			}
+
+			return result.ToArray();
+		}
+
+		protected override bool TryCreateDevice (object key, out HidDevice device, out object creationState)
+		{
+			creationState = null;
+            
+			var hidDevice = new LibusbHidDevice((UsbRegistry)key);
+            
+			if (!hidDevice.GetInfo()) { 
+				device = null; 
+				return false; 
+			}
+            
+			device = hidDevice; 
+			return true;
+		}
+
+		protected override void CompleteDevice (object key, HidDevice device, object creationState)
+		{
+
+		}
+
+		public override bool IsSupported {
+			get {
+				return true;
+			}
+		}
 	}
 }
 

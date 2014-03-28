@@ -8,7 +8,7 @@ namespace BlinkStick
 		private global::Gtk.Button buttonPaste;
 		private global::Gtk.Entry entryAccessCode;
 		private global::Gtk.Label label1;
-
+		
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
@@ -26,16 +26,28 @@ namespace BlinkStick
 			this.buttonPaste.CanFocus = true;
 			this.buttonPaste.Name = "buttonPaste";
 			this.buttonPaste.UseUnderline = true;
-			this.buttonPaste.Label = global::Mono.Unix.Catalog.GetString ("Paste");
-			global::Gtk.Image w1 = new global::Gtk.Image ();
-			w1.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-paste", global::Gtk.IconSize.Menu);
-			this.buttonPaste.Image = w1;
+			// Container child buttonPaste.Gtk.Container+ContainerChild
+			global::Gtk.Alignment w1 = new global::Gtk.Alignment (0.5F, 0.5F, 0F, 0F);
+			// Container child GtkAlignment.Gtk.Container+ContainerChild
+			global::Gtk.HBox w2 = new global::Gtk.HBox ();
+			w2.Spacing = 2;
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Image w3 = new global::Gtk.Image ();
+			w3.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-paste", global::Gtk.IconSize.Menu);
+			w2.Add (w3);
+			// Container child GtkHBox.Gtk.Container+ContainerChild
+			global::Gtk.Label w5 = new global::Gtk.Label ();
+			w5.LabelProp = global::Mono.Unix.Catalog.GetString ("Paste");
+			w5.UseUnderline = true;
+			w2.Add (w5);
+			w1.Add (w2);
+			this.buttonPaste.Add (w1);
 			this.table1.Add (this.buttonPaste);
-			global::Gtk.Table.TableChild w2 = ((global::Gtk.Table.TableChild)(this.table1 [this.buttonPaste]));
-			w2.LeftAttach = ((uint)(2));
-			w2.RightAttach = ((uint)(3));
-			w2.XOptions = ((global::Gtk.AttachOptions)(4));
-			w2.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w9 = ((global::Gtk.Table.TableChild)(this.table1 [this.buttonPaste]));
+			w9.LeftAttach = ((uint)(2));
+			w9.RightAttach = ((uint)(3));
+			w9.XOptions = ((global::Gtk.AttachOptions)(4));
+			w9.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.entryAccessCode = new global::Gtk.Entry ();
 			this.entryAccessCode.CanFocus = true;
@@ -43,18 +55,18 @@ namespace BlinkStick
 			this.entryAccessCode.IsEditable = true;
 			this.entryAccessCode.InvisibleChar = '●';
 			this.table1.Add (this.entryAccessCode);
-			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table1 [this.entryAccessCode]));
-			w3.LeftAttach = ((uint)(1));
-			w3.RightAttach = ((uint)(2));
-			w3.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w10 = ((global::Gtk.Table.TableChild)(this.table1 [this.entryAccessCode]));
+			w10.LeftAttach = ((uint)(1));
+			w10.RightAttach = ((uint)(2));
+			w10.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.label1 = new global::Gtk.Label ();
 			this.label1.Name = "label1";
 			this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("Access Code:");
 			this.table1.Add (this.label1);
-			global::Gtk.Table.TableChild w4 = ((global::Gtk.Table.TableChild)(this.table1 [this.label1]));
-			w4.XOptions = ((global::Gtk.AttachOptions)(4));
-			w4.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w11 = ((global::Gtk.Table.TableChild)(this.table1 [this.label1]));
+			w11.XOptions = ((global::Gtk.AttachOptions)(4));
+			w11.YOptions = ((global::Gtk.AttachOptions)(4));
 			this.Add (this.table1);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

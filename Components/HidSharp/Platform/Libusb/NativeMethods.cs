@@ -22,7 +22,7 @@ namespace HidSharp.Platform.Libusb
 {
 	static class NativeMethods
 	{
-		const string Libusb = "libusb-1.0";
+		const string Libusb = "libusb-1.0.so.0";
 		
 		public struct DeviceDescriptor
 		{

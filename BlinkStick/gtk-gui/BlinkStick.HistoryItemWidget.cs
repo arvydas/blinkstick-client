@@ -7,7 +7,7 @@ namespace BlinkStick
 		private global::Gtk.VBox vbox2;
 		private global::Gtk.Label labelHeader;
 		private global::Gtk.Label labelDetails;
-
+		
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);

@@ -28,6 +28,7 @@ namespace HidSharp.Platform
             foreach (var hidManager in new HidManager[]
                 {
                     new Windows.WinHidManager(),
+                    new Libusb.LibusbHidManager(),
                     new Linux.LinuxHidManager(),
                     new MacOS.MacHidManager(),
                     new Unsupported.UnsupportedHidManager()

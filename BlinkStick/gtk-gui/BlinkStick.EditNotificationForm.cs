@@ -30,7 +30,7 @@ namespace BlinkStick
 		private global::Gtk.Button buttonTest;
 		private global::Gtk.Button buttonCancel;
 		private global::Gtk.Button buttonOk;
-
+		
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
@@ -155,13 +155,13 @@ namespace BlinkStick
 			this.hbox2.Name = "hbox2";
 			this.hbox2.Spacing = 6;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.spinbuttonBlinkCount = new global::Gtk.SpinButton (1D, 10D, 1D);
+			this.spinbuttonBlinkCount = new global::Gtk.SpinButton (1, 10, 1);
 			this.spinbuttonBlinkCount.CanFocus = true;
 			this.spinbuttonBlinkCount.Name = "spinbuttonBlinkCount";
-			this.spinbuttonBlinkCount.Adjustment.PageIncrement = 2D;
-			this.spinbuttonBlinkCount.ClimbRate = 1D;
+			this.spinbuttonBlinkCount.Adjustment.PageIncrement = 2;
+			this.spinbuttonBlinkCount.ClimbRate = 1;
 			this.spinbuttonBlinkCount.Numeric = true;
-			this.spinbuttonBlinkCount.Value = 1D;
+			this.spinbuttonBlinkCount.Value = 1;
 			this.hbox2.Add (this.spinbuttonBlinkCount);
 			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.spinbuttonBlinkCount]));
 			w9.Position = 0;
@@ -262,6 +262,7 @@ namespace BlinkStick
 			this.radiobuttonBlink = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("Blink"));
 			this.radiobuttonBlink.CanFocus = true;
 			this.radiobuttonBlink.Name = "radiobuttonBlink";
+			this.radiobuttonBlink.Active = true;
 			this.radiobuttonBlink.DrawIndicator = true;
 			this.radiobuttonBlink.UseUnderline = true;
 			this.radiobuttonBlink.Group = new global::GLib.SList (global::System.IntPtr.Zero);

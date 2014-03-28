@@ -11,9 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlinkStick.Bayeux", "BlinkS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlinkStick.CometClient", "BlinkStick.CometClient\BlinkStick.CometClient.csproj", "{135D99EF-9956-4231-A456-85B0898BF07B}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "BlinkStick", "BlinkStick.Package\BlinkStick.mdproj", "{0D23B27F-1DF4-4D03-9C1E-07F2B6275D5E}"
+Project("{9344bdbb-3e7f-41fc-a0dd-8665d75ee146}") = "BlinkStick", "BlinkStick.Package\BlinkStick.mdproj", "{0D23B27F-1DF4-4D03-9C1E-07F2B6275D5E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HidSharp", "Components\HidSharp\HidSharp.csproj", "{0DB86674-2A7B-4BDC-93C1-3F7DC771426C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibUsbDotNet", "Components\LibUsbDotNet\LibWinUsb\LibUsbDotNet.csproj", "{0A78F6FF-5586-4052-8104-E23FF83A7CE1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,18 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A78F6FF-5586-4052-8104-E23FF83A7CE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A78F6FF-5586-4052-8104-E23FF83A7CE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A78F6FF-5586-4052-8104-E23FF83A7CE1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0A78F6FF-5586-4052-8104-E23FF83A7CE1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0A78F6FF-5586-4052-8104-E23FF83A7CE1}.Debug|x86.ActiveCfg = Debug|x86
+		{0A78F6FF-5586-4052-8104-E23FF83A7CE1}.Debug|x86.Build.0 = Debug|x86
+		{0A78F6FF-5586-4052-8104-E23FF83A7CE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A78F6FF-5586-4052-8104-E23FF83A7CE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A78F6FF-5586-4052-8104-E23FF83A7CE1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0A78F6FF-5586-4052-8104-E23FF83A7CE1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0A78F6FF-5586-4052-8104-E23FF83A7CE1}.Release|x86.ActiveCfg = Release|x86
+		{0A78F6FF-5586-4052-8104-E23FF83A7CE1}.Release|x86.Build.0 = Release|x86
 		{0D23B27F-1DF4-4D03-9C1E-07F2B6275D5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0D23B27F-1DF4-4D03-9C1E-07F2B6275D5E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
 		{0D23B27F-1DF4-4D03-9C1E-07F2B6275D5E}.Debug|x86.ActiveCfg = Debug|Any CPU

@@ -24,8 +24,8 @@ namespace HidSharp.Platform.Linux
 {
     static class NativeMethods
     {
-		const string libc = "libc";
-		const string libudev = "libudev.so.0";
+		const string libc = "libc.so.6";
+		const string libudev = "libudev.so.1";
 
 		public enum error
 		{
@@ -121,12 +121,12 @@ namespace HidSharp.Platform.Linux
             sysname = getMember("sysname"); release = getMember("release"); machine = getMember("machine");
             return true;
         }
-		
+
 		[DllImport(libc, SetLastError = true)]
 		public static extern int open(
 			[MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(Utf8Marshaler))] string filename,
 			 oflag oflag);
-		
+
 		[DllImport(libc, SetLastError = true)]
 		public static extern int close(int filedes);
 
