@@ -25,6 +25,7 @@ namespace HidSharp
 
 		internal void DeviceInitAndOpen()
 		{
+			/*
 			IUsbDevice wholeUsbDevice = _device.UsbDevice as IUsbDevice;
 
 			if (!ReferenceEquals (wholeUsbDevice, null)) {
@@ -33,6 +34,7 @@ namespace HidSharp
 				// Claim interface #0.
 				wholeUsbDevice.ClaimInterface (0);
 			}
+			*/
 		}
 
 		internal override void HandleFree()
@@ -72,10 +74,27 @@ namespace HidSharp
         public unsafe override void SetFeature(byte[] buffer, int offset, int count)
         {
             Throw.If.OutOfRange(buffer, offset, count);
-			
+
+			var data = new byte[4];
+
+			data[0] = 0x00;
+			data[1] = 255;
+			data[2] = 0;
+			data[3] = 0;
+
+			IntPtr dat = Marshal.AllocHGlobal(4);
+			Marshal.Copy(data,0,dat,4);
+
+			UsbSetupPacket packet = new UsbSetupPacket(0x20, 0x09, (short)0x01, 0, (short)data.Length);
+			int transferred;
+
+			_device.UsbDevice.ControlTransfer(ref packet, dat, data.Length, out transferred);
+
+
 			//HandleAcquireIfOpenOrFail();
 			try
 			{
+				/*
 				byte reportId = buffer[offset];
 
 				buffer[offset] = 0;
@@ -87,7 +106,7 @@ namespace HidSharp
 				int transferred;
 
 				_device.UsbDevice.ControlTransfer(ref packet, dat, buffer.Length, out transferred);
-
+				*/
 				/*
 				byte reportId = buffer[offset];
 

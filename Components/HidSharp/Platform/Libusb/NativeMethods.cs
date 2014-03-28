@@ -20,6 +20,7 @@ using System.Text;
 
 namespace HidSharp.Platform.Libusb
 {
+	/*
 	static class NativeMethods
 	{
 		const string Libusb = "libusb-1.0.so.0";
@@ -226,5 +227,6 @@ namespace HidSharp.Platform.Libusb
 		                                         	  	     out int transferred,
 		                                         	  	     uint timeout);
 	}
+	*/
 }
 

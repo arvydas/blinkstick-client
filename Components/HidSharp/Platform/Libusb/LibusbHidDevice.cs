@@ -1,6 +1,7 @@
 using System;
 using LibUsbDotNet;
 using LibUsbDotNet.Main;
+using System.Runtime.InteropServices;
 
 namespace HidSharp
 {
@@ -36,18 +37,36 @@ namespace HidSharp
             return (byte[])_reportDescriptor.Clone();
         }
 
-        internal unsafe bool GetInfo()
-        {
-			IUsbDevice wholeUsbDevice = deviceRegistry as IUsbDevice;
+        internal unsafe bool GetInfo ()
+		{
+			device = deviceRegistry.Device;
+
+			IUsbDevice wholeUsbDevice = device as IUsbDevice;
 
 			if (!ReferenceEquals (wholeUsbDevice, null)) {
 				// Select config #1
 				wholeUsbDevice.SetConfiguration (1);
 				// Claim interface #0.
 				wholeUsbDevice.ClaimInterface (0);
+			
+			} else {
+				return false;
 			}
 
-			device = deviceRegistry.Device;
+			var data = new byte[4];
+
+			data[0] = 0x00;
+			data[1] = 255;
+			data[2] = 0;
+			data[3] = 0;
+
+			IntPtr dat = Marshal.AllocHGlobal(4);
+			Marshal.Copy(data,0,dat,4);
+
+			UsbSetupPacket packet = new UsbSetupPacket(0x20, 0x09, (short)0x01, 0, 0);
+			int transferred;
+
+			device.ControlTransfer(ref packet, dat, data.Length, out transferred);
 
 			if (device == null || !device.IsOpen)
 				return false;
