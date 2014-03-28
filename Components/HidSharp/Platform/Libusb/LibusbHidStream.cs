@@ -9,8 +9,6 @@ namespace HidSharp
 	{
 		private HidDevice _hidDevice;
 		private UsbDevice _device;
-		object _readSync = new object(), _writeSync = new object();
-        byte[] _readBuffer, _writeBuffer;
 
 		public LibusbHidStream ()
 		{
@@ -61,7 +59,6 @@ namespace HidSharp
         {
             Throw.If.OutOfRange(buffer, offset, count);
 			
-			//HandleAcquireIfOpenOrFail();
 			try
 			{
 				UsbSetupPacket packet = new UsbSetupPacket (0x80 | 0x20, buffer[offset], (short)0x1, 0, 33);
@@ -72,7 +69,6 @@ namespace HidSharp
 			}
 			finally
 			{
-				//HandleRelease();
 			}
         }
 
@@ -87,7 +83,6 @@ namespace HidSharp
         {
             Throw.If.OutOfRange(buffer, offset, count);
 
-			//HandleAcquireIfOpenOrFail();
 			try
 			{
 				byte reportId = buffer[offset];
@@ -104,7 +99,6 @@ namespace HidSharp
 			}
 			finally
 			{
-				//HandleRelease();
 			}
         }
 
