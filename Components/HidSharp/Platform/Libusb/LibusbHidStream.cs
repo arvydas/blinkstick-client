@@ -20,29 +20,21 @@ namespace HidSharp
 			int handle;
 
 			_device = device;
-			DeviceInitAndOpen();
         }
 
-		internal void DeviceInitAndOpen()
+		internal override void HandleFree ()
 		{
-			/*
-			IUsbDevice wholeUsbDevice = _device.UsbDevice as IUsbDevice;
+			if (_device.UsbDevice != null && _device.UsbDevice.IsOpen) {
+			    IUsbDevice wholeUsbDevice = _device.UsbDevice as IUsbDevice;
+                
+				if (!ReferenceEquals(wholeUsbDevice, null))
+                {
+                    // Release interface #0.
+                    wholeUsbDevice.ReleaseInterface(0);
+                }
 
-			if (!ReferenceEquals (wholeUsbDevice, null)) {
-				// Select config #1
-				wholeUsbDevice.SetConfiguration (1);
-				// Claim interface #0.
-				wholeUsbDevice.ClaimInterface (0);
+                _device.UsbDevice.Close();
 			}
-			*/
-		}
-
-		internal override void HandleFree()
-		{
-			/*
-			NativeMethods.CloseHandle(ref _handle);
-			NativeMethods.CloseHandle(ref _closeEventHandle);
-			*/
 		}
 
         public unsafe override void GetFeature(byte[] buffer, int offset, int count)
@@ -75,26 +67,9 @@ namespace HidSharp
         {
             Throw.If.OutOfRange(buffer, offset, count);
 
-			var data = new byte[4];
-
-			data[0] = 0x00;
-			data[1] = 255;
-			data[2] = 0;
-			data[3] = 0;
-
-			IntPtr dat = Marshal.AllocHGlobal(4);
-			Marshal.Copy(data,0,dat,4);
-
-			UsbSetupPacket packet = new UsbSetupPacket(0x20, 0x09, (short)0x01, 0, (short)data.Length);
-			int transferred;
-
-			_device.UsbDevice.ControlTransfer(ref packet, dat, data.Length, out transferred);
-
-
 			//HandleAcquireIfOpenOrFail();
 			try
 			{
-				/*
 				byte reportId = buffer[offset];
 
 				buffer[offset] = 0;
@@ -106,23 +81,6 @@ namespace HidSharp
 				int transferred;
 
 				_device.UsbDevice.ControlTransfer(ref packet, dat, buffer.Length, out transferred);
-				*/
-				/*
-				byte reportId = buffer[offset];
-
-				buffer[offset] = 0;
-
-				IntPtr dat = Marshal.AllocHGlobal(buffer.Length);
-				Marshal.Copy(buffer, 0, dat, count);
-
-				UsbSetupPacket packet = new UsbSetupPacket(0x20, 0x09, reportId, 0, (byte)buffer.Length);
-				//UsbSetupPacket packet = new UsbSetupPacket (0x20 | 0x09, reportId, (short)0x1, 0, 33);
-				//UsbSetupPacket packet = new UsbSetupPacket(0x20, 0x09, reportId, (short)offset, (short)count);
-				int transferred;
-
-				_device.UsbDevice.ControlTransfer(ref packet, dat, buffer.Length, out transferred);
-				*/
-				if (transferred ==0) {};
 			}
 			finally
 			{
