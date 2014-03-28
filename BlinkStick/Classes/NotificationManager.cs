@@ -480,30 +480,41 @@ namespace BlinkStick.Classes
 		}
 
 
-		public void Stop ()
-		{
-			if (monitorWorker != null) {
-				monitorWorker.CancelAsync ();
-				monitorWorker = null;
-			}
+		public void Stop()
+        {
+            if (monitorWorker != null)
+            {
+                monitorWorker.CancelAsync();
+                monitorWorker = null;
+            }
 
-			if (animationWorker != null) {
-				animationWorker.CancelAsync ();
-				animationWorker = null;
-			}
+            if (animationWorker != null)
+            {
+                animationWorker.CancelAsync();
+                animationWorker = null;
+            }
 
-			if (ambilightWorker != null) {
-				ambilightWorker.CancelAsync ();
-				ambilightWorker = null;
-			}
+            if (ambilightWorker != null)
+            {
+                ambilightWorker.CancelAsync();
+                ambilightWorker = null;
+            }
 
-			foreach (CustomNotification notification in Notifications) {
-				notification.FinalizeServices ();
-			}
+            foreach (CustomNotification notification in Notifications)
+            {
+                notification.FinalizeServices();
+            }
 
-			if (client.Working) {
-				client.Disconnect();
-			}
+            if (client.Working)
+            {
+                client.Disconnect();
+            }
+
+            foreach (LedController controller in Controllers)
+            {
+                controller.Close();
+            }
+
 		}
 
 		void ambilightWorker_DoWork (object sender, DoWorkEventArgs e)

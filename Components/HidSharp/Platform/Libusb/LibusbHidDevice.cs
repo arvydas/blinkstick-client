@@ -8,14 +8,13 @@ namespace HidSharp
 	public class LibusbHidDevice : HidDevice
 	{
 		private UsbRegistry deviceRegistry;
-		private UsbDevice device;
 
 		string _manufacturer;
         string _productName;
         string _serialNumber;
         byte[] _reportDescriptor;
         int _vid, _pid, _version;
-        int _maxInput, _maxOutput, _maxFeature;
+        int _maxInput = 0, _maxOutput = 0, _maxFeature = 0;
         bool _reportsUseID;
         string _path;
 
@@ -28,7 +27,7 @@ namespace HidSharp
 		public override HidStream Open()
         {
             var stream = new LibusbHidStream();
-            try { stream.Init(_path, this); return stream; }
+            try { stream.Init(this, this.deviceRegistry); return stream; }
             catch { stream.Close(); throw; }
         }
 
@@ -39,32 +38,12 @@ namespace HidSharp
 
         internal unsafe bool GetInfo ()
 		{
-			device = deviceRegistry.Device;
-
-			IUsbDevice wholeUsbDevice = device as IUsbDevice;
-
-			if (!ReferenceEquals (wholeUsbDevice, null)) {
-				// Select config #1
-				wholeUsbDevice.SetConfiguration (1);
-				// Claim interface #0.
-				wholeUsbDevice.ClaimInterface (0);
-			
-			} else {
-				return false;
-			}
-
-			if (device == null || !device.IsOpen)
-				return false;
-
-			if (device.Info == null)
-				return false;
-
-			_vid = device.Info.Descriptor.VendorID;
-            _pid = device.Info.Descriptor.ProductID;
-            _version = 0;
-            _manufacturer = device.Info.ManufacturerString;
-            _productName = device.Info.ProductString;
-            _serialNumber = device.Info.SerialString;
+			_vid = deviceRegistry.Vid;
+            _pid = deviceRegistry.Pid;
+            _version = deviceRegistry.Rev;
+            _manufacturer = (String)deviceRegistry.DeviceProperties["Mfg"];
+            _productName = (String)deviceRegistry.DeviceProperties["DeviceDesc"];
+            _serialNumber = (String)deviceRegistry.DeviceProperties["SerialNumber"];
 
             return true;
         }
@@ -123,12 +102,6 @@ namespace HidSharp
         {
             get { return _vid; }
         }
-
-		public UsbDevice UsbDevice {
-			get {
-				return this.device;
-			}
-		}
 	}
 }
 

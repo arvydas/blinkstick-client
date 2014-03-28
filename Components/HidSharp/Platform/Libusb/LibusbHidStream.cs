@@ -7,7 +7,8 @@ namespace HidSharp
 {
 	public class LibusbHidStream : HidStream
 	{
-		private LibusbHidDevice _device;
+		private HidDevice _hidDevice;
+		private UsbDevice _device;
 		object _readSync = new object(), _writeSync = new object();
         byte[] _readBuffer, _writeBuffer;
 
@@ -15,17 +16,34 @@ namespace HidSharp
 		{
 		}
 
-		internal void Init(string path, LibusbHidDevice device)
+		internal void Init(HidDevice hidDevice, UsbRegistry registry)
         {
-			int handle;
-
-			_device = device;
+			_hidDevice = hidDevice;
+			OpenDevice (registry);
         }
+
+		internal void OpenDevice (UsbRegistry registry)
+		{
+			this._device = registry.Device;
+
+			IUsbDevice wholeUsbDevice = _device as IUsbDevice;
+
+			if (!ReferenceEquals (wholeUsbDevice, null)) {
+				// Select config #1
+				wholeUsbDevice.SetConfiguration (1);
+				// Claim interface #0.
+				wholeUsbDevice.ClaimInterface (0);
+			}			
+		}
 
 		internal override void HandleFree ()
 		{
-			if (_device.UsbDevice != null && _device.UsbDevice.IsOpen) {
-			    IUsbDevice wholeUsbDevice = _device.UsbDevice as IUsbDevice;
+		}
+
+		public override void Close ()
+		{
+			if (_device != null && _device.IsOpen) {
+			    IUsbDevice wholeUsbDevice = _device as IUsbDevice;
                 
 				if (!ReferenceEquals(wholeUsbDevice, null))
                 {
@@ -33,8 +51,10 @@ namespace HidSharp
                     wholeUsbDevice.ReleaseInterface(0);
                 }
 
-                _device.UsbDevice.Close();
+                _device.Close();
 			}
+
+			base.Close ();
 		}
 
         public unsafe override void GetFeature(byte[] buffer, int offset, int count)
@@ -48,7 +68,7 @@ namespace HidSharp
 
 				int transferred;
 
-				_device.UsbDevice.ControlTransfer (ref packet, buffer, count, out transferred);
+				_device.ControlTransfer (ref packet, buffer, count, out transferred);
 			}
 			finally
 			{
@@ -80,7 +100,7 @@ namespace HidSharp
 				UsbSetupPacket packet = new UsbSetupPacket(0x20, 0x09, reportId, 0, (byte)buffer.Length);
 				int transferred;
 
-				_device.UsbDevice.ControlTransfer(ref packet, dat, buffer.Length, out transferred);
+				_device.ControlTransfer(ref packet, dat, buffer.Length, out transferred);
 			}
 			finally
 			{
@@ -95,7 +115,7 @@ namespace HidSharp
 
         public override HidDevice Device
         {
-            get { return _device; }
+            get { return _hidDevice; }
         }
 	}
 }

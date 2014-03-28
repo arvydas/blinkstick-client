@@ -653,5 +653,9 @@ namespace BlinkStick
 			return result.ToArray();
         }
 
+        public void Close(){
+            if (Device != null)
+                Device.CloseDevice();
+        }
 	}
 }

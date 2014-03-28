@@ -284,6 +284,8 @@ public partial class MainWindow: Gtk.Window
 #if !LINUX
 		trayIcon.Visible = false;
 #endif
+
+
 		BlinkstickDeviceFinder.FreeUsbResources();
 
 		if (!BlinkstickDeviceFinder.IsUnix())
