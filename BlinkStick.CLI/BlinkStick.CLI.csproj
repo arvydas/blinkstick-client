@@ -51,6 +51,10 @@
       <Project>{7AAEBEBE-E38D-47B1-A04C-A055DCEB0757}</Project>
       <Name>BlinkStick.Hid</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Components\HidSharp\HidSharp.csproj">
+      <Project>{0DB86674-2A7B-4BDC-93C1-3F7DC771426C}</Project>
+      <Name>HidSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

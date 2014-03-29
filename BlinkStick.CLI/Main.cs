@@ -47,9 +47,9 @@ namespace BlinkStick.CLI
             }
 
             //find devices
-            List<AbstractBlinkstickHid> Devices = new List<AbstractBlinkstickHid>();
+            List<BlinkstickHid> Devices = new List<BlinkstickHid>();
 
-            foreach (AbstractBlinkstickHid device in BlinkstickDeviceFinder.FindDevices())
+            foreach (BlinkstickHid device in BlinkstickHid.AllDevices())
             {
                 if (options.Device == null || device.Serial == options.Device || device.Serial == "first")
                 {
@@ -73,7 +73,7 @@ namespace BlinkStick.CLI
                 return -1;
             }
 
-			foreach (AbstractBlinkstickHid device in Devices)
+			foreach (BlinkstickHid device in Devices)
             {
                 if (device.OpenDevice ()) {
 					Console.WriteLine (String.Format ("Device {0} opened successfully", device.Serial));
@@ -132,7 +132,7 @@ namespace BlinkStick.CLI
                 }
             }
 
-			BlinkstickDeviceFinder.FreeUsbResources();
+            HidSharp.HidDeviceLoader.FreeUsbResources();
 
 			if (Error)
 				return -1;
@@ -140,7 +140,7 @@ namespace BlinkStick.CLI
             	return 0;
 		}
 
-        public static void PrintDeviceInfo(AbstractBlinkstickHid device, Boolean colorOnly)
+        public static void PrintDeviceInfo(BlinkstickHid device, Boolean colorOnly)
         {
             byte cr;
             byte cg;
@@ -159,7 +159,7 @@ namespace BlinkStick.CLI
 			PrintDeviceInfoBlock(device, 3);
         }
 
-        public static void PrintDeviceInfoBlock(AbstractBlinkstickHid device, byte blockId)
+        public static void PrintDeviceInfoBlock(BlinkstickHid device, byte blockId)
         {
             Console.Write (String.Format("    Info block{0}: ", blockId - 1));
 
