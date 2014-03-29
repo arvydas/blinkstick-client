@@ -105,7 +105,7 @@ public partial class MainWindow: Gtk.Window
 	
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
-		if (!BlinkstickDeviceFinder.IsUnix())
+        if (HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Windows)
 		{
 			SetupSingleInstanceEvent();
 		}
@@ -285,10 +285,7 @@ public partial class MainWindow: Gtk.Window
 		trayIcon.Visible = false;
 #endif
 
-
-		BlinkstickDeviceFinder.FreeUsbResources();
-
-		if (!BlinkstickDeviceFinder.IsUnix())
+        if (HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Windows)
 		{
 			instanceExistsEvent.Cancel();
 		}

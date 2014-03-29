@@ -523,14 +523,17 @@ namespace BlinkStick.Classes
 
 			AbstractScreenCapture capture = null;
 
-			if (BlinkstickDeviceFinder.IsUnix())
-			{
-				capture = new LinuxScreenCapture();
-			}
-			else
-			{
-				capture = new WindowsScreenCapture();
-			}
+            switch (HidSharp.PlatformDetector.RunningPlatform())
+            {
+                case HidSharp.PlatformDetector.Platform.Windows:
+                    capture = new WindowsScreenCapture();
+                    break;
+                case HidSharp.PlatformDetector.Platform.Linux:
+                    capture = new LinuxScreenCapture();
+                    break;
+                case HidSharp.PlatformDetector.Platform.Mac:
+                    throw new Exception("Feature unsupported on this platform");
+            }
 
 			BackgroundWorker worker = (BackgroundWorker)sender;
 

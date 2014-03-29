@@ -43,13 +43,17 @@ namespace BlinkStick.Hid
 
 		public UsbMonitor (IntPtr mainWindowHandle)
 		{
-			if (BlinkstickDeviceFinder.IsUnix ()) {
-                //!!UsbDeviceNotifier = DeviceNotifier.OpenDeviceNotifier();
-                //!!UsbDeviceNotifier.OnDeviceNotify += OnDeviceNotifyEvent;
-			} else {
-				winUsbDeviceMonitor = new WinUsbDeviceMonitor();
-				winUsbDeviceMonitor.DeviceListChanged += HandleDeviceListChanged;
-			}
+            switch (HidSharp.PlatformDetector.RunningPlatform())
+            {
+                case HidSharp.PlatformDetector.Platform.Windows:
+                    winUsbDeviceMonitor = new WinUsbDeviceMonitor();
+                    winUsbDeviceMonitor.DeviceListChanged += HandleDeviceListChanged;
+                    break;
+                case HidSharp.PlatformDetector.Platform.Linux:
+                    //!!UsbDeviceNotifier = DeviceNotifier.OpenDeviceNotifier();
+                    //!!UsbDeviceNotifier.OnDeviceNotify += OnDeviceNotifyEvent;
+                    break;
+            }
 		}
 
 		void HandleDeviceListChanged (object sender, EventArgs e)

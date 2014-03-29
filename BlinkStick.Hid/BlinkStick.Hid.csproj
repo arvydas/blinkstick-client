@@ -36,13 +36,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="AbstractBlinkstickHid.cs" />
-    <Compile Include="BlinkstickDeviceFinder.cs" />
     <Compile Include="UsbMonitor.cs" />
-    <Compile Include="WindowsBlinkstickHid.cs" />
     <Compile Include="WinUsbDeviceMonitor.cs" />
     <Compile Include="RgbColor.cs" />
     <Compile Include="HSLColor.cs" />
+    <Compile Include="BlinkstickHid.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>

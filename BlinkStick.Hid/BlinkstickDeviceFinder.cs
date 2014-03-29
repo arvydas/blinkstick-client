@@ -22,27 +22,9 @@ namespace BlinkStick.Hid
 {
 	public static class BlinkstickDeviceFinder
 	{
-		public static Boolean IsUnix ()
+        public static BlinkstickHid[] FindDevices ()
 		{
-			int p = (int) Environment.OSVersion.Platform;
-            if ((p == 4) || (p == 128)) {
-				return true;
-            } else {
-				return false;
-            }
-		}
-
-		public static AbstractBlinkstickHid[] FindDevices ()
-		{
-            return WindowsBlinkstickHid.AllDevices();
-		}
-
-		public static void FreeUsbResources ()
-		{
-			// Free usb resources
-			if (IsUnix ()) {
-                //UsbDevice.Exit ();
-			}
+            return BlinkstickHid.AllDevices();
 		}
 	}
 }

@@ -21,13 +21,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Runtime.InteropServices;
-using HidSharp;
 using System.Text.RegularExpressions;
+using HidSharp;
 
 namespace BlinkStick.Hid
 {
-	public class WindowsBlinkstickHid : AbstractBlinkstickHid, IDisposable
+	public class BlinkstickHid : IDisposable
     {
+        protected const int VendorId = 0x20A0;
+        protected const int ProductId = 0x41E5;
+
         private HidDevice device;
         private HidStream stream;
 
@@ -35,15 +38,114 @@ namespace BlinkStick.Hid
         
         private bool disposed = false;
 
-		protected override String GetSerial()
-		{
-            return device.SerialNumber;
-		}
-		
-		protected override String GetManufacturer()
-		{
-            return device.Manufacturer;
-		}
+        protected bool connectedToDriver = false;
+
+        public Boolean Connected {
+            get {
+                return connectedToDriver;
+            }
+        }
+
+        public String Serial {
+            get {
+                return device.SerialNumber;
+            }
+        }
+
+        public String ManufacturerName {
+            get {
+                return device.Manufacturer;
+            }
+        }
+
+        /// <summary>
+        public String ProductName {
+            get {
+                return device.ProductName;
+            }
+        }
+
+        private String _Name;
+        public String Name {
+            get {
+                if (_Name == null) {
+                    GetInfoBlock (2, out _Name);
+                }
+
+                return _Name;
+            }
+            set {
+                if (_Name != value)
+                {
+                    _Name = value;
+                    SetInfoBlock(2, _Name);
+                }
+            }
+        }
+
+        private String _Data;
+        public String Data {
+            get {
+                if (_Data == null) {
+                    GetInfoBlock (3, out _Data);
+                }
+
+                return _Data;
+            }
+            set {
+                if (_Data != value)
+                {
+                    _Data = value;
+                    SetInfoBlock(3, _Data);
+                }
+            }
+        }
+
+        public void SetInfoBlock (byte id, string data)
+        {
+            SetInfoBlock(id, Encoding.ASCII.GetBytes(data));
+        }
+
+        public Boolean GetInfoBlock (byte id, out string data)
+        {
+            byte[] dataBytes;
+            Boolean result = GetInfoBlock (id, out dataBytes);
+
+            if (result) {
+                for (int i = 1; i < dataBytes.Length; i++) {
+                    if (dataBytes [i] == 0) {
+                        Array.Resize (ref dataBytes, i);
+                        break;
+                    }
+                }
+
+                data = Encoding.ASCII.GetString (dataBytes, 1, dataBytes.Length - 1);
+            } else {
+                data = "";
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Set LED color
+        /// </summary>
+        /// <param name="color">Must be in #rrggbb format</param>
+        public void SetLedColor(String color)
+        {
+            if (!IsValidColor(color))
+                throw new Exception("Color value is invalid");
+
+            SetLedColor(
+                Convert.ToByte(color.Substring(1, 2), 16),
+                Convert.ToByte(color.Substring(3, 2), 16),
+                Convert.ToByte(color.Substring(5, 2), 16));
+        }
+
+        public static Boolean IsValidColor (String color)
+        {
+            return Regex.IsMatch(color, "^#[A-Fa-f0-9]{6}$");
+        }
 
         /// Occurs when a BlinkStick device is attached.
         /// </summary>
@@ -57,7 +159,7 @@ namespace BlinkStick.Hid
         /// <summary>
         /// Initializes a new instance of the BlinkstickHid class.
         /// </summary>
-        public WindowsBlinkstickHid()
+        public BlinkstickHid()
         {
         }
 
@@ -67,7 +169,7 @@ namespace BlinkStick.Hid
         /// After a successful connection, a DeviceAttached event will normally be sent.
         /// </summary>
         /// <returns>True if a Blinkstick device is connected, False otherwise.</returns>
-        public override bool OpenDevice ()
+        public bool OpenDevice ()
 		{
 			if (this.device == null) {
                 HidDeviceLoader loader = new HidDeviceLoader();
@@ -101,14 +203,14 @@ namespace BlinkStick.Hid
 			return true;
 		}
 
-        public static WindowsBlinkstickHid[] AllDevices ()
+        public static BlinkstickHid[] AllDevices ()
 		{
-            List<WindowsBlinkstickHid> result = new List<WindowsBlinkstickHid>();
+            List<BlinkstickHid> result = new List<BlinkstickHid>();
 
             HidDeviceLoader loader = new HidDeviceLoader();
             foreach (HidDevice adevice in loader.GetDevices(VendorId, ProductId).ToArray())
             {
-                WindowsBlinkstickHid hid = new WindowsBlinkstickHid();
+                BlinkstickHid hid = new BlinkstickHid();
                 hid.device = adevice;
                 result.Add(hid);
             }
@@ -129,7 +231,7 @@ namespace BlinkStick.Hid
         /// <summary>
         /// Closes the connection to the device.
         /// </summary>
-        public override void CloseDevice()
+        public void CloseDevice()
         {
             stream.Close();
             device = null;
@@ -161,7 +263,7 @@ namespace BlinkStick.Hid
                 DeviceRemoved(this, EventArgs.Empty);
         }
 
-        public override void SetLedColor(byte r, byte g, byte b)
+        public void SetLedColor(byte r, byte g, byte b)
         {
             if (connectedToDriver)
             {
@@ -175,7 +277,7 @@ namespace BlinkStick.Hid
             }
         }
 
-		public override Boolean GetLedColor (out byte r, out byte g, out byte b)
+		public Boolean GetLedColor (out byte r, out byte g, out byte b)
 		{
             byte[] report = new byte[33]; 
             report[0] = 1;
@@ -197,7 +299,7 @@ namespace BlinkStick.Hid
 			}
 		}
 
-		protected override void SetInfoBlock (byte id, byte[] data)
+		protected void SetInfoBlock (byte id, byte[] data)
 		{
 			if (id == 2 || id == 3) {
 				if (data.Length > 32)
@@ -233,7 +335,7 @@ namespace BlinkStick.Hid
 			}
 		}
 
-		public override Boolean GetInfoBlock (byte id, out byte[] data)
+		public Boolean GetInfoBlock (byte id, out byte[] data)
 		{
 			if (id == 2 || id == 3) {
                 data = new byte[33];
@@ -275,7 +377,7 @@ namespace BlinkStick.Hid
         /// <summary>
         /// Destroys instance and frees device resources (if not freed already)
         /// </summary>
-        ~WindowsBlinkstickHid()
+        ~BlinkstickHid()
         {
             Dispose(false);
         }

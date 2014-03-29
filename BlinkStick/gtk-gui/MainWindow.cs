@@ -29,7 +29,7 @@ public partial class MainWindow
 	private global::Gtk.ScrolledWindow GtkScrolledWindow;
 	private global::Gtk.TreeView treeviewEvents;
 	private global::Gtk.Statusbar statusbar1;
-	
+
 	protected virtual void Build ()
 	{
 		global::Stetic.Gui.Initialize (this);

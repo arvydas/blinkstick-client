@@ -25,7 +25,7 @@ namespace BlinkStick.Hid
 {
 	public class WinUsbDeviceMonitor
 	{
-		public event EventHandler DeviceListChanged;
+        public event EventHandler DeviceListChanged;
 		
 		protected void OnDeviceListChanged()
 		{

@@ -31,7 +31,7 @@ namespace BlinkStick
 	{
 		#region Events
 		public event EventHandler BlinkStart;
-		public AbstractBlinkstickHid Device;
+		public BlinkstickHid Device;
 		
 		protected void OnBlinkStart()
 		{
@@ -643,7 +643,7 @@ namespace BlinkStick
 		{
 			List<LedController> result = new List<LedController>();
 
-			foreach (AbstractBlinkstickHid hidDevice in BlinkstickDeviceFinder.FindDevices()) {
+            foreach (BlinkstickHid hidDevice in BlinkstickHid.AllDevices()) {
 				LedController controller = new LedController();
 				controller.Device = hidDevice;
 				controller.Device.OpenDevice();
