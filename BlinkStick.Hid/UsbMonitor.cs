@@ -17,7 +17,7 @@
 #endregion
 
 using System;
-//!!!using LibUsbDotNet.DeviceNotify;
+using LibUsbDotNet.DeviceNotify;
 
 namespace BlinkStick.Hid
 {
@@ -34,7 +34,7 @@ namespace BlinkStick.Hid
 		}
 
 		private WinUsbDeviceMonitor winUsbDeviceMonitor;
-        //!!public IDeviceNotifier UsbDeviceNotifier;
+        public IDeviceNotifier UsbDeviceNotifier;
 
 		public Boolean Monitoring {
 			get;
@@ -50,8 +50,8 @@ namespace BlinkStick.Hid
                     winUsbDeviceMonitor.DeviceListChanged += HandleDeviceListChanged;
                     break;
                 case HidSharp.PlatformDetector.Platform.Linux:
-                    //!!UsbDeviceNotifier = DeviceNotifier.OpenDeviceNotifier();
-                    //!!UsbDeviceNotifier.OnDeviceNotify += OnDeviceNotifyEvent;
+                    UsbDeviceNotifier = DeviceNotifier.OpenDeviceNotifier();
+                    UsbDeviceNotifier.OnDeviceNotify += OnDeviceNotifyEvent;
                     break;
             }
 		}
@@ -63,37 +63,28 @@ namespace BlinkStick.Hid
 
 		public void Start ()
 		{
-            /*
-			if (UsbDeviceNotifier != null) {
+            if (UsbDeviceNotifier != null) {
 				UsbDeviceNotifier.Enabled = true;
 			}
-   */         
-			Monitoring = true;
+
+            Monitoring = true;
 		}
 
 		public void Stop ()
 		{
-            /*
             if (UsbDeviceNotifier != null) {
 				UsbDeviceNotifier.Enabled = false;  // Disable the device notifier
 
 				UsbDeviceNotifier.OnDeviceNotify -= OnDeviceNotifyEvent;
 			}
-*/
 
 			Monitoring = false;
 		}
 
-        /*
 		private void OnDeviceNotifyEvent(object sender, DeviceNotifyEventArgs e)
         {
-            Console.WriteLine(e.ToString()); // Dump the event info to output.
-        
-            Console.WriteLine();
-
 			OnUsbDeviceAdded();
         }
-        */
 
 		~UsbMonitor ()
 		{
