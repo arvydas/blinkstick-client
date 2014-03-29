@@ -476,7 +476,6 @@ public partial class MainWindow: Gtk.Window
 		*/
 		else
 		{
-			IntPtr dummy = Handle;
 			eventSignalled = new BlinkStick.Utils.EventSignalledHandler(evnt_EventSignalled);
 			instanceExistsEvent.SetObject(this, eventSignalled);
 		}

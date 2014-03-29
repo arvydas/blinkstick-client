@@ -22,8 +22,6 @@ namespace BlinkStick
 {
 	public partial class AboutDialog : Gtk.Dialog
 	{
-		string ApplicationTitle;
-
 		public AboutDialog ()
 		{
 			this.Build ();

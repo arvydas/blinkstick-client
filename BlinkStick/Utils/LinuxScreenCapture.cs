@@ -121,7 +121,7 @@ namespace BlinkStick.Utils
 				
 				//gfx.CopyFromScreen(0, 0, 0, 0, bmp.Size, CopyPixelOperation.SourceCopy);
 			}
-			catch (ArgumentException error) {
+			catch {
 				r = 0;
 				g = 0;
 				b = 0;

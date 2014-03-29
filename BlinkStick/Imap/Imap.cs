@@ -174,13 +174,12 @@ namespace Joshi.Utils.Imap
 		{
 			if (m_bIsLoggedIn)
 			{
-				ImapResponseEnum eImapResponse;
 				ArrayList asResultArray = new ArrayList();
 				string sCommand = IMAP_LOGOUT_COMMAND;
 				sCommand += IMAP_COMMAND_EOL;
 				try
 				{
-					eImapResponse = SendAndReceive(sCommand, ref asResultArray);
+					SendAndReceive(sCommand, ref asResultArray);
 				}
 				catch (Exception e)
 				{
@@ -1432,7 +1431,6 @@ namespace Joshi.Utils.Imap
 				{
 					//-------------------------
 					// PARSE RESPONSE
-					string sLastLine = IMAP_COMMAND_IDENTIFIER + " " + IMAP_OK_RESPONSE;
 					string sLine = asResultArray[0].ToString();
 					if (!sLine.StartsWith(IMAP_UNTAGGED_RESPONSE_PREFIX))
 					{
