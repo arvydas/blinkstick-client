@@ -142,6 +142,115 @@ namespace BlinkStick.Hid
                 Convert.ToByte(color.Substring(5, 2), 16));
         }
 
+        public void SetLedColor(byte channel, byte index, byte r, byte g, byte b)
+        {
+            if (connectedToDriver)
+            {
+                byte [] data = new byte[6];
+                data[0] = 5;
+                data[1] = channel;
+                data[2] = index;
+                data[3] = r;
+                data[4] = g;
+                data[5] = b;
+
+                stream.SetFeature(data);
+            }
+        }
+
+        public void SetLedColor(byte channel, byte index, string color)
+        {
+            if (!IsValidColor(color))
+                throw new Exception("Color value is invalid");
+
+            SetLedColor(
+                channel,
+                index,
+                Convert.ToByte(color.Substring(1, 2), 16),
+                Convert.ToByte(color.Substring(3, 2), 16),
+                Convert.ToByte(color.Substring(5, 2), 16));
+        }
+
+        public void SetLedMode(byte mode)
+        {
+            if (connectedToDriver)
+            {
+                byte [] data = new byte[2];
+                data[0] = 4;
+                data[1] = mode;
+                stream.SetFeature(data);
+            }
+        }
+
+
+        public void SetLedColors(byte channel, byte[] reportData)
+        {
+            int max_leds = 64;
+            byte reportId = 9;
+
+            //Automatically determine the correct report id to send the data to
+            if (reportData.Length <= 8 * 3)
+            {
+                max_leds = 8;
+                reportId = 6;
+            }
+            else if (reportData.Length <= 16 * 3)
+            {
+                max_leds = 16;
+                reportId = 7;
+            }
+            else if (reportData.Length <= 32 * 3)
+            {
+                max_leds = 32;
+                reportId = 8;
+            }
+            else if (reportData.Length <= 64 * 3)
+            {
+                max_leds = 64;
+                reportId = 9;
+            }
+            else if (reportData.Length <= 128 * 3)
+            {
+                max_leds = 64;
+                reportId = 10;
+            }
+
+            byte [] data = new byte[max_leds * 3 + 2];
+            data[0] = reportId;
+            data[1] = channel; // chanel index
+
+            for (int i = 0; i < Math.Min(reportData.Length, data.Length - 2); i++)
+            {
+                data[i + 2] = reportData[i];
+            }
+
+            for (int i = reportData.Length + 2; i < data.Length; i++)
+            {
+                data[i] = 0;
+            }
+
+            stream.SetFeature(data);
+
+            if (reportId == 10)
+            {
+                //System.Threading.Thread.Sleep(1);
+
+                for (int i = 0; i < Math.Min(data.Length - 2, reportData.Length - 64 * 3); i++)
+                {
+                    data[i + 2] = reportData[64 * 3 + i];
+                } 
+
+                for (int i = reportData.Length + 2 - 64 * 3; i < data.Length; i++)
+                {
+                    data[i] = 0;
+                }
+
+                data[0] = (byte)(reportId + 1);
+
+                stream.SetFeature(data);
+            }
+        } 
+
         public static Boolean IsValidColor (String color)
         {
             return Regex.IsMatch(color, "^#[A-Fa-f0-9]{6}$");
@@ -283,7 +392,7 @@ namespace BlinkStick.Hid
             report[0] = 1;
 
             if (connectedToDriver) {
-                stream.GetFeature(report);
+                stream.GetFeature(report, 0, 33);
 
 				r = report [1];
 				g = report [2];
@@ -298,6 +407,23 @@ namespace BlinkStick.Hid
 				return false;
 			}
 		}
+
+        public Boolean GetLedData (out byte[] data)
+        {
+            if (connectedToDriver)
+            {
+                data = new byte[3 * 8 * 8 + 1];
+                data[0] = 9;
+                stream.GetFeature(data, 0, data.Length);
+                return true;
+            }
+            else
+            {
+                data = new byte[0];
+                return false;
+            }
+
+        }
 
 		protected void SetInfoBlock (byte id, byte[] data)
 		{
@@ -343,7 +469,7 @@ namespace BlinkStick.Hid
 
                 if (connectedToDriver)
 				{
-                    stream.GetFeature(data);
+                    stream.GetFeature(data, 0, data.Length);
                 	return true;
 				}
 				else

@@ -45,9 +45,25 @@ namespace BlinkStick.CLI
             Description = "Set color for device. The format must be \"#rrggbb\" or \"random\" where rr, gg, bb is any hexadecimal number from 00 to FF.", GroupId = "commands")]
         public String SetColor { get; set; }
 
+        [CommandLineOption(Name = "set-mode", 
+            Description = "Set mode for BlinkStick, 0 - RGB LED, 1 - RGB LED inverse, 2 - WS2812.", GroupId = "commands")]
+        public int SetMode { get; set; }
+
+        [CommandLineOption(Name = "index", 
+            Description = "Index of LED", GroupId = "options")]
+        public int Index { get; set; }
+
+        [CommandLineOption(Name = "channel", 
+            Description = "Channel of LED", GroupId = "options")]
+        public int Channel { get; set; }
+
         [CommandLineOption(Name = "get-color", 
             Description = "Get the current color of the device", GroupId = "commands")]
         public Boolean GetColor { get; set; }
+
+        [CommandLineOption(Name = "get-led-data", 
+            Description = "Get the LED Data for the device", GroupId = "commands")]
+        public Boolean GetLedData { get; set; }
 
         [CommandLineOption(Name = "set-info-block1", 
             Description = "Set info block 1. May contain any string up to 32 chars long.", GroupId = "commands")]
@@ -68,6 +84,13 @@ namespace BlinkStick.CLI
         [CommandLineOption(Name = "d", Aliases = "device",
             Description = "Specify device by serial number. All devices if unspecified or first device found if \"first\" supplied as a parameter.", GroupId = "options")]
         public String Device { get; set; }
+
+        public Options()
+        {
+            this.Index = 0;
+            this.Channel = 0;
+            this.SetMode = -1;
+        }
     }
 
 }

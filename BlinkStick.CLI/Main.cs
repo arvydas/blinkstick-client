@@ -89,21 +89,29 @@ namespace BlinkStick.CLI
                     {
                         if (options.SetColor == "random")
                         {
-							Random r = new Random();
-                            device.SetLedColor((byte)r.Next(256), (byte)r.Next(256), (byte)r.Next(256));
+                            Random r = new Random();
+                            device.SetLedColor((byte)options.Channel, (byte)options.Index, (byte)r.Next(256), (byte)r.Next(256), (byte)r.Next(256));
                         }
                         else
                         {
                             try
                             {
-                                device.SetLedColor(options.SetColor);
+                                device.SetLedColor((byte)options.Channel, (byte)options.Index, options.SetColor);
                             }
                             catch (Exception e)
                             {
                                 Console.WriteLine("Error: " + e.Message);
-								Error = true;
+                                Error = true;
                             }
                         }
+                    }
+                    else if (options.SetMode != -1)
+                    {
+                        device.SetLedMode((byte)options.SetMode);
+                    }
+                    else if (options.GetLedData)
+                    {
+                        PrintDeviceLedData(device);
                     }
                     else if (options.GetInfoBlock1)
                     {
@@ -167,6 +175,31 @@ namespace BlinkStick.CLI
             if (device.GetInfoBlock(blockId, out deviceInfoBlock))
             {
                 Console.WriteLine (deviceInfoBlock);
+            }
+            else
+            {
+                Console.WriteLine ("FAILED");
+            }
+        }
+
+
+        public static void PrintDeviceLedData(BlinkstickHid device)
+        {
+            byte[] data;
+            if (device.GetLedData(out data))
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    for (int i = 0; i < 8; i++)
+                    {
+                        Console.Write(String.Format("{0:x2}{1:x2}{2:x2} ", 
+                            data[j * 3 * 8 + i * 3 + 1], 
+                            data[j * 3 * 8 + i * 3 + 0], 
+                            data[j * 3 * 8 + i * 3 + 2]));
+                    }
+
+                    Console.WriteLine("");
+                }
             }
             else
             {
