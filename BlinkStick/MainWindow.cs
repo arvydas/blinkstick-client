@@ -24,6 +24,8 @@ using BlinkStick.Classes;
 using log4net;
 using System.IO;
 using BlinkStick.Hid;
+using BlinkStick.Utils;
+using MonoDevelop.MacInterop;
 #if LINUX
 using AppIndicator;
 #endif
@@ -203,7 +205,7 @@ public partial class MainWindow: Gtk.Window
 
 		log.Debug("Showing popup menu");
 		popupMenu.ShowAll();
-
+        //TODO: Remove ifdef and use platform detection
 #if LINUX
 		indicator = new ApplicationIndicator ("blinkstick", "icon", Category.ApplicationStatus, ExecutableFolder);	
 		indicator.Menu = popupMenu;
@@ -223,6 +225,47 @@ public partial class MainWindow: Gtk.Window
 			popupMenu.Popup ();
 		};
 #endif
+        if (HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Mac) {
+            //enable the global key handler for keyboard shortcuts
+            MacMenu.GlobalKeyHandlerEnabled = true;
+
+            //Tell the IGE library to use your GTK menu as the Mac main menu
+            MacMenu.MenuBar = menubar2;
+
+            //tell IGE which menu item should be used for the app menu's quit item
+            MacMenu.QuitMenuItem = menuItemQuit;
+
+            //add a new group to the app menu, and add some items to it
+            var appGroup = MacMenu.AddAppMenuGroup ();
+            appGroup.AddMenuItem (menuItemQuit, "About BlinkStick Client...");
+            appGroup.AddMenuItem (menuItemQuit, "Preferences...");
+
+            //hide the menu bar so it no longer displays within the window
+            menubar2.Hide ();
+
+
+            ApplicationEvents.Quit += delegate(object sender, ApplicationQuitEventArgs e)
+            {
+                OnQuitActionActivated(null, null);
+                e.Handled = true;
+            };
+
+            ApplicationEvents.Reopen += delegate (object sender, ApplicationEventArgs e) {
+                this.Deiconify ();
+                this.Visible = true;
+                e.Handled = true;
+            };
+
+            //optional, only need this if your Info.plist registers to handle urls
+            ApplicationEvents.OpenUrls += delegate (object sender, ApplicationUrlEventArgs e) {
+                if (e.Urls != null || e.Urls.Count > 0) {
+                    //OpenUrls (e.Urls);
+                }
+                e.Handled = true;
+            };
+
+        }
+
 		log.Debug("Initialization done");
 	}
 
@@ -333,7 +376,8 @@ public partial class MainWindow: Gtk.Window
 		if(selection.GetSelected(out model, out iter)){
 			SelectedNotification = (CustomNotification)model.GetValue (iter, 0);
 		}
-	}
+	}
+
 	protected void OnNewActionActivated (object sender, EventArgs e)
 	{
 		CustomNotification newEvent = SelectNotificationTypeForm.ShowForm();
@@ -378,7 +422,8 @@ public partial class MainWindow: Gtk.Window
 		testForm = null;
 
 		//BlinkStickTestForm.ShowForm(Manager);
-	}
+	}
+
 	protected void OnCopyActionActivated (object sender, EventArgs e)
 	{
 		CustomNotification ev = SelectedNotification.Copy();
@@ -388,7 +433,8 @@ public partial class MainWindow: Gtk.Window
 			Manager.AddNotification (ev);
 			ev.InitializeServices();
 		}
-	}
+	}
+
 	protected void OnActiveActionToggled (object sender, EventArgs e)
 	{
 		if (IgnoreActivation)
@@ -401,11 +447,13 @@ public partial class MainWindow: Gtk.Window
 		ApplicationIsClosing = true;
 		DestroyEnvironment();
         Gtk.Application.Quit ();
-	}
+	}
+
 	protected void OnCheckActionChanged (object o, ChangedArgs args)
 	{
 		SelectedNotification.Check ();
-	}
+	}
+
 	protected void OnManageActionActivated (object sender, EventArgs e)
 	{
 		BlinkStickManageForm.ShowForm(Manager);
@@ -414,7 +462,8 @@ public partial class MainWindow: Gtk.Window
 	protected void OnHideActionActivated (object sender, EventArgs e)
 	{
 		this.Hide ();
-	}
+	}
+
 	protected void OnSupportActionActivated (object sender, EventArgs e)
 	{
 		try
@@ -440,7 +489,8 @@ public partial class MainWindow: Gtk.Window
 	protected void OnAboutActionActivated (object sender, EventArgs e)
 	{
 		BlinkStick.AboutDialog.ShowDialog(this.Title);
-	}
+	}
+
 
 	protected void OnOpenLogActionActivated (object sender, EventArgs e)
 	{
@@ -485,7 +535,9 @@ public partial class MainWindow: Gtk.Window
 	{
 		this.Visible = true;
 	} 
-	#endregion
+	#endregion
+
 }
 
-
+
+

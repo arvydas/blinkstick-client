@@ -117,6 +117,11 @@
     <Compile Include="Utils\XorgAPI.cs" />
     <Compile Include="Utils\LinuxScreenCapture.cs" />
     <Compile Include="Utils\Event.cs" />
+    <Compile Include="Utils\MacMenu.cs" />
+    <Compile Include="MacInterop\ApplicationEvents.cs" />
+    <Compile Include="MacInterop\Carbon.cs" />
+    <Compile Include="MacInterop\AppleEvent.cs" />
+    <Compile Include="MacInterop\CoreFoundation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
