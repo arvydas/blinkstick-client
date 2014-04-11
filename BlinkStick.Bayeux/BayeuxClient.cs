@@ -457,11 +457,13 @@ namespace BlinkStick.Bayeux
 			client = new TcpClient(ServerUri.Host, ServerUri.Port);
 
 			var head = new WebHeaderCollection();
-			head[HttpRequestHeader.Host] = ServerUri.Host;
+            head[HttpRequestHeader.Host] = ServerUri.Host + ":" + ServerUri.Port;
+            head[HttpRequestHeader.Accept] = "*/*";
 			head[HttpRequestHeader.Connection] = "keep-alive";
-			head[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+            head[HttpRequestHeader.ContentLength] = postData.Length.ToString();
+            head[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
 
-			var hhd = "POST " + ServerUri.PathAndQuery + " HTTP/1.0\r\n" + head + postData;
+            var hhd = "POST " + ServerUri.PathAndQuery + " HTTP/1.1\r\n" + head + postData;
 
 		    NetworkStream stream = client.GetStream();
 		    byte[] send = Encoding.ASCII.GetBytes(hhd);
