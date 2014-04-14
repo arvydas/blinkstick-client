@@ -60,6 +60,16 @@ namespace BlinkStick.Hid
 
 			return color;
 		}
+
+        public static RgbColor Black ()
+        {
+            return RgbColor.FromRgb(0, 0, 0);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0:x2}{1:x2}{2:x2}", this.R, this.G, this.B);
+        }
 	}
 }
 
