@@ -5,24 +5,41 @@ namespace BlinkStick
 	public partial class BlinkStickManageForm
 	{
 		private global::Gtk.HBox hbox1;
-		private global::Gtk.ScrolledWindow GtkScrolledWindow;
-		private global::Gtk.TreeView treeviewDevices;
-		private global::Gtk.Table table1;
-		private global::Gtk.ComboBox comboboxControl;
-		private global::Gtk.Entry entryData;
-		private global::Gtk.Entry entryName;
-		private global::Gtk.HButtonBox hbuttonbox2;
-		private global::Gtk.Button buttonReset;
-		private global::Gtk.Button buttonApply;
-		private global::Gtk.Label label5;
-		private global::Gtk.Label labelConnected;
-		private global::Gtk.Label labelConnectedValue;
-		private global::Gtk.Label labelData;
-		private global::Gtk.Label labelName;
-		private global::Gtk.Label labelSerialNumber;
-		private global::Gtk.Label labelSerialNumberValue;
-		private global::Gtk.Button buttonCancel;
 		
+		private global::Gtk.ScrolledWindow GtkScrolledWindow;
+		
+		private global::Gtk.TreeView treeviewDevices;
+		
+		private global::Gtk.Table table1;
+		
+		private global::Gtk.ComboBox comboboxControl;
+		
+		private global::Gtk.Entry entryData;
+		
+		private global::Gtk.Entry entryName;
+		
+		private global::Gtk.HButtonBox hbuttonbox2;
+		
+		private global::Gtk.Button buttonReset;
+		
+		private global::Gtk.Button buttonApply;
+		
+		private global::Gtk.Label label5;
+		
+		private global::Gtk.Label labelConnected;
+		
+		private global::Gtk.Label labelConnectedValue;
+		
+		private global::Gtk.Label labelData;
+		
+		private global::Gtk.Label labelName;
+		
+		private global::Gtk.Label labelSerialNumber;
+		
+		private global::Gtk.Label labelSerialNumberValue;
+		
+		private global::Gtk.Button buttonCancel;
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);

@@ -5,13 +5,19 @@ namespace BlinkStick
 	public partial class ImapEmailSettingsWidget
 	{
 		private global::Gtk.Table table1;
-		private global::Gtk.Entry entryPassword;
-		private global::Gtk.Entry entryServerAddress;
-		private global::Gtk.Entry entryUsername;
-		private global::Gtk.Label labelImapUsername;
-		private global::Gtk.Label labelPassword;
-		private global::Gtk.Label labelServerAddress;
 		
+		private global::Gtk.Entry entryPassword;
+		
+		private global::Gtk.Entry entryServerAddress;
+		
+		private global::Gtk.Entry entryUsername;
+		
+		private global::Gtk.Label labelImapUsername;
+		
+		private global::Gtk.Label labelPassword;
+		
+		private global::Gtk.Label labelServerAddress;
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);

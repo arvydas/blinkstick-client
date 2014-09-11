@@ -4,30 +4,55 @@
 public partial class MainWindow
 {
 	private global::Gtk.UIManager UIManager;
+	
 	private global::Gtk.Action newAction;
+	
 	private global::Gtk.Action editAction;
+	
 	private global::Gtk.Action deleteAction;
+	
 	private global::Gtk.RadioAction saveAction;
+	
 	private global::Gtk.Action copyAction;
+	
 	private global::Gtk.ToggleAction activeAction;
+	
 	private global::Gtk.Action FileAction;
+	
 	private global::Gtk.Action quitAction;
+	
 	private global::Gtk.Action BlinkStickAction;
+	
 	private global::Gtk.Action TestAction;
+	
 	private global::Gtk.Action ManageAction;
+	
 	private global::Gtk.Action HelpAction;
+	
 	private global::Gtk.Action SupportAction;
+	
 	private global::Gtk.Action AboutAction;
+	
 	private global::Gtk.Action HideAction;
+	
 	private global::Gtk.Action ReportABugAction;
+	
 	private global::Gtk.Action Action;
+	
 	private global::Gtk.Action OpenLogAction;
+	
 	private global::Gtk.VBox vbox2;
+	
 	private global::Gtk.MenuBar menubar2;
+	
 	private global::Gtk.VBox vbox3;
+	
 	private global::Gtk.Toolbar toolbar1;
+	
 	private global::Gtk.ScrolledWindow GtkScrolledWindow;
+	
 	private global::Gtk.TreeView treeviewEvents;
+	
 	private global::Gtk.Statusbar statusbar1;
 
 	protected virtual void Build ()
@@ -97,7 +122,7 @@ public partial class MainWindow
 		this.vbox2.Name = "vbox2";
 		this.vbox2.Spacing = 6;
 		// Container child vbox2.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString ("<ui><menubar name='menubar2'><menu name='FileAction' action='FileAction'><menuitem name='HideAction' action='HideAction'/><menuitem name='quitAction' action='quitAction'/></menu><menu name='BlinkStickAction' action='BlinkStickAction'><menuitem name='TestAction' action='TestAction'/><menuitem name='ManageAction' action='ManageAction'/></menu><menu name='HelpAction' action='HelpAction'><menuitem name='SupportAction' action='SupportAction'/><menuitem name='ReportABugAction' action='ReportABugAction'/><menuitem name='OpenLogAction' action='OpenLogAction'/><separator/><menuitem name='AboutAction' action='AboutAction'/></menu></menubar></ui>");
+		this.UIManager.AddUiFromString (@"<ui><menubar name='menubar2'><menu name='FileAction' action='FileAction'><menuitem name='HideAction' action='HideAction'/><menuitem name='quitAction' action='quitAction'/></menu><menu name='BlinkStickAction' action='BlinkStickAction'><menuitem name='TestAction' action='TestAction'/><menuitem name='ManageAction' action='ManageAction'/></menu><menu name='HelpAction' action='HelpAction'><menuitem name='SupportAction' action='SupportAction'/><menuitem name='ReportABugAction' action='ReportABugAction'/><menuitem name='OpenLogAction' action='OpenLogAction'/><separator/><menuitem name='AboutAction' action='AboutAction'/></menu></menubar></ui>");
 		this.menubar2 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar2")));
 		this.menubar2.Name = "menubar2";
 		this.vbox2.Add (this.menubar2);
@@ -110,7 +135,7 @@ public partial class MainWindow
 		this.vbox3.Name = "vbox3";
 		this.vbox3.Spacing = 6;
 		// Container child vbox3.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString ("<ui><toolbar name='toolbar1'><toolitem name='newAction' action='newAction'/><toolitem name='copyAction' action='copyAction'/><toolitem name='editAction' action='editAction'/><toolitem name='deleteAction' action='deleteAction'/><toolitem name='activeAction' action='activeAction'/></toolbar></ui>");
+		this.UIManager.AddUiFromString (@"<ui><toolbar name='toolbar1'><toolitem name='newAction' action='newAction'/><toolitem name='copyAction' action='copyAction'/><toolitem name='editAction' action='editAction'/><toolitem name='deleteAction' action='deleteAction'/><toolitem name='activeAction' action='activeAction'/></toolbar></ui>");
 		this.toolbar1 = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/toolbar1")));
 		this.toolbar1.Name = "toolbar1";
 		this.toolbar1.ShowArrow = false;

@@ -5,31 +5,57 @@ namespace BlinkStick
 	public partial class EditNotificationForm
 	{
 		private global::Gtk.Table tableGeneric;
+		
 		private global::Gtk.CheckButton checkbuttonEnabled;
+		
 		private global::Gtk.ComboBox comboboxDevices;
+		
 		private global::Gtk.Entry entryName;
+		
 		private global::Gtk.Label label4;
+		
 		private global::Gtk.Label labelName;
+		
 		private global::Gtk.Notebook notebook1;
+		
 		private global::Gtk.Table tableControls;
+		
 		private global::Gtk.ComboBox comboboxBlinkSpeed;
+		
 		private global::Gtk.ComboBox comboboxPriority;
+		
 		private global::Gtk.HBox hbox1;
+		
 		private global::Gtk.ColorButton colorbuttonColor;
+		
 		private global::Gtk.HBox hbox2;
+		
 		private global::Gtk.SpinButton spinbuttonBlinkCount;
+		
 		private global::Gtk.Label label1;
+		
 		private global::Gtk.Label label2;
+		
 		private global::Gtk.Label labelBlinkSPeed;
+		
 		private global::Gtk.Label labelColor;
+		
 		private global::Gtk.Label labelPriority;
+		
 		private global::Gtk.VBox vbox2;
+		
 		private global::Gtk.RadioButton radiobuttonBlink;
+		
 		private global::Gtk.RadioButton radiobuttonPulse;
+		
 		private global::Gtk.RadioButton radiobuttonMorph;
+		
 		private global::Gtk.Label label3;
+		
 		private global::Gtk.Button buttonTest;
+		
 		private global::Gtk.Button buttonCancel;
+		
 		private global::Gtk.Button buttonOk;
 
 		protected virtual void Build ()
@@ -185,13 +211,13 @@ namespace BlinkStick
 			this.hbox2.Name = "hbox2";
 			this.hbox2.Spacing = 6;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.spinbuttonBlinkCount = new global::Gtk.SpinButton (1, 10, 1);
+			this.spinbuttonBlinkCount = new global::Gtk.SpinButton (1D, 10D, 1D);
 			this.spinbuttonBlinkCount.CanFocus = true;
 			this.spinbuttonBlinkCount.Name = "spinbuttonBlinkCount";
-			this.spinbuttonBlinkCount.Adjustment.PageIncrement = 2;
-			this.spinbuttonBlinkCount.ClimbRate = 1;
+			this.spinbuttonBlinkCount.Adjustment.PageIncrement = 2D;
+			this.spinbuttonBlinkCount.ClimbRate = 1D;
 			this.spinbuttonBlinkCount.Numeric = true;
-			this.spinbuttonBlinkCount.Value = 1;
+			this.spinbuttonBlinkCount.Value = 1D;
 			this.hbox2.Add (this.spinbuttonBlinkCount);
 			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.spinbuttonBlinkCount]));
 			w12.Position = 0;
@@ -268,6 +294,7 @@ namespace BlinkStick
 			this.radiobuttonBlink = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("Blink"));
 			this.radiobuttonBlink.CanFocus = true;
 			this.radiobuttonBlink.Name = "radiobuttonBlink";
+			this.radiobuttonBlink.Active = true;
 			this.radiobuttonBlink.DrawIndicator = true;
 			this.radiobuttonBlink.UseUnderline = true;
 			this.radiobuttonBlink.Group = new global::GLib.SList (global::System.IntPtr.Zero);

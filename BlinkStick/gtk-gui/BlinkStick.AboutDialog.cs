@@ -5,13 +5,19 @@ namespace BlinkStick
 	public partial class AboutDialog
 	{
 		private global::Gtk.VBox vbox2;
-		private global::Gtk.Image imageLogo;
-		private global::Gtk.Label label1;
-		private global::Gtk.Label label2;
-		private global::Gtk.EventBox eventbox1;
-		private global::Gtk.Label label3;
-		private global::Gtk.Button buttonCancel;
 		
+		private global::Gtk.Image imageLogo;
+		
+		private global::Gtk.Label label1;
+		
+		private global::Gtk.Label label2;
+		
+		private global::Gtk.EventBox eventbox1;
+		
+		private global::Gtk.Label label3;
+		
+		private global::Gtk.Button buttonCancel;
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);

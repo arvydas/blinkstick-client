@@ -5,18 +5,29 @@ namespace BlinkStick
 	public partial class BlinkStickTestForm
 	{
 		private global::Gtk.VBox vbox4;
-		private global::Gtk.HBox hbox2;
-		private global::Gtk.Label labelBlinkStick;
-		private global::Gtk.ComboBox comboboxDevices;
-		private global::Gtk.ColorSelection colorSelection;
-		private global::Gtk.HBox hbox1;
-		private global::Gtk.CheckButton cbAutoSetColor;
-		private global::Gtk.Button buttonSetColor;
-		private global::Gtk.Button buttonSwitchToColor;
-		private global::Gtk.Button buttonPulseColor;
-		private global::Gtk.Button buttonAllOff;
-		private global::Gtk.Button buttonCancel;
 		
+		private global::Gtk.HBox hbox2;
+		
+		private global::Gtk.Label labelBlinkStick;
+		
+		private global::Gtk.ComboBox comboboxDevices;
+		
+		private global::Gtk.ColorSelection colorSelection;
+		
+		private global::Gtk.HBox hbox1;
+		
+		private global::Gtk.CheckButton cbAutoSetColor;
+		
+		private global::Gtk.Button buttonSetColor;
+		
+		private global::Gtk.Button buttonSwitchToColor;
+		
+		private global::Gtk.Button buttonPulseColor;
+		
+		private global::Gtk.Button buttonAllOff;
+		
+		private global::Gtk.Button buttonCancel;
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);

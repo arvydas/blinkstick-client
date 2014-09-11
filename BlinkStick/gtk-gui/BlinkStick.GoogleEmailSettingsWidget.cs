@@ -5,11 +5,15 @@ namespace BlinkStick
 	public partial class GoogleEmailSettingsWidget
 	{
 		private global::Gtk.Table table1;
-		private global::Gtk.Entry entryPassword;
-		private global::Gtk.Entry entryUsername;
-		private global::Gtk.Label labelGmailUsername;
-		private global::Gtk.Label labelPassword;
 		
+		private global::Gtk.Entry entryPassword;
+		
+		private global::Gtk.Entry entryUsername;
+		
+		private global::Gtk.Label labelGmailUsername;
+		
+		private global::Gtk.Label labelPassword;
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);

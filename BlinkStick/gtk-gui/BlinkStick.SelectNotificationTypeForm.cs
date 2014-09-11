@@ -5,15 +5,23 @@ namespace BlinkStick
 	public partial class SelectNotificationTypeForm
 	{
 		private global::Gtk.VBox vbox3;
-		private global::Gtk.RadioButton radiobuttonCustom;
-		private global::Gtk.RadioButton radiobuttonGmail;
-		private global::Gtk.RadioButton radiobuttonImap;
-		private global::Gtk.RadioButton radiobuttonBlinkstickService;
-		private global::Gtk.RadioButton radiobuttonCpuUsage;
-		private global::Gtk.RadioButton radiobuttonAmbilight;
-		private global::Gtk.Button buttonCancel;
-		private global::Gtk.Button buttonOk;
 		
+		private global::Gtk.RadioButton radiobuttonCustom;
+		
+		private global::Gtk.RadioButton radiobuttonGmail;
+		
+		private global::Gtk.RadioButton radiobuttonImap;
+		
+		private global::Gtk.RadioButton radiobuttonBlinkstickService;
+		
+		private global::Gtk.RadioButton radiobuttonCpuUsage;
+		
+		private global::Gtk.RadioButton radiobuttonAmbilight;
+		
+		private global::Gtk.Button buttonCancel;
+		
+		private global::Gtk.Button buttonOk;
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);

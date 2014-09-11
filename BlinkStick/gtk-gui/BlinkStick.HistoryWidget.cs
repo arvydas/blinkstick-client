@@ -5,7 +5,7 @@ namespace BlinkStick
 	public partial class HistoryWidget
 	{
 		private global::Gtk.VBox vboxHistoryItems;
-		
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
