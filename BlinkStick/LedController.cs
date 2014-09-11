@@ -135,14 +135,19 @@ namespace BlinkStick
         {
 			if (Device.Connected)
 			{
-				if (DataEntity.Control == DeviceControlEnum.Normal)
-				{
-					Device.SetLedColor(newColor.R, newColor.G, newColor.B);
-				}
-				else
-				{
-					Device.SetLedColor((byte)(255 - newColor.R), (byte)(255 - newColor.G), (byte)(255 - newColor.B));
-				}
+                try
+                {
+                    if (DataEntity.Control == DeviceControlEnum.Normal)
+    				{
+    					Device.SetLedColor(newColor.R, newColor.G, newColor.B);
+    				}
+    				else
+    				{
+    					Device.SetLedColor((byte)(255 - newColor.R), (byte)(255 - newColor.G), (byte)(255 - newColor.B));
+    				}
+                }
+                catch {
+                }
 			}
 
 			VisibleColor = newColor;
