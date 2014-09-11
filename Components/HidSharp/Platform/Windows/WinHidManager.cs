@@ -76,7 +76,9 @@ namespace HidSharp.Platform.Windows
         protected override void CompleteDevice(object key, HidDevice device, object creationState)
         {
             var hidDevice = (WinHidDevice)device; var handle = (IntPtr)creationState;
-            hidDevice.GetInfoComplete(handle);
+			if (hidDevice.VendorID != 0x15C2 && hidDevice.ProductID != 0x0038) {
+				hidDevice.GetInfoComplete (handle);
+			}
         }
 
         public override bool IsSupported
