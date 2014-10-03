@@ -1,0 +1,3 @@
+[submodule "Components/BlinkStickDotNet"]
+	path = Components/BlinkStickDotNet
+	url = https://github.com/arvydas/BlinkStickDotNet.git
