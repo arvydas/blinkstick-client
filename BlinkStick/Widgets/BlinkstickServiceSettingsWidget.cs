@@ -17,9 +17,9 @@
 #endregion
 
 using System;
-using BlinkStick.Classes;
+using BlinkStickClient.Classes;
 
-namespace BlinkStick
+namespace BlinkStickClient
 {
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class BlinkstickServiceSettingsWidget : NotificationWidget

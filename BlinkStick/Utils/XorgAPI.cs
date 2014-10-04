@@ -22,7 +22,7 @@ using System.Runtime.InteropServices;
 //using Xorg.Structs;
 
 
-namespace BlinkStick.Utils
+namespace BlinkStickClient.Utils
 {
 
     public class XorgAPI

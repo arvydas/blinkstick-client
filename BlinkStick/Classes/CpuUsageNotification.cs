@@ -22,9 +22,9 @@ using System.Diagnostics;
 using System.Management;
 #endif
 using log4net;
-using BlinkStick.Hid;
+using BlinkStickDotNet;
 
-namespace BlinkStick.Classes
+namespace BlinkStickClient.Classes
 {
 	public class CpuUsageNotification : CustomNotification
 	{

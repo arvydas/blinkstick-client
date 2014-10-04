@@ -17,14 +17,15 @@
 #endregion
 
 using System;
-using Gtk;
-using Gdk;
-using BlinkStick;
-using BlinkStick.Classes;
-using log4net;
 using System.IO;
-using BlinkStick.Hid;
-using BlinkStick.Utils;
+using BlinkStick;
+using Gdk;
+using Gtk;
+using log4net;
+using BlinkStickClient;
+using BlinkStickClient.Classes;
+using BlinkStickDotNet;
+using BlinkStickClient.Utils;
 using MonoDevelop.MacInterop;
 #if LINUX
 using AppIndicator;
@@ -34,8 +35,8 @@ public partial class MainWindow: Gtk.Window
 {	
 	protected static readonly ILog log = LogManager.GetLogger("Main");	
 
-	private static BlinkStick.Utils.Event instanceExistsEvent;
-	public BlinkStick.Utils.EventSignalledHandler eventSignalled;
+	private static BlinkStickClient.Utils.Event instanceExistsEvent;
+    public BlinkStickClient.Utils.EventSignalledHandler eventSignalled;
 
 	Gtk.ListStore EventListStore = new ListStore(typeof(CustomNotification));
 
@@ -162,8 +163,8 @@ public partial class MainWindow: Gtk.Window
 		Manager.Load ();
 		Manager.UpdateControllers();
 
-		DeviceMonitor = new UsbMonitor(this.GdkWindow.Handle);
-		DeviceMonitor.UsbDeviceAdded += (object sender, EventArgs e) => {
+		DeviceMonitor = new UsbMonitor();
+        DeviceMonitor.UsbDevicesChanged += (object sender, EventArgs e) => {
 			Gtk.Application.Invoke (delegate {
 				Manager.UpdateControllers();
 
@@ -488,7 +489,7 @@ public partial class MainWindow: Gtk.Window
 
 	protected void OnAboutActionActivated (object sender, EventArgs e)
 	{
-		BlinkStick.AboutDialog.ShowDialog(this.Title);
+		BlinkStickClient.AboutDialog.ShowDialog(this.Title);
 	}
 
 
@@ -508,7 +509,7 @@ public partial class MainWindow: Gtk.Window
 	private void SetupSingleInstanceEvent()
 	{
 		// this object provides single instance feature
-		instanceExistsEvent = new BlinkStick.Utils.Event("Local\\blinkstick_client");
+		instanceExistsEvent = new BlinkStickClient.Utils.Event("Local\\blinkstick_client");
 		
 		// already exists means another instance is running for the same user
 		if (instanceExistsEvent.EventAlreadyExists())
@@ -526,7 +527,7 @@ public partial class MainWindow: Gtk.Window
 		*/
 		else
 		{
-			eventSignalled = new BlinkStick.Utils.EventSignalledHandler(evnt_EventSignalled);
+			eventSignalled = new BlinkStickClient.Utils.EventSignalledHandler(evnt_EventSignalled);
 			instanceExistsEvent.SetObject(this, eventSignalled);
 		}
 	}

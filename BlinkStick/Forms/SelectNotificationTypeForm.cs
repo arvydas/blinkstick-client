@@ -18,9 +18,9 @@
 
 using System;
 using Gtk;
-using BlinkStick.Classes;
+using BlinkStickClient.Classes;
 
-namespace BlinkStick
+namespace BlinkStickClient
 {
 	public partial class SelectNotificationTypeForm : Gtk.Dialog
 	{

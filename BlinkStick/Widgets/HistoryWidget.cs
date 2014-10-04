@@ -17,10 +17,10 @@
 #endregion
 
 using System;
-using BlinkStick.Classes;
+using BlinkStickClient.Classes;
 using System.ComponentModel;
 
-namespace BlinkStick
+namespace BlinkStickClient
 {
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class HistoryWidget : Gtk.Bin

@@ -22,9 +22,9 @@ using Gtk;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using log4net;
-using BlinkStick.Hid;
+using BlinkStickDotNet;
 
-namespace BlinkStick.Classes
+namespace BlinkStickClient.Classes
 {
 	public class CustomNotification
 	{

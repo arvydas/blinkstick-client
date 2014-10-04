@@ -21,7 +21,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 
-namespace BlinkStick.Utils
+namespace BlinkStickClient.Utils
 {
 	public class WindowsScreenCapture : AbstractScreenCapture
 	{

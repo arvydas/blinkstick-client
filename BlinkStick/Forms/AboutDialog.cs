@@ -18,7 +18,7 @@
 
 using System;
 
-namespace BlinkStick
+namespace BlinkStickClient
 {
 	public partial class AboutDialog : Gtk.Dialog
 	{

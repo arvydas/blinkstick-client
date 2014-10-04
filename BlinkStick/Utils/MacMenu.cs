@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Runtime.InteropServices;
 
-namespace BlinkStick.Utils
+namespace BlinkStickClient.Utils
 {
     public class MacMenu
     {

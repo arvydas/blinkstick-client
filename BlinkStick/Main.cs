@@ -21,7 +21,7 @@ using Gtk;
 using System.IO;
 using log4net;
 
-namespace BlinkStick
+namespace BlinkStickClient
 {
 	class MainClass
 	{
@@ -70,7 +70,7 @@ namespace BlinkStick
 
 				args2.ExitApplication = true;
 
-				BlinkStick.Utils.MessageBox.Show (null, "Unfortunately BlinkStick Client has crashed :(\n\r" +
+				BlinkStickClient.Utils.MessageBox.Show (null, "Unfortunately BlinkStick Client has crashed :(\n\r" +
 				                                  "The details about the crash are available in the log file: \r\n\r\n" +
 				                                  MainWindow.LogFile + "\r\n\r\n" +
 				                                  "The application will now close.", MessageType.Error);

@@ -17,7 +17,7 @@
 #endregion
 
 using System;
-using BlinkStick.Classes;
+using BlinkStickClient.Classes;
 using System.Collections.Generic;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -26,7 +26,7 @@ using System.Threading;
 using BlinkStick.Bayeux;
 using log4net;
 
-namespace BlinkStick.Classes
+namespace BlinkStickClient.Classes
 {
 	public class BlinkstickService : CustomNotification
 	{

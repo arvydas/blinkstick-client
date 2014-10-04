@@ -21,16 +21,16 @@ using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
-using BlinkStick.Hid;
+using BlinkStickDotNet;
 using BlinkStick.Bayeux;
-using BlinkStick.Classes;
-using BlinkStick.Utils;
+using BlinkStickClient.Classes;
+using BlinkStickClient.Utils;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using log4net;
 
-namespace BlinkStick.Classes
+namespace BlinkStickClient.Classes
 {
 	public class NotificationManager
 	{
@@ -198,12 +198,12 @@ namespace BlinkStick.Classes
 				DeviceEntity knowDeviceEntity = FindKnownDeviceBySerialNumber(controller.Device.Serial);
 				if (knowDeviceEntity == null)
 				{
-					knowDeviceEntity = new DeviceEntity(controller.Device.Serial, controller.Device.Name, true);
+                    knowDeviceEntity = new DeviceEntity(controller.Device.Serial, controller.Device.InfoBlock1, true);
 					KnownDevices.Add(knowDeviceEntity);
 				}
 				else
 				{
-					knowDeviceEntity.Name = controller.Device.Name;
+                    knowDeviceEntity.Name = controller.Device.InfoBlock1;
 				}
 
 				controller.DataEntity = knowDeviceEntity;
@@ -719,7 +719,7 @@ namespace BlinkStick.Classes
 			List<DeviceEntity> devices = new List<DeviceEntity> ();
 
 			foreach (LedController controller in Controllers) {
-				devices.Add (new DeviceEntity (controller.Device.Serial, controller.Device.Name, true));
+                devices.Add (new DeviceEntity (controller.Device.Serial, controller.Device.InfoBlock1, true));
 			}
 
 			foreach (DeviceEntity device in KnownDevices) {
@@ -741,7 +741,7 @@ namespace BlinkStick.Classes
 			List<DeviceEntity> devices = new List<DeviceEntity> ();
 
 			foreach (LedController controller in Controllers) {
-				devices.Add (new DeviceEntity (controller.Device.Serial, controller.Device.Name, true));
+                devices.Add (new DeviceEntity (controller.Device.Serial, controller.Device.InfoBlock1, true));
 			}
 
 			devices.Sort(delegate(DeviceEntity d1, DeviceEntity d2) {

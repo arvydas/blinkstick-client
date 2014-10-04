@@ -6,7 +6,7 @@
   </configuration>
   <import>
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <widget-library name="../bin/Release/BlinkStick.exe" internal="true" />
+    <widget-library name="../bin/Debug/BlinkStickClient.exe" internal="true" />
   </import>
   <widget class="Gtk.Window" id="MainWindow" design-size="776 624">
     <action-group name="Default">
@@ -224,7 +224,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="BlinkStick.EditNotificationForm" design-size="264 414">
+  <widget class="Gtk.Dialog" id="BlinkStickClient.EditNotificationForm" design-size="264 414">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Notifications Settings</property>
     <property name="WindowPosition">Center</property>
@@ -617,7 +617,6 @@ High</property>
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="Label" translatable="yes">Blink</property>
-                        <property name="Active">True</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>
@@ -760,7 +759,7 @@ High</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="BlinkStick.GoogleEmailSettingsWidget" design-size="408 294">
+  <widget class="Gtk.Bin" id="BlinkStickClient.GoogleEmailSettingsWidget" design-size="408 294">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <property name="Tooltip" translatable="yes" />
@@ -862,7 +861,7 @@ High</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="BlinkStick.SelectNotificationTypeForm" design-size="400 270">
+  <widget class="Gtk.Dialog" id="BlinkStickClient.SelectNotificationTypeForm" design-size="400 270">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Select Notification Type</property>
     <property name="WindowPosition">Center</property>
@@ -1034,7 +1033,7 @@ High</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="BlinkStick.ImapEmailSettingsWidget" design-size="426 300">
+  <widget class="Gtk.Bin" id="BlinkStickClient.ImapEmailSettingsWidget" design-size="426 300">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -1177,7 +1176,7 @@ High</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="BlinkStick.HistoryItemWidget" design-size="444 57">
+  <widget class="Gtk.Bin" id="BlinkStickClient.HistoryItemWidget" design-size="444 57">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -1214,7 +1213,7 @@ High</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="BlinkStick.HistoryWidget" design-size="666 414">
+  <widget class="Gtk.Bin" id="BlinkStickClient.HistoryWidget" design-size="666 414">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -1234,7 +1233,7 @@ High</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="BlinkStick.BlinkstickServiceSettingsWidget" design-size="328 300">
+  <widget class="Gtk.Bin" id="BlinkStickClient.BlinkstickServiceSettingsWidget" design-size="328 300">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -1318,7 +1317,7 @@ High</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="BlinkStick.BlinkStickTestForm" design-size="533 395">
+  <widget class="Gtk.Dialog" id="BlinkStickClient.BlinkStickTestForm" design-size="533 395">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Test BlinkStick</property>
     <property name="WindowPosition">Center</property>
@@ -1509,7 +1508,7 @@ High</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="BlinkStick.BlinkStickManageForm" design-size="651 430">
+  <widget class="Gtk.Dialog" id="BlinkStickClient.BlinkStickManageForm" design-size="651 430">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Manage BlinkSticks</property>
     <property name="WindowPosition">CenterAlways</property>
@@ -1862,7 +1861,7 @@ Inverse</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="BlinkStick.AboutDialog" design-size="400 252">
+  <widget class="Gtk.Dialog" id="BlinkStickClient.AboutDialog" design-size="400 252">
     <property name="MemberName" />
     <property name="Title" translatable="yes">About</property>
     <property name="WindowPosition">Center</property>

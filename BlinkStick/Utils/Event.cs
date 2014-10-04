@@ -23,7 +23,7 @@ using System.Diagnostics;
 
 //TODO: Fix badly ported code from WinForms
 
-namespace BlinkStick.Utils
+namespace BlinkStickClient.Utils
 {
 	public delegate void EventSignalledHandler();
 

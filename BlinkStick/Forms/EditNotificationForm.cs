@@ -17,12 +17,12 @@
 #endregion
 
 using System;
-using BlinkStick.Classes;
+using BlinkStickClient.Classes;
 using System.Collections.Generic;
 using Gtk;
-using BlinkStick.Hid;
+using BlinkStickDotNet;
 
-namespace BlinkStick
+namespace BlinkStickClient
 {
 	public partial class EditNotificationForm : Gtk.Dialog
 	{

@@ -19,7 +19,7 @@
 using System;
 using Gtk;
 
-namespace BlinkStick.Utils
+namespace BlinkStickClient.Utils
 {
     public static class MessageBox
     {

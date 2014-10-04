@@ -18,9 +18,9 @@
 
 using System;
 using Gtk;
-using BlinkStick.Classes;
+using BlinkStickClient.Classes;
 
-namespace BlinkStick.Classes
+namespace BlinkStickClient.Classes
 {
 	public class NotificationWidget : Bin
 	{

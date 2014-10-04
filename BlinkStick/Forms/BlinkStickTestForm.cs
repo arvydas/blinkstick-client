@@ -18,11 +18,11 @@
 
 using System;
 using System.Collections.Generic;
-using BlinkStick.Classes;
+using BlinkStickClient.Classes;
 using Gtk;
-using BlinkStick.Hid;
+using BlinkStickDotNet;
 
-namespace BlinkStick
+namespace BlinkStickClient
 {
 	public partial class BlinkStickTestForm : Gtk.Dialog
 	{

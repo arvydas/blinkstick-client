@@ -17,7 +17,7 @@
 #endregion
 
 using System;
-using BlinkStick.Classes;
+using BlinkStickClient.Classes;
 using System.Collections.Generic;
 using System.Collections;
 using System.IO;
@@ -25,7 +25,7 @@ using System.Text.RegularExpressions;
 using Joshi.Utils.Imap;
 using log4net;
 
-namespace BlinkStick.Classes
+namespace BlinkStickClient.Classes
 {
 	public class ImapEmailNotification : CustomNotification
 	{

@@ -22,7 +22,7 @@ using System.Drawing.Imaging;
 using System.Text;
 using System.Drawing;
 
-namespace BlinkStick.Utils
+namespace BlinkStickClient.Utils
 {
 	public class LinuxScreenCapture : AbstractScreenCapture
 	{

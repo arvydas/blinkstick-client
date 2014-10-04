@@ -18,7 +18,7 @@
 
 using System;
 
-namespace BlinkStick.Classes
+namespace BlinkStickClient.Classes
 {
 	public class AmbiLightNotification : CustomNotification
 	{

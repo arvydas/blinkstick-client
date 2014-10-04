@@ -27,7 +27,7 @@ using System.Collections.Generic;
 using log4net;
 using System.Security.Cryptography.X509Certificates;
 
-namespace BlinkStick.Classes
+namespace BlinkStickClient.Classes
 {
 	public class GoogleEmailNotification : CustomNotification
 	{

@@ -22,16 +22,16 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
-using BlinkStick.Classes;
-using BlinkStick.Hid;
+using BlinkStickClient.Classes;
+using BlinkStickDotNet;
 
-namespace BlinkStick
+namespace BlinkStickClient
 {
 	public class LedController
 	{
 		#region Events
 		public event EventHandler BlinkStart;
-		public BlinkstickHid Device;
+		public BlinkStickDotNet.BlinkStick Device;
 		
 		protected void OnBlinkStart()
 		{
@@ -122,11 +122,11 @@ namespace BlinkStick
 			{
 				if (DataEntity.Control == DeviceControlEnum.Normal)
 				{
-					Device.SetLedColor(r, g, b);
+					Device.SetColor(r, g, b);
 				}
 				else
 				{
-					Device.SetLedColor((byte)(255 - r), (byte)(255 - g), (byte)(255 - b));
+					Device.SetColor((byte)(255 - r), (byte)(255 - g), (byte)(255 - b));
 				}
 			}
 		}
@@ -139,11 +139,11 @@ namespace BlinkStick
                 {
                     if (DataEntity.Control == DeviceControlEnum.Normal)
     				{
-    					Device.SetLedColor(newColor.R, newColor.G, newColor.B);
+    					Device.SetColor(newColor.R, newColor.G, newColor.B);
     				}
     				else
     				{
-    					Device.SetLedColor((byte)(255 - newColor.R), (byte)(255 - newColor.G), (byte)(255 - newColor.B));
+    					Device.SetColor((byte)(255 - newColor.R), (byte)(255 - newColor.G), (byte)(255 - newColor.B));
     				}
                 }
                 catch {
@@ -648,7 +648,7 @@ namespace BlinkStick
 		{
 			List<LedController> result = new List<LedController>();
 
-            foreach (BlinkstickHid hidDevice in BlinkstickHid.AllDevices()) {
+            foreach (BlinkStickDotNet.BlinkStick hidDevice in BlinkStickDotNet.BlinkStick.FindAll()) {
 				LedController controller = new LedController();
 				controller.Device = hidDevice;
 				controller.Device.OpenDevice();

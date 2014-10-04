@@ -18,10 +18,10 @@
 
 using System;
 using Gtk;
-using BlinkStick.Classes;
+using BlinkStickClient.Classes;
 using System.Collections.Generic;
 
-namespace BlinkStick
+namespace BlinkStickClient
 {
 	public partial class BlinkStickManageForm : Gtk.Dialog
 	{
@@ -103,7 +103,7 @@ namespace BlinkStick
 		{
 			if (model.GetValue (iter, 0) is LedController) {
 				LedController controller = (LedController)model.GetValue (iter, 0);
-				(cell as Gtk.CellRendererText).Text = controller.Device.Name;
+                (cell as Gtk.CellRendererText).Text = controller.Device.InfoBlock1;
 			}
 		}
 
@@ -135,8 +135,8 @@ namespace BlinkStick
 			} else {
 				labelConnectedValue.Text = "Yes";
 				labelSerialNumberValue.Text = SelectedController.Device.Serial;
-				entryName.Text = SelectedController.Device.Name;
-				entryData.Text = SelectedController.Device.Data;
+                entryName.Text = SelectedController.Device.InfoBlock1;
+                entryData.Text = SelectedController.Device.InfoBlock2;
 				comboboxControl.Active = (int)SelectedController.DataEntity.Control;
 				entryName.Sensitive = true;
 				entryData.Sensitive = true;
@@ -153,8 +153,8 @@ namespace BlinkStick
 
 		protected void OnButtonApplyClicked (object sender, EventArgs e)
 		{
-			SelectedController.Device.Name = entryName.Text;
-			SelectedController.Device.Data = entryData.Text;
+            SelectedController.Device.InfoBlock1 = entryName.Text;
+            SelectedController.Device.InfoBlock2 = entryData.Text;
 			SelectedController.DataEntity.Control = (DeviceControlEnum)comboboxControl.Active;
 
 			TreeModel model;
