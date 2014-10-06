@@ -5,6 +5,12 @@ namespace BlinkStickClient
     [System.ComponentModel.ToolboxItem(true)]
     public partial class AnimationWidget : Gtk.Bin
     {
+        public int Index {
+            set {
+                labelNumber.Text = "#" + value.ToString(); 
+            }
+        }
+
         public AnimationWidget()
         {
             this.Build();

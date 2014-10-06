@@ -49,6 +49,19 @@ namespace BlinkStickClient
             PatternListStore.AppendValues (new Pattern("Pattern5"));
 
             UpdateButtons();
+
+            for (int i = 0; i < 10; i++)
+            {
+                AnimationWidget anim = new AnimationWidget();
+                anim.Index = i;
+                vbox2.PackStart(anim);
+
+            }
+
+            Button btn = new Button();
+            btn.Label = "Add new";
+            vbox2.PackStart(btn);
+            btn.Show();
         }
 
         void UpdateButtons()

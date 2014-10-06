@@ -26,9 +26,9 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Label label2;
 		
-		private global::BlinkStickClient.AnimationWidget animationwidget1;
+		private global::Gtk.ScrolledWindow scrolledwindowAnimations;
 		
-		private global::BlinkStickClient.AnimationWidget animationwidget2;
+		private global::Gtk.VBox vbox2;
 		
 		private global::Gtk.Button buttonCancel;
 		
@@ -97,44 +97,45 @@ namespace BlinkStickClient
 			// Container child vbox4.Gtk.Box+BoxChild
 			this.label2 = new global::Gtk.Label ();
 			this.label2.Name = "label2";
-			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("label2");
+			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Pattern");
 			this.vbox4.Add (this.label2);
 			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.label2]));
 			w7.Position = 0;
 			w7.Expand = false;
 			w7.Fill = false;
 			// Container child vbox4.Gtk.Box+BoxChild
-			this.animationwidget1 = new global::BlinkStickClient.AnimationWidget ();
-			this.animationwidget1.Events = ((global::Gdk.EventMask)(256));
-			this.animationwidget1.Name = "animationwidget1";
-			this.vbox4.Add (this.animationwidget1);
-			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.animationwidget1]));
-			w8.Position = 1;
-			w8.Expand = false;
-			w8.Fill = false;
-			// Container child vbox4.Gtk.Box+BoxChild
-			this.animationwidget2 = new global::BlinkStickClient.AnimationWidget ();
-			this.animationwidget2.Events = ((global::Gdk.EventMask)(256));
-			this.animationwidget2.Name = "animationwidget2";
-			this.vbox4.Add (this.animationwidget2);
-			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.animationwidget2]));
-			w9.Position = 2;
-			w9.Expand = false;
-			w9.Fill = false;
+			this.scrolledwindowAnimations = new global::Gtk.ScrolledWindow ();
+			this.scrolledwindowAnimations.WidthRequest = 300;
+			this.scrolledwindowAnimations.CanFocus = true;
+			this.scrolledwindowAnimations.Name = "scrolledwindowAnimations";
+			this.scrolledwindowAnimations.HscrollbarPolicy = ((global::Gtk.PolicyType)(2));
+			this.scrolledwindowAnimations.ShadowType = ((global::Gtk.ShadowType)(1));
+			// Container child scrolledwindowAnimations.Gtk.Container+ContainerChild
+			global::Gtk.Viewport w8 = new global::Gtk.Viewport ();
+			w8.ShadowType = ((global::Gtk.ShadowType)(0));
+			// Container child GtkViewport.Gtk.Container+ContainerChild
+			this.vbox2 = new global::Gtk.VBox ();
+			this.vbox2.Name = "vbox2";
+			this.vbox2.Spacing = 6;
+			w8.Add (this.vbox2);
+			this.scrolledwindowAnimations.Add (w8);
+			this.vbox4.Add (this.scrolledwindowAnimations);
+			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.scrolledwindowAnimations]));
+			w11.Position = 1;
 			this.hbox1.Add (this.vbox4);
-			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.vbox4]));
-			w10.Position = 1;
-			w10.Expand = false;
-			w10.Fill = false;
+			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.vbox4]));
+			w12.Position = 1;
+			w12.Expand = false;
+			w12.Fill = false;
 			w2.Add (this.hbox1);
-			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(w2 [this.hbox1]));
-			w11.Position = 0;
+			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(w2 [this.hbox1]));
+			w13.Position = 0;
 			// Internal child BlinkStickClient.PatternDialog.ActionArea
-			global::Gtk.HButtonBox w12 = this.ActionArea;
-			w12.Name = "dialog1_ActionArea";
-			w12.Spacing = 10;
-			w12.BorderWidth = ((uint)(5));
-			w12.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w14 = this.ActionArea;
+			w14.Name = "dialog1_ActionArea";
+			w14.Spacing = 10;
+			w14.BorderWidth = ((uint)(5));
+			w14.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonCancel = new global::Gtk.Button ();
 			this.buttonCancel.CanDefault = true;
@@ -144,9 +145,9 @@ namespace BlinkStickClient
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-cancel";
 			this.AddActionWidget (this.buttonCancel, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w13 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w12 [this.buttonCancel]));
-			w13.Expand = false;
-			w13.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w15 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w14 [this.buttonCancel]));
+			w15.Expand = false;
+			w15.Fill = false;
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.button66 = new global::Gtk.Button ();
 			this.button66.CanFocus = true;
@@ -155,10 +156,10 @@ namespace BlinkStickClient
 			this.button66.UseUnderline = true;
 			this.button66.Label = "gtk-ok";
 			this.AddActionWidget (this.button66, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w14 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w12 [this.button66]));
-			w14.Position = 1;
-			w14.Expand = false;
-			w14.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w16 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w14 [this.button66]));
+			w16.Position = 1;
+			w16.Expand = false;
+			w16.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
