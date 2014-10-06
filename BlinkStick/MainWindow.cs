@@ -314,7 +314,7 @@ public partial class MainWindow: Gtk.Window
 			CustomNotification tevent = (CustomNotification)model.GetValue (iter, 0);
 			Gdk.Pixbuf pb = new Gdk.Pixbuf (Gdk.Colorspace.Rgb, false, 8, 16, 16);
 			pb.Fill ((uint)(0xff + tevent.Color.R * 0x1000000 + tevent.Color.G * 0x10000 + tevent.Color.B * 0x100));
-			(cell as Gtk.CellRendererPixbuf).Pixbuf = pb;
+            (cell as Gtk.CellRendererPixbuf).Pixbuf = pb;
 		}
 	}
 
@@ -536,6 +536,11 @@ public partial class MainWindow: Gtk.Window
 	{
 		this.Visible = true;
 	} 
+
+    protected void OnPatternsActionActivated (object sender, EventArgs e)
+    {
+        PatternDialog.ShowForm();
+    }
 	#endregion
 
 }

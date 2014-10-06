@@ -41,6 +41,8 @@ public partial class MainWindow
 	
 	private global::Gtk.Action OpenLogAction;
 	
+	private global::Gtk.Action PatternsAction;
+	
 	private global::Gtk.VBox vbox2;
 	
 	private global::Gtk.MenuBar menubar2;
@@ -112,6 +114,9 @@ public partial class MainWindow
 		this.OpenLogAction = new global::Gtk.Action ("OpenLogAction", global::Mono.Unix.Catalog.GetString ("Open Log"), null, null);
 		this.OpenLogAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Open Log");
 		w1.Add (this.OpenLogAction, null);
+		this.PatternsAction = new global::Gtk.Action ("PatternsAction", global::Mono.Unix.Catalog.GetString ("Patterns..."), null, null);
+		this.PatternsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Patterns...");
+		w1.Add (this.PatternsAction, null);
 		this.UIManager.InsertActionGroup (w1, 0);
 		this.AddAccelGroup (this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -122,7 +127,7 @@ public partial class MainWindow
 		this.vbox2.Name = "vbox2";
 		this.vbox2.Spacing = 6;
 		// Container child vbox2.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString (@"<ui><menubar name='menubar2'><menu name='FileAction' action='FileAction'><menuitem name='HideAction' action='HideAction'/><menuitem name='quitAction' action='quitAction'/></menu><menu name='BlinkStickAction' action='BlinkStickAction'><menuitem name='TestAction' action='TestAction'/><menuitem name='ManageAction' action='ManageAction'/></menu><menu name='HelpAction' action='HelpAction'><menuitem name='SupportAction' action='SupportAction'/><menuitem name='ReportABugAction' action='ReportABugAction'/><menuitem name='OpenLogAction' action='OpenLogAction'/><separator/><menuitem name='AboutAction' action='AboutAction'/></menu></menubar></ui>");
+		this.UIManager.AddUiFromString (@"<ui><menubar name='menubar2'><menu name='FileAction' action='FileAction'><menuitem name='HideAction' action='HideAction'/><menuitem name='quitAction' action='quitAction'/></menu><menu name='BlinkStickAction' action='BlinkStickAction'><menuitem name='TestAction' action='TestAction'/><menuitem name='ManageAction' action='ManageAction'/><menuitem name='PatternsAction' action='PatternsAction'/></menu><menu name='HelpAction' action='HelpAction'><menuitem name='SupportAction' action='SupportAction'/><menuitem name='ReportABugAction' action='ReportABugAction'/><menuitem name='OpenLogAction' action='OpenLogAction'/><separator/><menuitem name='AboutAction' action='AboutAction'/></menu></menubar></ui>");
 		this.menubar2 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar2")));
 		this.menubar2.Name = "menubar2";
 		this.vbox2.Add (this.menubar2);
@@ -191,6 +196,7 @@ public partial class MainWindow
 		this.HideAction.Activated += new global::System.EventHandler (this.OnHideActionActivated);
 		this.ReportABugAction.Activated += new global::System.EventHandler (this.OnReportABugActionActivated);
 		this.OpenLogAction.Activated += new global::System.EventHandler (this.OnOpenLogActionActivated);
+		this.PatternsAction.Activated += new global::System.EventHandler (this.OnPatternsActionActivated);
 		this.treeviewEvents.CursorChanged += new global::System.EventHandler (this.OnTreeviewEventsCursorChanged);
 		this.treeviewEvents.RowActivated += new global::Gtk.RowActivatedHandler (this.OnTreeviewEventsRowActivated);
 	}

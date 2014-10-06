@@ -122,6 +122,13 @@
     <Compile Include="gtk-gui\BlinkStickClient.BlinkStickTestForm.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.BlinkStickManageForm.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.AboutDialog.cs" />
+    <Compile Include="Forms\PatternDialog.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.PatternDialog.cs" />
+    <Compile Include="Classes\Pattern.cs" />
+    <Compile Include="Forms\EditPatternDialog.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.EditPatternDialog.cs" />
+    <Compile Include="Widgets\AnimationWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.AnimationWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
