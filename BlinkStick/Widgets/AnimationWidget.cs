@@ -7,12 +7,28 @@ namespace BlinkStickClient
     [System.ComponentModel.ToolboxItem(true)]
     public partial class AnimationWidget : Gtk.Bin
     {
+        private int _Index;
         public int Index {
+            get {
+                return _Index;
+            }
             set {
+                _Index = value;
                 labelNumber.Text = "#" + value.ToString(); 
+                ButtonVisibility(true);
             }
         }
 
+        private int _Count;
+        public int Count {
+            get {
+                return _Count;
+            }
+            set {
+                _Count = value;
+                ButtonVisibility(true);
+            }
+        }
 
         public event EventHandler DeleteAnimation;
 
@@ -46,8 +62,11 @@ namespace BlinkStickClient
             }
 
             set {
-                _AnimationObject = value;
-                LoadAnimationObject();
+                if (_AnimationObject != value)
+                {
+                    _AnimationObject = value;
+                    LoadAnimationObject();
+                }
             }
         }
 
@@ -89,15 +108,15 @@ namespace BlinkStickClient
         private void ButtonVisibility(Boolean visible) 
         {
             buttonUp.Visible = visible;
-            buttonUp.Sensitive = visible;
+            buttonUp.Sensitive = visible && Index != 1;
             buttonUp.NoShowAll = visible;
 
             buttonDown.Visible = visible;
-            buttonDown.Sensitive = visible;
+            buttonDown.Sensitive = visible && Index != Count;
             buttonDown.NoShowAll = visible;
 
             buttonDelete.Visible = visible;
-            buttonDelete.Sensitive = visible;
+            buttonDelete.Sensitive = visible && Count != 1;
             buttonDelete.NoShowAll = visible;
 
             if (visible)
@@ -122,6 +141,25 @@ namespace BlinkStickClient
             hboxMorph.Sensitive = comboboxMode.Active == 3;
             hboxMorph.NoShowAll = !(comboboxMode.Active == 3);
 
+            if (AnimationObject != null)
+            {
+                switch (comboboxMode.Active)
+                {
+                    case 0:
+                        AnimationObject.AnimationType = AnimationTypeEnum.SetColor;
+                        break;
+                    case 1:
+                        AnimationObject.AnimationType = AnimationTypeEnum.Blink;
+                        break;
+                    case 2:
+                        AnimationObject.AnimationType = AnimationTypeEnum.Morph;
+                        break;
+                    case 3:
+                        AnimationObject.AnimationType = AnimationTypeEnum.Pulse;
+                        break;
+                }
+            }
+
             this.Show();
         }
 
@@ -135,10 +173,10 @@ namespace BlinkStickClient
                 case AnimationTypeEnum.Blink:
                     comboboxMode.Active = 1;
                     break;
-                case AnimationTypeEnum.Pulse:
+                case AnimationTypeEnum.Morph:
                     comboboxMode.Active = 2;
                     break;
-                case AnimationTypeEnum.Morph:
+                case AnimationTypeEnum.Pulse:
                     comboboxMode.Active = 3;
                     break;
             }

@@ -19,6 +19,7 @@ namespace BlinkStickClient
                 {
                     _SelectedPattern = value;
                     UpdateButtons();
+                    LoadAnimations();
                 }
             }
         }
@@ -121,11 +122,14 @@ namespace BlinkStickClient
                     AnimationWidget widget = CreateAnimationWidget(animation, SelectedPattern.Animations.Count);
                     vbox2.PackStart(widget, false, false, 0);
                     vbox2.ReorderChild(widget, SelectedPattern.Animations.Count - 1);
+                    ReorderAnimations();
                 };
+                btn.Show();
 
                 vbox2.PackStart(btn, false, false, 10);
-                btn.Show();
+                ReorderAnimations();
             }
+            vbox2.Show();
         }
 
         private AnimationWidget CreateAnimationWidget(Animation animation, int index)
@@ -151,6 +155,7 @@ namespace BlinkStickClient
                 if (widget is AnimationWidget)
                 {
                     ((AnimationWidget)widget).Index = i;
+                    ((AnimationWidget)widget).Count = SelectedPattern.Animations.Count;
                     i++;
                 }
             }
@@ -204,8 +209,7 @@ namespace BlinkStickClient
             TreeIter iter;
 
             if((sender as TreeView).Selection.GetSelected(out model, out iter)){
-                SelectedPattern = (Pattern)model.GetValue (iter, 0);
-                LoadAnimations();
+                SelectedPattern = (Pattern)model.GetValue(iter, 0);
             }
         }
     }
