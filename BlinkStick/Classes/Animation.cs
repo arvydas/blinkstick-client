@@ -19,7 +19,7 @@ namespace BlinkStickClient.Classes
         public Animation()
         {
             this.AnimationType = AnimationTypeEnum.SetColor;
-            this.DelaySetColor = 1;
+            this.DelaySetColor = 1000;
             this.DurationBlink = 1000;
             this.RepeatBlink = 1;
             this.DurationPulse = 1000;

@@ -106,17 +106,7 @@ namespace BlinkStickClient
 
                 foreach (Animation animation in SelectedPattern.Animations)
                 {
-                    AnimationWidget widget = new AnimationWidget();
-                    widget.Index = i;
-                    widget.AnimationObject = animation;
-
-                    widget.DeleteAnimation += (sender, e) => {
-                        AnimationWidget w = (AnimationWidget)sender;
-                        SelectedPattern.Animations.Remove(w.AnimationObject);
-                        w.Destroy();
-                        ReorderAnimations();
-                    };
-
+                    AnimationWidget widget = CreateAnimationWidget(animation, i);
                     vbox2.PackStart(widget, false, false, 0);
 
                     i++;
@@ -124,9 +114,33 @@ namespace BlinkStickClient
 
                 Button btn = new Button();
                 btn.Label = "Add new";
+                btn.Clicked += (sender, e) => {
+                    Animation animation = new Animation();
+                    SelectedPattern.Animations.Add(animation);
+
+                    AnimationWidget widget = CreateAnimationWidget(animation, SelectedPattern.Animations.Count);
+                    vbox2.PackStart(widget, false, false, 0);
+                    vbox2.ReorderChild(widget, SelectedPattern.Animations.Count - 1);
+                };
+
                 vbox2.PackStart(btn, false, false, 10);
                 btn.Show();
             }
+        }
+
+        private AnimationWidget CreateAnimationWidget(Animation animation, int index)
+        {
+            AnimationWidget widget = new AnimationWidget();
+            widget.Index = index;
+            widget.AnimationObject = animation;
+            widget.DeleteAnimation += (sender, e) => {
+                AnimationWidget w = (AnimationWidget)sender;
+                SelectedPattern.Animations.Remove(w.AnimationObject);
+                w.Destroy();
+                ReorderAnimations();
+            };
+
+            return widget;
         }
 
         private void ReorderAnimations()
