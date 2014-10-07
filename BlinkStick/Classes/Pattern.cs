@@ -15,6 +15,7 @@ namespace BlinkStickClient.Classes
 
         public Pattern()
         {
+            Animations.Add(new Animation());
         }
 
         public Pattern(String name)
