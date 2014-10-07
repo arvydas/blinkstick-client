@@ -130,6 +130,7 @@
     <Compile Include="Widgets\AnimationWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.AnimationWidget.cs" />
     <Compile Include="Classes\Animation.cs" />
+    <Compile Include="Classes\DataModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

@@ -24,6 +24,26 @@ namespace BlinkStickClient
             }
         }
 
+        private DataModel _Data;
+        public DataModel Data {
+            set {
+
+                if (_Data != value)
+                {
+                    _Data = value;
+                    PatternListStore.Clear();
+                    foreach (Pattern pattern in Data.Patterns)
+                    {
+                        PatternListStore.AppendValues(pattern);
+                    }
+                }
+            }
+
+            get {
+                return _Data;
+            }
+        }
+
 
         public PatternDialog()
         {
@@ -42,23 +62,6 @@ namespace BlinkStickClient
             treeviewPatterns.Model = PatternListStore;
 
             treeviewPatterns.AppendColumn (patternNameColumn);
-
-            Pattern pattern = new Pattern();
-            pattern.Name = "Pattern 1";
-
-            Animation animation = new Animation();
-            animation.AnimationType = AnimationTypeEnum.SetColor;
-            pattern.Animations.Add(animation);
-
-            animation = new Animation();
-            animation.AnimationType = AnimationTypeEnum.Morph;
-            pattern.Animations.Add(animation);
-
-            animation = new Animation();
-            animation.AnimationType = AnimationTypeEnum.Pulse;
-            pattern.Animations.Add(animation);
-
-            PatternListStore.AppendValues (pattern);
 
             UpdateButtons();
         }
@@ -157,9 +160,10 @@ namespace BlinkStickClient
             }
         }
 
-        public static void ShowForm()
+        public static void ShowForm(DataModel data)
         {
             PatternDialog form = new PatternDialog ();
+            form.Data = data;
             form.Run ();
             form.Destroy();
         }
@@ -180,6 +184,8 @@ namespace BlinkStickClient
             if (EditPatternDialog.ShowForm(pattern))
             {
                 PatternListStore.AppendValues(pattern);
+                pattern.Animations.Add(new Animation());
+                Data.Patterns.Add(pattern);
             }
         }
 

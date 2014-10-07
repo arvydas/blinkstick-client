@@ -54,6 +54,7 @@ namespace BlinkStickClient
 			log.Info("--------------------------------------");
 			log.InfoFormat("BlinkStick Client {0} application started", MainWindow.ApplicationVersion);
 
+            #if !DEBUG
 			GLib.ExceptionManager.UnhandledException += delegate(GLib.UnhandledExceptionArgs args2) {
 				Exception e = (Exception)args2.ExceptionObject;
 				log.Fatal("Unhandled exception occured:");
@@ -75,6 +76,7 @@ namespace BlinkStickClient
 				                                  MainWindow.LogFile + "\r\n\r\n" +
 				                                  "The application will now close.", MessageType.Error);
 			};
+            #endif
 
 			Application.Init ();
 			MainWindow win = new MainWindow ();

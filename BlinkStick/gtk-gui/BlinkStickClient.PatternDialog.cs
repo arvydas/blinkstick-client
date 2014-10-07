@@ -31,8 +31,6 @@ namespace BlinkStickClient
 		private global::Gtk.VBox vbox2;
 		
 		private global::Gtk.Button buttonCancel;
-		
-		private global::Gtk.Button button66;
 
 		protected virtual void Build ()
 		{
@@ -143,23 +141,11 @@ namespace BlinkStickClient
 			this.buttonCancel.Name = "buttonCancel";
 			this.buttonCancel.UseStock = true;
 			this.buttonCancel.UseUnderline = true;
-			this.buttonCancel.Label = "gtk-cancel";
-			this.AddActionWidget (this.buttonCancel, -6);
+			this.buttonCancel.Label = "gtk-close";
+			this.AddActionWidget (this.buttonCancel, -7);
 			global::Gtk.ButtonBox.ButtonBoxChild w15 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w14 [this.buttonCancel]));
 			w15.Expand = false;
 			w15.Fill = false;
-			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
-			this.button66 = new global::Gtk.Button ();
-			this.button66.CanFocus = true;
-			this.button66.Name = "button66";
-			this.button66.UseStock = true;
-			this.button66.UseUnderline = true;
-			this.button66.Label = "gtk-ok";
-			this.AddActionWidget (this.button66, -5);
-			global::Gtk.ButtonBox.ButtonBoxChild w16 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w14 [this.button66]));
-			w16.Position = 1;
-			w16.Expand = false;
-			w16.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}

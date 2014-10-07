@@ -40,6 +40,8 @@ public partial class MainWindow: Gtk.Window
 
 	Gtk.ListStore EventListStore = new ListStore(typeof(CustomNotification));
 
+    DataModel Data = new DataModel();
+
 	NotificationManager Manager;
 	Boolean IgnoreActivation = false;
 
@@ -116,6 +118,9 @@ public partial class MainWindow: Gtk.Window
 		Build ();
 
 		this.Title = "BlinkStick " + ApplicationVersion;
+
+        log.Info("Loading data");
+        Data.Load();
 
 		log.Debug("Setting up controls");
 
@@ -320,7 +325,9 @@ public partial class MainWindow: Gtk.Window
 
 	private void DestroyEnvironment ()
 	{
-		DeviceMonitor.Stop ();
+        Data.Save();
+
+        DeviceMonitor.Stop ();
 		
 		Manager.Stop ();
 		Manager.Save ();
@@ -539,7 +546,7 @@ public partial class MainWindow: Gtk.Window
 
     protected void OnPatternsActionActivated (object sender, EventArgs e)
     {
-        PatternDialog.ShowForm();
+        PatternDialog.ShowForm(Data);
     }
 	#endregion
 
