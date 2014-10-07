@@ -199,6 +199,16 @@ namespace BlinkStickClient
         {
             OnDeleteAnimation();
         }
+
+        protected void OnButtonUpClicked (object sender, EventArgs e)
+        {
+            OnMoveUp();
+        }
+
+        protected void OnButtonDownClicked (object sender, EventArgs e)
+        {
+            OnMoveDown();
+        }
     }
 }
 

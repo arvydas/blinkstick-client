@@ -2334,6 +2334,7 @@ Pulse</property>
                 <property name="Icon">stock:gtk-go-up Menu</property>
                 <property name="Label" translatable="yes" />
                 <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnButtonUpClicked" />
               </widget>
               <packing>
                 <property name="Position">4</property>
@@ -2350,6 +2351,7 @@ Pulse</property>
                 <property name="Icon">stock:gtk-go-down Menu</property>
                 <property name="Label" translatable="yes" />
                 <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnButtonDownClicked" />
               </widget>
               <packing>
                 <property name="Position">5</property>

@@ -58,33 +58,9 @@ namespace BlinkStickClient
             animation.AnimationType = AnimationTypeEnum.Pulse;
             pattern.Animations.Add(animation);
 
-            /*
-            animation = new Animation();
-            animation.AnimationType = AnimationTypeEnum.Blink;
-            pattern.Animations.Add(animation);
-            */
-
             PatternListStore.AppendValues (pattern);
-            /*
-            PatternListStore.AppendValues (new Pattern("Pattern1"));
-            PatternListStore.AppendValues (new Pattern("Pattern2"));
-            PatternListStore.AppendValues (new Pattern("Pattern3"));
-            PatternListStore.AppendValues (new Pattern("Pattern4"));
-            PatternListStore.AppendValues (new Pattern("Pattern5"));
-            */
 
             UpdateButtons();
-
-            /*
-            for (int i = 0; i < 10; i++)
-            {
-                AnimationWidget anim = new AnimationWidget();
-                anim.Index = i;
-                vbox2.PackStart(anim);
-
-            }
-            */
-
         }
 
         void UpdateButtons()
@@ -137,6 +113,7 @@ namespace BlinkStickClient
             AnimationWidget widget = new AnimationWidget();
             widget.Index = index;
             widget.AnimationObject = animation;
+
             widget.DeleteAnimation += (sender, e) => {
                 AnimationWidget w = (AnimationWidget)sender;
                 SelectedPattern.Animations.Remove(w.AnimationObject);
@@ -144,7 +121,26 @@ namespace BlinkStickClient
                 ReorderAnimations();
             };
 
+            widget.MoveUp += (sender, e) => {
+                MoveAnimationBy((AnimationWidget)sender, -1);
+            };
+
+            widget.MoveDown += (sender, e) => {
+                MoveAnimationBy((AnimationWidget)sender, 1);
+            };
+
             return widget;
+        }
+
+        private void MoveAnimationBy(AnimationWidget widget, int count)
+        {
+            int oldIndex = SelectedPattern.Animations.IndexOf(widget.AnimationObject);
+
+            SelectedPattern.Animations.RemoveAt(oldIndex);
+            SelectedPattern.Animations.Insert(oldIndex + count, widget.AnimationObject);
+
+            vbox2.ReorderChild(widget, oldIndex + count);
+            ReorderAnimations();
         }
 
         private void ReorderAnimations()
