@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BlinkStickClient.Classes
 {
@@ -9,6 +10,8 @@ namespace BlinkStickClient.Classes
             get;
             set;
         }
+
+        public List<Animation> Animations = new List<Animation>();
 
         public Pattern()
         {

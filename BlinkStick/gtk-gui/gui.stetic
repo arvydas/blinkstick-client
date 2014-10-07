@@ -2085,7 +2085,7 @@ Inverse</property>
                         <child>
                           <widget class="Gtk.VBox" id="vbox2">
                             <property name="MemberName" />
-                            <property name="Spacing">6</property>
+                            <property name="BorderWidth">6</property>
                             <child>
                               <placeholder />
                             </child>
@@ -2256,9 +2256,11 @@ Inverse</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="BlinkStickClient.AnimationWidget" design-size="307 143">
+  <widget class="Gtk.Bin" id="BlinkStickClient.AnimationWidget" design-size="307 173">
     <property name="MemberName" />
     <property name="Visible">False</property>
+    <property name="Events">PointerMotionMask, ButtonMotionMask, Button1MotionMask, Button2MotionMask, Button3MotionMask, EnterNotifyMask, LeaveNotifyMask, ProximityInMask, ProximityOutMask</property>
+    <property name="ExtensionEvents">All</property>
     <child>
       <widget class="Gtk.VBox" id="vboxMain">
         <property name="MemberName" />
@@ -2267,7 +2269,6 @@ Inverse</property>
         <child>
           <widget class="Gtk.HBox" id="hboxColor">
             <property name="MemberName" />
-            <property name="Spacing">6</property>
             <child>
               <widget class="Gtk.Label" id="labelNumber">
                 <property name="MemberName" />
@@ -2278,6 +2279,7 @@ Inverse</property>
                 <property name="AutoSize">True</property>
                 <property name="Expand">False</property>
                 <property name="Fill">False</property>
+                <property name="Padding">6</property>
               </packing>
             </child>
             <child>
@@ -2295,6 +2297,7 @@ Pulse</property>
                 <property name="AutoSize">True</property>
                 <property name="Expand">False</property>
                 <property name="Fill">False</property>
+                <property name="Padding">6</property>
               </packing>
             </child>
             <child>
@@ -2324,7 +2327,7 @@ Pulse</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.Button" id="button297">
+              <widget class="Gtk.Button" id="buttonUp">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextAndIcon</property>
@@ -2340,7 +2343,7 @@ Pulse</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.Button" id="button296">
+              <widget class="Gtk.Button" id="buttonDown">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextAndIcon</property>
@@ -2356,13 +2359,14 @@ Pulse</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.Button" id="button199">
+              <widget class="Gtk.Button" id="buttonDelete">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Type">TextAndIcon</property>
                 <property name="Icon">stock:gtk-delete Menu</property>
                 <property name="Label" translatable="yes" />
                 <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnButtonDeleteClicked" />
               </widget>
               <packing>
                 <property name="PackType">End</property>
@@ -2399,10 +2403,10 @@ Pulse</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.SpinButton" id="spinbutton3">
+              <widget class="Gtk.SpinButton" id="spinbuttonSetColorDelay">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
-                <property name="Upper">100</property>
+                <property name="Upper">10000</property>
                 <property name="PageIncrement">10</property>
                 <property name="StepIncrement">1</property>
                 <property name="ClimbRate">1</property>
@@ -2442,14 +2446,16 @@ Pulse</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.SpinButton" id="spinbutton1">
+              <widget class="Gtk.SpinButton" id="spinbuttonBlinkDelay">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
-                <property name="Upper">100</property>
+                <property name="Lower">10</property>
+                <property name="Upper">10000</property>
                 <property name="PageIncrement">10</property>
                 <property name="StepIncrement">1</property>
                 <property name="ClimbRate">1</property>
                 <property name="Numeric">True</property>
+                <property name="Value">10</property>
               </widget>
               <packing>
                 <property name="Position">1</property>
@@ -2473,14 +2479,16 @@ Pulse</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.SpinButton" id="spinbutton2">
+              <widget class="Gtk.SpinButton" id="spinbuttonBlinkRepeat">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
+                <property name="Lower">1</property>
                 <property name="Upper">100</property>
                 <property name="PageIncrement">10</property>
                 <property name="StepIncrement">1</property>
                 <property name="ClimbRate">1</property>
                 <property name="Numeric">True</property>
+                <property name="Value">1</property>
               </widget>
               <packing>
                 <property name="Position">3</property>
@@ -2516,14 +2524,16 @@ Pulse</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.SpinButton" id="spinbutton4">
+              <widget class="Gtk.SpinButton" id="spinbuttonPulseDuration">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
-                <property name="Upper">100</property>
+                <property name="Lower">10</property>
+                <property name="Upper">10000</property>
                 <property name="PageIncrement">10</property>
                 <property name="StepIncrement">1</property>
                 <property name="ClimbRate">1</property>
                 <property name="Numeric">True</property>
+                <property name="Value">10</property>
               </widget>
               <packing>
                 <property name="Position">1</property>
@@ -2537,7 +2547,7 @@ Pulse</property>
                 <property name="MemberName" />
                 <property name="WidthRequest">50</property>
                 <property name="Xalign">1</property>
-                <property name="LabelProp" translatable="yes">Times:</property>
+                <property name="LabelProp" translatable="yes">Repeat:</property>
               </widget>
               <packing>
                 <property name="Position">2</property>
@@ -2547,14 +2557,16 @@ Pulse</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.SpinButton" id="spinbutton5">
+              <widget class="Gtk.SpinButton" id="spinbuttonPulseRepeat">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
+                <property name="Lower">1</property>
                 <property name="Upper">100</property>
                 <property name="PageIncrement">10</property>
                 <property name="StepIncrement">1</property>
                 <property name="ClimbRate">1</property>
                 <property name="Numeric">True</property>
+                <property name="Value">1</property>
               </widget>
               <packing>
                 <property name="Position">3</property>
@@ -2572,11 +2584,59 @@ Pulse</property>
           </packing>
         </child>
         <child>
+          <widget class="Gtk.HBox" id="hboxMorph">
+            <property name="MemberName" />
+            <property name="Spacing">6</property>
+            <child>
+              <widget class="Gtk.Label" id="labelDurationPulse1">
+                <property name="MemberName" />
+                <property name="WidthRequest">50</property>
+                <property name="Xalign">1</property>
+                <property name="LabelProp" translatable="yes">Duration:</property>
+              </widget>
+              <packing>
+                <property name="Position">0</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.SpinButton" id="spinbuttonMorphDuration">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Lower">10</property>
+                <property name="Upper">10000</property>
+                <property name="PageIncrement">10</property>
+                <property name="StepIncrement">1</property>
+                <property name="ClimbRate">1</property>
+                <property name="Numeric">True</property>
+                <property name="Value">10</property>
+              </widget>
+              <packing>
+                <property name="Position">1</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder />
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">4</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
           <widget class="Gtk.HSeparator" id="hseparator1">
             <property name="MemberName" />
           </widget>
           <packing>
-            <property name="Position">4</property>
+            <property name="Position">5</property>
             <property name="AutoSize">True</property>
             <property name="Expand">False</property>
             <property name="Fill">False</property>

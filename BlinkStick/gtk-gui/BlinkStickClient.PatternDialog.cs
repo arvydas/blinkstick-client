@@ -116,7 +116,7 @@ namespace BlinkStickClient
 			// Container child GtkViewport.Gtk.Container+ContainerChild
 			this.vbox2 = new global::Gtk.VBox ();
 			this.vbox2.Name = "vbox2";
-			this.vbox2.Spacing = 6;
+			this.vbox2.BorderWidth = ((uint)(6));
 			w8.Add (this.vbox2);
 			this.scrolledwindowAnimations.Add (w8);
 			this.vbox4.Add (this.scrolledwindowAnimations);

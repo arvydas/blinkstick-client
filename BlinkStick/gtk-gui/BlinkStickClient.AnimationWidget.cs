@@ -16,37 +16,43 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Alignment alignment1;
 		
-		private global::Gtk.Button button297;
+		private global::Gtk.Button buttonUp;
 		
-		private global::Gtk.Button button296;
+		private global::Gtk.Button buttonDown;
 		
-		private global::Gtk.Button button199;
+		private global::Gtk.Button buttonDelete;
 		
 		private global::Gtk.HBox hboxSetColor;
 		
 		private global::Gtk.Label labelDelaySetColor;
 		
-		private global::Gtk.SpinButton spinbutton3;
+		private global::Gtk.SpinButton spinbuttonSetColorDelay;
 		
 		private global::Gtk.HBox hboxBlink;
 		
 		private global::Gtk.Label labelDelayBlink;
 		
-		private global::Gtk.SpinButton spinbutton1;
+		private global::Gtk.SpinButton spinbuttonBlinkDelay;
 		
 		private global::Gtk.Label labelRepeat;
 		
-		private global::Gtk.SpinButton spinbutton2;
+		private global::Gtk.SpinButton spinbuttonBlinkRepeat;
 		
 		private global::Gtk.HBox hboxPulse;
 		
 		private global::Gtk.Label labelDurationPulse;
 		
-		private global::Gtk.SpinButton spinbutton4;
+		private global::Gtk.SpinButton spinbuttonPulseDuration;
 		
 		private global::Gtk.Label labelTimesPulse;
 		
-		private global::Gtk.SpinButton spinbutton5;
+		private global::Gtk.SpinButton spinbuttonPulseRepeat;
+		
+		private global::Gtk.HBox hboxMorph;
+		
+		private global::Gtk.Label labelDurationPulse1;
+		
+		private global::Gtk.SpinButton spinbuttonMorphDuration;
 		
 		private global::Gtk.HSeparator hseparator1;
 
@@ -55,6 +61,8 @@ namespace BlinkStickClient
 			global::Stetic.Gui.Initialize (this);
 			// Widget BlinkStickClient.AnimationWidget
 			global::Stetic.BinContainer.Attach (this);
+			this.Events = ((global::Gdk.EventMask)(798964));
+			this.ExtensionEvents = ((global::Gdk.ExtensionMode)(1));
 			this.Name = "BlinkStickClient.AnimationWidget";
 			// Container child BlinkStickClient.AnimationWidget.Gtk.Container+ContainerChild
 			this.vboxMain = new global::Gtk.VBox ();
@@ -64,7 +72,6 @@ namespace BlinkStickClient
 			// Container child vboxMain.Gtk.Box+BoxChild
 			this.hboxColor = new global::Gtk.HBox ();
 			this.hboxColor.Name = "hboxColor";
-			this.hboxColor.Spacing = 6;
 			// Container child hboxColor.Gtk.Box+BoxChild
 			this.labelNumber = new global::Gtk.Label ();
 			this.labelNumber.Name = "labelNumber";
@@ -74,6 +81,7 @@ namespace BlinkStickClient
 			w1.Position = 0;
 			w1.Expand = false;
 			w1.Fill = false;
+			w1.Padding = ((uint)(6));
 			// Container child hboxColor.Gtk.Box+BoxChild
 			this.comboboxMode = global::Gtk.ComboBox.NewText ();
 			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Set Color"));
@@ -86,6 +94,7 @@ namespace BlinkStickClient
 			w2.Position = 1;
 			w2.Expand = false;
 			w2.Fill = false;
+			w2.Padding = ((uint)(6));
 			// Container child hboxColor.Gtk.Box+BoxChild
 			this.buttonColor = new global::Gtk.ColorButton ();
 			this.buttonColor.CanFocus = true;
@@ -103,41 +112,41 @@ namespace BlinkStickClient
 			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hboxColor [this.alignment1]));
 			w4.Position = 3;
 			// Container child hboxColor.Gtk.Box+BoxChild
-			this.button297 = new global::Gtk.Button ();
-			this.button297.CanFocus = true;
-			this.button297.Name = "button297";
-			this.button297.UseUnderline = true;
+			this.buttonUp = new global::Gtk.Button ();
+			this.buttonUp.CanFocus = true;
+			this.buttonUp.Name = "buttonUp";
+			this.buttonUp.UseUnderline = true;
 			global::Gtk.Image w5 = new global::Gtk.Image ();
 			w5.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-go-up", global::Gtk.IconSize.Menu);
-			this.button297.Image = w5;
-			this.hboxColor.Add (this.button297);
-			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hboxColor [this.button297]));
+			this.buttonUp.Image = w5;
+			this.hboxColor.Add (this.buttonUp);
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hboxColor [this.buttonUp]));
 			w6.Position = 4;
 			w6.Expand = false;
 			w6.Fill = false;
 			// Container child hboxColor.Gtk.Box+BoxChild
-			this.button296 = new global::Gtk.Button ();
-			this.button296.CanFocus = true;
-			this.button296.Name = "button296";
-			this.button296.UseUnderline = true;
+			this.buttonDown = new global::Gtk.Button ();
+			this.buttonDown.CanFocus = true;
+			this.buttonDown.Name = "buttonDown";
+			this.buttonDown.UseUnderline = true;
 			global::Gtk.Image w7 = new global::Gtk.Image ();
 			w7.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-go-down", global::Gtk.IconSize.Menu);
-			this.button296.Image = w7;
-			this.hboxColor.Add (this.button296);
-			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hboxColor [this.button296]));
+			this.buttonDown.Image = w7;
+			this.hboxColor.Add (this.buttonDown);
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hboxColor [this.buttonDown]));
 			w8.Position = 5;
 			w8.Expand = false;
 			w8.Fill = false;
 			// Container child hboxColor.Gtk.Box+BoxChild
-			this.button199 = new global::Gtk.Button ();
-			this.button199.CanFocus = true;
-			this.button199.Name = "button199";
-			this.button199.UseUnderline = true;
+			this.buttonDelete = new global::Gtk.Button ();
+			this.buttonDelete.CanFocus = true;
+			this.buttonDelete.Name = "buttonDelete";
+			this.buttonDelete.UseUnderline = true;
 			global::Gtk.Image w9 = new global::Gtk.Image ();
 			w9.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-delete", global::Gtk.IconSize.Menu);
-			this.button199.Image = w9;
-			this.hboxColor.Add (this.button199);
-			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hboxColor [this.button199]));
+			this.buttonDelete.Image = w9;
+			this.hboxColor.Add (this.buttonDelete);
+			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hboxColor [this.buttonDelete]));
 			w10.PackType = ((global::Gtk.PackType)(1));
 			w10.Position = 6;
 			w10.Expand = false;
@@ -163,14 +172,14 @@ namespace BlinkStickClient
 			w12.Expand = false;
 			w12.Fill = false;
 			// Container child hboxSetColor.Gtk.Box+BoxChild
-			this.spinbutton3 = new global::Gtk.SpinButton (0D, 100D, 1D);
-			this.spinbutton3.CanFocus = true;
-			this.spinbutton3.Name = "spinbutton3";
-			this.spinbutton3.Adjustment.PageIncrement = 10D;
-			this.spinbutton3.ClimbRate = 1D;
-			this.spinbutton3.Numeric = true;
-			this.hboxSetColor.Add (this.spinbutton3);
-			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.hboxSetColor [this.spinbutton3]));
+			this.spinbuttonSetColorDelay = new global::Gtk.SpinButton (0D, 10000D, 1D);
+			this.spinbuttonSetColorDelay.CanFocus = true;
+			this.spinbuttonSetColorDelay.Name = "spinbuttonSetColorDelay";
+			this.spinbuttonSetColorDelay.Adjustment.PageIncrement = 10D;
+			this.spinbuttonSetColorDelay.ClimbRate = 1D;
+			this.spinbuttonSetColorDelay.Numeric = true;
+			this.hboxSetColor.Add (this.spinbuttonSetColorDelay);
+			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.hboxSetColor [this.spinbuttonSetColorDelay]));
 			w13.Position = 1;
 			w13.Expand = false;
 			w13.Fill = false;
@@ -195,14 +204,15 @@ namespace BlinkStickClient
 			w15.Expand = false;
 			w15.Fill = false;
 			// Container child hboxBlink.Gtk.Box+BoxChild
-			this.spinbutton1 = new global::Gtk.SpinButton (0D, 100D, 1D);
-			this.spinbutton1.CanFocus = true;
-			this.spinbutton1.Name = "spinbutton1";
-			this.spinbutton1.Adjustment.PageIncrement = 10D;
-			this.spinbutton1.ClimbRate = 1D;
-			this.spinbutton1.Numeric = true;
-			this.hboxBlink.Add (this.spinbutton1);
-			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hboxBlink [this.spinbutton1]));
+			this.spinbuttonBlinkDelay = new global::Gtk.SpinButton (10D, 10000D, 1D);
+			this.spinbuttonBlinkDelay.CanFocus = true;
+			this.spinbuttonBlinkDelay.Name = "spinbuttonBlinkDelay";
+			this.spinbuttonBlinkDelay.Adjustment.PageIncrement = 10D;
+			this.spinbuttonBlinkDelay.ClimbRate = 1D;
+			this.spinbuttonBlinkDelay.Numeric = true;
+			this.spinbuttonBlinkDelay.Value = 10D;
+			this.hboxBlink.Add (this.spinbuttonBlinkDelay);
+			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hboxBlink [this.spinbuttonBlinkDelay]));
 			w16.Position = 1;
 			w16.Expand = false;
 			w16.Fill = false;
@@ -218,14 +228,15 @@ namespace BlinkStickClient
 			w17.Expand = false;
 			w17.Fill = false;
 			// Container child hboxBlink.Gtk.Box+BoxChild
-			this.spinbutton2 = new global::Gtk.SpinButton (0D, 100D, 1D);
-			this.spinbutton2.CanFocus = true;
-			this.spinbutton2.Name = "spinbutton2";
-			this.spinbutton2.Adjustment.PageIncrement = 10D;
-			this.spinbutton2.ClimbRate = 1D;
-			this.spinbutton2.Numeric = true;
-			this.hboxBlink.Add (this.spinbutton2);
-			global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.hboxBlink [this.spinbutton2]));
+			this.spinbuttonBlinkRepeat = new global::Gtk.SpinButton (1D, 100D, 1D);
+			this.spinbuttonBlinkRepeat.CanFocus = true;
+			this.spinbuttonBlinkRepeat.Name = "spinbuttonBlinkRepeat";
+			this.spinbuttonBlinkRepeat.Adjustment.PageIncrement = 10D;
+			this.spinbuttonBlinkRepeat.ClimbRate = 1D;
+			this.spinbuttonBlinkRepeat.Numeric = true;
+			this.spinbuttonBlinkRepeat.Value = 1D;
+			this.hboxBlink.Add (this.spinbuttonBlinkRepeat);
+			global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.hboxBlink [this.spinbuttonBlinkRepeat]));
 			w18.Position = 3;
 			w18.Expand = false;
 			w18.Fill = false;
@@ -250,14 +261,15 @@ namespace BlinkStickClient
 			w20.Expand = false;
 			w20.Fill = false;
 			// Container child hboxPulse.Gtk.Box+BoxChild
-			this.spinbutton4 = new global::Gtk.SpinButton (0D, 100D, 1D);
-			this.spinbutton4.CanFocus = true;
-			this.spinbutton4.Name = "spinbutton4";
-			this.spinbutton4.Adjustment.PageIncrement = 10D;
-			this.spinbutton4.ClimbRate = 1D;
-			this.spinbutton4.Numeric = true;
-			this.hboxPulse.Add (this.spinbutton4);
-			global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.hboxPulse [this.spinbutton4]));
+			this.spinbuttonPulseDuration = new global::Gtk.SpinButton (10D, 10000D, 1D);
+			this.spinbuttonPulseDuration.CanFocus = true;
+			this.spinbuttonPulseDuration.Name = "spinbuttonPulseDuration";
+			this.spinbuttonPulseDuration.Adjustment.PageIncrement = 10D;
+			this.spinbuttonPulseDuration.ClimbRate = 1D;
+			this.spinbuttonPulseDuration.Numeric = true;
+			this.spinbuttonPulseDuration.Value = 10D;
+			this.hboxPulse.Add (this.spinbuttonPulseDuration);
+			global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.hboxPulse [this.spinbuttonPulseDuration]));
 			w21.Position = 1;
 			w21.Expand = false;
 			w21.Fill = false;
@@ -266,21 +278,22 @@ namespace BlinkStickClient
 			this.labelTimesPulse.WidthRequest = 50;
 			this.labelTimesPulse.Name = "labelTimesPulse";
 			this.labelTimesPulse.Xalign = 1F;
-			this.labelTimesPulse.LabelProp = global::Mono.Unix.Catalog.GetString ("Times:");
+			this.labelTimesPulse.LabelProp = global::Mono.Unix.Catalog.GetString ("Repeat:");
 			this.hboxPulse.Add (this.labelTimesPulse);
 			global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.hboxPulse [this.labelTimesPulse]));
 			w22.Position = 2;
 			w22.Expand = false;
 			w22.Fill = false;
 			// Container child hboxPulse.Gtk.Box+BoxChild
-			this.spinbutton5 = new global::Gtk.SpinButton (0D, 100D, 1D);
-			this.spinbutton5.CanFocus = true;
-			this.spinbutton5.Name = "spinbutton5";
-			this.spinbutton5.Adjustment.PageIncrement = 10D;
-			this.spinbutton5.ClimbRate = 1D;
-			this.spinbutton5.Numeric = true;
-			this.hboxPulse.Add (this.spinbutton5);
-			global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.hboxPulse [this.spinbutton5]));
+			this.spinbuttonPulseRepeat = new global::Gtk.SpinButton (1D, 100D, 1D);
+			this.spinbuttonPulseRepeat.CanFocus = true;
+			this.spinbuttonPulseRepeat.Name = "spinbuttonPulseRepeat";
+			this.spinbuttonPulseRepeat.Adjustment.PageIncrement = 10D;
+			this.spinbuttonPulseRepeat.ClimbRate = 1D;
+			this.spinbuttonPulseRepeat.Numeric = true;
+			this.spinbuttonPulseRepeat.Value = 1D;
+			this.hboxPulse.Add (this.spinbuttonPulseRepeat);
+			global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.hboxPulse [this.spinbuttonPulseRepeat]));
 			w23.Position = 3;
 			w23.Expand = false;
 			w23.Fill = false;
@@ -290,19 +303,53 @@ namespace BlinkStickClient
 			w24.Expand = false;
 			w24.Fill = false;
 			// Container child vboxMain.Gtk.Box+BoxChild
+			this.hboxMorph = new global::Gtk.HBox ();
+			this.hboxMorph.Name = "hboxMorph";
+			this.hboxMorph.Spacing = 6;
+			// Container child hboxMorph.Gtk.Box+BoxChild
+			this.labelDurationPulse1 = new global::Gtk.Label ();
+			this.labelDurationPulse1.WidthRequest = 50;
+			this.labelDurationPulse1.Name = "labelDurationPulse1";
+			this.labelDurationPulse1.Xalign = 1F;
+			this.labelDurationPulse1.LabelProp = global::Mono.Unix.Catalog.GetString ("Duration:");
+			this.hboxMorph.Add (this.labelDurationPulse1);
+			global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.hboxMorph [this.labelDurationPulse1]));
+			w25.Position = 0;
+			w25.Expand = false;
+			w25.Fill = false;
+			// Container child hboxMorph.Gtk.Box+BoxChild
+			this.spinbuttonMorphDuration = new global::Gtk.SpinButton (10D, 10000D, 1D);
+			this.spinbuttonMorphDuration.CanFocus = true;
+			this.spinbuttonMorphDuration.Name = "spinbuttonMorphDuration";
+			this.spinbuttonMorphDuration.Adjustment.PageIncrement = 10D;
+			this.spinbuttonMorphDuration.ClimbRate = 1D;
+			this.spinbuttonMorphDuration.Numeric = true;
+			this.spinbuttonMorphDuration.Value = 10D;
+			this.hboxMorph.Add (this.spinbuttonMorphDuration);
+			global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.hboxMorph [this.spinbuttonMorphDuration]));
+			w26.Position = 1;
+			w26.Expand = false;
+			w26.Fill = false;
+			this.vboxMain.Add (this.hboxMorph);
+			global::Gtk.Box.BoxChild w27 = ((global::Gtk.Box.BoxChild)(this.vboxMain [this.hboxMorph]));
+			w27.Position = 4;
+			w27.Expand = false;
+			w27.Fill = false;
+			// Container child vboxMain.Gtk.Box+BoxChild
 			this.hseparator1 = new global::Gtk.HSeparator ();
 			this.hseparator1.Name = "hseparator1";
 			this.vboxMain.Add (this.hseparator1);
-			global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.vboxMain [this.hseparator1]));
-			w25.Position = 4;
-			w25.Expand = false;
-			w25.Fill = false;
+			global::Gtk.Box.BoxChild w28 = ((global::Gtk.Box.BoxChild)(this.vboxMain [this.hseparator1]));
+			w28.Position = 5;
+			w28.Expand = false;
+			w28.Fill = false;
 			this.Add (this.vboxMain);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
 			this.Hide ();
 			this.comboboxMode.Changed += new global::System.EventHandler (this.OnComboboxModeChanged);
+			this.buttonDelete.Clicked += new global::System.EventHandler (this.OnButtonDeleteClicked);
 		}
 	}
 }

@@ -129,6 +129,7 @@
     <Compile Include="gtk-gui\BlinkStickClient.EditPatternDialog.cs" />
     <Compile Include="Widgets\AnimationWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.AnimationWidget.cs" />
+    <Compile Include="Classes\Animation.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

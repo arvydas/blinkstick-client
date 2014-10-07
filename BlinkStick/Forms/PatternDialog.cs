@@ -42,14 +42,39 @@ namespace BlinkStickClient
 
             treeviewPatterns.AppendColumn (patternNameColumn);
 
+            Pattern pattern = new Pattern();
+            pattern.Name = "Pattern 1";
+
+            Animation animation = new Animation();
+            animation.AnimationType = AnimationTypeEnum.SetColor;
+            pattern.Animations.Add(animation);
+
+            animation = new Animation();
+            animation.AnimationType = AnimationTypeEnum.Morph;
+            pattern.Animations.Add(animation);
+
+            animation = new Animation();
+            animation.AnimationType = AnimationTypeEnum.Pulse;
+            pattern.Animations.Add(animation);
+
+            /*
+            animation = new Animation();
+            animation.AnimationType = AnimationTypeEnum.Blink;
+            pattern.Animations.Add(animation);
+            */
+
+            PatternListStore.AppendValues (pattern);
+            /*
             PatternListStore.AppendValues (new Pattern("Pattern1"));
             PatternListStore.AppendValues (new Pattern("Pattern2"));
             PatternListStore.AppendValues (new Pattern("Pattern3"));
             PatternListStore.AppendValues (new Pattern("Pattern4"));
             PatternListStore.AppendValues (new Pattern("Pattern5"));
+            */
 
             UpdateButtons();
 
+            /*
             for (int i = 0; i < 10; i++)
             {
                 AnimationWidget anim = new AnimationWidget();
@@ -57,17 +82,64 @@ namespace BlinkStickClient
                 vbox2.PackStart(anim);
 
             }
+            */
 
-            Button btn = new Button();
-            btn.Label = "Add new";
-            vbox2.PackStart(btn);
-            btn.Show();
         }
 
         void UpdateButtons()
         {
             deleteAction.Sensitive = SelectedPattern != null;
             propertiesAction.Sensitive = SelectedPattern != null;
+        }
+
+        void LoadAnimations()
+        {
+            foreach (Widget child in vbox2.AllChildren)
+            {
+                child.Destroy();
+            }
+
+
+            if (SelectedPattern != null)
+            {
+                int i = 1;
+
+                foreach (Animation animation in SelectedPattern.Animations)
+                {
+                    AnimationWidget widget = new AnimationWidget();
+                    widget.Index = i;
+                    widget.AnimationObject = animation;
+
+                    widget.DeleteAnimation += (sender, e) => {
+                        AnimationWidget w = (AnimationWidget)sender;
+                        SelectedPattern.Animations.Remove(w.AnimationObject);
+                        w.Destroy();
+                        ReorderAnimations();
+                    };
+
+                    vbox2.PackStart(widget, false, false, 0);
+
+                    i++;
+                }
+
+                Button btn = new Button();
+                btn.Label = "Add new";
+                vbox2.PackStart(btn, false, false, 10);
+                btn.Show();
+            }
+        }
+
+        private void ReorderAnimations()
+        {
+            int i = 1;
+            foreach (Widget widget in vbox2.Children)
+            {
+                if (widget is AnimationWidget)
+                {
+                    ((AnimationWidget)widget).Index = i;
+                    i++;
+                }
+            }
         }
 
         public static void ShowForm()
@@ -119,6 +191,7 @@ namespace BlinkStickClient
 
             if((sender as TreeView).Selection.GetSelected(out model, out iter)){
                 SelectedPattern = (Pattern)model.GetValue (iter, 0);
+                LoadAnimations();
             }
         }
     }
