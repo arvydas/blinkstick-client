@@ -192,6 +192,8 @@ namespace BlinkStickClient
 
             spinbuttonMorphDuration.Value = AnimationObject.DurationMorph;
 
+            buttonColor.Color = AnimationObject.GtkColor;
+
             OnComboboxModeChanged(this, null);
         }
 
@@ -208,6 +210,11 @@ namespace BlinkStickClient
         protected void OnButtonDownClicked (object sender, EventArgs e)
         {
             OnMoveDown();
+        }
+
+        protected void OnButtonColorColorSet (object sender, EventArgs e)
+        {
+            AnimationObject.GtkColor = buttonColor.Color;
         }
     }
 }

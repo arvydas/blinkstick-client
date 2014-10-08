@@ -1,10 +1,41 @@
 ﻿using System;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using BlinkStickDotNet;
+using BlinkStickClient.Utils;
+using Gdk;
 
 namespace BlinkStickClient.Classes
 {
     public class Animation
     {
         public AnimationTypeEnum AnimationType { get; set; }
+
+        [JsonProperty("Color")]
+        public String ColorString {
+            get {
+                return String.Format("#{0:X2}{1:X2}{2:X2}", this.Color.R, this.Color.G, this.Color.B);
+            }
+            set {
+                this.Color = RgbColor.FromString(value);
+            }
+        }
+
+        [JsonIgnore]
+        public RgbColor Color {
+            get;
+            set;
+        }
+
+        [JsonIgnore]
+        public Color GtkColor {
+            get {
+                return new Gdk.Color(this.Color.R, this.Color.G, this.Color.B);
+            }
+            set {
+                this.Color = value.ToRgbColor();
+            }
+        }
 
         public int DelaySetColor { get; set; }
 
@@ -25,6 +56,7 @@ namespace BlinkStickClient.Classes
             this.DurationPulse = 1000;
             this.RepeatPulse = 1;
             this.DurationMorph = 1000;
+            this.ColorString = "#FFFFFF";
         }
     }
 

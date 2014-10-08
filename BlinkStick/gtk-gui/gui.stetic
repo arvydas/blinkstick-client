@@ -2303,6 +2303,7 @@ Pulse</property>
                 <property name="CanFocus">True</property>
                 <property name="Events">ButtonMotionMask, ButtonPressMask, ButtonReleaseMask</property>
                 <property name="Alpha">-1</property>
+                <signal name="ColorSet" handler="OnButtonColorColorSet" />
               </widget>
               <packing>
                 <property name="Position">2</property>

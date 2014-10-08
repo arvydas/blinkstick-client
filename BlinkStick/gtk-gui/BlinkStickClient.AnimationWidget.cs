@@ -349,6 +349,7 @@ namespace BlinkStickClient
 			}
 			this.Hide ();
 			this.comboboxMode.Changed += new global::System.EventHandler (this.OnComboboxModeChanged);
+			this.buttonColor.ColorSet += new global::System.EventHandler (this.OnButtonColorColorSet);
 			this.buttonUp.Clicked += new global::System.EventHandler (this.OnButtonUpClicked);
 			this.buttonDown.Clicked += new global::System.EventHandler (this.OnButtonDownClicked);
 			this.buttonDelete.Clicked += new global::System.EventHandler (this.OnButtonDeleteClicked);
