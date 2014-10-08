@@ -18,19 +18,37 @@ namespace BlinkStickClient
 		
 		private global::BlinkStickClient.BlinkStickEmulatorWidget blinkstickemulatorwidget1;
 		
-		private global::Gtk.Toolbar toolbar1;
-		
 		private global::Gtk.ScrolledWindow GtkScrolledWindow;
 		
 		private global::Gtk.TreeView treeviewPatterns;
 		
+		private global::Gtk.HBox hbox3;
+		
+		private global::Gtk.Alignment alignment1;
+		
+		private global::Gtk.Button buttonAddPattern;
+		
+		private global::Gtk.Alignment alignment2;
+		
 		private global::Gtk.VBox vbox4;
 		
+		private global::Gtk.HBox hbox2;
+		
 		private global::Gtk.Label labelPattern;
+		
+		private global::Gtk.Button buttonProperties;
 		
 		private global::Gtk.ScrolledWindow scrolledwindowAnimations;
 		
 		private global::Gtk.VBox vbox2;
+		
+		private global::Gtk.HBox hbox4;
+		
+		private global::Gtk.Alignment alignment3;
+		
+		private global::Gtk.Button buttonAddAnimation;
+		
+		private global::Gtk.Alignment alignment4;
 		
 		private global::Gtk.Button buttonCancel;
 
@@ -62,6 +80,7 @@ namespace BlinkStickClient
 			this.vbox3 = new global::Gtk.VBox ();
 			this.vbox3.Name = "vbox3";
 			this.vbox3.Spacing = 6;
+			this.vbox3.BorderWidth = ((uint)(6));
 			// Container child vbox3.Gtk.Box+BoxChild
 			this.blinkstickemulatorwidget1 = new global::BlinkStickClient.BlinkStickEmulatorWidget ();
 			this.blinkstickemulatorwidget1.Events = ((global::Gdk.EventMask)(256));
@@ -69,18 +88,6 @@ namespace BlinkStickClient
 			this.vbox3.Add (this.blinkstickemulatorwidget1);
 			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.blinkstickemulatorwidget1]));
 			w3.Position = 0;
-			// Container child vbox3.Gtk.Box+BoxChild
-			this.UIManager.AddUiFromString ("<ui><toolbar name=\'toolbar1\'><toolitem name=\'newAction\' action=\'newAction\'/><tool" +
-			"item name=\'propertiesAction\' action=\'propertiesAction\'/><toolitem name=\'deleteAc" +
-			"tion\' action=\'deleteAction\'/></toolbar></ui>");
-			this.toolbar1 = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/toolbar1")));
-			this.toolbar1.Name = "toolbar1";
-			this.toolbar1.ShowArrow = false;
-			this.vbox3.Add (this.toolbar1);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.toolbar1]));
-			w4.Position = 1;
-			w4.Expand = false;
-			w4.Fill = false;
 			// Container child vbox3.Gtk.Box+BoxChild
 			this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
 			this.GtkScrolledWindow.Name = "GtkScrolledWindow";
@@ -92,25 +99,82 @@ namespace BlinkStickClient
 			this.treeviewPatterns.HeadersVisible = false;
 			this.GtkScrolledWindow.Add (this.treeviewPatterns);
 			this.vbox3.Add (this.GtkScrolledWindow);
-			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.GtkScrolledWindow]));
-			w6.Position = 2;
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.GtkScrolledWindow]));
+			w5.Position = 1;
+			// Container child vbox3.Gtk.Box+BoxChild
+			this.hbox3 = new global::Gtk.HBox ();
+			this.hbox3.Name = "hbox3";
+			this.hbox3.Spacing = 6;
+			// Container child hbox3.Gtk.Box+BoxChild
+			this.alignment1 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
+			this.alignment1.Name = "alignment1";
+			this.hbox3.Add (this.alignment1);
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.alignment1]));
+			w6.Position = 0;
+			// Container child hbox3.Gtk.Box+BoxChild
+			this.buttonAddPattern = new global::Gtk.Button ();
+			this.buttonAddPattern.WidthRequest = 200;
+			this.buttonAddPattern.CanFocus = true;
+			this.buttonAddPattern.Name = "buttonAddPattern";
+			this.buttonAddPattern.UseUnderline = true;
+			this.buttonAddPattern.Label = global::Mono.Unix.Catalog.GetString ("Add New Pattern");
+			global::Gtk.Image w7 = new global::Gtk.Image ();
+			w7.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.Menu);
+			this.buttonAddPattern.Image = w7;
+			this.hbox3.Add (this.buttonAddPattern);
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.buttonAddPattern]));
+			w8.Position = 1;
+			w8.Expand = false;
+			w8.Fill = false;
+			// Container child hbox3.Gtk.Box+BoxChild
+			this.alignment2 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
+			this.alignment2.Name = "alignment2";
+			this.hbox3.Add (this.alignment2);
+			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.alignment2]));
+			w9.Position = 2;
+			this.vbox3.Add (this.hbox3);
+			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.hbox3]));
+			w10.Position = 2;
+			w10.Expand = false;
+			w10.Fill = false;
 			this.hbox1.Add (this.vbox3);
-			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.vbox3]));
-			w7.Position = 0;
+			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.vbox3]));
+			w11.Position = 0;
 			// Container child hbox1.Gtk.Box+BoxChild
 			this.vbox4 = new global::Gtk.VBox ();
 			this.vbox4.Name = "vbox4";
 			this.vbox4.Spacing = 6;
 			this.vbox4.BorderWidth = ((uint)(6));
 			// Container child vbox4.Gtk.Box+BoxChild
+			this.hbox2 = new global::Gtk.HBox ();
+			this.hbox2.Name = "hbox2";
+			this.hbox2.Spacing = 6;
+			// Container child hbox2.Gtk.Box+BoxChild
 			this.labelPattern = new global::Gtk.Label ();
 			this.labelPattern.Name = "labelPattern";
-			this.labelPattern.LabelProp = global::Mono.Unix.Catalog.GetString ("Pattern Animation");
-			this.vbox4.Add (this.labelPattern);
-			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.labelPattern]));
-			w8.Position = 0;
-			w8.Expand = false;
-			w8.Fill = false;
+			this.labelPattern.LabelProp = global::Mono.Unix.Catalog.GetString ("Pattern Animations");
+			this.hbox2.Add (this.labelPattern);
+			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.labelPattern]));
+			w12.Position = 0;
+			w12.Fill = false;
+			// Container child hbox2.Gtk.Box+BoxChild
+			this.buttonProperties = new global::Gtk.Button ();
+			this.buttonProperties.CanFocus = true;
+			this.buttonProperties.Name = "buttonProperties";
+			this.buttonProperties.UseUnderline = true;
+			global::Gtk.Image w13 = new global::Gtk.Image ();
+			w13.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-properties", global::Gtk.IconSize.Menu);
+			this.buttonProperties.Image = w13;
+			this.hbox2.Add (this.buttonProperties);
+			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.buttonProperties]));
+			w14.Position = 1;
+			w14.Expand = false;
+			w14.Fill = false;
+			this.vbox4.Add (this.hbox2);
+			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.hbox2]));
+			w15.Position = 0;
+			w15.Expand = false;
+			w15.Fill = false;
 			// Container child vbox4.Gtk.Box+BoxChild
 			this.scrolledwindowAnimations = new global::Gtk.ScrolledWindow ();
 			this.scrolledwindowAnimations.WidthRequest = 300;
@@ -119,31 +183,67 @@ namespace BlinkStickClient
 			this.scrolledwindowAnimations.HscrollbarPolicy = ((global::Gtk.PolicyType)(2));
 			this.scrolledwindowAnimations.ShadowType = ((global::Gtk.ShadowType)(1));
 			// Container child scrolledwindowAnimations.Gtk.Container+ContainerChild
-			global::Gtk.Viewport w9 = new global::Gtk.Viewport ();
-			w9.ShadowType = ((global::Gtk.ShadowType)(0));
+			global::Gtk.Viewport w16 = new global::Gtk.Viewport ();
+			w16.ShadowType = ((global::Gtk.ShadowType)(0));
 			// Container child GtkViewport.Gtk.Container+ContainerChild
 			this.vbox2 = new global::Gtk.VBox ();
 			this.vbox2.Name = "vbox2";
 			this.vbox2.BorderWidth = ((uint)(6));
-			w9.Add (this.vbox2);
-			this.scrolledwindowAnimations.Add (w9);
+			w16.Add (this.vbox2);
+			this.scrolledwindowAnimations.Add (w16);
 			this.vbox4.Add (this.scrolledwindowAnimations);
-			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.scrolledwindowAnimations]));
-			w12.Position = 1;
+			global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.scrolledwindowAnimations]));
+			w19.Position = 1;
+			// Container child vbox4.Gtk.Box+BoxChild
+			this.hbox4 = new global::Gtk.HBox ();
+			this.hbox4.Name = "hbox4";
+			this.hbox4.Spacing = 6;
+			// Container child hbox4.Gtk.Box+BoxChild
+			this.alignment3 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
+			this.alignment3.Name = "alignment3";
+			this.hbox4.Add (this.alignment3);
+			global::Gtk.Box.BoxChild w20 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.alignment3]));
+			w20.Position = 0;
+			// Container child hbox4.Gtk.Box+BoxChild
+			this.buttonAddAnimation = new global::Gtk.Button ();
+			this.buttonAddAnimation.WidthRequest = 200;
+			this.buttonAddAnimation.CanFocus = true;
+			this.buttonAddAnimation.Name = "buttonAddAnimation";
+			this.buttonAddAnimation.UseUnderline = true;
+			this.buttonAddAnimation.Label = global::Mono.Unix.Catalog.GetString ("Add New Animation");
+			global::Gtk.Image w21 = new global::Gtk.Image ();
+			w21.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.Menu);
+			this.buttonAddAnimation.Image = w21;
+			this.hbox4.Add (this.buttonAddAnimation);
+			global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.buttonAddAnimation]));
+			w22.Position = 1;
+			w22.Expand = false;
+			w22.Fill = false;
+			// Container child hbox4.Gtk.Box+BoxChild
+			this.alignment4 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
+			this.alignment4.Name = "alignment4";
+			this.hbox4.Add (this.alignment4);
+			global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.alignment4]));
+			w23.Position = 2;
+			this.vbox4.Add (this.hbox4);
+			global::Gtk.Box.BoxChild w24 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.hbox4]));
+			w24.Position = 2;
+			w24.Expand = false;
+			w24.Fill = false;
 			this.hbox1.Add (this.vbox4);
-			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.vbox4]));
-			w13.Position = 1;
-			w13.Expand = false;
-			w13.Fill = false;
+			global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.vbox4]));
+			w25.Position = 1;
+			w25.Expand = false;
+			w25.Fill = false;
 			w2.Add (this.hbox1);
-			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(w2 [this.hbox1]));
-			w14.Position = 0;
+			global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(w2 [this.hbox1]));
+			w26.Position = 0;
 			// Internal child BlinkStickClient.PatternDialog.ActionArea
-			global::Gtk.HButtonBox w15 = this.ActionArea;
-			w15.Name = "dialog1_ActionArea";
-			w15.Spacing = 10;
-			w15.BorderWidth = ((uint)(5));
-			w15.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w27 = this.ActionArea;
+			w27.Name = "dialog1_ActionArea";
+			w27.Spacing = 10;
+			w27.BorderWidth = ((uint)(5));
+			w27.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonCancel = new global::Gtk.Button ();
 			this.buttonCancel.CanDefault = true;
@@ -153,9 +253,9 @@ namespace BlinkStickClient
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-close";
 			this.AddActionWidget (this.buttonCancel, -7);
-			global::Gtk.ButtonBox.ButtonBoxChild w16 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w15 [this.buttonCancel]));
-			w16.Expand = false;
-			w16.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w28 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w27 [this.buttonCancel]));
+			w28.Expand = false;
+			w28.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
@@ -165,8 +265,9 @@ namespace BlinkStickClient
 			this.newAction.Activated += new global::System.EventHandler (this.OnNewActionActivated);
 			this.deleteAction.Activated += new global::System.EventHandler (this.OnDeleteActionActivated);
 			this.propertiesAction.Activated += new global::System.EventHandler (this.OnPropertiesActionActivated);
-			this.treeviewPatterns.CursorChanged += new global::System.EventHandler (this.OnTreeviewPatternsCursorChanged);
-			this.treeviewPatterns.RowActivated += new global::Gtk.RowActivatedHandler (this.OnTreeviewPatternsRowActivated);
+			this.buttonAddPattern.Clicked += new global::System.EventHandler (this.OnButtonAddPatternClicked);
+			this.buttonProperties.Clicked += new global::System.EventHandler (this.OnButtonPropertiesClicked);
+			this.buttonAddAnimation.Clicked += new global::System.EventHandler (this.OnButtonAddAnimationClicked);
 		}
 	}
 }

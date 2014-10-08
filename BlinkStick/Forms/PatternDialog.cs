@@ -2,6 +2,7 @@
 using Gtk;
 using Gdk;
 using BlinkStickClient.Classes;
+using BlinkStickClient.Utils;
 
 namespace BlinkStickClient
 {
@@ -77,45 +78,9 @@ namespace BlinkStickClient
 
             treeviewPatterns.Model = PatternListStore;
 
-            /*
-            Gtk.TreeViewColumn playColumn = new Gtk.TreeViewColumn ();
-            playColumn.Title = "Play";
-            Gtk.TreeViewColumn patternNameColumn = new Gtk.TreeViewColumn ();
-            patternNameColumn.Title = "Name";
-            Gtk.TreeViewColumn deleteColumn = new Gtk.TreeViewColumn ();
-            deleteColumn.Title = "Delete";
-
-            // Create the text cell that will display the artist name
-            Gtk.CellRendererPixbuf playCell = new Gtk.CellRendererPixbuf();
-            Gtk.CellRendererText patternNameCell = new Gtk.CellRendererText ();
-            Gtk.CellRendererPixbuf deleteCell = new Gtk.CellRendererPixbuf();
-
-            playColumn.PackStart (playCell, false);
-            patternNameColumn.PackStart (patternNameCell, true);
-            deleteColumn.PackStart (deleteCell, false);
-
-            //playColumn.SetAttributes(playCell, "stock_id", 1);
-            //deleteColumn.SetAttributes(deleteCell, "stock_id", 2);
-
-            treeviewPatterns.AppendColumn (playColumn);
-            treeviewPatterns.AppendColumn (patternNameColumn);
-            treeviewPatterns.AppendColumn (deleteColumn);
-
-            patternNameColumn.SetCellDataFunc (patternNameCell, new Gtk.TreeCellDataFunc (RenderPatternName));
-
-            PatternListStore.SetSortFunc(PatternColumn, delegate(TreeModel model, TreeIter a, TreeIter b) {
-                Pattern p1 = (Pattern)model.GetValue(a, PatternColumn);
-                Pattern p2 = (Pattern)model.GetValue(b, PatternColumn);
-
-                if (p1 == null || p2 == null) 
-                    return 0;
-
-                return String.Compare(p1.Name, p2.Name);
-            });
-            PatternListStore.SetSortColumnId(PatternColumn, SortType.Ascending);
-
-            treeviewPatterns.Model = PatternListStore;
-            */
+            //These events get lost in the designer
+            treeviewPatterns.RowActivated += OnTreeviewPatternsRowActivated;
+            treeviewPatterns.CursorChanged += OnTreeviewPatternsCursorChanged;
 
             UpdateButtons();
         }
@@ -124,6 +89,8 @@ namespace BlinkStickClient
         {
             deleteAction.Sensitive = SelectedPattern != null;
             propertiesAction.Sensitive = SelectedPattern != null;
+            buttonProperties.Sensitive = SelectedPattern != null;
+            buttonAddAnimation.Sensitive = SelectedPattern != null;
         }
 
         void LoadAnimations()
@@ -146,20 +113,6 @@ namespace BlinkStickClient
                     i++;
                 }
 
-                Button btn = new Button();
-                btn.Label = "Add new";
-                btn.Clicked += (sender, e) => {
-                    Animation animation = new Animation();
-                    SelectedPattern.Animations.Add(animation);
-
-                    AnimationWidget widget = CreateAnimationWidget(animation, SelectedPattern.Animations.Count);
-                    vbox2.PackStart(widget, false, false, 0);
-                    vbox2.ReorderChild(widget, SelectedPattern.Animations.Count - 1);
-                    ReorderAnimations();
-                };
-                btn.Show();
-
-                vbox2.PackStart(btn, false, false, 10);
                 ReorderAnimations();
             }
             vbox2.Show();
@@ -233,27 +186,6 @@ namespace BlinkStickClient
 
         protected void OnNewActionActivated (object sender, EventArgs e)
         {
-            Pattern pattern = new Pattern();
-
-            if (EditPatternDialog.ShowForm(pattern, Data))
-            {
-                PatternListStore.AppendValues("gtk-media-play", pattern, "gtk-delete");
-                pattern.Animations.Add(new Animation());
-                Data.Patterns.Add(pattern);
-
-                TreeIter iterator;
-                PatternListStore.GetIterFirst(out iterator);
-
-                do
-                {
-                    if (pattern == (Pattern)PatternListStore.GetValue(iterator, PatternColumn))
-                    {
-                        treeviewPatterns.SetCursor(PatternListStore.GetPath(iterator), treeviewPatterns.Columns[PatternColumn], false);
-                        break;
-                    }
-                } 
-                while (PatternListStore.IterNext(ref iterator));
-            }
         }
 
         protected void OnDeleteActionActivated (object sender, EventArgs e)
@@ -282,12 +214,68 @@ namespace BlinkStickClient
 
             if((sender as TreeView).Selection.GetSelected(out model, out iter)){
                 SelectedPattern = (Pattern)model.GetValue(iter, PatternColumn);
+
+                TreePath path;
+                TreeViewColumn column;
+                (sender as TreeView).GetCursor(out path, out column);
+
+                if (column == (sender as TreeView).Columns[2]) //Delete clicked
+                {
+                    PatternListStore.Remove(ref iter);
+                    Data.Patterns.Remove(SelectedPattern);
+                    SelectedPattern = null;
+                }
+                else if (column == (sender as TreeView).Columns[0]) //Play clicked
+                {
+                    MessageBox.Show(this, "Play " + SelectedPattern.Name + "?", MessageType.Info);
+                }
             }
         }
 
         protected void OnTreeviewPatternsRowActivated (object o, RowActivatedArgs args)
         {
             OnPropertiesActionActivated(o, new EventArgs()); 
+        }
+
+        protected void OnButtonPropertiesClicked (object sender, EventArgs e)
+        {
+            EditPatternDialog.ShowForm(SelectedPattern, Data);
+        }
+
+        protected void OnButtonAddPatternClicked (object sender, EventArgs e)
+        {
+            Pattern pattern = new Pattern();
+
+            if (EditPatternDialog.ShowForm(pattern, Data))
+            {
+                PatternListStore.AppendValues("gtk-media-play", pattern, "gtk-delete");
+                pattern.Animations.Add(new Animation());
+                Data.Patterns.Add(pattern);
+
+                TreeIter iterator;
+                PatternListStore.GetIterFirst(out iterator);
+
+                do
+                {
+                    if (pattern == (Pattern)PatternListStore.GetValue(iterator, PatternColumn))
+                    {
+                        treeviewPatterns.SetCursor(PatternListStore.GetPath(iterator), treeviewPatterns.Columns[PatternColumn], false);
+                        break;
+                    }
+                } 
+                while (PatternListStore.IterNext(ref iterator));
+            }
+        }
+
+        protected void OnButtonAddAnimationClicked (object sender, EventArgs e)
+        {
+            Animation animation = new Animation();
+            SelectedPattern.Animations.Add(animation);
+
+            AnimationWidget widget = CreateAnimationWidget(animation, SelectedPattern.Animations.Count);
+            vbox2.PackStart(widget, false, false, 0);
+            vbox2.ReorderChild(widget, SelectedPattern.Animations.Count - 1);
+            ReorderAnimations();
         }
     }
 }
