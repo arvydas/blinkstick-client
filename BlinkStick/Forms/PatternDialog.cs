@@ -194,6 +194,19 @@ namespace BlinkStickClient
                 PatternListStore.AppendValues(pattern);
                 pattern.Animations.Add(new Animation());
                 Data.Patterns.Add(pattern);
+
+                TreeIter iterator;
+                PatternListStore.GetIterFirst(out iterator);
+
+                do
+                {
+                    if (pattern == (Pattern)PatternListStore.GetValue(iterator, 0))
+                    {
+                        treeviewPatterns.SetCursor(PatternListStore.GetPath(iterator), treeviewPatterns.Columns[0], false);
+                        break;
+                    }
+                } 
+                while (PatternListStore.IterNext(ref iterator));
             }
         }
 
