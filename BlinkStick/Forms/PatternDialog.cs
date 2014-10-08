@@ -59,9 +59,17 @@ namespace BlinkStickClient
 
             patternNameColumn.SetCellDataFunc (patternNameCell, new Gtk.TreeCellDataFunc (RenderPatternName));
 
+            PatternListStore.SetSortFunc(0, delegate(TreeModel model, TreeIter a, TreeIter b) {
+                Pattern p1 = (Pattern)model.GetValue(a, 0);
+                Pattern p2 = (Pattern)model.GetValue(b, 0);
+                return String.Compare(p1.Name, p2.Name);
+            });
+            PatternListStore.SetSortColumnId(0, SortType.Ascending);
+
             treeviewPatterns.Model = PatternListStore;
 
             treeviewPatterns.AppendColumn (patternNameColumn);
+
 
             UpdateButtons();
         }
