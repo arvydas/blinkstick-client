@@ -624,7 +624,6 @@ High</property>
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="Label" translatable="yes">Blink</property>
-                        <property name="Active">True</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>
@@ -2017,7 +2016,7 @@ Inverse</property>
                   <widget class="Gtk.Toolbar" id="toolbar1">
                     <property name="MemberName" />
                     <property name="ShowArrow">False</property>
-                    <node name="__gtksharp_104_Stetic_Editor_ActionToolbar" type="Toolbar">
+                    <node name="toolbar1" type="Toolbar">
                       <node type="Toolitem" action="newAction" />
                       <node type="Toolitem" action="propertiesAction" />
                       <node type="Toolitem" action="deleteAction" />
@@ -2149,7 +2148,9 @@ Inverse</property>
   </widget>
   <widget class="Gtk.Dialog" id="BlinkStickClient.EditPatternDialog" design-size="400 143">
     <property name="MemberName" />
+    <property name="Title" translatable="yes">Edit Pattern Name</property>
     <property name="WindowPosition">Center</property>
+    <property name="AllowShrink">True</property>
     <property name="Buttons">2</property>
     <property name="HelpButton">False</property>
     <child internal-child="VBox">
@@ -2228,7 +2229,8 @@ Inverse</property>
             <property name="UseStock">True</property>
             <property name="Type">StockItem</property>
             <property name="StockId">gtk-ok</property>
-            <property name="ResponseId">-5</property>
+            <property name="ResponseId">-1</property>
+            <signal name="Clicked" handler="OnButtonOkClicked" />
             <property name="label">gtk-ok</property>
           </widget>
           <packing>

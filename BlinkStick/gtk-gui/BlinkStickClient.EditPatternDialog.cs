@@ -19,7 +19,9 @@ namespace BlinkStickClient
 			global::Stetic.Gui.Initialize (this);
 			// Widget BlinkStickClient.EditPatternDialog
 			this.Name = "BlinkStickClient.EditPatternDialog";
+			this.Title = global::Mono.Unix.Catalog.GetString ("Edit Pattern Name");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(1));
+			this.AllowShrink = true;
 			// Internal child BlinkStickClient.EditPatternDialog.VBox
 			global::Gtk.VBox w1 = this.VBox;
 			w1.Name = "dialog1_VBox";
@@ -80,7 +82,7 @@ namespace BlinkStickClient
 			this.buttonOk.UseStock = true;
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
-			this.AddActionWidget (this.buttonOk, -5);
+			w5.Add (this.buttonOk);
 			global::Gtk.ButtonBox.ButtonBoxChild w7 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w5 [this.buttonOk]));
 			w7.Position = 1;
 			w7.Expand = false;
@@ -91,6 +93,7 @@ namespace BlinkStickClient
 			this.DefaultWidth = 400;
 			this.DefaultHeight = 143;
 			this.Show ();
+			this.buttonOk.Clicked += new global::System.EventHandler (this.OnButtonOkClicked);
 		}
 	}
 }

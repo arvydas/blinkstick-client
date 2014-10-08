@@ -33,7 +33,7 @@ namespace BlinkStickClient.Classes
         }
 
 
-
+        #region Load/Save functions
         public void Load()
         {
             if (!Load(FileName))
@@ -88,14 +88,29 @@ namespace BlinkStickClient.Classes
 
             File.Move (BackupFileName, FileName);
         } 
+        #endregion
 
+        #region Helpers
+        public Boolean PatternNameExists(Pattern current, String name)
+        {
+            foreach (Pattern pattern in this.Patterns)
+            {
+                if (pattern != current && pattern.Name == name)
+                    return true;
+            }
 
+            return false;
+        }
+        #endregion
+
+        #region Assignment
         public void Assign(DataModel data)
         {
             this.Patterns.Clear();
 
             this.Patterns.AddRange(data.Patterns);
         }
+        #endregion
     }
 }
 

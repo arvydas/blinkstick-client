@@ -189,7 +189,7 @@ namespace BlinkStickClient
         {
             Pattern pattern = new Pattern();
 
-            if (EditPatternDialog.ShowForm(pattern))
+            if (EditPatternDialog.ShowForm(pattern, Data))
             {
                 PatternListStore.AppendValues(pattern);
                 pattern.Animations.Add(new Animation());
@@ -225,7 +225,7 @@ namespace BlinkStickClient
 
         protected void OnPropertiesActionActivated (object sender, EventArgs e)
         {
-            EditPatternDialog.ShowForm(SelectedPattern);
+            EditPatternDialog.ShowForm(SelectedPattern, Data);
         }
 
         protected void OnTreeviewPatternsCursorChanged (object sender, EventArgs e)
