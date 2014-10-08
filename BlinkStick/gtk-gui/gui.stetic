@@ -2013,6 +2013,16 @@ Inverse</property>
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
+                  <widget class="BlinkStickClient.BlinkStickEmulatorWidget" id="blinkstickemulatorwidget1">
+                    <property name="MemberName" />
+                    <property name="Events">ButtonPressMask</property>
+                  </widget>
+                  <packing>
+                    <property name="Position">0</property>
+                    <property name="AutoSize">True</property>
+                  </packing>
+                </child>
+                <child>
                   <widget class="Gtk.Toolbar" id="toolbar1">
                     <property name="MemberName" />
                     <property name="ShowArrow">False</property>
@@ -2023,7 +2033,7 @@ Inverse</property>
                     </node>
                   </widget>
                   <packing>
-                    <property name="Position">0</property>
+                    <property name="Position">1</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
@@ -2038,20 +2048,11 @@ Inverse</property>
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="ShowScrollbars">True</property>
+                        <property name="HeadersVisible">False</property>
                         <signal name="CursorChanged" handler="OnTreeviewPatternsCursorChanged" />
                         <signal name="RowActivated" handler="OnTreeviewPatternsRowActivated" />
                       </widget>
                     </child>
-                  </widget>
-                  <packing>
-                    <property name="Position">1</property>
-                    <property name="AutoSize">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="BlinkStickClient.BlinkStickEmulatorWidget" id="blinkstickemulatorwidget1">
-                    <property name="MemberName" />
-                    <property name="Events">ButtonPressMask</property>
                   </widget>
                   <packing>
                     <property name="Position">2</property>

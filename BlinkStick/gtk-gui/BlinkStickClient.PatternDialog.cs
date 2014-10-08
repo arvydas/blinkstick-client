@@ -16,13 +16,13 @@ namespace BlinkStickClient
 		
 		private global::Gtk.VBox vbox3;
 		
+		private global::BlinkStickClient.BlinkStickEmulatorWidget blinkstickemulatorwidget1;
+		
 		private global::Gtk.Toolbar toolbar1;
 		
 		private global::Gtk.ScrolledWindow GtkScrolledWindow;
 		
 		private global::Gtk.TreeView treeviewPatterns;
-		
-		private global::BlinkStickClient.BlinkStickEmulatorWidget blinkstickemulatorwidget1;
 		
 		private global::Gtk.VBox vbox4;
 		
@@ -63,6 +63,13 @@ namespace BlinkStickClient
 			this.vbox3.Name = "vbox3";
 			this.vbox3.Spacing = 6;
 			// Container child vbox3.Gtk.Box+BoxChild
+			this.blinkstickemulatorwidget1 = new global::BlinkStickClient.BlinkStickEmulatorWidget ();
+			this.blinkstickemulatorwidget1.Events = ((global::Gdk.EventMask)(256));
+			this.blinkstickemulatorwidget1.Name = "blinkstickemulatorwidget1";
+			this.vbox3.Add (this.blinkstickemulatorwidget1);
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.blinkstickemulatorwidget1]));
+			w3.Position = 0;
+			// Container child vbox3.Gtk.Box+BoxChild
 			this.UIManager.AddUiFromString ("<ui><toolbar name=\'toolbar1\'><toolitem name=\'newAction\' action=\'newAction\'/><tool" +
 			"item name=\'propertiesAction\' action=\'propertiesAction\'/><toolitem name=\'deleteAc" +
 			"tion\' action=\'deleteAction\'/></toolbar></ui>");
@@ -70,10 +77,10 @@ namespace BlinkStickClient
 			this.toolbar1.Name = "toolbar1";
 			this.toolbar1.ShowArrow = false;
 			this.vbox3.Add (this.toolbar1);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.toolbar1]));
-			w3.Position = 0;
-			w3.Expand = false;
-			w3.Fill = false;
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.toolbar1]));
+			w4.Position = 1;
+			w4.Expand = false;
+			w4.Fill = false;
 			// Container child vbox3.Gtk.Box+BoxChild
 			this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
 			this.GtkScrolledWindow.Name = "GtkScrolledWindow";
@@ -82,16 +89,10 @@ namespace BlinkStickClient
 			this.treeviewPatterns = new global::Gtk.TreeView ();
 			this.treeviewPatterns.CanFocus = true;
 			this.treeviewPatterns.Name = "treeviewPatterns";
+			this.treeviewPatterns.HeadersVisible = false;
 			this.GtkScrolledWindow.Add (this.treeviewPatterns);
 			this.vbox3.Add (this.GtkScrolledWindow);
-			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.GtkScrolledWindow]));
-			w5.Position = 1;
-			// Container child vbox3.Gtk.Box+BoxChild
-			this.blinkstickemulatorwidget1 = new global::BlinkStickClient.BlinkStickEmulatorWidget ();
-			this.blinkstickemulatorwidget1.Events = ((global::Gdk.EventMask)(256));
-			this.blinkstickemulatorwidget1.Name = "blinkstickemulatorwidget1";
-			this.vbox3.Add (this.blinkstickemulatorwidget1);
-			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.blinkstickemulatorwidget1]));
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.GtkScrolledWindow]));
 			w6.Position = 2;
 			this.hbox1.Add (this.vbox3);
 			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.vbox3]));

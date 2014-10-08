@@ -1,12 +1,15 @@
 ﻿using System;
 using Gtk;
+using Gdk;
 using BlinkStickClient.Classes;
 
 namespace BlinkStickClient
 {
     public partial class PatternDialog : Gtk.Dialog
     {
-        Gtk.ListStore PatternListStore = new ListStore(typeof(Pattern));
+        Gtk.ListStore PatternListStore = new ListStore(typeof(String), typeof(Pattern), typeof(String));
+
+        const int PatternColumn = 1;
 
         public Pattern _SelectedPattern = null;
 
@@ -34,7 +37,7 @@ namespace BlinkStickClient
                     PatternListStore.Clear();
                     foreach (Pattern pattern in Data.Patterns)
                     {
-                        PatternListStore.AppendValues(pattern);
+                        PatternListStore.AppendValues("gtk-media-play", pattern, "gtk-delete");
                     }
                 }
             }
@@ -51,25 +54,68 @@ namespace BlinkStickClient
 
             Gtk.TreeViewColumn patternNameColumn = new Gtk.TreeViewColumn ();
             patternNameColumn.Title = "Name";
-
-            // Create the text cell that will display the artist name
             Gtk.CellRendererText patternNameCell = new Gtk.CellRendererText ();
-
             patternNameColumn.PackStart (patternNameCell, true);
-
             patternNameColumn.SetCellDataFunc (patternNameCell, new Gtk.TreeCellDataFunc (RenderPatternName));
 
+            treeviewPatterns.AppendColumn ("Play", new Gtk.CellRendererPixbuf(), "stock_id", 0);
+            treeviewPatterns.AppendColumn (patternNameColumn);
+            treeviewPatterns.AppendColumn ("Delete", new Gtk.CellRendererPixbuf(), "stock_id", 2);
+
+            treeviewPatterns.Columns[2].Expand = false;
+            treeviewPatterns.Columns[1].Expand = true;
+
             PatternListStore.SetSortFunc(0, delegate(TreeModel model, TreeIter a, TreeIter b) {
-                Pattern p1 = (Pattern)model.GetValue(a, 0);
-                Pattern p2 = (Pattern)model.GetValue(b, 0);
+                Pattern p1 = (Pattern)model.GetValue(a, PatternColumn);
+                Pattern p2 = (Pattern)model.GetValue(b, PatternColumn);
+                if (p1 == null || p2 == null) 
+                    return 0;
                 return String.Compare(p1.Name, p2.Name);
             });
+
             PatternListStore.SetSortColumnId(0, SortType.Ascending);
 
             treeviewPatterns.Model = PatternListStore;
 
-            treeviewPatterns.AppendColumn (patternNameColumn);
+            /*
+            Gtk.TreeViewColumn playColumn = new Gtk.TreeViewColumn ();
+            playColumn.Title = "Play";
+            Gtk.TreeViewColumn patternNameColumn = new Gtk.TreeViewColumn ();
+            patternNameColumn.Title = "Name";
+            Gtk.TreeViewColumn deleteColumn = new Gtk.TreeViewColumn ();
+            deleteColumn.Title = "Delete";
 
+            // Create the text cell that will display the artist name
+            Gtk.CellRendererPixbuf playCell = new Gtk.CellRendererPixbuf();
+            Gtk.CellRendererText patternNameCell = new Gtk.CellRendererText ();
+            Gtk.CellRendererPixbuf deleteCell = new Gtk.CellRendererPixbuf();
+
+            playColumn.PackStart (playCell, false);
+            patternNameColumn.PackStart (patternNameCell, true);
+            deleteColumn.PackStart (deleteCell, false);
+
+            //playColumn.SetAttributes(playCell, "stock_id", 1);
+            //deleteColumn.SetAttributes(deleteCell, "stock_id", 2);
+
+            treeviewPatterns.AppendColumn (playColumn);
+            treeviewPatterns.AppendColumn (patternNameColumn);
+            treeviewPatterns.AppendColumn (deleteColumn);
+
+            patternNameColumn.SetCellDataFunc (patternNameCell, new Gtk.TreeCellDataFunc (RenderPatternName));
+
+            PatternListStore.SetSortFunc(PatternColumn, delegate(TreeModel model, TreeIter a, TreeIter b) {
+                Pattern p1 = (Pattern)model.GetValue(a, PatternColumn);
+                Pattern p2 = (Pattern)model.GetValue(b, PatternColumn);
+
+                if (p1 == null || p2 == null) 
+                    return 0;
+
+                return String.Compare(p1.Name, p2.Name);
+            });
+            PatternListStore.SetSortColumnId(PatternColumn, SortType.Ascending);
+
+            treeviewPatterns.Model = PatternListStore;
+            */
 
             UpdateButtons();
         }
@@ -179,8 +225,8 @@ namespace BlinkStickClient
 
         private void RenderPatternName (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
         {
-            if (model.GetValue (iter, 0) is Pattern) {
-                Pattern pattern = (Pattern)model.GetValue (iter, 0);
+            if (model.GetValue (iter, PatternColumn) is Pattern) {
+                Pattern pattern = (Pattern)model.GetValue (iter, PatternColumn);
                 (cell as Gtk.CellRendererText).Text = pattern.Name;
             }
         }
@@ -191,7 +237,7 @@ namespace BlinkStickClient
 
             if (EditPatternDialog.ShowForm(pattern, Data))
             {
-                PatternListStore.AppendValues(pattern);
+                PatternListStore.AppendValues("gtk-media-play", pattern, "gtk-delete");
                 pattern.Animations.Add(new Animation());
                 Data.Patterns.Add(pattern);
 
@@ -200,9 +246,9 @@ namespace BlinkStickClient
 
                 do
                 {
-                    if (pattern == (Pattern)PatternListStore.GetValue(iterator, 0))
+                    if (pattern == (Pattern)PatternListStore.GetValue(iterator, PatternColumn))
                     {
-                        treeviewPatterns.SetCursor(PatternListStore.GetPath(iterator), treeviewPatterns.Columns[0], false);
+                        treeviewPatterns.SetCursor(PatternListStore.GetPath(iterator), treeviewPatterns.Columns[PatternColumn], false);
                         break;
                     }
                 } 
@@ -216,7 +262,7 @@ namespace BlinkStickClient
             TreeIter iter;
 
             if(treeviewPatterns.Selection.GetSelected(out model, out iter)){
-                Pattern pattern = (Pattern)model.GetValue(iter, 0);
+                Pattern pattern = (Pattern)model.GetValue(iter, PatternColumn);
                 PatternListStore.Remove(ref iter);
                 Data.Patterns.Remove(pattern);
                 SelectedPattern = null;
@@ -235,7 +281,7 @@ namespace BlinkStickClient
             TreeIter iter;
 
             if((sender as TreeView).Selection.GetSelected(out model, out iter)){
-                SelectedPattern = (Pattern)model.GetValue(iter, 0);
+                SelectedPattern = (Pattern)model.GetValue(iter, PatternColumn);
             }
         }
 
