@@ -219,6 +219,7 @@ namespace BlinkStickClient
                 Pattern pattern = (Pattern)model.GetValue(iter, 0);
                 PatternListStore.Remove(ref iter);
                 Data.Patterns.Remove(pattern);
+                SelectedPattern = null;
             }
         }
 
