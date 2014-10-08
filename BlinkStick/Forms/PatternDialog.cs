@@ -212,11 +212,13 @@ namespace BlinkStickClient
 
         protected void OnDeleteActionActivated (object sender, EventArgs e)
         {
-            TreeModel modelx;
+            TreeModel model;
             TreeIter iter;
 
-            if(treeviewPatterns.Selection.GetSelected(out modelx, out iter)){
+            if(treeviewPatterns.Selection.GetSelected(out model, out iter)){
+                Pattern pattern = (Pattern)model.GetValue(iter, 0);
                 PatternListStore.Remove(ref iter);
+                Data.Patterns.Remove(pattern);
             }
         }
 
