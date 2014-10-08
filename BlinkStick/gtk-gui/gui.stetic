@@ -2001,20 +2001,20 @@ Inverse</property>
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>
     <child internal-child="VBox">
-      <widget class="Gtk.VBox" id="dialog1_VBox">
+      <widget class="Gtk.VBox" id="dialog_content">
         <property name="MemberName" />
         <property name="BorderWidth">2</property>
         <child>
-          <widget class="Gtk.HBox" id="hbox1">
+          <widget class="Gtk.HBox" id="hboxHorizontalSplit">
             <property name="MemberName" />
             <property name="Spacing">6</property>
             <child>
-              <widget class="Gtk.VBox" id="vbox3">
+              <widget class="Gtk.VBox" id="vboxLeft">
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <property name="BorderWidth">6</property>
                 <child>
-                  <widget class="BlinkStickClient.BlinkStickEmulatorWidget" id="blinkstickemulatorwidget1">
+                  <widget class="BlinkStickClient.BlinkStickEmulatorWidget" id="blinkstickemulatorwidget">
                     <property name="MemberName" />
                     <property name="Events">ButtonPressMask</property>
                   </widget>
@@ -2042,7 +2042,7 @@ Inverse</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.HBox" id="hbox3">
+                  <widget class="Gtk.HBox" id="hboxNewPatternButtons">
                     <property name="MemberName" />
                     <property name="Spacing">6</property>
                     <child>
@@ -2102,12 +2102,12 @@ Inverse</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.VBox" id="vbox4">
+              <widget class="Gtk.VBox" id="vboxRight">
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <property name="BorderWidth">6</property>
                 <child>
-                  <widget class="Gtk.HBox" id="hbox2">
+                  <widget class="Gtk.HBox" id="hboxAnimationsTitle">
                     <property name="MemberName" />
                     <property name="Spacing">6</property>
                     <child>
@@ -2158,7 +2158,7 @@ Inverse</property>
                         <property name="MemberName" />
                         <property name="ShadowType">None</property>
                         <child>
-                          <widget class="Gtk.VBox" id="vbox2">
+                          <widget class="Gtk.VBox" id="vboxAnimations">
                             <property name="MemberName" />
                             <property name="BorderWidth">6</property>
                             <child>
@@ -2181,7 +2181,7 @@ Inverse</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.HBox" id="hbox4">
+                  <widget class="Gtk.HBox" id="hboxNewAnimationButtons">
                     <property name="MemberName" />
                     <property name="Spacing">6</property>
                     <child>
@@ -2251,7 +2251,7 @@ Inverse</property>
       </widget>
     </child>
     <child internal-child="ActionArea">
-      <widget class="Gtk.HButtonBox" id="dialog1_ActionArea">
+      <widget class="Gtk.HButtonBox" id="dialog_actions">
         <property name="MemberName" />
         <property name="Spacing">10</property>
         <property name="BorderWidth">5</property>

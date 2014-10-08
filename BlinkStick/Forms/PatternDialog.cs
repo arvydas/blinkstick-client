@@ -95,7 +95,7 @@ namespace BlinkStickClient
 
         void LoadAnimations()
         {
-            foreach (Widget child in vbox2.AllChildren)
+            foreach (Widget child in vboxAnimations.AllChildren)
             {
                 child.Destroy();
             }
@@ -108,14 +108,14 @@ namespace BlinkStickClient
                 foreach (Animation animation in SelectedPattern.Animations)
                 {
                     AnimationWidget widget = CreateAnimationWidget(animation, i);
-                    vbox2.PackStart(widget, false, false, 0);
+                    vboxAnimations.PackStart(widget, false, false, 0);
 
                     i++;
                 }
 
                 ReorderAnimations();
             }
-            vbox2.Show();
+            vboxAnimations.Show();
         }
 
         private AnimationWidget CreateAnimationWidget(Animation animation, int index)
@@ -149,14 +149,14 @@ namespace BlinkStickClient
             SelectedPattern.Animations.RemoveAt(oldIndex);
             SelectedPattern.Animations.Insert(oldIndex + count, widget.AnimationObject);
 
-            vbox2.ReorderChild(widget, oldIndex + count);
+            vboxAnimations.ReorderChild(widget, oldIndex + count);
             ReorderAnimations();
         }
 
         private void ReorderAnimations()
         {
             int i = 1;
-            foreach (Widget widget in vbox2.Children)
+            foreach (Widget widget in vboxAnimations.Children)
             {
                 if (widget is AnimationWidget)
                 {
@@ -273,8 +273,8 @@ namespace BlinkStickClient
             SelectedPattern.Animations.Add(animation);
 
             AnimationWidget widget = CreateAnimationWidget(animation, SelectedPattern.Animations.Count);
-            vbox2.PackStart(widget, false, false, 0);
-            vbox2.ReorderChild(widget, SelectedPattern.Animations.Count - 1);
+            vboxAnimations.PackStart(widget, false, false, 0);
+            vboxAnimations.ReorderChild(widget, SelectedPattern.Animations.Count - 1);
             ReorderAnimations();
         }
     }
