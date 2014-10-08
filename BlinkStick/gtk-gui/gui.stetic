@@ -624,6 +624,7 @@ High</property>
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="Label" translatable="yes">Blink</property>
+                        <property name="Active">True</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>
@@ -1976,26 +1977,6 @@ Inverse</property>
     </child>
   </widget>
   <widget class="Gtk.Dialog" id="BlinkStickClient.PatternDialog" design-size="673 514">
-    <action-group name="Default">
-      <action id="newAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes" />
-        <property name="StockId">gtk-new</property>
-        <signal name="Activated" handler="OnNewActionActivated" />
-      </action>
-      <action id="deleteAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes" />
-        <property name="StockId">gtk-delete</property>
-        <signal name="Activated" handler="OnDeleteActionActivated" />
-      </action>
-      <action id="propertiesAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes" />
-        <property name="StockId">gtk-properties</property>
-        <signal name="Activated" handler="OnPropertiesActionActivated" />
-      </action>
-    </action-group>
     <property name="MemberName" />
     <property name="WindowPosition">Center</property>
     <property name="Buttons">1</property>

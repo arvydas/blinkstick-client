@@ -3,6 +3,9 @@ using Gtk;
 using Gdk;
 using BlinkStickClient.Classes;
 using BlinkStickClient.Utils;
+using System.ComponentModel;
+using System.Threading;
+using BlinkStickDotNet;
 
 namespace BlinkStickClient
 {
@@ -87,8 +90,6 @@ namespace BlinkStickClient
 
         void UpdateButtons()
         {
-            deleteAction.Sensitive = SelectedPattern != null;
-            propertiesAction.Sensitive = SelectedPattern != null;
             buttonProperties.Sensitive = SelectedPattern != null;
             buttonAddAnimation.Sensitive = SelectedPattern != null;
         }
@@ -183,30 +184,6 @@ namespace BlinkStickClient
                 (cell as Gtk.CellRendererText).Text = pattern.Name;
             }
         }
-
-        protected void OnNewActionActivated (object sender, EventArgs e)
-        {
-        }
-
-        protected void OnDeleteActionActivated (object sender, EventArgs e)
-        {
-            TreeModel model;
-            TreeIter iter;
-
-            if(treeviewPatterns.Selection.GetSelected(out model, out iter)){
-                Pattern pattern = (Pattern)model.GetValue(iter, PatternColumn);
-                PatternListStore.Remove(ref iter);
-                Data.Patterns.Remove(pattern);
-                SelectedPattern = null;
-            }
-        }
-
-
-        protected void OnPropertiesActionActivated (object sender, EventArgs e)
-        {
-            EditPatternDialog.ShowForm(SelectedPattern, Data);
-        }
-
         protected void OnTreeviewPatternsCursorChanged (object sender, EventArgs e)
         {
             TreeModel model;
@@ -227,14 +204,14 @@ namespace BlinkStickClient
                 }
                 else if (column == (sender as TreeView).Columns[0]) //Play clicked
                 {
-                    MessageBox.Show(this, "Play " + SelectedPattern.Name + "?", MessageType.Info);
+                    PlayPattern(SelectedPattern);
                 }
             }
         }
 
         protected void OnTreeviewPatternsRowActivated (object o, RowActivatedArgs args)
         {
-            OnPropertiesActionActivated(o, new EventArgs()); 
+            EditPatternDialog.ShowForm(SelectedPattern, Data);
         }
 
         protected void OnButtonPropertiesClicked (object sender, EventArgs e)
@@ -276,6 +253,59 @@ namespace BlinkStickClient
             vboxAnimations.PackStart(widget, false, false, 0);
             vboxAnimations.ReorderChild(widget, SelectedPattern.Animations.Count - 1);
             ReorderAnimations();
+        }
+
+        private void PlayPattern(Pattern pattern)
+        {
+            RgbColor color = blinkstickemulatorwidget.LedColor.ToRgbColor();
+
+            BackgroundWorker moodWorker = new BackgroundWorker();
+            moodWorker.DoWork += (object sender, DoWorkEventArgs e) => {
+                BlinkStickDotNet.BlinkStick led = new BlinkStickDotNet.BlinkStick();
+
+                byte r = color.R;
+                byte g = color.G;
+                byte b = color.B;
+
+                led.SendColor += (object o, BlinkStickDotNet.SendColorEventArgs ee) => {
+                    Gtk.Application.Invoke (delegate {
+                        blinkstickemulatorwidget.LedColor = new Color(ee.R, ee.G, ee.B);
+                    });
+
+                    r = ee.R;
+                    g = ee.G;
+                    b = ee.B;
+
+                    ee.SendToDevice = false;
+                };
+
+                led.ReceiveColor += (object o, BlinkStickDotNet.ReceiveColorEventArgs ee) => {
+                    ee.R = r;
+                    ee.B = b;
+                    ee.G = g;
+                };
+
+                foreach (Animation animation in pattern.Animations)
+                {
+                    switch (animation.AnimationType) {
+                        case AnimationTypeEnum.SetColor:
+                            led.SetColor(animation.Color);
+                            Thread.Sleep(animation.DelaySetColor);
+                            break;
+                        case AnimationTypeEnum.Blink:
+                            led.Blink(animation.Color, animation.RepeatBlink, animation.DurationBlink);
+                            break;
+                        case AnimationTypeEnum.Pulse:
+                            led.Pulse(animation.Color, animation.RepeatPulse, animation.DurationPulse);
+                            break;
+                        case AnimationTypeEnum.Morph:
+                            led.Morph(animation.Color, animation.DurationPulse);
+                            break;
+                    }
+                }
+            };
+            moodWorker.WorkerSupportsCancellation = true;
+            moodWorker.RunWorkerAsync();
         }
     }
 }
