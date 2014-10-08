@@ -24,7 +24,7 @@ namespace BlinkStickClient
 		
 		private global::Gtk.VBox vbox4;
 		
-		private global::Gtk.Label label2;
+		private global::Gtk.Label labelPattern;
 		
 		private global::Gtk.ScrolledWindow scrolledwindowAnimations;
 		
@@ -93,11 +93,11 @@ namespace BlinkStickClient
 			this.vbox4.Spacing = 6;
 			this.vbox4.BorderWidth = ((uint)(6));
 			// Container child vbox4.Gtk.Box+BoxChild
-			this.label2 = new global::Gtk.Label ();
-			this.label2.Name = "label2";
-			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Pattern");
-			this.vbox4.Add (this.label2);
-			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.label2]));
+			this.labelPattern = new global::Gtk.Label ();
+			this.labelPattern.Name = "labelPattern";
+			this.labelPattern.LabelProp = global::Mono.Unix.Catalog.GetString ("Pattern Animation");
+			this.vbox4.Add (this.labelPattern);
+			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.labelPattern]));
 			w7.Position = 0;
 			w7.Expand = false;
 			w7.Fill = false;
@@ -156,6 +156,7 @@ namespace BlinkStickClient
 			this.deleteAction.Activated += new global::System.EventHandler (this.OnDeleteActionActivated);
 			this.propertiesAction.Activated += new global::System.EventHandler (this.OnPropertiesActionActivated);
 			this.treeviewPatterns.CursorChanged += new global::System.EventHandler (this.OnTreeviewPatternsCursorChanged);
+			this.treeviewPatterns.RowActivated += new global::Gtk.RowActivatedHandler (this.OnTreeviewPatternsRowActivated);
 		}
 	}
 }

@@ -237,6 +237,11 @@ namespace BlinkStickClient
                 SelectedPattern = (Pattern)model.GetValue(iter, 0);
             }
         }
+
+        protected void OnTreeviewPatternsRowActivated (object o, RowActivatedArgs args)
+        {
+            OnPropertiesActionActivated(o, new EventArgs()); 
+        }
     }
 }
 

@@ -2016,7 +2016,7 @@ Inverse</property>
                   <widget class="Gtk.Toolbar" id="toolbar1">
                     <property name="MemberName" />
                     <property name="ShowArrow">False</property>
-                    <node name="toolbar1" type="Toolbar">
+                    <node name="__gtksharp_104_Stetic_Editor_ActionToolbar" type="Toolbar">
                       <node type="Toolitem" action="newAction" />
                       <node type="Toolitem" action="propertiesAction" />
                       <node type="Toolitem" action="deleteAction" />
@@ -2039,6 +2039,7 @@ Inverse</property>
                         <property name="CanFocus">True</property>
                         <property name="ShowScrollbars">True</property>
                         <signal name="CursorChanged" handler="OnTreeviewPatternsCursorChanged" />
+                        <signal name="RowActivated" handler="OnTreeviewPatternsRowActivated" />
                       </widget>
                     </child>
                   </widget>
@@ -2059,9 +2060,9 @@ Inverse</property>
                 <property name="Spacing">6</property>
                 <property name="BorderWidth">6</property>
                 <child>
-                  <widget class="Gtk.Label" id="label2">
+                  <widget class="Gtk.Label" id="labelPattern">
                     <property name="MemberName" />
-                    <property name="LabelProp" translatable="yes">Pattern</property>
+                    <property name="LabelProp" translatable="yes">Pattern Animation</property>
                   </widget>
                   <packing>
                     <property name="Position">0</property>
