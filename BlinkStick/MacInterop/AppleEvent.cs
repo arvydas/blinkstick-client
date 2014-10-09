@@ -219,8 +219,10 @@ namespace MonoDevelop.MacInterop
 		ProcessNonReplyEvents = 0x00008000,
 	}
 
+    #pragma warning disable 649
 	struct DescType
 	{
 		public OSType Value;
 	}
+    #pragma warning restore 649
 }
