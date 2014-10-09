@@ -112,11 +112,11 @@ UpgradeLog*.XML
 /Install/setup/*
 
 !/Components/Json.Net/Bin
-!/Components/log4net-1.2.11/*
-!/Components/log4net-1.2.11/*/*
-!/Components/log4net-1.2.11/*/*/*
-!/Components/log4net-1.2.11/*/*/*/*
-!/Components/log4net-1.2.11/*/*/*/*/*
+!/Components/log4net-1.2.13/*
+!/Components/log4net-1.2.13/*/*
+!/Components/log4net-1.2.13/*/*/*
+!/Components/log4net-1.2.13/*/*/*/*
+!/Components/log4net-1.2.13/*/*/*/*/*
 !/Components/plossum-commandline/*
 
 

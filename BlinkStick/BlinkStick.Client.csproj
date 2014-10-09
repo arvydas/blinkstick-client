@@ -58,13 +58,13 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Components\Json.Net\Bin\Net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Posix" />
-    <Reference Include="log4net">
-      <HintPath>..\Components\log4net-1.2.11\bin\mono\2.0\release\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="Mono.Cairo, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="log4net">
+      <HintPath>..\Components\log4net-1.2.13\bin\net\4.0\release\log4net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">

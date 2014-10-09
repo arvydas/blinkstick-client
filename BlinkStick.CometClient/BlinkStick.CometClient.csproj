@@ -41,7 +41,7 @@
       <HintPath>..\Components\Json.Net\Bin\Net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
-      <HintPath>..\Components\log4net-1.2.11\bin\mono\2.0\release\log4net.dll</HintPath>
+      <HintPath>..\Components\log4net-1.2.13\bin\net\4.0\release\log4net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
