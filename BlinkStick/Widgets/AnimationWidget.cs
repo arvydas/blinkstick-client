@@ -133,13 +133,13 @@ namespace BlinkStickClient
             hboxBlink.Sensitive = comboboxMode.Active == 1;
             hboxBlink.NoShowAll = !(comboboxMode.Active == 1);
 
-            hboxPulse.Visible = comboboxMode.Active == 2;
-            hboxPulse.Sensitive = comboboxMode.Active == 2;
-            hboxPulse.NoShowAll = !(comboboxMode.Active == 2);
+            hboxMorph.Visible = comboboxMode.Active == 2;
+            hboxMorph.Sensitive = comboboxMode.Active == 2;
+            hboxMorph.NoShowAll = !(comboboxMode.Active == 2);
 
-            hboxMorph.Visible = comboboxMode.Active == 3;
-            hboxMorph.Sensitive = comboboxMode.Active == 3;
-            hboxMorph.NoShowAll = !(comboboxMode.Active == 3);
+            hboxPulse.Visible = comboboxMode.Active == 3;
+            hboxPulse.Sensitive = comboboxMode.Active == 3;
+            hboxPulse.NoShowAll = !(comboboxMode.Active == 3);
 
             if (AnimationObject != null)
             {
