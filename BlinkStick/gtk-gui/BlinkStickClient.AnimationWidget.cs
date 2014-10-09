@@ -353,6 +353,12 @@ namespace BlinkStickClient
 			this.buttonUp.Clicked += new global::System.EventHandler (this.OnButtonUpClicked);
 			this.buttonDown.Clicked += new global::System.EventHandler (this.OnButtonDownClicked);
 			this.buttonDelete.Clicked += new global::System.EventHandler (this.OnButtonDeleteClicked);
+			this.spinbuttonSetColorDelay.ValueChanged += new global::System.EventHandler (this.OnSpinbuttonSetColorDelayValueChanged);
+			this.spinbuttonBlinkDelay.ValueChanged += new global::System.EventHandler (this.OnSpinbuttonBlinkDelayValueChanged);
+			this.spinbuttonBlinkRepeat.ValueChanged += new global::System.EventHandler (this.OnSpinbuttonBlinkRepeatValueChanged);
+			this.spinbuttonPulseDuration.ValueChanged += new global::System.EventHandler (this.OnSpinbuttonPulseDurationValueChanged);
+			this.spinbuttonPulseRepeat.ValueChanged += new global::System.EventHandler (this.OnSpinbuttonPulseRepeatValueChanged);
+			this.spinbuttonMorphDuration.ValueChanged += new global::System.EventHandler (this.OnSpinbuttonMorphDurationValueChanged);
 		}
 	}
 }

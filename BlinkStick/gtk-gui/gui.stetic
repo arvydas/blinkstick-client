@@ -2506,6 +2506,7 @@ Pulse</property>
                 <property name="StepIncrement">1</property>
                 <property name="ClimbRate">1</property>
                 <property name="Numeric">True</property>
+                <signal name="ValueChanged" handler="OnSpinbuttonSetColorDelayValueChanged" />
               </widget>
               <packing>
                 <property name="Position">1</property>
@@ -2551,6 +2552,7 @@ Pulse</property>
                 <property name="ClimbRate">1</property>
                 <property name="Numeric">True</property>
                 <property name="Value">10</property>
+                <signal name="ValueChanged" handler="OnSpinbuttonBlinkDelayValueChanged" />
               </widget>
               <packing>
                 <property name="Position">1</property>
@@ -2584,6 +2586,7 @@ Pulse</property>
                 <property name="ClimbRate">1</property>
                 <property name="Numeric">True</property>
                 <property name="Value">1</property>
+                <signal name="ValueChanged" handler="OnSpinbuttonBlinkRepeatValueChanged" />
               </widget>
               <packing>
                 <property name="Position">3</property>
@@ -2629,6 +2632,7 @@ Pulse</property>
                 <property name="ClimbRate">1</property>
                 <property name="Numeric">True</property>
                 <property name="Value">10</property>
+                <signal name="ValueChanged" handler="OnSpinbuttonPulseDurationValueChanged" />
               </widget>
               <packing>
                 <property name="Position">1</property>
@@ -2662,6 +2666,7 @@ Pulse</property>
                 <property name="ClimbRate">1</property>
                 <property name="Numeric">True</property>
                 <property name="Value">1</property>
+                <signal name="ValueChanged" handler="OnSpinbuttonPulseRepeatValueChanged" />
               </widget>
               <packing>
                 <property name="Position">3</property>
@@ -2707,6 +2712,7 @@ Pulse</property>
                 <property name="ClimbRate">1</property>
                 <property name="Numeric">True</property>
                 <property name="Value">10</property>
+                <signal name="ValueChanged" handler="OnSpinbuttonMorphDurationValueChanged" />
               </widget>
               <packing>
                 <property name="Position">1</property>

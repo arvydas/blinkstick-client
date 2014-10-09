@@ -30,6 +30,8 @@ namespace BlinkStickClient
             }
         }
 
+        private Boolean Loading = false;
+
         public event EventHandler DeleteAnimation;
 
         protected void OnDeleteAnimation()
@@ -165,6 +167,8 @@ namespace BlinkStickClient
 
         private void LoadAnimationObject()
         {
+            Loading = true;
+
             switch (AnimationObject.AnimationType)
             {
                 case AnimationTypeEnum.SetColor:
@@ -195,6 +199,8 @@ namespace BlinkStickClient
             buttonColor.Color = AnimationObject.GtkColor;
 
             OnComboboxModeChanged(this, null);
+
+            Loading = false;
         }
 
         protected void OnButtonDeleteClicked (object sender, EventArgs e)
@@ -214,7 +220,58 @@ namespace BlinkStickClient
 
         protected void OnButtonColorColorSet (object sender, EventArgs e)
         {
+            if (Loading)
+                return;
+
             AnimationObject.GtkColor = buttonColor.Color;
+        }
+
+        protected void OnSpinbuttonSetColorDelayValueChanged (object sender, EventArgs e)
+        {
+            if (Loading)
+                return;
+
+            AnimationObject.DelaySetColor = (sender as SpinButton).ValueAsInt;
+        }
+
+        protected void OnSpinbuttonBlinkDelayValueChanged (object sender, EventArgs e)
+        {
+            if (Loading)
+                return;
+
+            AnimationObject.DurationBlink = (sender as SpinButton).ValueAsInt;
+        }
+
+        protected void OnSpinbuttonBlinkRepeatValueChanged (object sender, EventArgs e)
+        {
+            if (Loading)
+                return;
+
+            AnimationObject.RepeatBlink = (sender as SpinButton).ValueAsInt;
+        }
+
+        protected void OnSpinbuttonPulseDurationValueChanged (object sender, EventArgs e)
+        {
+            if (Loading)
+                return;
+
+            AnimationObject.DurationPulse = (sender as SpinButton).ValueAsInt;
+        }
+
+        protected void OnSpinbuttonPulseRepeatValueChanged (object sender, EventArgs e)
+        {
+            if (Loading)
+                return;
+
+            AnimationObject.RepeatPulse = (sender as SpinButton).ValueAsInt;
+        }
+
+        protected void OnSpinbuttonMorphDurationValueChanged (object sender, EventArgs e)
+        {
+            if (Loading)
+                return;
+
+            AnimationObject.DurationMorph = (sender as SpinButton).ValueAsInt;
         }
     }
 }
