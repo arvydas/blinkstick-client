@@ -14,9 +14,10 @@ namespace BlinkStickClient
             this.Build();
         }
 
-        public static Boolean ShowForm(Pattern pattern, ApplicationDataModel data)
+        public static Boolean ShowForm(Pattern pattern, ApplicationDataModel data, string title)
         {
             EditPatternDialog form = new EditPatternDialog ();
+            form.Title = title;
             form._Data = data;
             form._Pattern = pattern;
 

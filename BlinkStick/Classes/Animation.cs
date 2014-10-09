@@ -58,6 +58,18 @@ namespace BlinkStickClient.Classes
             this.DurationMorph = 1000;
             this.ColorString = "#FFFFFF";
         }
+
+        public void Assign(Animation animation)
+        {
+            this.AnimationType = animation.AnimationType;
+            this.DelaySetColor = animation.DelaySetColor;
+            this.DurationBlink = animation.DurationBlink;
+            this.RepeatBlink = animation.RepeatBlink;
+            this.DurationPulse = animation.DurationPulse;
+            this.RepeatPulse = animation.RepeatPulse;
+            this.DurationMorph = animation.DurationMorph;
+            this.ColorString = animation.ColorString;
+        }
     }
 
     public enum AnimationTypeEnum {
