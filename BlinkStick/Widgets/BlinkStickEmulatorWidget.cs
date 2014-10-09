@@ -31,14 +31,21 @@ namespace BlinkStickClient
 
                     Alpha = hsl.Lightness;
 
-                    if (Alpha > 0.5) 
+                    if (hsl.Saturation == 0)
                     {
-                        Alpha = 1;
+                        hsl.Lightness = 1;
                     }
-                    else 
+                    else
                     {
-                        Alpha = Alpha / 0.5;
-                        hsl.Lightness = 0.5;
+                        if (Alpha > 0.5)
+                        {
+                            Alpha = 1;
+                        }
+                        else
+                        {
+                            Alpha = Alpha / 0.5;
+                            hsl.Lightness = 0.5;
+                        }
                     }
 
                     Red = hsl.Color.R / 255.0;
