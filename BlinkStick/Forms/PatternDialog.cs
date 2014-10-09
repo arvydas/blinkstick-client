@@ -338,7 +338,7 @@ namespace BlinkStickClient
                             led.Pulse(animation.Color, animation.RepeatPulse, animation.DurationPulse);
                             break;
                         case AnimationTypeEnum.Morph:
-                            led.Morph(animation.Color, animation.DurationPulse);
+                            led.Morph(animation.Color, animation.DurationMorph);
                             break;
                     }
                 }
