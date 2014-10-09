@@ -36,15 +36,15 @@ namespace BlinkStickClient
         private Pattern PlayingPattern = null;
         private BackgroundWorker PatternPlayer = null;
 
-        private DataModel _Data;
-        public DataModel Data {
+        private ApplicationDataModel _DataModel;
+        public ApplicationDataModel DataModel {
             set {
 
-                if (_Data != value)
+                if (_DataModel != value)
                 {
-                    _Data = value;
+                    _DataModel = value;
                     PatternListStore.Clear();
-                    foreach (Pattern pattern in Data.Patterns)
+                    foreach (Pattern pattern in DataModel.Patterns)
                     {
                         PatternListStore.AppendValues("gtk-media-play", pattern, "gtk-delete");
                     }
@@ -52,7 +52,7 @@ namespace BlinkStickClient
             }
 
             get {
-                return _Data;
+                return _DataModel;
             }
         }
 
@@ -173,10 +173,10 @@ namespace BlinkStickClient
             }
         }
 
-        public static void ShowForm(DataModel data)
+        public static void ShowForm(ApplicationDataModel data)
         {
             PatternDialog form = new PatternDialog ();
-            form.Data = data;
+            form.DataModel = data;
             form.Run ();
             form.StopPattern();
             form.Destroy();
@@ -205,7 +205,7 @@ namespace BlinkStickClient
                 if (column == (sender as TreeView).Columns[2]) //Delete clicked
                 {
                     PatternListStore.Remove(ref iter);
-                    Data.Patterns.Remove(SelectedPattern);
+                    DataModel.Patterns.Remove(SelectedPattern);
                     SelectedPattern = null;
                 }
                 else if (column == (sender as TreeView).Columns[0]) //Play clicked
@@ -225,23 +225,23 @@ namespace BlinkStickClient
 
         protected void OnTreeviewPatternsRowActivated (object o, RowActivatedArgs args)
         {
-            EditPatternDialog.ShowForm(SelectedPattern, Data);
+            EditPatternDialog.ShowForm(SelectedPattern, DataModel);
         }
 
         protected void OnButtonPropertiesClicked (object sender, EventArgs e)
         {
-            EditPatternDialog.ShowForm(SelectedPattern, Data);
+            EditPatternDialog.ShowForm(SelectedPattern, DataModel);
         }
 
         protected void OnButtonAddPatternClicked (object sender, EventArgs e)
         {
             Pattern pattern = new Pattern();
 
-            if (EditPatternDialog.ShowForm(pattern, Data))
+            if (EditPatternDialog.ShowForm(pattern, DataModel))
             {
                 PatternListStore.AppendValues("gtk-media-play", pattern, "gtk-delete");
                 pattern.Animations.Add(new Animation());
-                Data.Patterns.Add(pattern);
+                DataModel.Patterns.Add(pattern);
 
                 TreeIter iterator;
                 PatternListStore.GetIterFirst(out iterator);

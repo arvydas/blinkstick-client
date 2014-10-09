@@ -6,7 +6,7 @@ namespace BlinkStickClient
 {
     public partial class EditPatternDialog : Gtk.Dialog
     {
-        private DataModel _Data;
+        private ApplicationDataModel _Data;
         private Pattern _Pattern;
 
         public EditPatternDialog()
@@ -14,7 +14,7 @@ namespace BlinkStickClient
             this.Build();
         }
 
-        public static Boolean ShowForm(Pattern pattern, DataModel data)
+        public static Boolean ShowForm(Pattern pattern, ApplicationDataModel data)
         {
             EditPatternDialog form = new EditPatternDialog ();
             form._Data = data;

@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace BlinkStickClient.Classes
 {
-    public class DataModel
+    public class ApplicationDataModel
     {
         public List<Pattern> Patterns = new List<Pattern>();
 
@@ -26,7 +26,7 @@ namespace BlinkStickClient.Classes
         } 
 
 
-        public DataModel()
+        public ApplicationDataModel()
         {
             FileName = Path.Combine (DefaultSettingsFolder, "data.json");
             BackupFileName = Path.Combine (DefaultSettingsFolder, "data.~json");
@@ -51,12 +51,12 @@ namespace BlinkStickClient.Classes
             {
                 try
                 {
-                    DataModel data;
+                    ApplicationDataModel data;
 
                     JsonSerializer serializer = new JsonSerializer ();
                     serializer.TypeNameHandling = TypeNameHandling.Auto;
                     using (TextReader tr = new StreamReader(SettingsFileName)) {
-                        data = (DataModel)serializer.Deserialize(tr, this.GetType());
+                        data = (ApplicationDataModel)serializer.Deserialize(tr, this.GetType());
                         tr.Close();
                     }
 
@@ -104,7 +104,7 @@ namespace BlinkStickClient.Classes
         #endregion
 
         #region Assignment
-        public void Assign(DataModel data)
+        public void Assign(ApplicationDataModel data)
         {
             this.Patterns.Clear();
 
