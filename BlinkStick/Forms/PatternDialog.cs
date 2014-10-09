@@ -15,6 +15,8 @@ namespace BlinkStickClient
 
         const int PatternColumn = 1;
 
+        BlinkStickDotNet.BlinkStick led;
+
         public Pattern _SelectedPattern = null;
 
         public Pattern SelectedPattern {
@@ -30,6 +32,9 @@ namespace BlinkStickClient
                 }
             }
         }
+
+        private Pattern PlayingPattern = null;
+        private BackgroundWorker PatternPlayer = null;
 
         private DataModel _Data;
         public DataModel Data {
@@ -173,6 +178,7 @@ namespace BlinkStickClient
             PatternDialog form = new PatternDialog ();
             form.Data = data;
             form.Run ();
+            form.StopPattern();
             form.Destroy();
         }
 
@@ -204,7 +210,15 @@ namespace BlinkStickClient
                 }
                 else if (column == (sender as TreeView).Columns[0]) //Play clicked
                 {
-                    PlayPattern(SelectedPattern);
+                    if (SelectedPattern == PlayingPattern)
+                    {
+                        StopPattern();
+                    }
+                    else
+                    {
+                        PlayPattern(SelectedPattern);
+                        model.SetValue(iter, 0, "gtk-media-stop");
+                    }
                 }
             }
         }
@@ -255,13 +269,35 @@ namespace BlinkStickClient
             ReorderAnimations();
         }
 
+        private void StopPattern()
+        {
+            if (PatternPlayer != null)
+            {
+                led.Stop();
+                PatternPlayer.CancelAsync();
+
+                while (PatternPlayer != null && PatternPlayer.IsBusy)
+                {
+                    if (Gtk.Application.EventsPending())
+                        Gtk.Application.RunIteration();
+
+                    Thread.Sleep(1);
+                }
+            }
+        }
+
         private void PlayPattern(Pattern pattern)
         {
+            StopPattern();
+
+            PlayingPattern = pattern;
+
             RgbColor color = blinkstickemulatorwidget.LedColor.ToRgbColor();
 
-            BackgroundWorker moodWorker = new BackgroundWorker();
-            moodWorker.DoWork += (object sender, DoWorkEventArgs e) => {
-                BlinkStickDotNet.BlinkStick led = new BlinkStickDotNet.BlinkStick();
+            led = new BlinkStickDotNet.BlinkStick();
+
+            PatternPlayer = new BackgroundWorker();
+            PatternPlayer.DoWork += (object sender, DoWorkEventArgs e) => {
 
                 byte r = color.R;
                 byte g = color.G;
@@ -287,10 +323,13 @@ namespace BlinkStickClient
 
                 foreach (Animation animation in pattern.Animations)
                 {
+                    if (((BackgroundWorker)sender).CancellationPending)
+                        return;
+
                     switch (animation.AnimationType) {
                         case AnimationTypeEnum.SetColor:
                             led.SetColor(animation.Color);
-                            Thread.Sleep(animation.DelaySetColor);
+                            led.WaitThread(animation.DelaySetColor);
                             break;
                         case AnimationTypeEnum.Blink:
                             led.Blink(animation.Color, animation.RepeatBlink, animation.DurationBlink);
@@ -304,8 +343,32 @@ namespace BlinkStickClient
                     }
                 }
             };
-            moodWorker.WorkerSupportsCancellation = true;
-            moodWorker.RunWorkerAsync();
+
+            PatternPlayer.RunWorkerCompleted += (sender, e) => {
+                SetPatternIconToStop(pattern);
+                PlayingPattern = null;
+                PatternPlayer = null;
+                led = null;
+            };
+
+            PatternPlayer.WorkerSupportsCancellation = true;
+            PatternPlayer.RunWorkerAsync();
+        }
+
+        private void SetPatternIconToStop(Pattern pattern)
+        {
+            TreeIter iterator;
+            PatternListStore.GetIterFirst(out iterator);
+
+            do
+            {
+                if (pattern == (Pattern)PatternListStore.GetValue(iterator, PatternColumn))
+                {
+                    PatternListStore.SetValue(iterator, 0, "gtk-media-play");
+                    break;
+                }
+            } 
+            while (PatternListStore.IterNext(ref iterator));
         }
     }
 }
