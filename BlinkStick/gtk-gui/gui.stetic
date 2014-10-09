@@ -111,11 +111,6 @@
         <property name="ShortLabel" translatable="yes">Report a Bug</property>
         <signal name="Activated" handler="OnReportABugActionActivated" />
       </action>
-      <action id="Action">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes">-</property>
-        <property name="ShortLabel" translatable="yes">-</property>
-      </action>
       <action id="OpenLogAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Open Log</property>

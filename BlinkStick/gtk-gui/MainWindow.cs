@@ -37,8 +37,6 @@ public partial class MainWindow
 	
 	private global::Gtk.Action ReportABugAction;
 	
-	private global::Gtk.Action Action;
-	
 	private global::Gtk.Action OpenLogAction;
 	
 	private global::Gtk.Action PatternsAction;
@@ -108,9 +106,6 @@ public partial class MainWindow
 		this.ReportABugAction = new global::Gtk.Action ("ReportABugAction", global::Mono.Unix.Catalog.GetString ("Report a Bug"), null, null);
 		this.ReportABugAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Report a Bug");
 		w1.Add (this.ReportABugAction, null);
-		this.Action = new global::Gtk.Action ("Action", global::Mono.Unix.Catalog.GetString ("-"), null, null);
-		this.Action.ShortLabel = global::Mono.Unix.Catalog.GetString ("-");
-		w1.Add (this.Action, null);
 		this.OpenLogAction = new global::Gtk.Action ("OpenLogAction", global::Mono.Unix.Catalog.GetString ("Open Log"), null, null);
 		this.OpenLogAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Open Log");
 		w1.Add (this.OpenLogAction, null);
