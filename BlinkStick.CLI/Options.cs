@@ -26,10 +26,9 @@ using Plossum;
 namespace BlinkStick.CLI
 {
     [CommandLineManager(ApplicationName = "BlinkStick CLI",
-       Copyright = "Copyright (C) Agile Innovative Ltd 2013",
-       EnabledOptionStyles = OptionStyles.Group | OptionStyles.LongUnix)]
-    [CommandLineOptionGroup("commands", Name = "Commands",
-        Require = OptionGroupRequirement.ExactlyOne)]
+        Copyright = "Copyright (C) Agile Innovative Ltd 2013-2014",
+        EnabledOptionStyles = OptionStyles.Group | OptionStyles.LongUnix)]
+    [CommandLineOptionGroup("commands", Name = "Commands")]
     [CommandLineOptionGroup("options", Name = "Options")]
     class Options
     {
@@ -42,11 +41,12 @@ namespace BlinkStick.CLI
         public Boolean Help { get; set; }
 
         [CommandLineOption(Name = "set-color", 
-            Description = "Set color for device. The format must be \"#rrggbb\" or \"random\" where rr, gg, bb is any hexadecimal number from 00 to FF.", GroupId = "commands")]
+            Description = "Set color for device. The format must be \"#rrggbb\" or \"random\" where rr, gg, bb is any hexadecimal number from 00 to FF.", 
+            GroupId = "commands")]
         public String SetColor { get; set; }
 
         [CommandLineOption(Name = "set-mode", 
-            Description = "Set mode for BlinkStick, 0 - RGB LED, 1 - RGB LED inverse, 2 - WS2812.", GroupId = "commands")]
+            Description = "Set mode for BlinkStick, 0 - RGB LED, 1 - RGB LED inverse, 2 - WS2812, 3 - WS2812 mirror.", GroupId = "commands")]
         public int SetMode { get; set; }
 
         [CommandLineOption(Name = "index", 
@@ -87,8 +87,8 @@ namespace BlinkStick.CLI
 
         public Options()
         {
-            this.Index = 0;
-            this.Channel = 0;
+            this.Index = -1;
+            this.Channel = -1;
             this.SetMode = -1;
         }
     }
