@@ -8,7 +8,7 @@
     <ProjectGuid>{F23663AF-0EC4-4719-8040-3F1DDD516BCE}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>BlinkStick.CLI</RootNamespace>
-    <AssemblyName>BlinkStick.CLI</AssemblyName>
+    <AssemblyName>blinkstick</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,7 +20,7 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <Externalconsole>true</Externalconsole>
-    <Commandlineparameters> -d BS000015-1.0 --set-info-block1=abcdefgh</Commandlineparameters>
+    <Commandlineparameters>--set-mode 2</Commandlineparameters>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>none</DebugType>
@@ -56,4 +56,18 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <ProjectReference Include="..\Components\BlinkStickDotNet\BlinkStickDotNet\BlinkStickDotNet.csproj">
+      <Project>{7AAEBEBE-E38D-47B1-A04C-A055DCEB0757}</Project>
+      <Name>BlinkStickDotNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Components\BlinkStickDotNet\Components\HidSharp\HidSharp.csproj">
+      <Project>{0DB86674-2A7B-4BDC-93C1-3F7DC771426C}</Project>
+      <Name>HidSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Components\BlinkStickDotNet\Components\LibWinUsb\LibUsbDotNet.csproj">
+      <Project>{0A78F6FF-5586-4052-8104-E23FF83A7CE1}</Project>
+      <Name>LibUsbDotNet</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
