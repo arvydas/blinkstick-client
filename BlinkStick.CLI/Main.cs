@@ -18,7 +18,7 @@
 
 using System;
 using System.Collections.Generic;
-using BlinkStick.Hid;
+using BlinkStickDotNet;
 using Plossum.CommandLine;
 
 namespace BlinkStick.CLI
@@ -46,10 +46,18 @@ namespace BlinkStick.CLI
                 return -1;
             }
 
-            //find devices
-            List<BlinkstickHid> Devices = new List<BlinkstickHid>();
+            if (parser.RemainingArguments.Count > 0)
+            {
+                if (options.SetColor == null)
+                {
+                    options.SetColor = parser.RemainingArguments[0];
+                }
+            }
 
-            foreach (BlinkstickHid device in BlinkstickHid.AllDevices())
+            //find devices
+            List<BlinkStickDotNet.BlinkStick> Devices = new List<BlinkStickDotNet.BlinkStick>();
+
+            foreach (BlinkStickDotNet.BlinkStick device in BlinkStickDotNet.BlinkStick.FindAll())
             {
                 if (options.Device == null || device.Serial == options.Device || device.Serial == "first")
                 {
@@ -73,7 +81,7 @@ namespace BlinkStick.CLI
                 return -1;
             }
 
-			foreach (BlinkstickHid device in Devices)
+            foreach (BlinkStickDotNet.BlinkStick device in Devices)
             {
                 if (device.OpenDevice ()) {
 					Console.WriteLine (String.Format ("Device {0} opened successfully", device.Serial));
@@ -90,13 +98,40 @@ namespace BlinkStick.CLI
                         if (options.SetColor == "random")
                         {
                             Random r = new Random();
-                            device.SetLedColor((byte)options.Channel, (byte)options.Index, (byte)r.Next(256), (byte)r.Next(256), (byte)r.Next(256));
+                            if (options.Channel == -1 && options.Index == -1)
+                            {
+                                device.SetColor((byte)r.Next(256), (byte)r.Next(256), (byte)r.Next(256));
+                            }
+                            else
+                            {
+                                if (options.Channel == -1)
+                                    options.Channel = 0;
+
+                                if (options.Index == -1)
+                                    options.Index = 0;
+
+                                device.SetColor((byte)options.Channel, (byte)options.Index, (byte)r.Next(256), (byte)r.Next(256), (byte)r.Next(256));
+                            }
                         }
                         else
                         {
                             try
                             {
-                                device.SetLedColor((byte)options.Channel, (byte)options.Index, options.SetColor);
+                                if (options.Channel == -1 && options.Index == -1)
+                                {
+                                    device.SetColor(options.SetColor);
+                                }
+                                else
+                                {
+                                    if (options.Channel == -1)
+                                        options.Channel = 0;
+
+                                    if (options.Index == -1)
+                                        options.Index = 0;
+
+                                    device.SetColor((byte)options.Channel, (byte)options.Index, options.SetColor);
+                                }
+
                             }
                             catch (Exception e)
                             {
@@ -107,7 +142,7 @@ namespace BlinkStick.CLI
                     }
                     else if (options.SetMode != -1)
                     {
-                        device.SetLedMode((byte)options.SetMode);
+                        device.SetMode((byte)options.SetMode);
                     }
                     else if (options.GetLedData)
                     {
@@ -123,13 +158,13 @@ namespace BlinkStick.CLI
                     }
                     else if (options.SetInfoBlock1 != null)
                     {
-                        device.SetInfoBlock(2, options.SetInfoBlock1);
+                        device.InfoBlock1 = options.SetInfoBlock1;
                         Console.WriteLine("    Info block 1 updated");
                         PrintDeviceInfoBlock(device, 2);
                     }
                     else if (options.SetInfoBlock2 != null)
                     {
-                        device.SetInfoBlock(3, options.SetInfoBlock2);
+                        device.InfoBlock2 = options.SetInfoBlock2;
                         Console.WriteLine("    Info block 2 updated");
                         PrintDeviceInfoBlock(device, 3);
                     }
@@ -148,13 +183,13 @@ namespace BlinkStick.CLI
             	return 0;
 		}
 
-        public static void PrintDeviceInfo(BlinkstickHid device, Boolean colorOnly)
+        public static void PrintDeviceInfo(BlinkStickDotNet.BlinkStick device, Boolean colorOnly)
         {
             byte cr;
             byte cg;
             byte cb;
 
-            device.GetLedColor(out cr, out cg, out cb);
+            device.GetColor(out cr, out cg, out cb);
 
             Console.WriteLine (String.Format ("    Device color: #{0:X2}{1:X2}{2:X2}", cr, cg, cb));
 
@@ -164,29 +199,29 @@ namespace BlinkStick.CLI
             Console.WriteLine ("    Serial:       " + device.Serial);
             Console.WriteLine ("    Manufacturer: " + device.ManufacturerName);
             Console.WriteLine ("    Product Name: " + device.ProductName);
-			PrintDeviceInfoBlock(device, 3);
+            Console.WriteLine ("    Mode:         " + device.GetMode());
+            PrintDeviceInfoBlock(device, 3);
         }
 
-        public static void PrintDeviceInfoBlock(BlinkstickHid device, byte blockId)
+        public static void PrintDeviceInfoBlock(BlinkStickDotNet.BlinkStick device, byte blockId)
         {
             Console.Write (String.Format("    Info block{0}: ", blockId - 1));
 
-            string deviceInfoBlock;
-            if (device.GetInfoBlock(blockId, out deviceInfoBlock))
+            if (blockId == 2)
             {
-                Console.WriteLine (deviceInfoBlock);
+                Console.WriteLine(device.InfoBlock1);
             }
             else
             {
-                Console.WriteLine ("FAILED");
+                Console.WriteLine(device.InfoBlock2);
             }
         }
 
 
-        public static void PrintDeviceLedData(BlinkstickHid device)
+        public static void PrintDeviceLedData(BlinkStickDotNet.BlinkStick device)
         {
             byte[] data;
-            if (device.GetLedData(out data))
+            if (device.GetColors(out data))
             {
                 for (int j = 0; j < 8; j++)
                 {
