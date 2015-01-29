@@ -8,7 +8,7 @@
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <widget-library name="../bin/Debug/BlinkStickClient.exe" internal="true" />
   </import>
-  <widget class="Gtk.Window" id="MainWindow" design-size="776 624">
+  <widget class="Gtk.Window" id="MainWindow" design-size="776 463">
     <action-group name="Default">
       <action id="newAction">
         <property name="Type">Action</property>
@@ -123,6 +123,20 @@
         <property name="ShortLabel" translatable="yes">Patterns...</property>
         <signal name="Activated" handler="OnPatternsActionActivated" />
       </action>
+      <action id="addAction">
+        <property name="Type">Toggle</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-add</property>
+        <property name="DrawAsRadio">False</property>
+        <property name="Active">False</property>
+      </action>
+      <action id="networkAction">
+        <property name="Type">Toggle</property>
+        <property name="Label" translatable="yes" />
+        <property name="StockId">gtk-network</property>
+        <property name="DrawAsRadio">False</property>
+        <property name="Active">False</property>
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">BlinkStick</property>
@@ -202,6 +216,38 @@
               </widget>
               <packing>
                 <property name="Position">1</property>
+                <property name="AutoSize">True</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.HBox" id="hbox1">
+                <property name="MemberName" />
+                <property name="Spacing">6</property>
+                <child>
+                  <widget class="Gtk.Toolbar" id="toolbar2">
+                    <property name="MemberName" />
+                    <property name="Orientation">Vertical</property>
+                    <property name="ShowArrow">False</property>
+                    <property name="ButtonStyle">Both</property>
+                    <property name="IconSize">LargeToolbar</property>
+                    <node name="__gtksharp_129_Stetic_Editor_ActionToolbar" type="Toolbar">
+                      <node type="Toolitem" action="addAction" />
+                      <node type="Toolitem" action="networkAction" />
+                    </node>
+                  </widget>
+                  <packing>
+                    <property name="Position">0</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <placeholder />
+                </child>
+              </widget>
+              <packing>
+                <property name="Position">2</property>
                 <property name="AutoSize">True</property>
               </packing>
             </child>

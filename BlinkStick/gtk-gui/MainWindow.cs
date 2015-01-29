@@ -41,6 +41,10 @@ public partial class MainWindow
 	
 	private global::Gtk.Action PatternsAction;
 	
+	private global::Gtk.ToggleAction addAction;
+	
+	private global::Gtk.ToggleAction networkAction;
+	
 	private global::Gtk.VBox vbox2;
 	
 	private global::Gtk.MenuBar menubar2;
@@ -52,6 +56,10 @@ public partial class MainWindow
 	private global::Gtk.ScrolledWindow GtkScrolledWindow;
 	
 	private global::Gtk.TreeView treeviewEvents;
+	
+	private global::Gtk.HBox hbox1;
+	
+	private global::Gtk.Toolbar toolbar2;
 	
 	private global::Gtk.Statusbar statusbar1;
 
@@ -112,6 +120,10 @@ public partial class MainWindow
 		this.PatternsAction = new global::Gtk.Action ("PatternsAction", global::Mono.Unix.Catalog.GetString ("Patterns..."), null, null);
 		this.PatternsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Patterns...");
 		w1.Add (this.PatternsAction, null);
+		this.addAction = new global::Gtk.ToggleAction ("addAction", null, null, "gtk-add");
+		w1.Add (this.addAction, null);
+		this.networkAction = new global::Gtk.ToggleAction ("networkAction", null, null, "gtk-network");
+		w1.Add (this.networkAction, null);
 		this.UIManager.InsertActionGroup (w1, 0);
 		this.AddAccelGroup (this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -158,24 +170,45 @@ public partial class MainWindow
 		this.vbox3.Add (this.GtkScrolledWindow);
 		global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.GtkScrolledWindow]));
 		w5.Position = 1;
+		// Container child vbox3.Gtk.Box+BoxChild
+		this.hbox1 = new global::Gtk.HBox ();
+		this.hbox1.Name = "hbox1";
+		this.hbox1.Spacing = 6;
+		// Container child hbox1.Gtk.Box+BoxChild
+		this.UIManager.AddUiFromString ("<ui><toolbar name=\'toolbar2\'><toolitem name=\'addAction\' action=\'addAction\'/><tool" +
+		"item name=\'networkAction\' action=\'networkAction\'/></toolbar></ui>");
+		this.toolbar2 = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/toolbar2")));
+		this.toolbar2.Name = "toolbar2";
+		this.toolbar2.Orientation = ((global::Gtk.Orientation)(1));
+		this.toolbar2.ShowArrow = false;
+		this.toolbar2.ToolbarStyle = ((global::Gtk.ToolbarStyle)(2));
+		this.toolbar2.IconSize = ((global::Gtk.IconSize)(3));
+		this.hbox1.Add (this.toolbar2);
+		global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.toolbar2]));
+		w6.Position = 0;
+		w6.Expand = false;
+		w6.Fill = false;
+		this.vbox3.Add (this.hbox1);
+		global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.hbox1]));
+		w7.Position = 2;
 		this.vbox2.Add (this.vbox3);
-		global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.vbox3]));
-		w6.Position = 1;
+		global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.vbox3]));
+		w8.Position = 1;
 		// Container child vbox2.Gtk.Box+BoxChild
 		this.statusbar1 = new global::Gtk.Statusbar ();
 		this.statusbar1.Name = "statusbar1";
 		this.statusbar1.Spacing = 6;
 		this.vbox2.Add (this.statusbar1);
-		global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.statusbar1]));
-		w7.Position = 2;
-		w7.Expand = false;
-		w7.Fill = false;
+		global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.statusbar1]));
+		w9.Position = 2;
+		w9.Expand = false;
+		w9.Fill = false;
 		this.Add (this.vbox2);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
 		}
 		this.DefaultWidth = 776;
-		this.DefaultHeight = 624;
+		this.DefaultHeight = 463;
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		this.newAction.Activated += new global::System.EventHandler (this.OnNewActionActivated);
