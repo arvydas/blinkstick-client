@@ -112,9 +112,6 @@ Global
 		{F23663AF-0EC4-4719-8040-3F1DDD516BCE}.Release|x86.ActiveCfg = Release|x86
 		{F23663AF-0EC4-4719-8040-3F1DDD516BCE}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = BlinkStick\BlinkStick.Client.csproj
-	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection

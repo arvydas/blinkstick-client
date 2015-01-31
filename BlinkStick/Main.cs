@@ -79,6 +79,7 @@ namespace BlinkStickClient
             #endif
 
 			Application.Init ();
+            //Gtk.Rc.Parse(Path.Combine(MainWindow.ExecutableFolder, "Theme", "gtkrc")); 
 			MainWindow win = new MainWindow ();
 			win.Show ();
 			Application.Run ();

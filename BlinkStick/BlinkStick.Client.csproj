@@ -135,6 +135,16 @@
     <Compile Include="gtk-gui\BlinkStickClient.BlinkStickEmulatorWidget.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />
     <Compile Include="Classes\ApplicationDataModel.cs" />
+    <Compile Include="Widgets\BlinkStickTestWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.BlinkStickTestWidget.cs" />
+    <Compile Include="Widgets\BlinkStickInfoWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.BlinkStickInfoWidget.cs" />
+    <Compile Include="Widgets\OverviewWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.OverviewWidget.cs" />
+    <Compile Include="Widgets\PatternEditorWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.PatternEditorWidget.cs" />
+    <Compile Include="Widgets\ColorPaletteWidget.cs" />
+    <Compile Include="Classes\ExtensionMethods.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

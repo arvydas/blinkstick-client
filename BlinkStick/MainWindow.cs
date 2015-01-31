@@ -70,8 +70,8 @@ public partial class MainWindow: Gtk.Window
 		}
 	}
 
-	private String _ExecutableFolder = "";
-	private String ExecutableFolder {
+	private static String _ExecutableFolder = "";
+    public static String ExecutableFolder {
 		get {
 			if (_ExecutableFolder == "")
 				_ExecutableFolder = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
@@ -272,6 +272,16 @@ public partial class MainWindow: Gtk.Window
 
         }
 
+        notebookPages.ShowTabs = false;
+        notebookPages.CurrentPage = 0;
+        /*
+        Gdk.Color c = new Color();
+        Gdk.Color.Parse("transparent", ref c);
+        notebookPages.ModifyBg(StateType.Normal, c);
+        */
+
+        patternEditorWidget.DataModel = this.DataModel;
+
 		log.Debug("Initialization done");
 	}
 
@@ -420,18 +430,6 @@ public partial class MainWindow: Gtk.Window
 		Manager.Save();
 	}
 
-	protected void OnTestActionActivated (object sender, EventArgs e)
-	{
-		testForm = new BlinkStickTestForm ();
-		testForm.Manager = this.Manager;
-		testForm.PopulateForm();
-		testForm.Run ();
-		testForm.Destroy();
-		testForm = null;
-
-		//BlinkStickTestForm.ShowForm(Manager);
-	}
-
 	protected void OnCopyActionActivated (object sender, EventArgs e)
 	{
 		CustomNotification ev = SelectedNotification.Copy();
@@ -548,7 +546,37 @@ public partial class MainWindow: Gtk.Window
     {
         PatternDialog.ShowForm(DataModel);
     }
-	#endregion
+
+    protected void OnTestActionActivated (object sender, EventArgs e)
+    {
+        testForm = new BlinkStickTestForm ();
+        testForm.Manager = this.Manager;
+        testForm.PopulateForm();
+        testForm.Run ();
+        testForm.Destroy();
+        testForm = null;
+    }
+
+    private void UpdateToolbarButtons()
+    {
+        int index = -1;
+
+        foreach (Widget button in toolbar2.AllChildren)
+        {
+            index++;
+
+            if (button is RadioToolButton)
+            {
+                (button as RadioToolButton).Active = index == notebookPages.CurrentPage;
+            }
+        }
+    }
+
+    protected void ToolbarButtonToggled (object sender, EventArgs e)
+    {
+        notebookPages.CurrentPage = (sender as RadioAction).Value;
+    }
+    #endregion
 
 }
 
