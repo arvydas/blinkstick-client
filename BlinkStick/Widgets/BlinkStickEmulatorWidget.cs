@@ -64,7 +64,8 @@ namespace BlinkStickClient
             LedColor = new Gdk.Color(0, 0, 0);
 
             drawingareaMain.ExposeEvent += HandleExposeEvent;
-            display = new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "BlinkStick.png"));
+            //display = new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "BlinkStick.png"));
+            display = Gdk.Pixbuf.LoadFromResource("BlinkStickClient.blinkstick.png");
         }
 
         void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)

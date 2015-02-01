@@ -70,6 +70,8 @@
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="blinkstick.svg" />
+    <EmbeddedResource Include="blinkstick.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -131,7 +133,6 @@
     <Compile Include="Widgets\AnimationWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.AnimationWidget.cs" />
     <Compile Include="Classes\Animation.cs" />
-    <Compile Include="Widgets\BlinkStickEmulatorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.BlinkStickEmulatorWidget.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />
     <Compile Include="Classes\ApplicationDataModel.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="gtk-gui\BlinkStickClient.NotificationsWidget.cs" />
     <Compile Include="Widgets\HelpWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.HelpWidget.cs" />
+    <Compile Include="Widgets\BlinkStickEmulatorWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
@@ -187,12 +189,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="App.config" />
-    <None Include="blinkstick.svg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="blinkstick.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
