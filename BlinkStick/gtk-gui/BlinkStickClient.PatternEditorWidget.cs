@@ -8,7 +8,7 @@ namespace BlinkStickClient
 		
 		private global::Gtk.VBox vboxLeft;
 		
-		private global::BlinkStickClient.BlinkStickEmulatorWidget blinkstickemulatorwidget;
+		private global::BlinkStickClient.BlinkStickEmulatorWidget blinkstickemulatorwidget1;
 		
 		private global::Gtk.ScrolledWindow GtkScrolledWindow;
 		
@@ -58,11 +58,11 @@ namespace BlinkStickClient
 			this.vboxLeft.Spacing = 6;
 			this.vboxLeft.BorderWidth = ((uint)(6));
 			// Container child vboxLeft.Gtk.Box+BoxChild
-			this.blinkstickemulatorwidget = new global::BlinkStickClient.BlinkStickEmulatorWidget ();
-			this.blinkstickemulatorwidget.Events = ((global::Gdk.EventMask)(256));
-			this.blinkstickemulatorwidget.Name = "blinkstickemulatorwidget";
-			this.vboxLeft.Add (this.blinkstickemulatorwidget);
-			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.vboxLeft [this.blinkstickemulatorwidget]));
+			this.blinkstickemulatorwidget1 = new global::BlinkStickClient.BlinkStickEmulatorWidget ();
+			this.blinkstickemulatorwidget1.Events = ((global::Gdk.EventMask)(256));
+			this.blinkstickemulatorwidget1.Name = "blinkstickemulatorwidget1";
+			this.vboxLeft.Add (this.blinkstickemulatorwidget1);
+			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.vboxLeft [this.blinkstickemulatorwidget1]));
 			w1.Position = 0;
 			// Container child vboxLeft.Gtk.Box+BoxChild
 			this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();

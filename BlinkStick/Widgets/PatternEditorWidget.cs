@@ -318,7 +318,7 @@ namespace BlinkStickClient
 
             PlayingPattern = pattern;
 
-            RgbColor color = blinkstickemulatorwidget.LedColor.ToRgbColor();
+            RgbColor color = blinkstickemulatorwidget1.LedColor.ToRgbColor();
 
             led = new BlinkStickDotNet.BlinkStick();
 
@@ -331,7 +331,7 @@ namespace BlinkStickClient
 
                 led.SendColor += (object o, BlinkStickDotNet.SendColorEventArgs ee) => {
                     Gtk.Application.Invoke (delegate {
-                        blinkstickemulatorwidget.LedColor = new Color(ee.R, ee.G, ee.B);
+                        blinkstickemulatorwidget1.LedColor = new Color(ee.R, ee.G, ee.B);
                     });
 
                     r = ee.R;

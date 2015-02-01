@@ -18,6 +18,7 @@
 
 using System;
 using System.IO;
+using System.Collections.Generic;
 using BlinkStick;
 using Gdk;
 using Gtk;
@@ -38,12 +39,32 @@ public partial class MainWindow: Gtk.Window
 	private static BlinkStickClient.Utils.Event instanceExistsEvent;
     public BlinkStickClient.Utils.EventSignalledHandler eventSignalled;
 
-	Gtk.ListStore EventListStore = new ListStore(typeof(CustomNotification));
-
     ApplicationDataModel DataModel = new ApplicationDataModel();
 
 	NotificationManager Manager;
-	Boolean IgnoreActivation = false;
+
+    List<Widget> Pages = new List<Widget>();
+    Widget _VisiblePage;
+    Widget VisiblePage {
+        get{
+            return _VisiblePage;
+        }
+        set {
+            if (_VisiblePage != value)
+            {
+                if (_VisiblePage != null)
+                    _VisiblePage.HideAll();
+
+                _VisiblePage = value;
+
+                if (_VisiblePage != null)
+                    _VisiblePage.ShowAll();
+            }
+        }
+    }
+
+    OverviewWidget overviewWidget;
+    NotificationsWidget notificationsWidget;
 
 	private Boolean ApplicationIsClosing = false;
 #if LINUX
@@ -55,21 +76,6 @@ public partial class MainWindow: Gtk.Window
 	BlinkStickTestForm testForm;
 
 	private Menu popupMenu;
-	public CustomNotification _SelectedNotification = null;
-
-	public CustomNotification SelectedNotification {
-		get {
-			return _SelectedNotification;
-		}
-		set {
-			if (_SelectedNotification != value)
-			{
-				_SelectedNotification = value;
-				UpdateButtons();
-			}
-		}
-	}
-
 	private static String _ExecutableFolder = "";
     public static String ExecutableFolder {
 		get {
@@ -124,43 +130,9 @@ public partial class MainWindow: Gtk.Window
 
 		log.Debug("Setting up controls");
 
-		Gtk.TreeViewColumn eventTitleColumn = new Gtk.TreeViewColumn ();
-		eventTitleColumn.Title = "Name";
-
-		Gtk.TreeViewColumn eventTypeColumn = new Gtk.TreeViewColumn ();
-		eventTypeColumn.Title = "Type";
-
-		Gtk.TreeViewColumn eventColorColumn = new Gtk.TreeViewColumn ();
-		eventColorColumn.Title = "Color";
-
-		// Create the text cell that will display the artist name
-		Gtk.CellRendererText eventTitleCell = new Gtk.CellRendererText ();
-		Gtk.CellRendererText eventTypeCell = new Gtk.CellRendererText ();
-		Gtk.CellRendererPixbuf eventColorCell = new Gtk.CellRendererPixbuf ();
 
 		log.Debug ("Loading main form icon");
 		this.Icon = new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "icon.png"));
-			 
-		log.Debug( "Setting up treeview");
-		// Add the cell to the column
-		eventColorColumn.PackStart (eventColorCell, false);
-		eventTypeColumn.PackEnd (eventTypeCell, true);
-		eventTitleColumn.PackEnd (eventTitleCell, true);
-	 
-		// Tell the Cell Renderers which items in the model to display
-		//eventTitleColumn.AddAttribute (eventTitleCell, "name", 0);
-		eventTitleColumn.SetCellDataFunc (eventTitleCell, new Gtk.TreeCellDataFunc (RenderEventName));
-		eventTypeColumn.SetCellDataFunc (eventTypeCell, new Gtk.TreeCellDataFunc (RenderEventType));
-		eventColorColumn.SetCellDataFunc (eventColorCell, new Gtk.TreeCellDataFunc (RenderEventColor));
-
-		treeviewEvents.Model = EventListStore;
-
-		treeviewEvents.AppendColumn (eventColorColumn);
-		treeviewEvents.AppendColumn (eventTypeColumn);
-		treeviewEvents.AppendColumn (eventTitleColumn);
-
-		log.Debug("Updating buttons");
-		UpdateButtons ();
 
 		log.Debug("Setting up notification manager");
 		Manager = new NotificationManager ();
@@ -181,12 +153,6 @@ public partial class MainWindow: Gtk.Window
 		};
 		DeviceMonitor.Start ();
 
-		log.Debug("Adding notifications to the tree");
-		//Gtk.TreeIter customEventRoot = EventListStore.AppendValues(new TriggeredEvent("Custom"));
-		foreach (CustomNotification e in Manager.Notifications) {
-			//EventListStore.AppendValues(customEventRoot, e);
-			EventListStore.AppendValues (e);
-		}
 
 		log.Debug("Starting notification manager");
 		Manager.Start ();
@@ -272,15 +238,29 @@ public partial class MainWindow: Gtk.Window
 
         }
 
-        notebookPages.ShowTabs = false;
-        notebookPages.CurrentPage = 0;
-        /*
-        Gdk.Color c = new Color();
-        Gdk.Color.Parse("transparent", ref c);
-        notebookPages.ModifyBg(StateType.Normal, c);
-        */
+        overviewWidget = new OverviewWidget();
+        hbox1.PackEnd(overviewWidget, true, true, 0);
+        Pages.Add(overviewWidget);
+        VisiblePage = overviewWidget;
 
+        notificationsWidget = new NotificationsWidget();
+        notificationsWidget.Manager = this.Manager;
+        notificationsWidget.Initialize();
+        hbox1.PackEnd(notificationsWidget, true, true, 0);
+        Pages.Add(notificationsWidget);
+
+        PatternEditorWidget patternEditorWidget = new PatternEditorWidget();
         patternEditorWidget.DataModel = this.DataModel;
+        hbox1.PackEnd(patternEditorWidget, true, true, 0);
+        Pages.Add(patternEditorWidget);
+
+        BlinkStickTestWidget blinkstickTestWidget = new BlinkStickTestWidget();
+        hbox1.PackEnd(blinkstickTestWidget, true, true, 0);
+        Pages.Add(blinkstickTestWidget);
+
+        HelpWidget helpWidget = new HelpWidget();
+        hbox1.PackEnd(helpWidget, true, true, 0);
+        Pages.Add(helpWidget);
 
 		log.Debug("Initialization done");
 	}
@@ -293,44 +273,8 @@ public partial class MainWindow: Gtk.Window
 	void HandleNotificationUpdated (object sender, NotificationManager.NotificationUpdatedEventArgs e)
 	{
 		Gtk.Application.Invoke (delegate {
-			TreeIter iter;
-			Boolean searchMore = EventListStore.GetIterFirst(out iter);
-			while (searchMore)
-			{
-				if (EventListStore.GetValue(iter, 0) == e.Notification)
-				{
-					EventListStore.EmitRowChanged(EventListStore.GetPath(iter), iter);
-				}
-
-				searchMore = EventListStore.IterNext(ref iter);
-			}
+            notificationsWidget.NotificationUpdated(e.Notification);
 		});
-	}
-
-	private void RenderEventName (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
-	{
-		if (model.GetValue (iter, 0) is CustomNotification) {
-			CustomNotification tevent = (CustomNotification)model.GetValue (iter, 0);
-			(cell as Gtk.CellRendererText).Text = tevent.Name;
-		}
-	}
-
-	private void RenderEventType (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
-	{
-		if (model.GetValue (iter, 0) is CustomNotification) {
-			CustomNotification tevent = (CustomNotification)model.GetValue (iter, 0);
-			(cell as Gtk.CellRendererText).Text = tevent.GetTypeName();
-		}
-	}
-
-	private void RenderEventColor (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
-	{
-		if (model.GetValue (iter, 0) is CustomNotification) {
-			CustomNotification tevent = (CustomNotification)model.GetValue (iter, 0);
-			Gdk.Pixbuf pb = new Gdk.Pixbuf (Gdk.Colorspace.Rgb, false, 8, 16, 16);
-			pb.Fill ((uint)(0xff + tevent.Color.R * 0x1000000 + tevent.Color.G * 0x10000 + tevent.Color.B * 0x100));
-            (cell as Gtk.CellRendererPixbuf).Pixbuf = pb;
-		}
 	}
 
 	private void DestroyEnvironment ()
@@ -367,97 +311,11 @@ public partial class MainWindow: Gtk.Window
 		this.Hide();
 	}
 
-	protected void OnTreeviewEventsRowActivated (object o, RowActivatedArgs args)
-	{
-		EditNotificationForm.ShowForm(SelectedNotification, Manager);
-	}
-
-	private void UpdateButtons()
-	{
-		editAction.Sensitive = SelectedNotification != null;
-		deleteAction.Sensitive = SelectedNotification != null;
-		//checkAction.Sensitive = SelectedNotification != null;
-		copyAction.Sensitive = SelectedNotification != null;
-		activeAction.Sensitive = SelectedNotification != null;
-		IgnoreActivation = true;
-		activeAction.Active = SelectedNotification != null && SelectedNotification.Active;
-		IgnoreActivation = false;
-	}
-
-	protected void OnTreeviewEventsCursorChanged (object sender, EventArgs e)
-	{
-		TreeModel model;
-		TreeIter iter;
-
-		TreeSelection selection = (sender as TreeView).Selection;
-
-		if(selection.GetSelected(out model, out iter)){
-			SelectedNotification = (CustomNotification)model.GetValue (iter, 0);
-		}
-	}
-
-	protected void OnNewActionActivated (object sender, EventArgs e)
-	{
-		CustomNotification newEvent = SelectNotificationTypeForm.ShowForm();
-
-		if (newEvent != null && EditNotificationForm.ShowForm(newEvent, Manager))
-		{
-			EventListStore.AppendValues(newEvent);
-			Manager.AddNotification (newEvent);
-			newEvent.InitializeServices();
-			Manager.Save();
-		}
-	}
-
-	protected void OnDeleteActionActivated (object sender, EventArgs e)
-	{
-		TreeModel modelx;
-		TreeIter iter;
-
-		TreeSelection selection = treeviewEvents.Selection;
-
-		if(selection.GetSelected(out modelx, out iter)){
-			SelectedNotification.FinalizeServices();
-			Manager.RemoveNotification(SelectedNotification);
-			EventListStore.Remove(ref iter);
-			Manager.Save();
-		}
-	}
-
-	protected void OnEditActionActivated (object sender, EventArgs e)
-	{
-		EditNotificationForm.ShowForm(SelectedNotification, Manager);
-		Manager.Save();
-	}
-
-	protected void OnCopyActionActivated (object sender, EventArgs e)
-	{
-		CustomNotification ev = SelectedNotification.Copy();
-		if (EditNotificationForm.ShowForm(ev, Manager))
-		{
-			EventListStore.AppendValues(ev);
-			Manager.AddNotification (ev);
-			ev.InitializeServices();
-		}
-	}
-
-	protected void OnActiveActionToggled (object sender, EventArgs e)
-	{
-		if (IgnoreActivation)
-			return;
-
-		SelectedNotification.Active = activeAction.Active;
-	}
 	protected void OnQuitActionActivated (object sender, EventArgs e)
 	{
 		ApplicationIsClosing = true;
 		DestroyEnvironment();
         Gtk.Application.Quit ();
-	}
-
-	protected void OnCheckActionChanged (object o, ChangedArgs args)
-	{
-		SelectedNotification.Check ();
 	}
 
 	protected void OnManageActionActivated (object sender, EventArgs e)
@@ -557,24 +415,9 @@ public partial class MainWindow: Gtk.Window
         testForm = null;
     }
 
-    private void UpdateToolbarButtons()
-    {
-        int index = -1;
-
-        foreach (Widget button in toolbar2.AllChildren)
-        {
-            index++;
-
-            if (button is RadioToolButton)
-            {
-                (button as RadioToolButton).Active = index == notebookPages.CurrentPage;
-            }
-        }
-    }
-
     protected void ToolbarButtonToggled (object sender, EventArgs e)
     {
-        notebookPages.CurrentPage = (sender as RadioAction).Value;
+        VisiblePage = Pages[(sender as RadioAction).Value];
     }
     #endregion
 

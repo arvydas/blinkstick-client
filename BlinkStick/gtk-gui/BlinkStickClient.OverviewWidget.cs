@@ -152,9 +152,7 @@ namespace BlinkStickClient
 			w8.Expand = false;
 			w8.Fill = false;
 			// Container child hboxMain.Gtk.Box+BoxChild
-			this.blinkstickinfowidget2 = new global::BlinkStickClient.BlinkStickInfoWidget ();
-			this.blinkstickinfowidget2.Events = ((global::Gdk.EventMask)(256));
-			this.blinkstickinfowidget2.Name = "blinkstickinfowidget2";
+			this.blinkstickinfowidget2 = null;
 			this.hboxMain.Add (this.blinkstickinfowidget2);
 			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.hboxMain [this.blinkstickinfowidget2]));
 			w9.Position = 1;

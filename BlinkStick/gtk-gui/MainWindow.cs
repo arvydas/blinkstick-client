@@ -5,17 +5,7 @@ public partial class MainWindow
 {
 	private global::Gtk.UIManager UIManager;
 	
-	private global::Gtk.Action newAction;
-	
-	private global::Gtk.Action editAction;
-	
-	private global::Gtk.Action deleteAction;
-	
 	private global::Gtk.RadioAction saveAction;
-	
-	private global::Gtk.Action copyAction;
-	
-	private global::Gtk.ToggleAction activeAction;
 	
 	private global::Gtk.Action FileAction;
 	
@@ -61,32 +51,6 @@ public partial class MainWindow
 	
 	private global::Gtk.Toolbar toolbar2;
 	
-	private global::Gtk.Notebook notebookPages;
-	
-	private global::BlinkStickClient.OverviewWidget overviewwidget1;
-	
-	private global::Gtk.Label labelTabPageOverview;
-	
-	private global::Gtk.VBox vbox5;
-	
-	private global::Gtk.Toolbar toolbar1;
-	
-	private global::Gtk.ScrolledWindow GtkScrolledWindow;
-	
-	private global::Gtk.TreeView treeviewEvents;
-	
-	private global::Gtk.Label labelTabPageNotifications;
-	
-	private global::BlinkStickClient.PatternEditorWidget patternEditorWidget;
-	
-	private global::Gtk.Label label5;
-	
-	private global::BlinkStickClient.BlinkStickTestWidget blinksticktestwidget1;
-	
-	private global::Gtk.Label labelTabPageTest;
-	
-	private global::Gtk.Label labelPageHelp;
-	
 	private global::Gtk.Statusbar statusbar1;
 
 	protected virtual void Build ()
@@ -95,21 +59,9 @@ public partial class MainWindow
 		// Widget MainWindow
 		this.UIManager = new global::Gtk.UIManager ();
 		global::Gtk.ActionGroup w1 = new global::Gtk.ActionGroup ("Default");
-		this.newAction = new global::Gtk.Action ("newAction", global::Mono.Unix.Catalog.GetString ("_New"), null, "gtk-new");
-		this.newAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("New");
-		w1.Add (this.newAction, null);
-		this.editAction = new global::Gtk.Action ("editAction", null, null, "gtk-edit");
-		w1.Add (this.editAction, null);
-		this.deleteAction = new global::Gtk.Action ("deleteAction", null, null, "gtk-delete");
-		w1.Add (this.deleteAction, null);
 		this.saveAction = new global::Gtk.RadioAction ("saveAction", null, null, "gtk-save", 0);
 		this.saveAction.Group = new global::GLib.SList (global::System.IntPtr.Zero);
 		w1.Add (this.saveAction, null);
-		this.copyAction = new global::Gtk.Action ("copyAction", null, null, "gtk-copy");
-		w1.Add (this.copyAction, null);
-		this.activeAction = new global::Gtk.ToggleAction ("activeAction", global::Mono.Unix.Catalog.GetString ("_Active"), null, "gtk-yes");
-		this.activeAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("_Active");
-		w1.Add (this.activeAction, null);
 		this.FileAction = new global::Gtk.Action ("FileAction", global::Mono.Unix.Catalog.GetString ("File"), null, null);
 		this.FileAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("File");
 		w1.Add (this.FileAction, null);
@@ -151,19 +103,19 @@ public partial class MainWindow
 		this.OverviewToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Overview");
 		w1.Add (this.OverviewToolbarAction, null);
 		this.NotificationsToolbarAction = new global::Gtk.RadioAction ("NotificationsToolbarAction", global::Mono.Unix.Catalog.GetString ("Notifications"), null, null, 1);
-		this.NotificationsToolbarAction.Group = this.saveAction.Group;
+		this.NotificationsToolbarAction.Group = this.OverviewToolbarAction.Group;
 		this.NotificationsToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Notifications");
 		w1.Add (this.NotificationsToolbarAction, null);
 		this.TestToolbarAction = new global::Gtk.RadioAction ("TestToolbarAction", global::Mono.Unix.Catalog.GetString ("Test"), null, null, 3);
-		this.TestToolbarAction.Group = this.saveAction.Group;
+		this.TestToolbarAction.Group = this.OverviewToolbarAction.Group;
 		this.TestToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Test");
 		w1.Add (this.TestToolbarAction, null);
 		this.HelpToolbarAction = new global::Gtk.RadioAction ("HelpToolbarAction", global::Mono.Unix.Catalog.GetString ("Help"), null, null, 4);
-		this.HelpToolbarAction.Group = this.saveAction.Group;
+		this.HelpToolbarAction.Group = this.OverviewToolbarAction.Group;
 		this.HelpToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Help");
 		w1.Add (this.HelpToolbarAction, null);
 		this.PatternsAction1 = new global::Gtk.RadioAction ("PatternsAction1", global::Mono.Unix.Catalog.GetString ("Patterns"), null, null, 2);
-		this.PatternsAction1.Group = this.saveAction.Group;
+		this.PatternsAction1.Group = this.OverviewToolbarAction.Group;
 		this.PatternsAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Patterns");
 		w1.Add (this.PatternsAction1, null);
 		this.UIManager.InsertActionGroup (w1, 0);
@@ -205,125 +157,29 @@ public partial class MainWindow
 		w3.Position = 0;
 		w3.Expand = false;
 		w3.Fill = false;
-		// Container child hbox1.Gtk.Box+BoxChild
-		this.notebookPages = new global::Gtk.Notebook ();
-		this.notebookPages.CanFocus = true;
-		this.notebookPages.Name = "notebookPages";
-		this.notebookPages.CurrentPage = 0;
-		// Container child notebookPages.Gtk.Notebook+NotebookChild
-		this.overviewwidget1 = new global::BlinkStickClient.OverviewWidget ();
-		this.overviewwidget1.Events = ((global::Gdk.EventMask)(256));
-		this.overviewwidget1.Name = "overviewwidget1";
-		this.notebookPages.Add (this.overviewwidget1);
-		// Notebook tab
-		this.labelTabPageOverview = new global::Gtk.Label ();
-		this.labelTabPageOverview.Name = "labelTabPageOverview";
-		this.labelTabPageOverview.LabelProp = global::Mono.Unix.Catalog.GetString ("Overview");
-		this.notebookPages.SetTabLabel (this.overviewwidget1, this.labelTabPageOverview);
-		this.labelTabPageOverview.ShowAll ();
-		// Container child notebookPages.Gtk.Notebook+NotebookChild
-		this.vbox5 = new global::Gtk.VBox ();
-		this.vbox5.Name = "vbox5";
-		this.vbox5.Spacing = 6;
-		// Container child vbox5.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString (@"<ui><toolbar name='toolbar1'><toolitem name='newAction' action='newAction'/><toolitem name='copyAction' action='copyAction'/><toolitem name='editAction' action='editAction'/><toolitem name='deleteAction' action='deleteAction'/><toolitem name='activeAction' action='activeAction'/></toolbar></ui>");
-		this.toolbar1 = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/toolbar1")));
-		this.toolbar1.Name = "toolbar1";
-		this.toolbar1.ShowArrow = false;
-		this.toolbar1.ToolbarStyle = ((global::Gtk.ToolbarStyle)(2));
-		this.toolbar1.IconSize = ((global::Gtk.IconSize)(2));
-		this.vbox5.Add (this.toolbar1);
-		global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.toolbar1]));
-		w5.Position = 0;
-		w5.Expand = false;
-		w5.Fill = false;
-		// Container child vbox5.Gtk.Box+BoxChild
-		this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
-		this.GtkScrolledWindow.Name = "GtkScrolledWindow";
-		this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
-		// Container child GtkScrolledWindow.Gtk.Container+ContainerChild
-		this.treeviewEvents = new global::Gtk.TreeView ();
-		this.treeviewEvents.CanFocus = true;
-		this.treeviewEvents.Name = "treeviewEvents";
-		this.GtkScrolledWindow.Add (this.treeviewEvents);
-		this.vbox5.Add (this.GtkScrolledWindow);
-		global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.GtkScrolledWindow]));
-		w7.Position = 1;
-		this.notebookPages.Add (this.vbox5);
-		global::Gtk.Notebook.NotebookChild w8 = ((global::Gtk.Notebook.NotebookChild)(this.notebookPages [this.vbox5]));
-		w8.Position = 1;
-		// Notebook tab
-		this.labelTabPageNotifications = new global::Gtk.Label ();
-		this.labelTabPageNotifications.Name = "labelTabPageNotifications";
-		this.labelTabPageNotifications.LabelProp = global::Mono.Unix.Catalog.GetString ("Notifications");
-		this.notebookPages.SetTabLabel (this.vbox5, this.labelTabPageNotifications);
-		this.labelTabPageNotifications.ShowAll ();
-		// Container child notebookPages.Gtk.Notebook+NotebookChild
-		this.patternEditorWidget = new global::BlinkStickClient.PatternEditorWidget ();
-		this.patternEditorWidget.Events = ((global::Gdk.EventMask)(256));
-		this.patternEditorWidget.Name = "patternEditorWidget";
-		this.notebookPages.Add (this.patternEditorWidget);
-		global::Gtk.Notebook.NotebookChild w9 = ((global::Gtk.Notebook.NotebookChild)(this.notebookPages [this.patternEditorWidget]));
-		w9.Position = 2;
-		// Notebook tab
-		this.label5 = new global::Gtk.Label ();
-		this.label5.Name = "label5";
-		this.label5.LabelProp = global::Mono.Unix.Catalog.GetString ("Patterns");
-		this.notebookPages.SetTabLabel (this.patternEditorWidget, this.label5);
-		this.label5.ShowAll ();
-		// Container child notebookPages.Gtk.Notebook+NotebookChild
-		this.blinksticktestwidget1 = new global::BlinkStickClient.BlinkStickTestWidget ();
-		this.blinksticktestwidget1.Events = ((global::Gdk.EventMask)(256));
-		this.blinksticktestwidget1.Name = "blinksticktestwidget1";
-		this.notebookPages.Add (this.blinksticktestwidget1);
-		global::Gtk.Notebook.NotebookChild w10 = ((global::Gtk.Notebook.NotebookChild)(this.notebookPages [this.blinksticktestwidget1]));
-		w10.Position = 3;
-		// Notebook tab
-		this.labelTabPageTest = new global::Gtk.Label ();
-		this.labelTabPageTest.Name = "labelTabPageTest";
-		this.labelTabPageTest.LabelProp = global::Mono.Unix.Catalog.GetString ("Test");
-		this.notebookPages.SetTabLabel (this.blinksticktestwidget1, this.labelTabPageTest);
-		this.labelTabPageTest.ShowAll ();
-		// Notebook tab
-		global::Gtk.Label w11 = new global::Gtk.Label ();
-		w11.Visible = true;
-		this.notebookPages.Add (w11);
-		this.labelPageHelp = new global::Gtk.Label ();
-		this.labelPageHelp.Name = "labelPageHelp";
-		this.labelPageHelp.LabelProp = global::Mono.Unix.Catalog.GetString ("Help");
-		this.notebookPages.SetTabLabel (w11, this.labelPageHelp);
-		this.labelPageHelp.ShowAll ();
-		this.hbox1.Add (this.notebookPages);
-		global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.notebookPages]));
-		w12.Position = 1;
 		this.vbox3.Add (this.hbox1);
-		global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.hbox1]));
-		w13.Position = 0;
+		global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.hbox1]));
+		w4.Position = 0;
 		this.vbox2.Add (this.vbox3);
-		global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.vbox3]));
-		w14.Position = 1;
+		global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.vbox3]));
+		w5.Position = 1;
 		// Container child vbox2.Gtk.Box+BoxChild
 		this.statusbar1 = new global::Gtk.Statusbar ();
 		this.statusbar1.Name = "statusbar1";
 		this.statusbar1.Spacing = 6;
 		this.vbox2.Add (this.statusbar1);
-		global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.statusbar1]));
-		w15.Position = 2;
-		w15.Expand = false;
-		w15.Fill = false;
+		global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.statusbar1]));
+		w6.Position = 2;
+		w6.Expand = false;
+		w6.Fill = false;
 		this.Add (this.vbox2);
 		if ((this.Child != null)) {
 			this.Child.ShowAll ();
 		}
-		this.DefaultWidth = 733;
+		this.DefaultWidth = 966;
 		this.DefaultHeight = 607;
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
-		this.newAction.Activated += new global::System.EventHandler (this.OnNewActionActivated);
-		this.editAction.Activated += new global::System.EventHandler (this.OnEditActionActivated);
-		this.deleteAction.Activated += new global::System.EventHandler (this.OnDeleteActionActivated);
-		this.copyAction.Activated += new global::System.EventHandler (this.OnCopyActionActivated);
-		this.activeAction.Toggled += new global::System.EventHandler (this.OnActiveActionToggled);
 		this.quitAction.Activated += new global::System.EventHandler (this.OnQuitActionActivated);
 		this.TestAction.Activated += new global::System.EventHandler (this.OnTestActionActivated);
 		this.ManageAction.Activated += new global::System.EventHandler (this.OnManageActionActivated);
@@ -338,7 +194,5 @@ public partial class MainWindow
 		this.TestToolbarAction.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
 		this.HelpToolbarAction.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
 		this.PatternsAction1.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
-		this.treeviewEvents.CursorChanged += new global::System.EventHandler (this.OnTreeviewEventsCursorChanged);
-		this.treeviewEvents.RowActivated += new global::Gtk.RowActivatedHandler (this.OnTreeviewEventsRowActivated);
 	}
 }
