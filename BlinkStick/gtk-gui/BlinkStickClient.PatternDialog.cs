@@ -64,7 +64,9 @@ namespace BlinkStickClient
 			this.vboxLeft.Spacing = 6;
 			this.vboxLeft.BorderWidth = ((uint)(6));
 			// Container child vboxLeft.Gtk.Box+BoxChild
-			this.blinkstickemulatorwidget = null;
+			this.blinkstickemulatorwidget = new global::BlinkStickClient.BlinkStickEmulatorWidget ();
+			this.blinkstickemulatorwidget.Events = ((global::Gdk.EventMask)(256));
+			this.blinkstickemulatorwidget.Name = "blinkstickemulatorwidget";
 			this.vboxLeft.Add (this.blinkstickemulatorwidget);
 			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vboxLeft [this.blinkstickemulatorwidget]));
 			w2.Position = 0;

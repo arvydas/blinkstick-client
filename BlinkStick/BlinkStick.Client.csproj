@@ -151,6 +151,8 @@
     <Compile Include="Widgets\HelpWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.HelpWidget.cs" />
     <Compile Include="Widgets\BlinkStickEmulatorWidget.cs" />
+    <Compile Include="Forms\ConfigureBlinkStickDialog.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.ConfigureBlinkStickDialog.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

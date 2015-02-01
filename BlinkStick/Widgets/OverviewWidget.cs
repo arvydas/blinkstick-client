@@ -20,6 +20,13 @@ namespace BlinkStickClient
 
             hbox1.PackStart(new ColorPaletteWidget());
         }
+
+        protected void OnButtonConfigureBlinkStickClicked (object sender, EventArgs e)
+        {
+            ConfigureBlinkStickDialog dialog = new ConfigureBlinkStickDialog();
+            dialog.Run();
+            dialog.Destroy();
+        }
     }
 }
 
