@@ -153,6 +153,8 @@
     <Compile Include="Widgets\BlinkStickEmulatorWidget.cs" />
     <Compile Include="Forms\ConfigureBlinkStickDialog.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.ConfigureBlinkStickDialog.cs" />
+    <Compile Include="DataModel\BlinkStickDeviceSettings.cs" />
+    <Compile Include="DataModel\BlinkStickDevices.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
@@ -202,4 +204,7 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <ItemGroup>
+    <Folder Include="DataModel\" />
+  </ItemGroup>
 </Project>

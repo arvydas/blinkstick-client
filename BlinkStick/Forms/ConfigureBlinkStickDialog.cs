@@ -1,4 +1,6 @@
 ﻿using System;
+using BlinkStickClient.DataModel;
+using BlinkStickDotNet;
 
 namespace BlinkStickClient
 {

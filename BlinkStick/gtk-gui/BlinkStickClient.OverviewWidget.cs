@@ -10,13 +10,13 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Label labelSelectBlinkStick;
 		
-		private global::Gtk.ComboBox comboboxBlinkStick;
+		private global::Gtk.ComboBox comboboxDevices;
 		
 		private global::Gtk.Button buttonRefresh;
 		
-		private global::Gtk.Button buttonConfigureBlinkStick;
+		private global::Gtk.Button buttonConfigure;
 		
-		private global::Gtk.Button button881;
+		private global::Gtk.Button buttonDelete;
 		
 		private global::Gtk.HBox hboxMain;
 		
@@ -57,12 +57,11 @@ namespace BlinkStickClient
 			w1.Expand = false;
 			w1.Fill = false;
 			// Container child hboxMiniMenu.Gtk.Box+BoxChild
-			this.comboboxBlinkStick = global::Gtk.ComboBox.NewText ();
-			this.comboboxBlinkStick.AppendText (global::Mono.Unix.Catalog.GetString ("BS000000-0.0"));
-			this.comboboxBlinkStick.WidthRequest = 150;
-			this.comboboxBlinkStick.Name = "comboboxBlinkStick";
-			this.hboxMiniMenu.Add (this.comboboxBlinkStick);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.comboboxBlinkStick]));
+			this.comboboxDevices = new global::Gtk.ComboBox ();
+			this.comboboxDevices.WidthRequest = 200;
+			this.comboboxDevices.Name = "comboboxDevices";
+			this.hboxMiniMenu.Add (this.comboboxDevices);
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.comboboxDevices]));
 			w2.Position = 1;
 			w2.Expand = false;
 			w2.Fill = false;
@@ -80,28 +79,28 @@ namespace BlinkStickClient
 			w4.Expand = false;
 			w4.Fill = false;
 			// Container child hboxMiniMenu.Gtk.Box+BoxChild
-			this.buttonConfigureBlinkStick = new global::Gtk.Button ();
-			this.buttonConfigureBlinkStick.CanFocus = true;
-			this.buttonConfigureBlinkStick.Name = "buttonConfigureBlinkStick";
-			this.buttonConfigureBlinkStick.UseUnderline = true;
+			this.buttonConfigure = new global::Gtk.Button ();
+			this.buttonConfigure.CanFocus = true;
+			this.buttonConfigure.Name = "buttonConfigure";
+			this.buttonConfigure.UseUnderline = true;
 			global::Gtk.Image w5 = new global::Gtk.Image ();
 			w5.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-preferences", global::Gtk.IconSize.Menu);
-			this.buttonConfigureBlinkStick.Image = w5;
-			this.hboxMiniMenu.Add (this.buttonConfigureBlinkStick);
-			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.buttonConfigureBlinkStick]));
+			this.buttonConfigure.Image = w5;
+			this.hboxMiniMenu.Add (this.buttonConfigure);
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.buttonConfigure]));
 			w6.Position = 3;
 			w6.Expand = false;
 			w6.Fill = false;
 			// Container child hboxMiniMenu.Gtk.Box+BoxChild
-			this.button881 = new global::Gtk.Button ();
-			this.button881.CanFocus = true;
-			this.button881.Name = "button881";
-			this.button881.UseUnderline = true;
+			this.buttonDelete = new global::Gtk.Button ();
+			this.buttonDelete.CanFocus = true;
+			this.buttonDelete.Name = "buttonDelete";
+			this.buttonDelete.UseUnderline = true;
 			global::Gtk.Image w7 = new global::Gtk.Image ();
 			w7.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-delete", global::Gtk.IconSize.Menu);
-			this.button881.Image = w7;
-			this.hboxMiniMenu.Add (this.button881);
-			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.button881]));
+			this.buttonDelete.Image = w7;
+			this.hboxMiniMenu.Add (this.buttonDelete);
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.buttonDelete]));
 			w8.Position = 4;
 			w8.Expand = false;
 			w8.Fill = false;
@@ -165,7 +164,8 @@ namespace BlinkStickClient
 				this.Child.ShowAll ();
 			}
 			this.Hide ();
-			this.buttonConfigureBlinkStick.Clicked += new global::System.EventHandler (this.OnButtonConfigureBlinkStickClicked);
+			this.comboboxDevices.Changed += new global::System.EventHandler (this.OnComboboxDevicesChanged);
+			this.buttonConfigure.Clicked += new global::System.EventHandler (this.OnButtonConfigureBlinkStickClicked);
 		}
 	}
 }

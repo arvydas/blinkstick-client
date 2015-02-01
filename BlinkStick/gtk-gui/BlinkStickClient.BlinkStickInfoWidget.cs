@@ -12,7 +12,7 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Label labelManufacturer;
 		
-		private global::Gtk.Label labelManufacturer1;
+		private global::Gtk.Label labelManufacturerInfo;
 		
 		private global::Gtk.Label labelModeInfo;
 		
@@ -35,7 +35,7 @@ namespace BlinkStickClient
 			// Container child BlinkStickClient.BlinkStickInfoWidget.Gtk.Container+ContainerChild
 			this.tableInfo = new global::Gtk.Table (((uint)(5)), ((uint)(2)), false);
 			this.tableInfo.Name = "tableInfo";
-			this.tableInfo.RowSpacing = ((uint)(16));
+			this.tableInfo.RowSpacing = ((uint)(8));
 			this.tableInfo.ColumnSpacing = ((uint)(6));
 			this.tableInfo.BorderWidth = ((uint)(12));
 			// Container child tableInfo.Gtk.Table+TableChild
@@ -69,12 +69,12 @@ namespace BlinkStickClient
 			w3.XOptions = ((global::Gtk.AttachOptions)(4));
 			w3.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child tableInfo.Gtk.Table+TableChild
-			this.labelManufacturer1 = new global::Gtk.Label ();
-			this.labelManufacturer1.Name = "labelManufacturer1";
-			this.labelManufacturer1.Xalign = 0F;
-			this.labelManufacturer1.LabelProp = global::Mono.Unix.Catalog.GetString ("[Manufacturer]");
-			this.tableInfo.Add (this.labelManufacturer1);
-			global::Gtk.Table.TableChild w4 = ((global::Gtk.Table.TableChild)(this.tableInfo [this.labelManufacturer1]));
+			this.labelManufacturerInfo = new global::Gtk.Label ();
+			this.labelManufacturerInfo.Name = "labelManufacturerInfo";
+			this.labelManufacturerInfo.Xalign = 0F;
+			this.labelManufacturerInfo.LabelProp = global::Mono.Unix.Catalog.GetString ("[Manufacturer]");
+			this.tableInfo.Add (this.labelManufacturerInfo);
+			global::Gtk.Table.TableChild w4 = ((global::Gtk.Table.TableChild)(this.tableInfo [this.labelManufacturerInfo]));
 			w4.TopAttach = ((uint)(3));
 			w4.BottomAttach = ((uint)(4));
 			w4.LeftAttach = ((uint)(1));
