@@ -53,7 +53,7 @@ public partial class MainWindow: Gtk.Window
             if (_VisiblePage != value)
             {
                 if (_VisiblePage != null)
-                    _VisiblePage.HideAll();
+                    _VisiblePage.Hide();
 
                 _VisiblePage = value;
 
