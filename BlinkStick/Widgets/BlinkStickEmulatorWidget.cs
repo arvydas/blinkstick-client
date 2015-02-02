@@ -289,7 +289,7 @@ namespace BlinkStickClient
             double glowRadius = LedSize * 2 / scale;
             RadialGradient gradient = new RadialGradient(led.X, led.Y, 0, led.X, led.Y, glowRadius);
             gradient.AddColorStop(0, new Cairo.Color(ColorBuffer[index].Red, ColorBuffer[index].Green, ColorBuffer[index].Blue, ColorBuffer[index].Alpha));
-            gradient.AddColorStop(0.0 + ColorBuffer[index].Alpha * 0.25, new Cairo.Color(ColorBuffer[index].Red, ColorBuffer[index].Green, ColorBuffer[index].Blue, ColorBuffer[index].Alpha));
+            gradient.AddColorStop(0.15, new Cairo.Color(ColorBuffer[index].Red, ColorBuffer[index].Green, ColorBuffer[index].Blue, ColorBuffer[index].Alpha));
             gradient.AddColorStop(1, new Cairo.Color(ColorBuffer[index].Red, ColorBuffer[index].Green, ColorBuffer[index].Blue, 0));
             cr.Save();
             cr.Rectangle(led.X - glowRadius, led.Y - glowRadius, glowRadius * 2, glowRadius * 2);
