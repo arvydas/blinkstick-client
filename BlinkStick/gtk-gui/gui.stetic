@@ -630,7 +630,6 @@ High</property>
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="Label" translatable="yes">Blink</property>
-                        <property name="Active">True</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>
@@ -3171,7 +3170,7 @@ Pulse</property>
             <child>
               <widget class="Gtk.ComboBox" id="comboboxDevices">
                 <property name="MemberName" />
-                <property name="WidthRequest">200</property>
+                <property name="WidthRequest">150</property>
                 <property name="IsTextCombo">False</property>
                 <property name="Items" translatable="yes" />
                 <signal name="Changed" handler="OnComboboxDevicesChanged" />
@@ -3191,6 +3190,7 @@ Pulse</property>
                 <property name="Icon">stock:gtk-refresh Menu</property>
                 <property name="Label" translatable="yes" />
                 <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnButtonRefreshClicked" />
               </widget>
               <packing>
                 <property name="Position">2</property>
@@ -3224,6 +3224,7 @@ Pulse</property>
                 <property name="Icon">stock:gtk-delete Menu</property>
                 <property name="Label" translatable="yes" />
                 <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnButtonDeleteClicked" />
               </widget>
               <packing>
                 <property name="Position">4</property>
@@ -3660,7 +3661,7 @@ Pulse</property>
       <placeholder />
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="BlinkStickClient.ConfigureBlinkStickDialog" design-size="529 609">
+  <widget class="Gtk.Dialog" id="BlinkStickClient.ConfigureBlinkStickDialog" design-size="502 609">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Configure BlinkStick</property>
     <property name="WindowPosition">Center</property>
@@ -3733,81 +3734,6 @@ Pulse</property>
             </child>
             <child>
               <placeholder />
-            </child>
-            <child>
-              <widget class="Gtk.CheckButton" id="checkbuttonChannelB">
-                <property name="MemberName" />
-                <property name="CanFocus">True</property>
-                <property name="Label" translatable="yes">B Channel</property>
-                <property name="DrawIndicator">True</property>
-                <property name="HasLabel">True</property>
-                <property name="UseUnderline">True</property>
-              </widget>
-              <packing>
-                <property name="TopAttach">7</property>
-                <property name="BottomAttach">8</property>
-                <property name="LeftAttach">1</property>
-                <property name="RightAttach">2</property>
-                <property name="AutoSize">True</property>
-                <property name="XOptions">Fill</property>
-                <property name="YOptions">Fill</property>
-                <property name="XExpand">False</property>
-                <property name="XFill">True</property>
-                <property name="XShrink">False</property>
-                <property name="YExpand">False</property>
-                <property name="YFill">True</property>
-                <property name="YShrink">False</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="Gtk.CheckButton" id="checkbuttonChannelG">
-                <property name="MemberName" />
-                <property name="CanFocus">True</property>
-                <property name="Label" translatable="yes">G Channel</property>
-                <property name="DrawIndicator">True</property>
-                <property name="HasLabel">True</property>
-                <property name="UseUnderline">True</property>
-              </widget>
-              <packing>
-                <property name="TopAttach">6</property>
-                <property name="BottomAttach">7</property>
-                <property name="LeftAttach">1</property>
-                <property name="RightAttach">2</property>
-                <property name="AutoSize">True</property>
-                <property name="XOptions">Fill</property>
-                <property name="YOptions">Fill</property>
-                <property name="XExpand">False</property>
-                <property name="XFill">True</property>
-                <property name="XShrink">False</property>
-                <property name="YExpand">False</property>
-                <property name="YFill">True</property>
-                <property name="YShrink">False</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="Gtk.CheckButton" id="checkbuttonChannelR">
-                <property name="MemberName" />
-                <property name="CanFocus">True</property>
-                <property name="Label" translatable="yes">R Channel</property>
-                <property name="DrawIndicator">True</property>
-                <property name="HasLabel">True</property>
-                <property name="UseUnderline">True</property>
-              </widget>
-              <packing>
-                <property name="TopAttach">5</property>
-                <property name="BottomAttach">6</property>
-                <property name="LeftAttach">1</property>
-                <property name="RightAttach">2</property>
-                <property name="AutoSize">True</property>
-                <property name="XOptions">Fill</property>
-                <property name="YOptions">Fill</property>
-                <property name="XExpand">False</property>
-                <property name="XFill">True</property>
-                <property name="XShrink">False</property>
-                <property name="YExpand">False</property>
-                <property name="YFill">True</property>
-                <property name="YShrink">False</property>
-              </packing>
             </child>
             <child>
               <widget class="Gtk.Entry" id="entryData">
@@ -3927,6 +3853,72 @@ Pulse</property>
                 <property name="TopAttach">12</property>
                 <property name="BottomAttach">13</property>
                 <property name="RightAttach">3</property>
+                <property name="AutoSize">True</property>
+                <property name="XOptions">Fill</property>
+                <property name="YOptions">Fill</property>
+                <property name="XExpand">False</property>
+                <property name="XFill">True</property>
+                <property name="XShrink">False</property>
+                <property name="YExpand">False</property>
+                <property name="YFill">True</property>
+                <property name="YShrink">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="labelChannelB">
+                <property name="MemberName" />
+                <property name="Xalign">1</property>
+                <property name="LabelProp" translatable="yes">B Channel</property>
+              </widget>
+              <packing>
+                <property name="TopAttach">7</property>
+                <property name="BottomAttach">8</property>
+                <property name="LeftAttach">1</property>
+                <property name="RightAttach">2</property>
+                <property name="AutoSize">True</property>
+                <property name="XOptions">Fill</property>
+                <property name="YOptions">Fill</property>
+                <property name="XExpand">False</property>
+                <property name="XFill">True</property>
+                <property name="XShrink">False</property>
+                <property name="YExpand">False</property>
+                <property name="YFill">True</property>
+                <property name="YShrink">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="labelChannelG">
+                <property name="MemberName" />
+                <property name="Xalign">1</property>
+                <property name="LabelProp" translatable="yes">G Channel</property>
+              </widget>
+              <packing>
+                <property name="TopAttach">6</property>
+                <property name="BottomAttach">7</property>
+                <property name="LeftAttach">1</property>
+                <property name="RightAttach">2</property>
+                <property name="AutoSize">True</property>
+                <property name="XOptions">Fill</property>
+                <property name="YOptions">Fill</property>
+                <property name="XExpand">False</property>
+                <property name="XFill">True</property>
+                <property name="XShrink">False</property>
+                <property name="YExpand">False</property>
+                <property name="YFill">True</property>
+                <property name="YShrink">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="labelChannelR">
+                <property name="MemberName" />
+                <property name="Xalign">1</property>
+                <property name="LabelProp" translatable="yes">R Channel</property>
+              </widget>
+              <packing>
+                <property name="TopAttach">5</property>
+                <property name="BottomAttach">6</property>
+                <property name="LeftAttach">1</property>
+                <property name="RightAttach">2</property>
                 <property name="AutoSize">True</property>
                 <property name="XOptions">Fill</property>
                 <property name="YOptions">Fill</property>
@@ -4234,6 +4226,7 @@ Pulse</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>
                 <property name="Group">group1</property>
+                <signal name="Toggled" handler="ModeRadioButtonToggled" />
               </widget>
               <packing>
                 <property name="TopAttach">15</property>
@@ -4260,6 +4253,7 @@ Pulse</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>
                 <property name="Group">group1</property>
+                <signal name="Toggled" handler="ModeRadioButtonToggled" />
               </widget>
               <packing>
                 <property name="TopAttach">17</property>
@@ -4286,6 +4280,7 @@ Pulse</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>
                 <property name="Group">group1</property>
+                <signal name="Toggled" handler="ModeRadioButtonToggled" />
               </widget>
               <packing>
                 <property name="TopAttach">19</property>
@@ -4312,6 +4307,7 @@ Pulse</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>
                 <property name="Group">group1</property>
+                <signal name="Toggled" handler="ModeRadioButtonToggled" />
               </widget>
               <packing>
                 <property name="TopAttach">13</property>
@@ -4334,7 +4330,7 @@ Pulse</property>
                 <property name="MemberName" />
                 <property name="WidthRequest">30</property>
                 <property name="CanFocus">True</property>
-                <property name="Upper">100</property>
+                <property name="Upper">64</property>
                 <property name="PageIncrement">10</property>
                 <property name="StepIncrement">1</property>
                 <property name="ClimbRate">1</property>
@@ -4361,7 +4357,7 @@ Pulse</property>
                 <property name="MemberName" />
                 <property name="WidthRequest">30</property>
                 <property name="CanFocus">True</property>
-                <property name="Upper">100</property>
+                <property name="Upper">64</property>
                 <property name="PageIncrement">10</property>
                 <property name="StepIncrement">1</property>
                 <property name="ClimbRate">1</property>
@@ -4388,7 +4384,7 @@ Pulse</property>
                 <property name="MemberName" />
                 <property name="WidthRequest">30</property>
                 <property name="CanFocus">True</property>
-                <property name="Upper">100</property>
+                <property name="Upper">64</property>
                 <property name="PageIncrement">10</property>
                 <property name="StepIncrement">1</property>
                 <property name="ClimbRate">1</property>
@@ -4451,7 +4447,8 @@ Pulse</property>
             <property name="UseStock">True</property>
             <property name="Type">StockItem</property>
             <property name="StockId">gtk-ok</property>
-            <property name="ResponseId">-5</property>
+            <property name="ResponseId">-1</property>
+            <signal name="Clicked" handler="OnButtonOkClicked" />
             <property name="label">gtk-ok</property>
           </widget>
           <packing>

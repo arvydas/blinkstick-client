@@ -12,16 +12,51 @@ namespace BlinkStickClient.DataModel
         {
         }
 
-        public void AddIfDoesNotExist(BlinkStickDotNet.BlinkStick led)
+        public Boolean AddIfDoesNotExist(BlinkStickDotNet.BlinkStick led)
         {
+            Boolean newRecord = true;
+
             foreach (BlinkStickDeviceSettings current in Devices)
             {
                 if (current.Serial == led.Serial)
-                    return;
+                {
+                    current.Touched = true;
+                    if (current.Led == null)
+                    {
+                        current.Led = led;
+                    }
+                    newRecord = false;
+                }
             }
 
-            BlinkStickDeviceSettings settings = new BlinkStickDeviceSettings(led);
-            Devices.Add(settings);
+            if (newRecord)
+            {
+                BlinkStickDeviceSettings settings = new BlinkStickDeviceSettings(led);
+                settings.Touched = true;
+                Devices.Add(settings);
+                led.OpenDevice();
+            }
+
+            return newRecord;
+        }
+
+        public void Untouch()
+        {
+            foreach (BlinkStickDeviceSettings settings in Devices)
+            {
+                settings.Touched = false;
+            }
+        }
+
+        public void ProcessUntouched()
+        {
+            foreach (BlinkStickDeviceSettings settings in Devices)
+            {
+                if (!settings.Touched)
+                {
+                    settings.Led = null;
+                }
+            }
         }
     }
 }

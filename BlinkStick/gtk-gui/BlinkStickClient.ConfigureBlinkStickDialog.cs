@@ -6,12 +6,6 @@ namespace BlinkStickClient
 	{
 		private global::Gtk.Table table1;
 		
-		private global::Gtk.CheckButton checkbuttonChannelB;
-		
-		private global::Gtk.CheckButton checkbuttonChannelG;
-		
-		private global::Gtk.CheckButton checkbuttonChannelR;
-		
 		private global::Gtk.Entry entryData;
 		
 		private global::Gtk.Entry entryName;
@@ -23,6 +17,12 @@ namespace BlinkStickClient
 		private global::Gtk.HSeparator hseparator2;
 		
 		private global::Gtk.HSeparator hseparator3;
+		
+		private global::Gtk.Label labelChannelB;
+		
+		private global::Gtk.Label labelChannelG;
+		
+		private global::Gtk.Label labelChannelR;
 		
 		private global::Gtk.Label labelData;
 		
@@ -91,51 +91,6 @@ namespace BlinkStickClient
 			this.table1.ColumnSpacing = ((uint)(6));
 			this.table1.BorderWidth = ((uint)(12));
 			// Container child table1.Gtk.Table+TableChild
-			this.checkbuttonChannelB = new global::Gtk.CheckButton ();
-			this.checkbuttonChannelB.CanFocus = true;
-			this.checkbuttonChannelB.Name = "checkbuttonChannelB";
-			this.checkbuttonChannelB.Label = global::Mono.Unix.Catalog.GetString ("B Channel");
-			this.checkbuttonChannelB.DrawIndicator = true;
-			this.checkbuttonChannelB.UseUnderline = true;
-			this.table1.Add (this.checkbuttonChannelB);
-			global::Gtk.Table.TableChild w2 = ((global::Gtk.Table.TableChild)(this.table1 [this.checkbuttonChannelB]));
-			w2.TopAttach = ((uint)(7));
-			w2.BottomAttach = ((uint)(8));
-			w2.LeftAttach = ((uint)(1));
-			w2.RightAttach = ((uint)(2));
-			w2.XOptions = ((global::Gtk.AttachOptions)(4));
-			w2.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table1.Gtk.Table+TableChild
-			this.checkbuttonChannelG = new global::Gtk.CheckButton ();
-			this.checkbuttonChannelG.CanFocus = true;
-			this.checkbuttonChannelG.Name = "checkbuttonChannelG";
-			this.checkbuttonChannelG.Label = global::Mono.Unix.Catalog.GetString ("G Channel");
-			this.checkbuttonChannelG.DrawIndicator = true;
-			this.checkbuttonChannelG.UseUnderline = true;
-			this.table1.Add (this.checkbuttonChannelG);
-			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table1 [this.checkbuttonChannelG]));
-			w3.TopAttach = ((uint)(6));
-			w3.BottomAttach = ((uint)(7));
-			w3.LeftAttach = ((uint)(1));
-			w3.RightAttach = ((uint)(2));
-			w3.XOptions = ((global::Gtk.AttachOptions)(4));
-			w3.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table1.Gtk.Table+TableChild
-			this.checkbuttonChannelR = new global::Gtk.CheckButton ();
-			this.checkbuttonChannelR.CanFocus = true;
-			this.checkbuttonChannelR.Name = "checkbuttonChannelR";
-			this.checkbuttonChannelR.Label = global::Mono.Unix.Catalog.GetString ("R Channel");
-			this.checkbuttonChannelR.DrawIndicator = true;
-			this.checkbuttonChannelR.UseUnderline = true;
-			this.table1.Add (this.checkbuttonChannelR);
-			global::Gtk.Table.TableChild w4 = ((global::Gtk.Table.TableChild)(this.table1 [this.checkbuttonChannelR]));
-			w4.TopAttach = ((uint)(5));
-			w4.BottomAttach = ((uint)(6));
-			w4.LeftAttach = ((uint)(1));
-			w4.RightAttach = ((uint)(2));
-			w4.XOptions = ((global::Gtk.AttachOptions)(4));
-			w4.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table1.Gtk.Table+TableChild
 			this.entryData = new global::Gtk.Entry ();
 			this.entryData.CanFocus = true;
 			this.entryData.Name = "entryData";
@@ -143,12 +98,12 @@ namespace BlinkStickClient
 			this.entryData.MaxLength = 32;
 			this.entryData.InvisibleChar = '●';
 			this.table1.Add (this.entryData);
-			global::Gtk.Table.TableChild w5 = ((global::Gtk.Table.TableChild)(this.table1 [this.entryData]));
-			w5.TopAttach = ((uint)(2));
-			w5.BottomAttach = ((uint)(3));
-			w5.LeftAttach = ((uint)(1));
-			w5.RightAttach = ((uint)(3));
-			w5.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w2 = ((global::Gtk.Table.TableChild)(this.table1 [this.entryData]));
+			w2.TopAttach = ((uint)(2));
+			w2.BottomAttach = ((uint)(3));
+			w2.LeftAttach = ((uint)(1));
+			w2.RightAttach = ((uint)(3));
+			w2.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.entryName = new global::Gtk.Entry ();
 			this.entryName.CanFocus = true;
@@ -157,10 +112,10 @@ namespace BlinkStickClient
 			this.entryName.MaxLength = 32;
 			this.entryName.InvisibleChar = '●';
 			this.table1.Add (this.entryName);
-			global::Gtk.Table.TableChild w6 = ((global::Gtk.Table.TableChild)(this.table1 [this.entryName]));
-			w6.LeftAttach = ((uint)(1));
-			w6.RightAttach = ((uint)(3));
-			w6.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table1 [this.entryName]));
+			w3.LeftAttach = ((uint)(1));
+			w3.RightAttach = ((uint)(3));
+			w3.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.hscaleLimitBrightness = new global::Gtk.HScale (null);
 			this.hscaleLimitBrightness.CanFocus = true;
@@ -174,40 +129,79 @@ namespace BlinkStickClient
 			this.hscaleLimitBrightness.Digits = 0;
 			this.hscaleLimitBrightness.ValuePos = ((global::Gtk.PositionType)(3));
 			this.table1.Add (this.hscaleLimitBrightness);
-			global::Gtk.Table.TableChild w7 = ((global::Gtk.Table.TableChild)(this.table1 [this.hscaleLimitBrightness]));
-			w7.TopAttach = ((uint)(10));
-			w7.BottomAttach = ((uint)(11));
-			w7.LeftAttach = ((uint)(1));
-			w7.RightAttach = ((uint)(3));
-			w7.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w4 = ((global::Gtk.Table.TableChild)(this.table1 [this.hscaleLimitBrightness]));
+			w4.TopAttach = ((uint)(10));
+			w4.BottomAttach = ((uint)(11));
+			w4.LeftAttach = ((uint)(1));
+			w4.RightAttach = ((uint)(3));
+			w4.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.hseparator1 = new global::Gtk.HSeparator ();
 			this.hseparator1.Name = "hseparator1";
 			this.table1.Add (this.hseparator1);
-			global::Gtk.Table.TableChild w8 = ((global::Gtk.Table.TableChild)(this.table1 [this.hseparator1]));
-			w8.TopAttach = ((uint)(4));
-			w8.BottomAttach = ((uint)(5));
-			w8.RightAttach = ((uint)(3));
-			w8.XOptions = ((global::Gtk.AttachOptions)(4));
-			w8.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w5 = ((global::Gtk.Table.TableChild)(this.table1 [this.hseparator1]));
+			w5.TopAttach = ((uint)(4));
+			w5.BottomAttach = ((uint)(5));
+			w5.RightAttach = ((uint)(3));
+			w5.XOptions = ((global::Gtk.AttachOptions)(4));
+			w5.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.hseparator2 = new global::Gtk.HSeparator ();
 			this.hseparator2.Name = "hseparator2";
 			this.table1.Add (this.hseparator2);
-			global::Gtk.Table.TableChild w9 = ((global::Gtk.Table.TableChild)(this.table1 [this.hseparator2]));
-			w9.TopAttach = ((uint)(9));
-			w9.BottomAttach = ((uint)(10));
-			w9.RightAttach = ((uint)(3));
-			w9.XOptions = ((global::Gtk.AttachOptions)(4));
-			w9.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w6 = ((global::Gtk.Table.TableChild)(this.table1 [this.hseparator2]));
+			w6.TopAttach = ((uint)(9));
+			w6.BottomAttach = ((uint)(10));
+			w6.RightAttach = ((uint)(3));
+			w6.XOptions = ((global::Gtk.AttachOptions)(4));
+			w6.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.hseparator3 = new global::Gtk.HSeparator ();
 			this.hseparator3.Name = "hseparator3";
 			this.table1.Add (this.hseparator3);
-			global::Gtk.Table.TableChild w10 = ((global::Gtk.Table.TableChild)(this.table1 [this.hseparator3]));
-			w10.TopAttach = ((uint)(12));
-			w10.BottomAttach = ((uint)(13));
-			w10.RightAttach = ((uint)(3));
+			global::Gtk.Table.TableChild w7 = ((global::Gtk.Table.TableChild)(this.table1 [this.hseparator3]));
+			w7.TopAttach = ((uint)(12));
+			w7.BottomAttach = ((uint)(13));
+			w7.RightAttach = ((uint)(3));
+			w7.XOptions = ((global::Gtk.AttachOptions)(4));
+			w7.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
+			this.labelChannelB = new global::Gtk.Label ();
+			this.labelChannelB.Name = "labelChannelB";
+			this.labelChannelB.Xalign = 1F;
+			this.labelChannelB.LabelProp = global::Mono.Unix.Catalog.GetString ("B Channel");
+			this.table1.Add (this.labelChannelB);
+			global::Gtk.Table.TableChild w8 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelChannelB]));
+			w8.TopAttach = ((uint)(7));
+			w8.BottomAttach = ((uint)(8));
+			w8.LeftAttach = ((uint)(1));
+			w8.RightAttach = ((uint)(2));
+			w8.XOptions = ((global::Gtk.AttachOptions)(4));
+			w8.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
+			this.labelChannelG = new global::Gtk.Label ();
+			this.labelChannelG.Name = "labelChannelG";
+			this.labelChannelG.Xalign = 1F;
+			this.labelChannelG.LabelProp = global::Mono.Unix.Catalog.GetString ("G Channel");
+			this.table1.Add (this.labelChannelG);
+			global::Gtk.Table.TableChild w9 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelChannelG]));
+			w9.TopAttach = ((uint)(6));
+			w9.BottomAttach = ((uint)(7));
+			w9.LeftAttach = ((uint)(1));
+			w9.RightAttach = ((uint)(2));
+			w9.XOptions = ((global::Gtk.AttachOptions)(4));
+			w9.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
+			this.labelChannelR = new global::Gtk.Label ();
+			this.labelChannelR.Name = "labelChannelR";
+			this.labelChannelR.Xalign = 1F;
+			this.labelChannelR.LabelProp = global::Mono.Unix.Catalog.GetString ("R Channel");
+			this.table1.Add (this.labelChannelR);
+			global::Gtk.Table.TableChild w10 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelChannelR]));
+			w10.TopAttach = ((uint)(5));
+			w10.BottomAttach = ((uint)(6));
+			w10.LeftAttach = ((uint)(1));
+			w10.RightAttach = ((uint)(2));
 			w10.XOptions = ((global::Gtk.AttachOptions)(4));
 			w10.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
@@ -442,7 +436,7 @@ namespace BlinkStickClient
 			w27.XOptions = ((global::Gtk.AttachOptions)(4));
 			w27.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
-			this.spinbuttonChannelB = new global::Gtk.SpinButton (0D, 100D, 1D);
+			this.spinbuttonChannelB = new global::Gtk.SpinButton (0D, 64D, 1D);
 			this.spinbuttonChannelB.WidthRequest = 30;
 			this.spinbuttonChannelB.CanFocus = true;
 			this.spinbuttonChannelB.Name = "spinbuttonChannelB";
@@ -458,7 +452,7 @@ namespace BlinkStickClient
 			w28.XOptions = ((global::Gtk.AttachOptions)(4));
 			w28.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
-			this.spinbuttonChannelG = new global::Gtk.SpinButton (0D, 100D, 1D);
+			this.spinbuttonChannelG = new global::Gtk.SpinButton (0D, 64D, 1D);
 			this.spinbuttonChannelG.WidthRequest = 30;
 			this.spinbuttonChannelG.CanFocus = true;
 			this.spinbuttonChannelG.Name = "spinbuttonChannelG";
@@ -474,7 +468,7 @@ namespace BlinkStickClient
 			w29.XOptions = ((global::Gtk.AttachOptions)(4));
 			w29.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
-			this.spinbuttonChannelR = new global::Gtk.SpinButton (0D, 100D, 1D);
+			this.spinbuttonChannelR = new global::Gtk.SpinButton (0D, 64D, 1D);
 			this.spinbuttonChannelR.WidthRequest = 30;
 			this.spinbuttonChannelR.CanFocus = true;
 			this.spinbuttonChannelR.Name = "spinbuttonChannelR";
@@ -520,7 +514,7 @@ namespace BlinkStickClient
 			this.buttonOk.UseStock = true;
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
-			this.AddActionWidget (this.buttonOk, -5);
+			w32.Add (this.buttonOk);
 			global::Gtk.ButtonBox.ButtonBoxChild w34 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w32 [this.buttonOk]));
 			w34.Position = 1;
 			w34.Expand = false;
@@ -528,9 +522,14 @@ namespace BlinkStickClient
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
-			this.DefaultWidth = 529;
+			this.DefaultWidth = 502;
 			this.DefaultHeight = 609;
 			this.Show ();
+			this.radiobuttonModeRGB.Toggled += new global::System.EventHandler (this.ModeRadioButtonToggled);
+			this.radiobuttonModeMultiLEDMirror.Toggled += new global::System.EventHandler (this.ModeRadioButtonToggled);
+			this.radiobuttonModeMultiLED.Toggled += new global::System.EventHandler (this.ModeRadioButtonToggled);
+			this.radiobuttonModeInverse.Toggled += new global::System.EventHandler (this.ModeRadioButtonToggled);
+			this.buttonOk.Clicked += new global::System.EventHandler (this.OnButtonOkClicked);
 		}
 	}
 }

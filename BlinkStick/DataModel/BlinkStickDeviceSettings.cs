@@ -14,19 +14,32 @@ namespace BlinkStickClient.DataModel
 
         public BlinkStickDotNet.BlinkStick Led;
 
+        public Boolean Touched { get; set; }
+
         public BlinkStickDeviceSettings()
         {
+            this.Touched = true;
+            this.BrightnessLimit = 100;
         }
 
         public BlinkStickDeviceSettings(BlinkStickDotNet.BlinkStick led)
         {
             this.Led = led;
             this.Serial = led.Serial;
+            this.Touched = true;
+            this.BrightnessLimit = 100;
         }
 
         public override string ToString()
         {
-            return string.Format("{0}{1}", this.Serial, Led == null ? " (Disconnected)" : "");
+            if (Led != null && Led.InfoBlock1.Trim() != "")
+            {
+                return Led.InfoBlock1;
+            }
+            else
+            {
+                return this.Serial;
+            }
         }
     }
 }

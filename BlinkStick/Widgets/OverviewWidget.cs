@@ -9,6 +9,8 @@ namespace BlinkStickClient
     {
         BlinkStickDevices BlinkStickDeviceList = new BlinkStickDevices();
 
+        ListStore store = new ListStore(typeof (BlinkStickDeviceSettings));
+
         private BlinkStickDeviceSettings _SelectedBlinkStick;
 
         private BlinkStickDeviceSettings SelectedBlinkStick
@@ -23,7 +25,6 @@ namespace BlinkStickClient
                 if (_SelectedBlinkStick != value)
                 {
                     _SelectedBlinkStick = value;
-
                 }
             }
         }
@@ -38,22 +39,29 @@ namespace BlinkStickClient
 
             hbox1.PackStart(new ColorPaletteWidget());
     
-            RefreshDevices();
+            CellRendererPixbuf blinkstickConnectedCell = new CellRendererPixbuf();
+            comboboxDevices.PackStart(blinkstickConnectedCell, false);
+            comboboxDevices.SetCellDataFunc(blinkstickConnectedCell, BlinkStickConnectedRenderer);
 
             CellRendererText blinkStickDeviceSettingsCell = new CellRendererText();
             comboboxDevices.PackStart(blinkStickDeviceSettingsCell, true);
             comboboxDevices.AddAttribute (blinkStickDeviceSettingsCell, "text", 0);
             comboboxDevices.SetCellDataFunc(blinkStickDeviceSettingsCell, BlinkStickDeviceSettingsClassRenderer);
 
-            ListStore store = new ListStore(typeof (BlinkStickDeviceSettings));
-
-            foreach (BlinkStickDeviceSettings entity in BlinkStickDeviceList.Devices) {
-                store.AppendValues(entity);
-            }
+            RefreshDevices();
 
             comboboxDevices.Model = store;
 
             UpdateUI();
+        }
+
+        private void BlinkStickConnectedRenderer(CellLayout cell_layout, CellRenderer cell, TreeModel model, TreeIter iter)
+        {    
+            BlinkStickDeviceSettings myclass = model.GetValue(iter, 0) as BlinkStickDeviceSettings;
+            if (myclass != null)
+            {
+                (cell as CellRendererPixbuf).StockId = myclass.Led == null ? "gtk-no" : "gtk-yes";
+            }
         }
 
         private void BlinkStickDeviceSettingsClassRenderer(CellLayout cell_layout, CellRenderer cell, TreeModel model, TreeIter iter)
@@ -62,7 +70,6 @@ namespace BlinkStickClient
             if (myclass != null)
             {
                 (cell as CellRendererText).Text = myclass.ToString();
-                //(cell as CellRendererText).Alignment = Pango.Alignment.Left;
                 cell.Xalign = 0;
             }
         }
@@ -70,22 +77,59 @@ namespace BlinkStickClient
         protected void OnButtonConfigureBlinkStickClicked (object sender, EventArgs e)
         {
             ConfigureBlinkStickDialog dialog = new ConfigureBlinkStickDialog();
+            dialog.DeviceSettings = SelectedBlinkStick;
+            dialog.UpdateUI();
             dialog.Run();
             dialog.Destroy();
         }
 
         public void RefreshDevices()
         {
+            BlinkStickDeviceList.Untouch();
+
             foreach (BlinkStickDotNet.BlinkStick led in BlinkStickDotNet.BlinkStick.FindAll())
             {
                 BlinkStickDeviceList.AddIfDoesNotExist(led);
+            }
+
+            BlinkStickDeviceList.ProcessUntouched();
+
+            int previousDeviceIndex = comboboxDevices.Active;
+
+            store.Clear();
+
+            foreach (BlinkStickDeviceSettings entity in BlinkStickDeviceList.Devices) {
+                store.AppendValues(entity);
+            }
+
+            SelectedBlinkStick = null;
+
+            if (store.IterNChildren() >= 1)
+            {
+                if (previousDeviceIndex == -1)
+                {
+                    comboboxDevices.Active = 0;
+                }
+                else 
+                {
+                    while (store.IterNChildren() <= previousDeviceIndex)
+                    {
+                        previousDeviceIndex--;
+                    }
+
+                    comboboxDevices.Active = previousDeviceIndex;
+                }
+            }
+            else
+            {
+                comboboxDevices.Active = -1;
             }
         }
 
         private void UpdateUI()
         {
-            buttonConfigure.Sensitive = comboboxDevices.Active != -1;
-            buttonDelete.Sensitive = comboboxDevices.Active != -1;
+            buttonConfigure.Sensitive = comboboxDevices.Active != -1 && SelectedBlinkStick.Led != null;
+            buttonDelete.Sensitive = comboboxDevices.Active != -1 && SelectedBlinkStick.Led == null;
             blinkstickinfowidget2.UpdateUI(SelectedBlinkStick);
         }
 
@@ -97,6 +141,17 @@ namespace BlinkStickClient
             SelectedBlinkStick = (BlinkStickDeviceSettings)((sender as Gtk.ComboBox).Model.GetValue(iter, 0));
 
             UpdateUI();
+        }
+
+        protected void OnButtonRefreshClicked (object sender, EventArgs e)
+        {
+            RefreshDevices();
+        }
+
+        protected void OnButtonDeleteClicked (object sender, EventArgs e)
+        {
+            BlinkStickDeviceList.Devices.Remove(SelectedBlinkStick);
+            RefreshDevices();
         }
     }
 }

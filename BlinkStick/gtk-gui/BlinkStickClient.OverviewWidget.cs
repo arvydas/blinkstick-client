@@ -58,7 +58,7 @@ namespace BlinkStickClient
 			w1.Fill = false;
 			// Container child hboxMiniMenu.Gtk.Box+BoxChild
 			this.comboboxDevices = new global::Gtk.ComboBox ();
-			this.comboboxDevices.WidthRequest = 200;
+			this.comboboxDevices.WidthRequest = 150;
 			this.comboboxDevices.Name = "comboboxDevices";
 			this.hboxMiniMenu.Add (this.comboboxDevices);
 			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.comboboxDevices]));
@@ -165,7 +165,9 @@ namespace BlinkStickClient
 			}
 			this.Hide ();
 			this.comboboxDevices.Changed += new global::System.EventHandler (this.OnComboboxDevicesChanged);
+			this.buttonRefresh.Clicked += new global::System.EventHandler (this.OnButtonRefreshClicked);
 			this.buttonConfigure.Clicked += new global::System.EventHandler (this.OnButtonConfigureBlinkStickClicked);
+			this.buttonDelete.Clicked += new global::System.EventHandler (this.OnButtonDeleteClicked);
 		}
 	}
 }

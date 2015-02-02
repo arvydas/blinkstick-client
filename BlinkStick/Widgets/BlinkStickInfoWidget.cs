@@ -60,11 +60,6 @@ namespace BlinkStickClient
                     {
                         try
                         {
-                            if (!settings.Led.Connected)
-                            {
-                                settings.Led.OpenDevice();
-                            }
-
                             switch (settings.Led.GetMode())
                             {
                                 case 0:

@@ -149,6 +149,8 @@ public partial class MainWindow: Gtk.Window
 				{
 					testForm.PopulateForm();
 				}
+
+                overviewWidget.RefreshDevices();
 			});
 		};
 		DeviceMonitor.Start ();
