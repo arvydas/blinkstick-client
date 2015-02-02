@@ -41,6 +41,36 @@ namespace BlinkStickClient.DataModel
                 return this.Serial;
             }
         }
+
+        public void SetColor(byte channel, byte index, byte r, byte g, byte b)
+        {
+            if (BrightnessLimit < 100 && BrightnessLimit >= 0)
+            {
+                r = (byte)(BrightnessLimit / 100.0 * r);
+                g = (byte)(BrightnessLimit / 100.0 * g);
+                b = (byte)(BrightnessLimit / 100.0 * b);
+            }
+
+            if (Led != null)
+            {
+                Led.SetColor(channel, index, r, g, b);
+            }
+        }
+
+        public void SetColor(byte r, byte g, byte b)
+        {
+            if (BrightnessLimit < 100 && BrightnessLimit >= 0)
+            {
+                r = (byte)(BrightnessLimit / 100.0 * r);
+                g = (byte)(BrightnessLimit / 100.0 * g);
+                b = (byte)(BrightnessLimit / 100.0 * b);
+            }
+
+            if (Led != null)
+            {
+                Led.SetColor(r, g, b);
+            }
+        }
     }
 }
 
