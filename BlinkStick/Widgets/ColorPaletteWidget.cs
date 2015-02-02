@@ -54,10 +54,11 @@ namespace BlinkStickClient
 
             cr.LineWidth = 9;
             //cr.SetSourceRGB(0.7, 0.2, 0.0);
+            int grow = 0;
 
             for (int i = 0; i < ColorList.Length; i++)
             {
-                int grow = 0;
+                grow = 0;
 
                 if (SelectedIndex == i)
                 {
@@ -81,26 +82,43 @@ namespace BlinkStickClient
                 cr.Stroke ();
             }
 
-            /*
-            cr.LineWidth = 9;
-            cr.SetSourceRGB(0.7, 0.2, 0.0);
+            PointD coords = drawButton(cr, TileSpacing + (TileSize + TileSpacing) * ColorList.Length, TileSpacing, "All Off", false);
 
-            int width, height;
-            width = Allocation.Width;
-            height = Allocation.Height;
-
-            cr.Translate(width/2, height/2);
-            cr.Arc(0, 0, (width < height ? width : height) / 2 - 10, 0, 2*Math.PI);
-            cr.StrokePreserve();
-
-            cr.SetSourceRGB(0.3, 0.4, 0.6);
-            cr.Fill();
-           */
+            coords = drawButton(cr, coords.X, TileSpacing, "Custom", false);
 
             ((IDisposable) cr.GetTarget()).Dispose();                                      
             ((IDisposable) cr).Dispose();
 
             return true;
+        }
+
+        PointD drawButton(Cairo.Context cr, double x, double y, String text, Boolean selected)
+        {
+            cr.SetSourceRGB(0, 0, 0);
+            cr.SelectFontFace("Georgia", FontSlant.Normal, FontWeight.Bold);
+            cr.SetFontSize(11);
+            TextExtents te = cr.TextExtents(text);
+
+            int spacing = 5;
+            int grow = selected ? 3 : 0;
+            DrawRoundedRectangle(cr, 
+                x - grow,
+                y - grow, 
+                te.Width + grow * 2 + spacing * 2, 
+                TileSize + grow * 2, 
+                3);
+            cr.SetSourceRGB(1, 1, 1);
+            cr.FillPreserve ();
+            cr.SetSourceRGB(0, 0, 0);
+            cr.LineWidth = 1.2;
+            cr.Stroke ();
+
+            cr.MoveTo(
+                x + spacing  - te.XBearing,
+                y - te.YBearing + (TileSize - te.Height) / 2);
+            cr.ShowText(text);
+
+            return new PointD(x + te.Width + spacing * 2 + TileSpacing, 0);
         }
 
         static void DrawRoundedRectangle (Cairo.Context gr, double x, double y, double width, double height, double radius)
