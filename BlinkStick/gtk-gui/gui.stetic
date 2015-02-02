@@ -630,6 +630,7 @@ High</property>
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="Label" translatable="yes">Blink</property>
+                        <property name="Active">True</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>
@@ -2766,6 +2767,7 @@ Pulse</property>
         <child>
           <widget class="Gtk.DrawingArea" id="drawingareaMain">
             <property name="MemberName" />
+            <property name="Events">PointerMotionMask, PointerMotionHintMask, ButtonMotionMask, Button1MotionMask, Button2MotionMask, Button3MotionMask, ButtonPressMask, ButtonReleaseMask</property>
           </widget>
           <packing>
             <property name="Position">0</property>

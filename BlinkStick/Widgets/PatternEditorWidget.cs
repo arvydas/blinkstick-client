@@ -97,6 +97,8 @@ namespace BlinkStickClient
             treeviewPatterns.RowActivated += OnTreeviewPatternsRowActivated;
             treeviewPatterns.CursorChanged += OnTreeviewPatternsCursorChanged;
 
+            blinkstickemulatorwidget1.EmulatedDevice = BlinkStickDeviceEnum.BlinkStick;
+
             UpdateButtons();
 
         }
@@ -318,7 +320,7 @@ namespace BlinkStickClient
 
             PlayingPattern = pattern;
 
-            RgbColor color = blinkstickemulatorwidget1.LedColor.ToRgbColor();
+            RgbColor color = blinkstickemulatorwidget1.GetColor().ToRgbColor();
 
             led = new BlinkStickDotNet.BlinkStick();
 
@@ -331,7 +333,7 @@ namespace BlinkStickClient
 
                 led.SendColor += (object o, BlinkStickDotNet.SendColorEventArgs ee) => {
                     Gtk.Application.Invoke (delegate {
-                        blinkstickemulatorwidget1.LedColor = new Color(ee.R, ee.G, ee.B);
+                        blinkstickemulatorwidget1.SetColor(new Color(ee.R, ee.G, ee.B));
                     });
 
                     r = ee.R;

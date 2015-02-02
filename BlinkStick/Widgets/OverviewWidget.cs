@@ -35,19 +35,22 @@ namespace BlinkStickClient
         {
             this.Build();
 
-            /*
-            Gdk.Pixbuf image = Gdk.Pixbuf.LoadFromResource("BlinkStickClient.blinkstick.png");
-            image = image.ScaleSimple(image.Width / 2, image.Height / 2, Gdk.InterpType.Nearest);
-            imageBlinkStickPreview.Pixbuf = image;
-            */
-
             hbox1.PackStart(colorPaletteWidget);
 
             colorPaletteWidget.ColorClicked += (object sender, ColorClickedEventArgs e) => {
                 if (SelectedBlinkStick != null && SelectedBlinkStick.Led != null)
                 {
                     BlinkStickDotNet.RgbColor color = BlinkStickDotNet.RgbColor.FromGdkColor(e.Color.Red, e.Color.Green, e.Color.Blue);
-                    SelectedBlinkStick.Led.SetColor(color.R, color.G, color.B);
+                    if (blinkstickemulatorwidget1.SelectedLed == -1)
+                    {
+                        SelectedBlinkStick.SetColor(color.R, color.G, color.B);
+                        blinkstickemulatorwidget1.SetColor(e.Color);
+                    }
+                    else
+                    {
+                        SelectedBlinkStick.SetColor(0, (byte)blinkstickemulatorwidget1.SelectedLed, color.R, color.G, color.B);
+                        blinkstickemulatorwidget1.SetColor((byte)blinkstickemulatorwidget1.SelectedLed, e.Color);
+                    }
                 }
             };
     

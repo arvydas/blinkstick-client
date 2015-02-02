@@ -20,6 +20,7 @@ namespace BlinkStickClient
 			this.vboxMain.Spacing = 6;
 			// Container child vboxMain.Gtk.Box+BoxChild
 			this.drawingareaMain = new global::Gtk.DrawingArea ();
+			this.drawingareaMain.Events = ((global::Gdk.EventMask)(1020));
 			this.drawingareaMain.Name = "drawingareaMain";
 			this.vboxMain.Add (this.drawingareaMain);
 			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.vboxMain [this.drawingareaMain]));
