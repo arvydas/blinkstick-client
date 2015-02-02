@@ -24,6 +24,7 @@ namespace BlinkStickClient.DataModel
                     if (current.Led == null)
                     {
                         current.Led = led;
+                        current.Led.OpenDevice();
                     }
                     newRecord = false;
                 }
