@@ -33,7 +33,7 @@ namespace BlinkStickClient
 			global::Stetic.BinContainer.Attach (this);
 			this.Name = "BlinkStickClient.BlinkStickInfoWidget";
 			// Container child BlinkStickClient.BlinkStickInfoWidget.Gtk.Container+ContainerChild
-			this.tableInfo = new global::Gtk.Table (((uint)(5)), ((uint)(2)), false);
+			this.tableInfo = new global::Gtk.Table (((uint)(5)), ((uint)(2)), true);
 			this.tableInfo.Name = "tableInfo";
 			this.tableInfo.RowSpacing = ((uint)(8));
 			this.tableInfo.ColumnSpacing = ((uint)(6));

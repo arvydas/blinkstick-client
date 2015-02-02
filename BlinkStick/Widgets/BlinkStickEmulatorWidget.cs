@@ -57,6 +57,23 @@ namespace BlinkStickClient
             }
         }
 
+        private BlinkStickDotNet.BlinkStickDeviceEnum _EmulatedDevice;
+        public BlinkStickDotNet.BlinkStickDeviceEnum EmulatedDevice
+        {
+            get
+            {
+                return _EmulatedDevice;
+            }
+            set
+            {
+                if (_EmulatedDevice != value)
+                {
+                    _EmulatedDevice = value;
+                    LoadDisplay();
+                }
+            }
+        }
+
         public BlinkStickEmulatorWidget()
         {
             this.Build();
@@ -64,16 +81,43 @@ namespace BlinkStickClient
             LedColor = new Gdk.Color(0, 0, 0);
 
             drawingareaMain.ExposeEvent += HandleExposeEvent;
-            //display = new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "BlinkStick.png"));
-            display = Gdk.Pixbuf.LoadFromResource("BlinkStickClient.blinkstick.png");
+
+            LoadDisplay();
+        }
+
+        public void LoadDisplay()
+        {
+            switch (EmulatedDevice)
+            {
+                case BlinkStickDeviceEnum.BlinkStick:
+                    display = Gdk.Pixbuf.LoadFromResource("BlinkStickClient.Resources.blinkstick.png");
+                    break;
+                case BlinkStickDeviceEnum.BlinkStickPro:
+                    display = Gdk.Pixbuf.LoadFromResource("BlinkStickClient.Resources.blinkstick-pro.png");
+                    break;
+                case BlinkStickDeviceEnum.BlinkStickSquare:
+                    display = Gdk.Pixbuf.LoadFromResource("BlinkStickClient.Resources.blinkstick-square.png");
+                    break;
+                case BlinkStickDeviceEnum.BlinkStickStrip:
+                    display = Gdk.Pixbuf.LoadFromResource("BlinkStickClient.Resources.blinkstick-strip.png");
+                    break;
+                default:
+                    display = null;
+                    break;
+            }
+
+            drawingareaMain.QueueDraw();
         }
 
         void HandleExposeEvent (object o, Gtk.ExposeEventArgs args)
         {
+            if (display == null)
+                return;
+
             DrawingArea area = (DrawingArea) o;
             Cairo.Context cr =  Gdk.CairoHelper.Create(area.GdkWindow);
 
-            int border = Math.Min((int)(Allocation.Width * 0.2), (int)(Allocation.Height * 0.2));
+            int border = Math.Min((int)(Allocation.Width * 0.1), (int)(Allocation.Height * 0.1));
 
             double scale = Math.Max (1.0 * display.Width / (Allocation.Width - border * 2), 1.0 * display.Height / (Allocation.Height - border * 2));
 

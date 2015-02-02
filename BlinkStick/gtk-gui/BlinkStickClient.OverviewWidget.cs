@@ -18,9 +18,9 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Button buttonDelete;
 		
-		private global::Gtk.HBox hboxMain;
+		private global::BlinkStickClient.BlinkStickEmulatorWidget blinkstickemulatorwidget1;
 		
-		private global::Gtk.Image imageBlinkStickPreview;
+		private global::Gtk.HSeparator hseparator1;
 		
 		private global::BlinkStickClient.BlinkStickInfoWidget blinkstickinfowidget2;
 		
@@ -110,31 +110,28 @@ namespace BlinkStickClient
 			w9.Expand = false;
 			w9.Fill = false;
 			// Container child vbox4.Gtk.Box+BoxChild
-			this.hboxMain = new global::Gtk.HBox ();
-			this.hboxMain.Name = "hboxMain";
-			this.hboxMain.Spacing = 6;
-			this.hboxMain.BorderWidth = ((uint)(12));
-			// Container child hboxMain.Gtk.Box+BoxChild
-			this.imageBlinkStickPreview = new global::Gtk.Image ();
-			this.imageBlinkStickPreview.HeightRequest = 150;
-			this.imageBlinkStickPreview.Name = "imageBlinkStickPreview";
-			this.hboxMain.Add (this.imageBlinkStickPreview);
-			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hboxMain [this.imageBlinkStickPreview]));
-			w10.Position = 0;
-			w10.Expand = false;
-			w10.Fill = false;
-			// Container child hboxMain.Gtk.Box+BoxChild
+			this.blinkstickemulatorwidget1 = new global::BlinkStickClient.BlinkStickEmulatorWidget ();
+			this.blinkstickemulatorwidget1.HeightRequest = 200;
+			this.blinkstickemulatorwidget1.Events = ((global::Gdk.EventMask)(256));
+			this.blinkstickemulatorwidget1.Name = "blinkstickemulatorwidget1";
+			this.vbox4.Add (this.blinkstickemulatorwidget1);
+			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.blinkstickemulatorwidget1]));
+			w10.Position = 1;
+			// Container child vbox4.Gtk.Box+BoxChild
+			this.hseparator1 = new global::Gtk.HSeparator ();
+			this.hseparator1.Name = "hseparator1";
+			this.vbox4.Add (this.hseparator1);
+			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.hseparator1]));
+			w11.Position = 2;
+			w11.Expand = false;
+			w11.Fill = false;
+			// Container child vbox4.Gtk.Box+BoxChild
 			this.blinkstickinfowidget2 = new global::BlinkStickClient.BlinkStickInfoWidget ();
 			this.blinkstickinfowidget2.Events = ((global::Gdk.EventMask)(256));
 			this.blinkstickinfowidget2.Name = "blinkstickinfowidget2";
-			this.hboxMain.Add (this.blinkstickinfowidget2);
-			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.hboxMain [this.blinkstickinfowidget2]));
-			w11.Position = 1;
-			w11.Expand = false;
-			w11.Fill = false;
-			this.vbox4.Add (this.hboxMain);
-			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.hboxMain]));
-			w12.Position = 1;
+			this.vbox4.Add (this.blinkstickinfowidget2);
+			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.blinkstickinfowidget2]));
+			w12.Position = 3;
 			w12.Expand = false;
 			w12.Fill = false;
 			// Container child vbox4.Gtk.Box+BoxChild
@@ -158,7 +155,7 @@ namespace BlinkStickClient
 			this.frame2.LabelWidget = this.GtkLabel11;
 			this.vbox4.Add (this.frame2);
 			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.frame2]));
-			w15.Position = 2;
+			w15.Position = 4;
 			this.Add (this.vbox4);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

@@ -70,8 +70,10 @@
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="blinkstick.svg" />
-    <EmbeddedResource Include="blinkstick.png" />
+    <EmbeddedResource Include="Resources\blinkstick.png" />
+    <EmbeddedResource Include="Resources\blinkstick-pro.png" />
+    <EmbeddedResource Include="Resources\blinkstick-square.png" />
+    <EmbeddedResource Include="Resources\blinkstick-strip.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />

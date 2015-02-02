@@ -2924,7 +2924,7 @@ Pulse</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="BlinkStickClient.BlinkStickInfoWidget" design-size="1388 1363">
+  <widget class="Gtk.Bin" id="BlinkStickClient.BlinkStickInfoWidget" design-size="351 170">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -2932,6 +2932,7 @@ Pulse</property>
         <property name="MemberName" />
         <property name="NRows">5</property>
         <property name="NColumns">2</property>
+        <property name="Homogeneous">True</property>
         <property name="RowSpacing">8</property>
         <property name="ColumnSpacing">6</property>
         <property name="BorderWidth">12</property>
@@ -3143,7 +3144,7 @@ Pulse</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="BlinkStickClient.OverviewWidget" design-size="483 352">
+  <widget class="Gtk.Bin" id="BlinkStickClient.OverviewWidget" design-size="483 453">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -3245,37 +3246,34 @@ Pulse</property>
           </packing>
         </child>
         <child>
-          <widget class="Gtk.HBox" id="hboxMain">
+          <widget class="BlinkStickClient.BlinkStickEmulatorWidget" id="blinkstickemulatorwidget1">
             <property name="MemberName" />
-            <property name="Spacing">6</property>
-            <property name="BorderWidth">12</property>
-            <child>
-              <widget class="Gtk.Image" id="imageBlinkStickPreview">
-                <property name="MemberName" />
-                <property name="HeightRequest">150</property>
-              </widget>
-              <packing>
-                <property name="Position">0</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="BlinkStickClient.BlinkStickInfoWidget" id="blinkstickinfowidget2">
-                <property name="MemberName" />
-                <property name="Events">ButtonPressMask</property>
-              </widget>
-              <packing>
-                <property name="Position">1</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
-              </packing>
-            </child>
+            <property name="HeightRequest">200</property>
+            <property name="Events">ButtonPressMask</property>
           </widget>
           <packing>
             <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.HSeparator" id="hseparator1">
+            <property name="MemberName" />
+          </widget>
+          <packing>
+            <property name="Position">2</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="BlinkStickClient.BlinkStickInfoWidget" id="blinkstickinfowidget2">
+            <property name="MemberName" />
+            <property name="Events">ButtonPressMask</property>
+          </widget>
+          <packing>
+            <property name="Position">3</property>
             <property name="AutoSize">True</property>
             <property name="Expand">False</property>
             <property name="Fill">False</property>
@@ -3320,7 +3318,7 @@ Pulse</property>
             </child>
           </widget>
           <packing>
-            <property name="Position">2</property>
+            <property name="Position">4</property>
             <property name="AutoSize">True</property>
           </packing>
         </child>

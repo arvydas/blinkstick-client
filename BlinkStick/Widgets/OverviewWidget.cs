@@ -35,9 +35,11 @@ namespace BlinkStickClient
         {
             this.Build();
 
+            /*
             Gdk.Pixbuf image = Gdk.Pixbuf.LoadFromResource("BlinkStickClient.blinkstick.png");
             image = image.ScaleSimple(image.Width / 2, image.Height / 2, Gdk.InterpType.Nearest);
             imageBlinkStickPreview.Pixbuf = image;
+            */
 
             hbox1.PackStart(colorPaletteWidget);
 
@@ -132,6 +134,15 @@ namespace BlinkStickClient
             buttonConfigure.Sensitive = comboboxDevices.Active != -1 && SelectedBlinkStick != null && SelectedBlinkStick.Led != null;
             buttonDelete.Sensitive = comboboxDevices.Active != -1 && SelectedBlinkStick != null && SelectedBlinkStick.Led == null;
             blinkstickinfowidget2.UpdateUI(SelectedBlinkStick);
+
+            if (SelectedBlinkStick != null && SelectedBlinkStick.Led != null)
+            {
+                blinkstickemulatorwidget1.EmulatedDevice = SelectedBlinkStick.Led.BlinkStickDevice;
+            }
+            else
+            {
+                blinkstickemulatorwidget1.EmulatedDevice = BlinkStickDotNet.BlinkStickDeviceEnum.Unknown;
+            }
         }
 
         protected void OnComboboxDevicesChanged (object sender, EventArgs e)
