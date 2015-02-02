@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Gtk;
 using Cairo;
 using Gdk;
@@ -23,6 +24,8 @@ namespace BlinkStickClient
         public String[] ColorList = new String[] {"black", "gray25", "gray50", "gray75", "white", "red", "green", "blue", "yellow", "orange", "brown", 
             "violet", "DarkViolet", "magenta", "SlateBlue1", "green1"};
 
+        private List<Gdk.Color> CachedColors = new List<Gdk.Color>();
+
         public int SelectedIndex { get; private set; }
 
         public int TileSize { set; get; }
@@ -35,6 +38,14 @@ namespace BlinkStickClient
             this.SelectedIndex = -1;
 
             AddEvents((int)(EventMask.ButtonPressMask | EventMask.ButtonReleaseMask | EventMask.PointerMotionMask));
+
+            for (int i = 0; i < ColorList.Length; i++)
+            {
+                Gdk.Color c = new Gdk.Color();
+                Gdk.Color.Parse(ColorList[i], ref c);
+
+                CachedColors.Add(c);
+            }
         }
 
         protected override bool OnExposeEvent(Gdk.EventExpose args)
@@ -56,9 +67,7 @@ namespace BlinkStickClient
                 DrawRoundedRectangle(cr, TileSpacing + (TileSize + TileSpacing) * i - grow,
                     TileSpacing - grow, TileSize + grow * 2, TileSize + grow * 2, 3);
 
-                Gdk.Color c = new Gdk.Color();
-                Gdk.Color.Parse(ColorList[i], ref c);
-                cr.SetSourceRGB(c.Red / (float)0x10000, c.Green / (float)0x10000, c.Blue / (float)0x10000);
+                cr.SetSourceRGB(CachedColors[i].Red / (float)0x10000, CachedColors[i].Green / (float)0x10000, CachedColors[i].Blue / (float)0x10000);
 
                 cr.FillPreserve ();
 
@@ -125,6 +134,10 @@ namespace BlinkStickClient
 
         protected override bool OnButtonReleaseEvent(Gdk.EventButton evnt)
         {
+            if (SelectedIndex > -1)
+            {
+                OnColorClicked(CachedColors[SelectedIndex]);
+            }
 
             return base.OnButtonReleaseEvent(evnt);
         }

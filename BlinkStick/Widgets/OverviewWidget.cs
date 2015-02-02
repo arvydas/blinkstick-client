@@ -11,6 +11,8 @@ namespace BlinkStickClient
 
         ListStore store = new ListStore(typeof (BlinkStickDeviceSettings));
 
+        ColorPaletteWidget colorPaletteWidget = new ColorPaletteWidget();
+
         private BlinkStickDeviceSettings _SelectedBlinkStick;
 
         private BlinkStickDeviceSettings SelectedBlinkStick
@@ -37,7 +39,15 @@ namespace BlinkStickClient
             image = image.ScaleSimple(image.Width / 2, image.Height / 2, Gdk.InterpType.Nearest);
             imageBlinkStickPreview.Pixbuf = image;
 
-            hbox1.PackStart(new ColorPaletteWidget());
+            hbox1.PackStart(colorPaletteWidget);
+
+            colorPaletteWidget.ColorClicked += (object sender, ColorClickedEventArgs e) => {
+                if (SelectedBlinkStick != null && SelectedBlinkStick.Led != null)
+                {
+                    BlinkStickDotNet.RgbColor color = BlinkStickDotNet.RgbColor.FromGdkColor(e.Color.Red, e.Color.Green, e.Color.Blue);
+                    SelectedBlinkStick.Led.SetColor(color.R, color.G, color.B);
+                }
+            };
     
             CellRendererPixbuf blinkstickConnectedCell = new CellRendererPixbuf();
             comboboxDevices.PackStart(blinkstickConnectedCell, false);
@@ -72,15 +82,6 @@ namespace BlinkStickClient
                 (cell as CellRendererText).Text = myclass.ToString();
                 cell.Xalign = 0;
             }
-        }
-
-        protected void OnButtonConfigureBlinkStickClicked (object sender, EventArgs e)
-        {
-            ConfigureBlinkStickDialog dialog = new ConfigureBlinkStickDialog();
-            dialog.DeviceSettings = SelectedBlinkStick;
-            dialog.UpdateUI();
-            dialog.Run();
-            dialog.Destroy();
         }
 
         public void RefreshDevices()
@@ -128,8 +129,8 @@ namespace BlinkStickClient
 
         private void UpdateUI()
         {
-            buttonConfigure.Sensitive = comboboxDevices.Active != -1 && SelectedBlinkStick.Led != null;
-            buttonDelete.Sensitive = comboboxDevices.Active != -1 && SelectedBlinkStick.Led == null;
+            buttonConfigure.Sensitive = comboboxDevices.Active != -1 && SelectedBlinkStick != null && SelectedBlinkStick.Led != null;
+            buttonDelete.Sensitive = comboboxDevices.Active != -1 && SelectedBlinkStick != null && SelectedBlinkStick.Led == null;
             blinkstickinfowidget2.UpdateUI(SelectedBlinkStick);
         }
 
@@ -152,6 +153,15 @@ namespace BlinkStickClient
         {
             BlinkStickDeviceList.Devices.Remove(SelectedBlinkStick);
             RefreshDevices();
+        }
+
+        protected void OnButtonConfigureClicked (object sender, EventArgs e)
+        {
+            ConfigureBlinkStickDialog dialog = new ConfigureBlinkStickDialog();
+            dialog.DeviceSettings = SelectedBlinkStick;
+            dialog.UpdateUI();
+            dialog.Run();
+            dialog.Destroy();
         }
     }
 }

@@ -166,7 +166,7 @@ namespace BlinkStickClient
 			this.Hide ();
 			this.comboboxDevices.Changed += new global::System.EventHandler (this.OnComboboxDevicesChanged);
 			this.buttonRefresh.Clicked += new global::System.EventHandler (this.OnButtonRefreshClicked);
-			this.buttonConfigure.Clicked += new global::System.EventHandler (this.OnButtonConfigureBlinkStickClicked);
+			this.buttonConfigure.Clicked += new global::System.EventHandler (this.OnButtonConfigureClicked);
 			this.buttonDelete.Clicked += new global::System.EventHandler (this.OnButtonDeleteClicked);
 		}
 	}

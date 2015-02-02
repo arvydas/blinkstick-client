@@ -3207,7 +3207,7 @@ Pulse</property>
                 <property name="Icon">stock:gtk-preferences Menu</property>
                 <property name="Label" translatable="yes" />
                 <property name="UseUnderline">True</property>
-                <signal name="Clicked" handler="OnButtonConfigureBlinkStickClicked" />
+                <signal name="Clicked" handler="OnButtonConfigureClicked" />
               </widget>
               <packing>
                 <property name="Position">3</property>
