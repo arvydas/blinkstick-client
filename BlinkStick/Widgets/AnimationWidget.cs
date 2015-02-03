@@ -15,7 +15,7 @@ namespace BlinkStickClient
             set {
                 _Index = value;
                 labelNumber.Text = "#" + value.ToString(); 
-                ButtonVisibility(true);
+                ButtonVisibility(ShowEditControls);
             }
         }
 
@@ -26,7 +26,7 @@ namespace BlinkStickClient
             }
             set {
                 _Count = value;
-                ButtonVisibility(true);
+                ButtonVisibility(ShowEditControls);
             }
         }
 
@@ -72,6 +72,8 @@ namespace BlinkStickClient
             }
         }
 
+        public Boolean ShowEditControls { get; set; }
+
         public AnimationWidget()
         {
             this.Build();
@@ -90,7 +92,9 @@ namespace BlinkStickClient
             };
             */
 
-            ButtonVisibility(true);
+            ShowEditControls = false;
+
+            UpdateUIControls();
 
             /*
             foreach (Widget widget in this.AllChildren)
@@ -111,37 +115,20 @@ namespace BlinkStickClient
         {
             buttonUp.Visible = visible;
             buttonUp.Sensitive = visible && Index != 1;
-            buttonUp.NoShowAll = visible;
+            buttonUp.NoShowAll = !visible;
 
             buttonDown.Visible = visible;
             buttonDown.Sensitive = visible && Index != Count;
-            buttonDown.NoShowAll = visible;
+            buttonDown.NoShowAll = !visible;
 
             buttonDelete.Visible = visible;
             buttonDelete.Sensitive = visible && Count != 1;
-            buttonDelete.NoShowAll = visible;
-
-            if (visible)
-                this.Show();
+            buttonDelete.NoShowAll = !visible;
         }
 
         protected void OnComboboxModeChanged (object sender, EventArgs e)
         {
-            hboxSetColor.Visible = comboboxMode.Active == 0;
-            hboxSetColor.Sensitive = comboboxMode.Active == 0;
-            hboxSetColor.NoShowAll = !(comboboxMode.Active == 0);
-
-            hboxBlink.Visible = comboboxMode.Active == 1;
-            hboxBlink.Sensitive = comboboxMode.Active == 1;
-            hboxBlink.NoShowAll = !(comboboxMode.Active == 1);
-
-            hboxMorph.Visible = comboboxMode.Active == 2;
-            hboxMorph.Sensitive = comboboxMode.Active == 2;
-            hboxMorph.NoShowAll = !(comboboxMode.Active == 2);
-
-            hboxPulse.Visible = comboboxMode.Active == 3;
-            hboxPulse.Sensitive = comboboxMode.Active == 3;
-            hboxPulse.NoShowAll = !(comboboxMode.Active == 3);
+            UpdateUIControls();
 
             if (AnimationObject != null)
             {
@@ -163,6 +150,27 @@ namespace BlinkStickClient
             }
 
             this.Show();
+        }
+
+        private void UpdateUIControls()
+        {
+            hboxSetColor.Visible = comboboxMode.Active == 0 && ShowEditControls;
+            hboxSetColor.Sensitive = comboboxMode.Active == 0 && ShowEditControls;
+            hboxSetColor.NoShowAll = !(comboboxMode.Active == 0) && !ShowEditControls;
+
+            hboxBlink.Visible = comboboxMode.Active == 1 && ShowEditControls;
+            hboxBlink.Sensitive = comboboxMode.Active == 1 && ShowEditControls;
+            hboxBlink.NoShowAll = !(comboboxMode.Active == 1) && !ShowEditControls;
+
+            hboxMorph.Visible = comboboxMode.Active == 2 && ShowEditControls;
+            hboxMorph.Sensitive = comboboxMode.Active == 2 && ShowEditControls;
+            hboxMorph.NoShowAll = !(comboboxMode.Active == 2) && !ShowEditControls;
+
+            hboxPulse.Visible = comboboxMode.Active == 3 && ShowEditControls;
+            hboxPulse.Sensitive = comboboxMode.Active == 3 && ShowEditControls;
+            hboxPulse.NoShowAll = !(comboboxMode.Active == 3) && !ShowEditControls;
+
+            ButtonVisibility(ShowEditControls);
         }
 
         private void LoadAnimationObject()
@@ -272,6 +280,12 @@ namespace BlinkStickClient
                 return;
 
             AnimationObject.DurationMorph = (sender as SpinButton).ValueAsInt;
+        }
+
+        protected void OnButtonPropertiesClicked (object sender, EventArgs e)
+        {
+            ShowEditControls = !ShowEditControls;
+            UpdateUIControls();
         }
     }
 }

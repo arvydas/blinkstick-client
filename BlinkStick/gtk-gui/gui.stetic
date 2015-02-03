@@ -2359,7 +2359,7 @@ Inverse</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="BlinkStickClient.AnimationWidget" design-size="307 173">
+  <widget class="Gtk.Bin" id="BlinkStickClient.AnimationWidget" design-size="367 177">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <property name="Events">PointerMotionMask, ButtonMotionMask, Button1MotionMask, Button2MotionMask, Button3MotionMask, EnterNotifyMask, LeaveNotifyMask, ProximityInMask, ProximityOutMask</property>
@@ -2386,14 +2386,21 @@ Inverse</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.ComboBox" id="comboboxMode">
+              <widget class="Gtk.Alignment" id="alignment2">
                 <property name="MemberName" />
-                <property name="IsTextCombo">True</property>
-                <property name="Items" translatable="yes">Set Color
+                <property name="TopPadding">3</property>
+                <property name="BottomPadding">3</property>
+                <child>
+                  <widget class="Gtk.ComboBox" id="comboboxMode">
+                    <property name="MemberName" />
+                    <property name="IsTextCombo">True</property>
+                    <property name="Items" translatable="yes">Set Color
 Blink
 Morph
 Pulse</property>
-                <signal name="Changed" handler="OnComboboxModeChanged" />
+                    <signal name="Changed" handler="OnComboboxModeChanged" />
+                  </widget>
+                </child>
               </widget>
               <packing>
                 <property name="Position">1</property>
@@ -2442,7 +2449,7 @@ Pulse</property>
               </widget>
               <packing>
                 <property name="Position">4</property>
-                <property name="AutoSize">False</property>
+                <property name="AutoSize">True</property>
                 <property name="Expand">False</property>
                 <property name="Fill">False</property>
               </packing>
@@ -2459,7 +2466,7 @@ Pulse</property>
               </widget>
               <packing>
                 <property name="Position">5</property>
-                <property name="AutoSize">False</property>
+                <property name="AutoSize">True</property>
                 <property name="Expand">False</property>
                 <property name="Fill">False</property>
               </packing>
@@ -2475,9 +2482,26 @@ Pulse</property>
                 <signal name="Clicked" handler="OnButtonDeleteClicked" />
               </widget>
               <packing>
-                <property name="PackType">End</property>
                 <property name="Position">6</property>
-                <property name="AutoSize">False</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.Button" id="buttonProperties">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Type">TextAndIcon</property>
+                <property name="Icon">stock:gtk-edit Menu</property>
+                <property name="Label" translatable="yes" />
+                <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnButtonPropertiesClicked" />
+              </widget>
+              <packing>
+                <property name="PackType">End</property>
+                <property name="Position">7</property>
+                <property name="AutoSize">True</property>
                 <property name="Expand">False</property>
                 <property name="Fill">False</property>
               </packing>
