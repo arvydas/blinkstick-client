@@ -9,6 +9,7 @@ namespace BlinkStickClient
     public partial class NotificationsWidget : Gtk.Bin
     {
         public BlinkStickDevices BlinkStickDeviceList;
+        public ApplicationDataModel DataModel;
 
         protected static readonly ILog log = LogManager.GetLogger("Main");  
 
@@ -66,12 +67,9 @@ namespace BlinkStickClient
         public void Initialize()
         {
             log.Debug("Adding notifications to the tree");
-            /*
-            foreach (Notification e in Manager.Notifications) {
-                //EventListStore.AppendValues(customEventRoot, e);
-                EventListStore.AppendValues (e);
+            foreach (Notification e in DataModel.Notifications) {
+                NotificationListStore.AppendValues (e);
             } 
-            */
 
             UpdateButtons();
         }
@@ -142,6 +140,7 @@ namespace BlinkStickClient
                     if (dialog2.Run() == (int)ResponseType.Ok)
                     {
                         NotificationListStore.AppendValues(notification);
+                        DataModel.Notifications.Add(notification);
                     }
                     dialog2.Destroy();
                 }

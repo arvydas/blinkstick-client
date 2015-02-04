@@ -250,6 +250,7 @@ public partial class MainWindow: Gtk.Window
 
         notificationsWidget = new NotificationsWidget();
         //!!!notificationsWidget.Manager = this.Manager;
+        notificationsWidget.DataModel = DataModel;
         notificationsWidget.Initialize();
         hbox1.PackEnd(notificationsWidget, true, true, 0);
         Pages.Add(notificationsWidget);

@@ -9,6 +9,7 @@ namespace BlinkStickClient.DataModel
     public class ApplicationDataModel
     {
         public List<Pattern> Patterns = new List<Pattern>();
+        public List<Notification> Notifications = new List<Notification>();
 
         private String FileName;
         private String BackupFileName;
@@ -107,8 +108,10 @@ namespace BlinkStickClient.DataModel
         public void Assign(ApplicationDataModel data)
         {
             this.Patterns.Clear();
-
             this.Patterns.AddRange(data.Patterns);
+
+            this.Notifications.Clear();
+            this.Notifications.AddRange(data.Notifications);
         }
         #endregion
     }
