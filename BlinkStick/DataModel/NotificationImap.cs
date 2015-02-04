@@ -12,6 +12,16 @@ namespace BlinkStickClient.DataModel
         public NotificationImap()
         {
         }
+
+        public override Notification Copy(Notification notification)
+        {
+            if (notification == null)
+            {
+                notification = new NotificationImap();
+            }
+
+            return base.Copy(notification);
+        }
     }
 }
 

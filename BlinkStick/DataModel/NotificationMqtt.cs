@@ -12,6 +12,16 @@ namespace BlinkStickClient.DataModel
         public NotificationMqtt()
         {
         }
+
+        public override Notification Copy(Notification notification)
+        {
+            if (notification == null)
+            {
+                notification = new NotificationMqtt();
+            }
+
+            return base.Copy(notification);
+        }
     }
 }
 

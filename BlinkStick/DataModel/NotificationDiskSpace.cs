@@ -12,6 +12,16 @@ namespace BlinkStickClient.DataModel
         public NotificationDiskSpace()
         {
         }
+
+        public override Notification Copy(Notification notification)
+        {
+            if (notification == null)
+            {
+                notification = new NotificationDiskSpace();
+            }
+
+            return base.Copy(notification);
+        }
     }
 }
 

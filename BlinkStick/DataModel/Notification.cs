@@ -18,6 +18,19 @@ namespace BlinkStickClient.DataModel
         {
             //Empty, nothing to dispose in base class
         }
+
+        public virtual Notification Copy(Notification notification = null)
+        {
+            if (notification == null)
+            {
+                throw new ArgumentNullException("notification");
+            }
+
+            notification.Name = this.Name;
+            notification.BlinkStickSerial = this.BlinkStickSerial;
+
+            return notification;
+        }
     }
 }
 

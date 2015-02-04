@@ -12,6 +12,16 @@ namespace BlinkStickClient.DataModel
         public NotificationRam()
         {
         }
+
+        public override Notification Copy(Notification notification)
+        {
+            if (notification == null)
+            {
+                notification = new NotificationRam();
+            }
+
+            return base.Copy(notification);
+        }
     }
 }
 

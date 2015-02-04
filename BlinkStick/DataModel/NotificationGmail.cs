@@ -12,6 +12,16 @@ namespace BlinkStickClient.DataModel
         public NotificationGmail()
         {
         }
+
+        public override Notification Copy(Notification notification)
+        {
+            if (notification == null)
+            {
+                notification = new NotificationGmail();
+            }
+
+            return base.Copy(notification);
+        }
     }
 }
 

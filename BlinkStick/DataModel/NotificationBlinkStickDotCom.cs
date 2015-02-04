@@ -13,6 +13,16 @@ namespace BlinkStickClient.DataModel
         {
 
         }
+
+        public override Notification Copy(Notification notification)
+        {
+            if (notification == null)
+            {
+                notification = new NotificationBlinkStickDotCom();
+            }
+
+            return base.Copy(notification);
+        }
     }
 }
 

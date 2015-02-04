@@ -12,6 +12,16 @@ namespace BlinkStickClient.DataModel
         public NotificationRemoteControl()
         {
         }
+
+        public override Notification Copy(Notification notification)
+        {
+            if (notification == null)
+            {
+                notification = new NotificationRemoteControl();
+            }
+
+            return base.Copy(notification);
+        }
     }
 }
 

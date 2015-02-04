@@ -11,6 +11,19 @@ namespace BlinkStickClient.DataModel
         public PatternNotification()
         {
         }
+
+        public override Notification Copy(Notification notification)
+        {
+            if (notification == null)
+            {
+                throw new ArgumentNullException("notification");
+            }
+
+            (notification as PatternNotification).Pattern = this.Pattern;
+            (notification as PatternNotification).LedIndex = this.LedIndex;
+
+            return base.Copy(notification);
+        }
     }
 }
 
