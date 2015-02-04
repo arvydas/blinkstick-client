@@ -10,7 +10,7 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Label labelSelectBlinkStick;
 		
-		private global::Gtk.ComboBox comboboxDevices;
+		private global::BlinkStickClient.DeviceComboboxWidget deviceComboboxWidget;
 		
 		private global::Gtk.Button buttonRefresh;
 		
@@ -57,11 +57,12 @@ namespace BlinkStickClient
 			w1.Expand = false;
 			w1.Fill = false;
 			// Container child hboxMiniMenu.Gtk.Box+BoxChild
-			this.comboboxDevices = new global::Gtk.ComboBox ();
-			this.comboboxDevices.WidthRequest = 150;
-			this.comboboxDevices.Name = "comboboxDevices";
-			this.hboxMiniMenu.Add (this.comboboxDevices);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.comboboxDevices]));
+			this.deviceComboboxWidget = new global::BlinkStickClient.DeviceComboboxWidget ();
+			this.deviceComboboxWidget.WidthRequest = 130;
+			this.deviceComboboxWidget.Events = ((global::Gdk.EventMask)(256));
+			this.deviceComboboxWidget.Name = "deviceComboboxWidget";
+			this.hboxMiniMenu.Add (this.deviceComboboxWidget);
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.deviceComboboxWidget]));
 			w2.Position = 1;
 			w2.Expand = false;
 			w2.Fill = false;
@@ -161,7 +162,6 @@ namespace BlinkStickClient
 				this.Child.ShowAll ();
 			}
 			this.Hide ();
-			this.comboboxDevices.Changed += new global::System.EventHandler (this.OnComboboxDevicesChanged);
 			this.buttonRefresh.Clicked += new global::System.EventHandler (this.OnButtonRefreshClicked);
 			this.buttonConfigure.Clicked += new global::System.EventHandler (this.OnButtonConfigureClicked);
 			this.buttonDelete.Clicked += new global::System.EventHandler (this.OnButtonDeleteClicked);

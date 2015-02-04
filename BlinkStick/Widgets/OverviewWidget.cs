@@ -13,24 +13,6 @@ namespace BlinkStickClient
 
         ColorPaletteWidget colorPaletteWidget = new ColorPaletteWidget();
 
-        private BlinkStickDeviceSettings _SelectedBlinkStick;
-
-        private BlinkStickDeviceSettings SelectedBlinkStick
-        {
-            get
-            {
-                return _SelectedBlinkStick;
-            }
-
-            set 
-            {
-                if (_SelectedBlinkStick != value)
-                {
-                    _SelectedBlinkStick = value;
-                }
-            }
-        }
-
         public OverviewWidget()
         {
             this.Build();
@@ -38,34 +20,27 @@ namespace BlinkStickClient
             hbox1.PackStart(colorPaletteWidget);
 
             colorPaletteWidget.ColorClicked += (object sender, ColorClickedEventArgs e) => {
-                if (SelectedBlinkStick != null && SelectedBlinkStick.Led != null)
+                if (deviceComboboxWidget.SelectedBlinkStick != null && deviceComboboxWidget.SelectedBlinkStick.Led != null)
                 {
                     BlinkStickDotNet.RgbColor color = BlinkStickDotNet.RgbColor.FromGdkColor(e.Color.Red, e.Color.Green, e.Color.Blue);
                     if (blinkstickemulatorwidget1.SelectedLed == -1)
                     {
-                        SelectedBlinkStick.SetColor(color.R, color.G, color.B);
+                        deviceComboboxWidget.SelectedBlinkStick.SetColor(color.R, color.G, color.B);
                         blinkstickemulatorwidget1.SetColor(e.Color);
                     }
                     else
                     {
-                        SelectedBlinkStick.SetColor(0, (byte)blinkstickemulatorwidget1.SelectedLed, color.R, color.G, color.B);
+                        deviceComboboxWidget.SelectedBlinkStick.SetColor(0, (byte)blinkstickemulatorwidget1.SelectedLed, color.R, color.G, color.B);
                         blinkstickemulatorwidget1.SetColor((byte)blinkstickemulatorwidget1.SelectedLed, e.Color);
                     }
                 }
             };
+
+            deviceComboboxWidget.DeviceChanged += (object sender, EventArgs e) => {
+                UpdateUI();
+            };
     
-            CellRendererPixbuf blinkstickConnectedCell = new CellRendererPixbuf();
-            comboboxDevices.PackStart(blinkstickConnectedCell, false);
-            comboboxDevices.SetCellDataFunc(blinkstickConnectedCell, BlinkStickConnectedRenderer);
-
-            CellRendererText blinkStickDeviceSettingsCell = new CellRendererText();
-            comboboxDevices.PackStart(blinkStickDeviceSettingsCell, true);
-            comboboxDevices.AddAttribute (blinkStickDeviceSettingsCell, "text", 0);
-            comboboxDevices.SetCellDataFunc(blinkStickDeviceSettingsCell, BlinkStickDeviceSettingsClassRenderer);
-
             RefreshDevices();
-
-            comboboxDevices.Model = store;
 
             UpdateUI();
         }
@@ -100,62 +75,23 @@ namespace BlinkStickClient
 
             BlinkStickDeviceList.ProcessUntouched();
 
-            int previousDeviceIndex = comboboxDevices.Active;
-
-            store.Clear();
-
-            foreach (BlinkStickDeviceSettings entity in BlinkStickDeviceList.Devices) {
-                store.AppendValues(entity);
-            }
-
-            SelectedBlinkStick = null;
-
-            if (store.IterNChildren() >= 1)
-            {
-                if (previousDeviceIndex == -1)
-                {
-                    comboboxDevices.Active = 0;
-                }
-                else 
-                {
-                    while (store.IterNChildren() <= previousDeviceIndex)
-                    {
-                        previousDeviceIndex--;
-                    }
-
-                    comboboxDevices.Active = previousDeviceIndex;
-                }
-            }
-            else
-            {
-                comboboxDevices.Active = -1;
-            }
+            deviceComboboxWidget.LoadDevices(BlinkStickDeviceList);
         }
 
         private void UpdateUI()
         {
-            buttonConfigure.Sensitive = comboboxDevices.Active != -1 && SelectedBlinkStick != null && SelectedBlinkStick.Led != null;
-            buttonDelete.Sensitive = comboboxDevices.Active != -1 && SelectedBlinkStick != null && SelectedBlinkStick.Led == null;
-            blinkstickinfowidget2.UpdateUI(SelectedBlinkStick);
+            buttonConfigure.Sensitive = deviceComboboxWidget.SelectedBlinkStick != null && deviceComboboxWidget.SelectedBlinkStick.Led != null;
+            buttonDelete.Sensitive = deviceComboboxWidget.SelectedBlinkStick != null && deviceComboboxWidget.SelectedBlinkStick.Led == null;
+            blinkstickinfowidget2.UpdateUI(deviceComboboxWidget.SelectedBlinkStick);
 
-            if (SelectedBlinkStick != null && SelectedBlinkStick.Led != null)
+            if (deviceComboboxWidget.SelectedBlinkStick != null && deviceComboboxWidget.SelectedBlinkStick.Led != null)
             {
-                blinkstickemulatorwidget1.EmulatedDevice = SelectedBlinkStick.Led.BlinkStickDevice;
+                blinkstickemulatorwidget1.EmulatedDevice = deviceComboboxWidget.SelectedBlinkStick.Led.BlinkStickDevice;
             }
             else
             {
                 blinkstickemulatorwidget1.EmulatedDevice = BlinkStickDotNet.BlinkStickDeviceEnum.Unknown;
             }
-        }
-
-        protected void OnComboboxDevicesChanged (object sender, EventArgs e)
-        {
-            TreeIter iter;
-
-            (sender as Gtk.ComboBox).GetActiveIter(out iter);
-            SelectedBlinkStick = (BlinkStickDeviceSettings)((sender as Gtk.ComboBox).Model.GetValue(iter, 0));
-
-            UpdateUI();
         }
 
         protected void OnButtonRefreshClicked (object sender, EventArgs e)
@@ -165,14 +101,14 @@ namespace BlinkStickClient
 
         protected void OnButtonDeleteClicked (object sender, EventArgs e)
         {
-            BlinkStickDeviceList.Devices.Remove(SelectedBlinkStick);
-            RefreshDevices();
+            BlinkStickDeviceList.Devices.Remove(deviceComboboxWidget.SelectedBlinkStick);
+            deviceComboboxWidget.LoadDevices(BlinkStickDeviceList);
         }
 
         protected void OnButtonConfigureClicked (object sender, EventArgs e)
         {
             ConfigureBlinkStickDialog dialog = new ConfigureBlinkStickDialog();
-            dialog.DeviceSettings = SelectedBlinkStick;
+            dialog.DeviceSettings = deviceComboboxWidget.SelectedBlinkStick;
             dialog.UpdateUI();
             dialog.Run();
             dialog.Destroy();
