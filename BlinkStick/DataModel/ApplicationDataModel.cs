@@ -56,6 +56,8 @@ namespace BlinkStickClient.DataModel
 
                     JsonSerializer serializer = new JsonSerializer ();
                     serializer.TypeNameHandling = TypeNameHandling.Auto;
+                    serializer.Formatting = Formatting.Indented;
+                    serializer.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
                     using (TextReader tr = new StreamReader(SettingsFileName)) {
                         data = (ApplicationDataModel)serializer.Deserialize(tr, this.GetType());
                         tr.Close();
@@ -79,6 +81,7 @@ namespace BlinkStickClient.DataModel
             JsonSerializer serializer = new JsonSerializer ();
             serializer.TypeNameHandling = TypeNameHandling.Auto;
             serializer.Formatting = Formatting.Indented;
+            serializer.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
             using (TextWriter tw = new StreamWriter(BackupFileName, false)) {
                 serializer.Serialize(tw, this);
                 tw.Close();
