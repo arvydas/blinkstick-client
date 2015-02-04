@@ -42,6 +42,8 @@ namespace BlinkStickClient
             comboboxPattern.SetCellDataFunc(blinkStickDeviceSettingsCell, PaternTitleRenderer);
 
             comboboxPattern.Model = store;
+
+            deviceComboboxWidget.AutoSelectDevice = false;
         }
 
         private void PaternTitleRenderer(CellLayout cell_layout, CellRenderer cell, TreeModel model, TreeIter iter)
