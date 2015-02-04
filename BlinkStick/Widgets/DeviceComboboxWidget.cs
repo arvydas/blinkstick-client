@@ -43,9 +43,13 @@ namespace BlinkStickClient
             }
         }
 
+        public Boolean AutoSelectDevice { get; set; }
+
         public DeviceComboboxWidget()
         {
             this.Build();
+
+            this.AutoSelectDevice = true;
 
             CellRendererPixbuf blinkstickConnectedCell = new CellRendererPixbuf();
             comboboxDevices.PackStart(blinkstickConnectedCell, false);
@@ -79,7 +83,10 @@ namespace BlinkStickClient
             {
                 if (previousDeviceIndex == -1)
                 {
-                    comboboxDevices.Active = 0;
+                    if (AutoSelectDevice)
+                    {
+                        comboboxDevices.Active = 0;
+                    }
                 }
                 else 
                 {
