@@ -93,6 +93,7 @@ namespace BlinkStickClient
 			this.deviceComboboxWidget = new global::BlinkStickClient.DeviceComboboxWidget ();
 			this.deviceComboboxWidget.Events = ((global::Gdk.EventMask)(256));
 			this.deviceComboboxWidget.Name = "deviceComboboxWidget";
+			this.deviceComboboxWidget.AutoSelectDevice = false;
 			this.table2.Add (this.deviceComboboxWidget);
 			global::Gtk.Table.TableChild w5 = ((global::Gtk.Table.TableChild)(this.table2 [this.deviceComboboxWidget]));
 			w5.TopAttach = ((uint)(1));

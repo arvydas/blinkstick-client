@@ -4798,6 +4798,7 @@ Pulse</property>
                       <widget class="BlinkStickClient.DeviceComboboxWidget" id="deviceComboboxWidget">
                         <property name="MemberName" />
                         <property name="Events">ButtonPressMask</property>
+                        <property name="AutoSelectDevice">False</property>
                       </widget>
                       <packing>
                         <property name="TopAttach">1</property>

@@ -32,6 +32,16 @@ namespace BlinkStickClient
         public BlinkStickDevices BlinkStickDeviceList;
         public ApplicationDataModel DataModel;
 
+        public Pattern SelectedPattern
+        {
+            get
+            {
+                TreeIter iter;
+                comboboxPattern.GetActiveIter(out iter);
+                return (Pattern)(comboboxPattern.Model.GetValue(iter, 0));
+            }
+        }
+
         public EditNotificationDialog()
         {
             this.Build();
@@ -68,6 +78,18 @@ namespace BlinkStickClient
                 return;
             }
 
+            if (deviceComboboxWidget.SelectedBlinkStick == null)
+            {
+                MessageBox.Show(this, "Please select BlinkStick device", Gtk.MessageType.Error);
+                return;
+            }
+
+            if (Notification is PatternNotification && SelectedPattern == null)
+            {
+                MessageBox.Show(this, "Please select a pattern", Gtk.MessageType.Error);
+                return;
+            }
+
             ControlsToObject();
 
             this.Respond(Gtk.ResponseType.Ok);
@@ -80,9 +102,7 @@ namespace BlinkStickClient
 
             if (Notification is PatternNotification)
             {
-                TreeIter iter;
-                comboboxPattern.GetActiveIter(out iter);
-                ((PatternNotification)Notification).Pattern = (Pattern)(comboboxPattern.Model.GetValue(iter, 0));
+                ((PatternNotification)Notification).Pattern = SelectedPattern;
             }
 
         }
