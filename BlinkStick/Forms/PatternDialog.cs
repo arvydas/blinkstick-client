@@ -6,6 +6,7 @@ using BlinkStickClient.Utils;
 using System.ComponentModel;
 using System.Threading;
 using BlinkStickDotNet;
+using BlinkStickClient.DataModel;
 
 namespace BlinkStickClient
 {

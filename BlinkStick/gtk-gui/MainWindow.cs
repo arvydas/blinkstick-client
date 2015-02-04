@@ -107,11 +107,11 @@ public partial class MainWindow
 		this.NotificationsToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Notifications");
 		w1.Add (this.NotificationsToolbarAction, null);
 		this.TestToolbarAction = new global::Gtk.RadioAction ("TestToolbarAction", global::Mono.Unix.Catalog.GetString ("Test"), null, null, 3);
-		this.TestToolbarAction.Group = this.OverviewToolbarAction.Group;
+		this.TestToolbarAction.Group = this.NotificationsToolbarAction.Group;
 		this.TestToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Test");
 		w1.Add (this.TestToolbarAction, null);
 		this.HelpToolbarAction = new global::Gtk.RadioAction ("HelpToolbarAction", global::Mono.Unix.Catalog.GetString ("Help"), null, null, 4);
-		this.HelpToolbarAction.Group = this.OverviewToolbarAction.Group;
+		this.HelpToolbarAction.Group = this.TestToolbarAction.Group;
 		this.HelpToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Help");
 		w1.Add (this.HelpToolbarAction, null);
 		this.PatternsAction1 = new global::Gtk.RadioAction ("PatternsAction1", global::Mono.Unix.Catalog.GetString ("Patterns"), null, null, 2);

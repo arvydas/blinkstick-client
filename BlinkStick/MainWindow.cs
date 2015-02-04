@@ -25,6 +25,7 @@ using Gtk;
 using log4net;
 using BlinkStickClient;
 using BlinkStickClient.Classes;
+using BlinkStickClient.DataModel;
 using BlinkStickDotNet;
 using BlinkStickClient.Utils;
 using MonoDevelop.MacInterop;
@@ -263,6 +264,82 @@ public partial class MainWindow: Gtk.Window
         HelpWidget helpWidget = new HelpWidget();
         hbox1.PackEnd(helpWidget, true, true, 0);
         Pages.Add(helpWidget);
+
+
+        NotificationRegistry.Register("Test", 
+            "Test Notification", 
+            "Simple test notification", 
+            typeof(NotificationTest));
+
+        NotificationRegistry.Register("Background", 
+            "Ambilight", 
+            "Creates an ambilight effect", 
+            typeof(NotificationAmbilight));
+
+        NotificationRegistry.Register("Internet", 
+            "GMail", 
+            "Checks your GMail account and notifies when new mail arrives", 
+            typeof(NotificationGmail));
+
+        NotificationRegistry.Register("Internet", 
+            "IMAP", 
+            "Checks your IMAP email account and notifies when new mail arrives", 
+            typeof(NotificationImap));
+
+        NotificationRegistry.Register("Internet", 
+            "POP3", 
+            "Checks your POP3 email account and notifies when new mail arrives", 
+            typeof(NotificationPop3));
+
+        NotificationRegistry.Register("Background", 
+            "Moodlight", 
+            "Randomly changes BlinkStick color to create color mood", 
+            typeof(NotificationMood));
+
+        NotificationRegistry.Register("Background", 
+            "Active Application", 
+            "Sets color for currently activated application", 
+            typeof(NotificationApplication));
+
+        NotificationRegistry.Register("Hardware", 
+            "CPU", 
+            "Displays a notification when CPU usage is above limit", 
+            typeof(NotificationCpu));
+
+        NotificationRegistry.Register("Hardware", 
+            "RAM", 
+            "Displays a notification when RAM usage is above limit", 
+            typeof(NotificationRam));
+
+        NotificationRegistry.Register("Hardware", 
+            "Battery", 
+            "Displays a notification when battery charge drops below certain limit", 
+            typeof(NotificationBattery));
+
+        NotificationRegistry.Register("Hardware", 
+            "Disk Space", 
+            "Displays a notification when available disk space drops below certain limit", 
+            typeof(NotificationDiskSpace));
+
+        NotificationRegistry.Register("Services", 
+            "Remote Control", 
+            "Creates a remote control server accessible via HTTP.", 
+            typeof(NotificationRemoteControl));
+
+        NotificationRegistry.Register("Services", 
+            "MQTT server", 
+            "Creates an MQTT server which allows remote control of connected BlinkStick devices via MQTT protocol.", 
+            typeof(NotificationMqtt));
+
+        NotificationRegistry.Register("Services", 
+            "Blinkstick.com", 
+            "Connects to www.blinkstick.com and allows remote control of a BlinkStick device", 
+            typeof(NotificationBlinkStickDotCom));
+
+        NotificationRegistry.Register("Services", 
+            "IFTTT", 
+            "Connects to IFTTT and allows remote control of a BlinkStick device", 
+            typeof(NotificationIfttt));
 
 		log.Debug("Initialization done");
 	}

@@ -129,15 +129,12 @@
     <Compile Include="gtk-gui\BlinkStickClient.AboutDialog.cs" />
     <Compile Include="Forms\PatternDialog.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.PatternDialog.cs" />
-    <Compile Include="Classes\Pattern.cs" />
     <Compile Include="Forms\EditPatternDialog.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.EditPatternDialog.cs" />
     <Compile Include="Widgets\AnimationWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.AnimationWidget.cs" />
-    <Compile Include="Classes\Animation.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.BlinkStickEmulatorWidget.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />
-    <Compile Include="Classes\ApplicationDataModel.cs" />
     <Compile Include="Widgets\BlinkStickTestWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.BlinkStickTestWidget.cs" />
     <Compile Include="Widgets\BlinkStickInfoWidget.cs" />
@@ -157,6 +154,29 @@
     <Compile Include="gtk-gui\BlinkStickClient.ConfigureBlinkStickDialog.cs" />
     <Compile Include="DataModel\BlinkStickDeviceSettings.cs" />
     <Compile Include="DataModel\BlinkStickDevices.cs" />
+    <Compile Include="DataModel\Notification.cs" />
+    <Compile Include="DataModel\Pattern.cs" />
+    <Compile Include="DataModel\Animation.cs" />
+    <Compile Include="DataModel\PatternNotification.cs" />
+    <Compile Include="DataModel\ApplicationDataModel.cs" />
+    <Compile Include="DataModel\NotificationRegistry.cs" />
+    <Compile Include="DataModel\NotificationTest.cs" />
+    <Compile Include="Forms\SelectNotificationDialog.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.SelectNotificationDialog.cs" />
+    <Compile Include="DataModel\NotificationAmbilight.cs" />
+    <Compile Include="DataModel\NotificationGmail.cs" />
+    <Compile Include="DataModel\NotificationImap.cs" />
+    <Compile Include="DataModel\NotificationPop3.cs" />
+    <Compile Include="DataModel\NotificationMood.cs" />
+    <Compile Include="DataModel\NotificationCpu.cs" />
+    <Compile Include="DataModel\NotificationDiskSpace.cs" />
+    <Compile Include="DataModel\NotificationRam.cs" />
+    <Compile Include="DataModel\NotificationBattery.cs" />
+    <Compile Include="DataModel\NotificationRemoteControl.cs" />
+    <Compile Include="DataModel\NotificationMqtt.cs" />
+    <Compile Include="DataModel\NotificationBlinkStickDotCom.cs" />
+    <Compile Include="DataModel\NotificationIfttt.cs" />
+    <Compile Include="DataModel\NotificationApplication.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

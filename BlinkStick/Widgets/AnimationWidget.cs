@@ -1,5 +1,6 @@
 ﻿using System;
 using BlinkStickClient.Classes;
+using BlinkStickClient.DataModel;
 using Gtk;
 
 namespace BlinkStickClient

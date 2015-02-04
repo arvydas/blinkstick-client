@@ -126,6 +126,7 @@ namespace BlinkStickClient
         }
         protected void OnNewActionActivated (object sender, EventArgs e)
         {
+            /*
             CustomNotification newEvent = SelectNotificationTypeForm.ShowForm();
 
             if (newEvent != null && EditNotificationForm.ShowForm(newEvent, Manager))
@@ -134,6 +135,13 @@ namespace BlinkStickClient
                 Manager.AddNotification (newEvent);
                 newEvent.InitializeServices();
                 Manager.Save();
+            }
+            */
+
+            using (SelectNotificationDialog dialog = new SelectNotificationDialog())
+            {
+                dialog.Run();
+                dialog.Destroy();
             }
         }
         protected void OnCopyActionActivated (object sender, EventArgs e)
