@@ -23,6 +23,11 @@ namespace BlinkStickClient.DataModel
             this.Name = name;
         }
 
+        public override String ToString()
+        {
+            return this.Name;
+        }
+
         public void Assign(Pattern pattern)
         {
             foreach (Animation animation in pattern.Animations)
