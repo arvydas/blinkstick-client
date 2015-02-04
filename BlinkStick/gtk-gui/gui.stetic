@@ -3199,6 +3199,7 @@ Pulse</property>
                 <property name="MemberName" />
                 <property name="WidthRequest">130</property>
                 <property name="Events">ButtonPressMask</property>
+                <property name="AutoSelectDevice">True</property>
               </widget>
               <packing>
                 <property name="Position">1</property>
