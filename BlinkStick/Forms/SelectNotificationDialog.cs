@@ -109,6 +109,8 @@ namespace BlinkStickClient
                 labelNameInfo.Text = "";
                 labelDescriptionInfo.Text = "";
             }
+
+            this.buttonOk.Sensitive = SelectedType != null;
         }
     }
 }

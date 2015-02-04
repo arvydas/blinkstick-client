@@ -10,9 +10,9 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Table table2;
 		
-		private global::BlinkStickClient.DeviceComboboxWidget devicecomboboxwidget1;
+		private global::BlinkStickClient.DeviceComboboxWidget deviceComboboxWidget;
 		
-		private global::Gtk.Entry entry1;
+		private global::Gtk.Entry entryName;
 		
 		private global::Gtk.Label label3;
 		
@@ -29,7 +29,10 @@ namespace BlinkStickClient
 			global::Stetic.Gui.Initialize (this);
 			// Widget BlinkStickClient.EditNotificationDialog
 			this.Name = "BlinkStickClient.EditNotificationDialog";
-			this.WindowPosition = ((global::Gtk.WindowPosition)(4));
+			this.Title = global::Mono.Unix.Catalog.GetString ("Edit Notification");
+			this.WindowPosition = ((global::Gtk.WindowPosition)(1));
+			this.SkipPagerHint = true;
+			this.SkipTaskbarHint = true;
 			// Internal child BlinkStickClient.EditNotificationDialog.VBox
 			global::Gtk.VBox w1 = this.VBox;
 			w1.Name = "dialog1_VBox";
@@ -48,11 +51,11 @@ namespace BlinkStickClient
 			this.table2.RowSpacing = ((uint)(6));
 			this.table2.ColumnSpacing = ((uint)(6));
 			// Container child table2.Gtk.Table+TableChild
-			this.devicecomboboxwidget1 = new global::BlinkStickClient.DeviceComboboxWidget ();
-			this.devicecomboboxwidget1.Events = ((global::Gdk.EventMask)(256));
-			this.devicecomboboxwidget1.Name = "devicecomboboxwidget1";
-			this.table2.Add (this.devicecomboboxwidget1);
-			global::Gtk.Table.TableChild w2 = ((global::Gtk.Table.TableChild)(this.table2 [this.devicecomboboxwidget1]));
+			this.deviceComboboxWidget = new global::BlinkStickClient.DeviceComboboxWidget ();
+			this.deviceComboboxWidget.Events = ((global::Gdk.EventMask)(256));
+			this.deviceComboboxWidget.Name = "deviceComboboxWidget";
+			this.table2.Add (this.deviceComboboxWidget);
+			global::Gtk.Table.TableChild w2 = ((global::Gtk.Table.TableChild)(this.table2 [this.deviceComboboxWidget]));
 			w2.TopAttach = ((uint)(1));
 			w2.BottomAttach = ((uint)(2));
 			w2.LeftAttach = ((uint)(1));
@@ -60,13 +63,13 @@ namespace BlinkStickClient
 			w2.XOptions = ((global::Gtk.AttachOptions)(4));
 			w2.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table2.Gtk.Table+TableChild
-			this.entry1 = new global::Gtk.Entry ();
-			this.entry1.CanFocus = true;
-			this.entry1.Name = "entry1";
-			this.entry1.IsEditable = true;
-			this.entry1.InvisibleChar = '●';
-			this.table2.Add (this.entry1);
-			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table2 [this.entry1]));
+			this.entryName = new global::Gtk.Entry ();
+			this.entryName.CanFocus = true;
+			this.entryName.Name = "entryName";
+			this.entryName.IsEditable = true;
+			this.entryName.InvisibleChar = '●';
+			this.table2.Add (this.entryName);
+			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table2 [this.entryName]));
 			w3.LeftAttach = ((uint)(1));
 			w3.RightAttach = ((uint)(2));
 			w3.XOptions = ((global::Gtk.AttachOptions)(4));
@@ -129,7 +132,7 @@ namespace BlinkStickClient
 			this.buttonOk.UseStock = true;
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
-			this.AddActionWidget (this.buttonOk, -5);
+			w9.Add (this.buttonOk);
 			global::Gtk.ButtonBox.ButtonBoxChild w11 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w9 [this.buttonOk]));
 			w11.Position = 1;
 			w11.Expand = false;
@@ -140,6 +143,7 @@ namespace BlinkStickClient
 			this.DefaultWidth = 272;
 			this.DefaultHeight = 333;
 			this.Show ();
+			this.buttonOk.Clicked += new global::System.EventHandler (this.OnButtonOkClicked);
 		}
 	}
 }

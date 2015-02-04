@@ -12,8 +12,6 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Action deleteAction;
 		
-		private global::Gtk.ToggleAction activeAction;
-		
 		private global::Gtk.Action editAction;
 		
 		private global::Gtk.VBox vbox5;
@@ -38,9 +36,6 @@ namespace BlinkStickClient
 			w2.Add (this.copyAction, null);
 			this.deleteAction = new global::Gtk.Action ("deleteAction", null, null, "gtk-delete");
 			w2.Add (this.deleteAction, null);
-			this.activeAction = new global::Gtk.ToggleAction ("activeAction", global::Mono.Unix.Catalog.GetString ("_Active"), null, "gtk-yes");
-			this.activeAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("_Active");
-			w2.Add (this.activeAction, null);
 			this.editAction = new global::Gtk.Action ("editAction", null, null, "gtk-edit");
 			w2.Add (this.editAction, null);
 			this.UIManager.InsertActionGroup (w2, 0);
@@ -50,12 +45,15 @@ namespace BlinkStickClient
 			this.vbox5.Name = "vbox5";
 			this.vbox5.Spacing = 6;
 			// Container child vbox5.Gtk.Box+BoxChild
-			this.UIManager.AddUiFromString (@"<ui><toolbar name='toolbar1'><toolitem name='newAction' action='newAction'/><toolitem name='copyAction' action='copyAction'/><toolitem name='editAction' action='editAction'/><toolitem name='deleteAction' action='deleteAction'/><toolitem name='activeAction' action='activeAction'/></toolbar></ui>");
+			this.UIManager.AddUiFromString ("<ui><toolbar name=\'toolbar1\'><toolitem name=\'newAction\' action=\'newAction\'/><tool" +
+			"item name=\'copyAction\' action=\'copyAction\'/><toolitem name=\'editAction\' action=\'" +
+			"editAction\'/><toolitem name=\'deleteAction\' action=\'deleteAction\'/></toolbar></ui" +
+			">");
 			this.toolbar1 = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/toolbar1")));
 			this.toolbar1.Name = "toolbar1";
 			this.toolbar1.ShowArrow = false;
 			this.toolbar1.ToolbarStyle = ((global::Gtk.ToolbarStyle)(2));
-			this.toolbar1.IconSize = ((global::Gtk.IconSize)(3));
+			this.toolbar1.IconSize = ((global::Gtk.IconSize)(1));
 			this.vbox5.Add (this.toolbar1);
 			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.toolbar1]));
 			w3.Position = 0;
@@ -82,7 +80,6 @@ namespace BlinkStickClient
 			this.newAction.Activated += new global::System.EventHandler (this.OnNewActionActivated);
 			this.copyAction.Activated += new global::System.EventHandler (this.OnCopyActionActivated);
 			this.deleteAction.Activated += new global::System.EventHandler (this.OnDeleteActionActivated);
-			this.activeAction.Toggled += new global::System.EventHandler (this.OnActiveActionToggled);
 			this.editAction.Activated += new global::System.EventHandler (this.OnEditActionActivated);
 			this.treeviewEvents.RowActivated += new global::Gtk.RowActivatedHandler (this.OnTreeviewEventsRowActivated);
 			this.treeviewEvents.CursorChanged += new global::System.EventHandler (this.OnTreeviewEventsCursorChanged);

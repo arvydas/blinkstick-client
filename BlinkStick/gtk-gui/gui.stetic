@@ -3611,15 +3611,6 @@ Pulse</property>
         <property name="StockId">gtk-delete</property>
         <signal name="Activated" handler="OnDeleteActionActivated" />
       </action>
-      <action id="activeAction">
-        <property name="Type">Toggle</property>
-        <property name="Label" translatable="yes">_Active</property>
-        <property name="ShortLabel" translatable="yes">_Active</property>
-        <property name="StockId">gtk-yes</property>
-        <property name="DrawAsRadio">False</property>
-        <property name="Active">False</property>
-        <signal name="Toggled" handler="OnActiveActionToggled" />
-      </action>
       <action id="editAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes" />
@@ -3638,13 +3629,12 @@ Pulse</property>
             <property name="MemberName" />
             <property name="ShowArrow">False</property>
             <property name="ButtonStyle">Both</property>
-            <property name="IconSize">LargeToolbar</property>
+            <property name="IconSize">Menu</property>
             <node name="toolbar1" type="Toolbar">
               <node type="Toolitem" action="newAction" />
               <node type="Toolitem" action="copyAction" />
               <node type="Toolitem" action="editAction" />
               <node type="Toolitem" action="deleteAction" />
-              <node type="Toolitem" action="activeAction" />
             </node>
           </widget>
           <packing>
@@ -4487,6 +4477,8 @@ Pulse</property>
     <property name="Title" translatable="yes">Add notification</property>
     <property name="WindowPosition">Center</property>
     <property name="Modal">True</property>
+    <property name="SkipPagerHint">True</property>
+    <property name="SkipTaskbarHint">True</property>
     <property name="Buttons">2</property>
     <property name="HelpButton">False</property>
     <child internal-child="VBox">
@@ -4722,7 +4714,10 @@ Pulse</property>
   </widget>
   <widget class="Gtk.Dialog" id="BlinkStickClient.EditNotificationDialog" design-size="272 333">
     <property name="MemberName" />
-    <property name="WindowPosition">CenterOnParent</property>
+    <property name="Title" translatable="yes">Edit Notification</property>
+    <property name="WindowPosition">Center</property>
+    <property name="SkipPagerHint">True</property>
+    <property name="SkipTaskbarHint">True</property>
     <property name="Buttons">2</property>
     <property name="HelpButton">False</property>
     <child internal-child="VBox">
@@ -4747,7 +4742,7 @@ Pulse</property>
                     <property name="RowSpacing">6</property>
                     <property name="ColumnSpacing">6</property>
                     <child>
-                      <widget class="BlinkStickClient.DeviceComboboxWidget" id="devicecomboboxwidget1">
+                      <widget class="BlinkStickClient.DeviceComboboxWidget" id="deviceComboboxWidget">
                         <property name="MemberName" />
                         <property name="Events">ButtonPressMask</property>
                       </widget>
@@ -4768,7 +4763,7 @@ Pulse</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.Entry" id="entry1">
+                      <widget class="Gtk.Entry" id="entryName">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="IsEditable">True</property>
@@ -4884,7 +4879,8 @@ Pulse</property>
             <property name="UseStock">True</property>
             <property name="Type">StockItem</property>
             <property name="StockId">gtk-ok</property>
-            <property name="ResponseId">-5</property>
+            <property name="ResponseId">-1</property>
+            <signal name="Clicked" handler="OnButtonOkClicked" />
             <property name="label">gtk-ok</property>
           </widget>
           <packing>

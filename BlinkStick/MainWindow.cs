@@ -64,6 +64,8 @@ public partial class MainWindow: Gtk.Window
         }
     }
 
+    BlinkStickDevices BlinkStickDeviceList = new BlinkStickDevices();
+
     OverviewWidget overviewWidget;
     NotificationsWidget notificationsWidget;
 
@@ -144,14 +146,14 @@ public partial class MainWindow: Gtk.Window
 		DeviceMonitor = new UsbMonitor();
         DeviceMonitor.UsbDevicesChanged += (object sender, EventArgs e) => {
 			Gtk.Application.Invoke (delegate {
-				Manager.UpdateControllers();
+				//Manager.UpdateControllers();
 
 				if (testForm != null)
 				{
 					testForm.PopulateForm();
 				}
 
-                overviewWidget.RefreshDevices();
+                RefreshDevices();
 			});
 		};
 		DeviceMonitor.Start ();
@@ -247,7 +249,7 @@ public partial class MainWindow: Gtk.Window
         VisiblePage = overviewWidget;
 
         notificationsWidget = new NotificationsWidget();
-        notificationsWidget.Manager = this.Manager;
+        //!!!notificationsWidget.Manager = this.Manager;
         notificationsWidget.Initialize();
         hbox1.PackEnd(notificationsWidget, true, true, 0);
         Pages.Add(notificationsWidget);
@@ -326,8 +328,25 @@ public partial class MainWindow: Gtk.Window
             "Connects to IFTTT and allows remote control of a BlinkStick device", 
             typeof(NotificationIfttt));
 
+        overviewWidget.BlinkStickDeviceList = this.BlinkStickDeviceList;
+        notificationsWidget.BlinkStickDeviceList = this.BlinkStickDeviceList;
+
+        RefreshDevices();
+
 		log.Debug("Initialization done");
 	}
+
+    void RefreshDevices()
+    {
+        BlinkStickDeviceList.Untouch();
+        foreach (BlinkStickDotNet.BlinkStick led in BlinkStickDotNet.BlinkStick.FindAll())
+        {
+            BlinkStickDeviceList.AddIfDoesNotExist(led);
+        }
+        BlinkStickDeviceList.ProcessUntouched();
+
+        overviewWidget.RefreshDevices();
+    }
 
 	private void ToggleMainWindow (object sender, EventArgs e)
 	{
@@ -337,7 +356,7 @@ public partial class MainWindow: Gtk.Window
 	void HandleNotificationUpdated (object sender, NotificationManager.NotificationUpdatedEventArgs e)
 	{
 		Gtk.Application.Invoke (delegate {
-            notificationsWidget.NotificationUpdated(e.Notification);
+            //!!!notificationsWidget.NotificationUpdated(e.Notification);
 		});
 	}
 

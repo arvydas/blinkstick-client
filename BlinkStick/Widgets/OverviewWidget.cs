@@ -7,7 +7,7 @@ namespace BlinkStickClient
     [System.ComponentModel.ToolboxItem(true)]
     public partial class OverviewWidget : Gtk.Bin
     {
-        BlinkStickDevices BlinkStickDeviceList = new BlinkStickDevices();
+        public BlinkStickDevices BlinkStickDeviceList;
 
         ListStore store = new ListStore(typeof (BlinkStickDeviceSettings));
 
@@ -40,8 +40,6 @@ namespace BlinkStickClient
                 UpdateUI();
             };
     
-            RefreshDevices();
-
             UpdateUI();
         }
 
@@ -66,16 +64,8 @@ namespace BlinkStickClient
 
         public void RefreshDevices()
         {
-            BlinkStickDeviceList.Untouch();
-
-            foreach (BlinkStickDotNet.BlinkStick led in BlinkStickDotNet.BlinkStick.FindAll())
-            {
-                BlinkStickDeviceList.AddIfDoesNotExist(led);
-            }
-
-            BlinkStickDeviceList.ProcessUntouched();
-
             deviceComboboxWidget.LoadDevices(BlinkStickDeviceList);
+            UpdateUI();
         }
 
         private void UpdateUI()

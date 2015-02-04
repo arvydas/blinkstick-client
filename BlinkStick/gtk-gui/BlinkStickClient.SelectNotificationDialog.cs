@@ -36,6 +36,8 @@ namespace BlinkStickClient
 			this.Title = global::Mono.Unix.Catalog.GetString ("Add notification");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(1));
 			this.Modal = true;
+			this.SkipPagerHint = true;
+			this.SkipTaskbarHint = true;
 			// Internal child BlinkStickClient.SelectNotificationDialog.VBox
 			global::Gtk.VBox w1 = this.VBox;
 			w1.Name = "dialog1_VBox";

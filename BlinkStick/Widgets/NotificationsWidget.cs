@@ -1,5 +1,5 @@
 ﻿using System;
-using BlinkStickClient.Classes;
+using BlinkStickClient.DataModel;
 using log4net;
 using Gtk;
 
@@ -8,17 +8,15 @@ namespace BlinkStickClient
     [System.ComponentModel.ToolboxItem(true)]
     public partial class NotificationsWidget : Gtk.Bin
     {
+        public BlinkStickDevices BlinkStickDeviceList;
+
         protected static readonly ILog log = LogManager.GetLogger("Main");  
 
-        Boolean IgnoreActivation = false;
+        Gtk.ListStore NotificationListStore = new ListStore(typeof(Notification));
 
-        Gtk.ListStore EventListStore = new ListStore(typeof(CustomNotification));
+        private Notification _SelectedNotification = null;
 
-        public NotificationManager Manager;
-
-        private CustomNotification _SelectedNotification = null;
-
-        public CustomNotification SelectedNotification {
+        public Notification SelectedNotification {
             get {
                 return _SelectedNotification;
             }
@@ -37,46 +35,43 @@ namespace BlinkStickClient
 
             log.Debug( "Setting up treeview");
 
-            Gtk.TreeViewColumn eventTitleColumn = new Gtk.TreeViewColumn ();
-            eventTitleColumn.Title = "Name";
+            Gtk.TreeViewColumn nameColumn = new Gtk.TreeViewColumn ();
+            nameColumn.Title = "Name";
 
-            Gtk.TreeViewColumn eventTypeColumn = new Gtk.TreeViewColumn ();
-            eventTypeColumn.Title = "Type";
+            Gtk.TreeViewColumn typeColumn = new Gtk.TreeViewColumn ();
+            typeColumn.Title = "Type";
 
-            Gtk.TreeViewColumn eventColorColumn = new Gtk.TreeViewColumn ();
-            eventColorColumn.Title = "Color";
+            Gtk.TreeViewColumn blinkStickColumn = new Gtk.TreeViewColumn ();
+            blinkStickColumn.Title = "BlinkStick";
 
-            // Create the text cell that will display the artist name
-            Gtk.CellRendererText eventTitleCell = new Gtk.CellRendererText ();
-            Gtk.CellRendererText eventTypeCell = new Gtk.CellRendererText ();
-            Gtk.CellRendererPixbuf eventColorCell = new Gtk.CellRendererPixbuf ();
+            Gtk.CellRendererText nameCell = new Gtk.CellRendererText ();
+            Gtk.CellRendererText typeCell = new Gtk.CellRendererText ();
+            Gtk.CellRendererText blinkStickCell = new Gtk.CellRendererText ();
 
-            // Add the cell to the column
-            eventColorColumn.PackStart (eventColorCell, false);
-            eventTypeColumn.PackEnd (eventTypeCell, true);
-            eventTitleColumn.PackEnd (eventTitleCell, true);
+            blinkStickColumn.PackEnd (blinkStickCell, true);
+            nameColumn.PackEnd (nameCell, true);
+            typeColumn.PackEnd (typeCell, true);
 
-            // Tell the Cell Renderers which items in the model to display
-            //eventTitleColumn.AddAttribute (eventTitleCell, "name", 0);
-            eventTitleColumn.SetCellDataFunc (eventTitleCell, new Gtk.TreeCellDataFunc (RenderEventName));
-            eventTypeColumn.SetCellDataFunc (eventTypeCell, new Gtk.TreeCellDataFunc (RenderEventType));
-            eventColorColumn.SetCellDataFunc (eventColorCell, new Gtk.TreeCellDataFunc (RenderEventColor));
+            nameColumn.SetCellDataFunc (nameCell, new Gtk.TreeCellDataFunc (RenderNameCell));
+            typeColumn.SetCellDataFunc (typeCell, new Gtk.TreeCellDataFunc (RenderTypeCell));
+            blinkStickColumn.SetCellDataFunc (blinkStickCell, new Gtk.TreeCellDataFunc (RenderBlinkStickCell));
 
-            treeviewEvents.Model = EventListStore;
+            treeviewEvents.AppendColumn (blinkStickColumn);
+            treeviewEvents.AppendColumn (typeColumn);
+            treeviewEvents.AppendColumn (nameColumn);
 
-            treeviewEvents.AppendColumn (eventColorColumn);
-            treeviewEvents.AppendColumn (eventTypeColumn);
-            treeviewEvents.AppendColumn (eventTitleColumn);
+            treeviewEvents.Model = NotificationListStore;
         }
 
         public void Initialize()
         {
             log.Debug("Adding notifications to the tree");
-            //Gtk.TreeIter customEventRoot = EventListStore.AppendValues(new TriggeredEvent("Custom"));
-            foreach (CustomNotification e in Manager.Notifications) {
+            /*
+            foreach (Notification e in Manager.Notifications) {
                 //EventListStore.AppendValues(customEventRoot, e);
                 EventListStore.AppendValues (e);
-            }        
+            } 
+            */
 
             UpdateButtons();
         }
@@ -85,32 +80,27 @@ namespace BlinkStickClient
         {
             editAction.Sensitive = SelectedNotification != null;
             deleteAction.Sensitive = SelectedNotification != null;
-            //checkAction.Sensitive = SelectedNotification != null;
             copyAction.Sensitive = SelectedNotification != null;
-            activeAction.Sensitive = SelectedNotification != null;
-            IgnoreActivation = true;
-            activeAction.Active = SelectedNotification != null && SelectedNotification.Active;
-            IgnoreActivation = false;
         }
 
-        public void NotificationUpdated(CustomNotification notification)
+        public void NotificationUpdated(Notification notification)
         {
             TreeIter iter;
-            Boolean searchMore = EventListStore.GetIterFirst(out iter);
+            Boolean searchMore = NotificationListStore.GetIterFirst(out iter);
             while (searchMore)
             {
-                if (EventListStore.GetValue(iter, 0) == notification)
+                if (NotificationListStore.GetValue(iter, 0) == notification)
                 {
-                    EventListStore.EmitRowChanged(EventListStore.GetPath(iter), iter);
+                    NotificationListStore.EmitRowChanged(NotificationListStore.GetPath(iter), iter);
                 }
 
-                searchMore = EventListStore.IterNext(ref iter);
+                searchMore = NotificationListStore.IterNext(ref iter);
             }
         }
 
         protected void OnTreeviewEventsRowActivated (object o, Gtk.RowActivatedArgs args)
         {
-            EditNotificationForm.ShowForm(SelectedNotification, Manager);
+            //!!!EditNotificationForm.ShowForm(SelectedNotification, Manager);
         }
 
         protected void OnTreeviewEventsCursorChanged (object sender, EventArgs e)
@@ -121,31 +111,46 @@ namespace BlinkStickClient
             TreeSelection selection = (sender as TreeView).Selection;
 
             if(selection.GetSelected(out model, out iter)){
-                SelectedNotification = (CustomNotification)model.GetValue (iter, 0);
+                SelectedNotification = (Notification)model.GetValue (iter, 0);
             }
         }
         protected void OnNewActionActivated (object sender, EventArgs e)
         {
-            /*
-            CustomNotification newEvent = SelectNotificationTypeForm.ShowForm();
+            int response;
 
-            if (newEvent != null && EditNotificationForm.ShowForm(newEvent, Manager))
-            {
-                EventListStore.AppendValues(newEvent);
-                Manager.AddNotification (newEvent);
-                newEvent.InitializeServices();
-                Manager.Save();
-            }
-            */
+            Type notificationType = typeof(Notification);
 
             using (SelectNotificationDialog dialog = new SelectNotificationDialog())
             {
-                dialog.Run();
+                response = dialog.Run();
+                if (response == (int)ResponseType.Ok)
+                {
+                    notificationType = dialog.SelectedType.NotificationType;
+                }
                 dialog.Destroy();
+            }
+
+            if (response == (int)ResponseType.Ok)
+            {
+
+                using (EditNotificationDialog dialog2 = new EditNotificationDialog())
+                {
+                    Notification notification = (Notification)Activator.CreateInstance(notificationType);
+                    dialog2.Notification = notification;
+                    dialog2.BlinkStickDeviceList = this.BlinkStickDeviceList;
+                    dialog2.RefreshDevices();
+                    if (dialog2.Run() == (int)ResponseType.Ok)
+                    {
+                        NotificationListStore.AppendValues(notification);
+                    }
+                    dialog2.Destroy();
+                }
             }
         }
         protected void OnCopyActionActivated (object sender, EventArgs e)
         {
+            throw new NotImplementedException();
+            /*
             CustomNotification ev = SelectedNotification.Copy();
             if (EditNotificationForm.ShowForm(ev, Manager))
             {
@@ -153,15 +158,20 @@ namespace BlinkStickClient
                 Manager.AddNotification (ev);
                 ev.InitializeServices();
             }
+            */
         }
 
         protected void OnEditActionActivated (object sender, EventArgs e)
         {
+            throw new NotImplementedException();
+            /*
             EditNotificationForm.ShowForm(SelectedNotification, Manager);
             Manager.Save();
+            */
         }
         protected void OnDeleteActionActivated (object sender, EventArgs e)
         {
+            /*
             TreeModel modelx;
             TreeIter iter;
 
@@ -173,43 +183,31 @@ namespace BlinkStickClient
                 EventListStore.Remove(ref iter);
                 Manager.Save();
             }
+            */
         }
-        protected void OnActiveActionToggled (object sender, EventArgs e)
+        private void RenderNameCell (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
         {
-            if (IgnoreActivation)
-                return;
-
-            SelectedNotification.Active = activeAction.Active;
-        }
-
-        private void RenderEventName (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
-        {
-            if (model.GetValue (iter, 0) is CustomNotification) {
-                CustomNotification tevent = (CustomNotification)model.GetValue (iter, 0);
-                (cell as Gtk.CellRendererText).Text = tevent.Name;
+            if (model.GetValue (iter, 0) is Notification) {
+                Notification notification = (Notification)model.GetValue (iter, 0);
+                (cell as Gtk.CellRendererText).Text = notification.Name;
             }
         }
 
-        private void RenderEventType (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
+        private void RenderTypeCell (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
         {
-            if (model.GetValue (iter, 0) is CustomNotification) {
-                CustomNotification tevent = (CustomNotification)model.GetValue (iter, 0);
-                (cell as Gtk.CellRendererText).Text = tevent.GetTypeName();
+            if (model.GetValue (iter, 0) is Notification) {
+                Notification notification = (Notification)model.GetValue (iter, 0);
+                (cell as Gtk.CellRendererText).Text = notification.GetTypeName();
             }
         }
 
-        private void RenderEventColor (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
+        private void RenderBlinkStickCell (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
         {
-            if (model.GetValue (iter, 0) is CustomNotification) {
-                CustomNotification tevent = (CustomNotification)model.GetValue (iter, 0);
-                Gdk.Pixbuf pb = new Gdk.Pixbuf (Gdk.Colorspace.Rgb, false, 8, 16, 16);
-                pb.Fill ((uint)(0xff + tevent.Color.R * 0x1000000 + tevent.Color.G * 0x10000 + tevent.Color.B * 0x100));
-                (cell as Gtk.CellRendererPixbuf).Pixbuf = pb;
+            if (model.GetValue (iter, 0) is Notification) {
+                Notification notification = (Notification)model.GetValue (iter, 0);
+                (cell as Gtk.CellRendererText).Text = notification.BlinkStickSerial;
             }
         }
-
-
-
     }
 }
 
