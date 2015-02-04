@@ -97,6 +97,24 @@ namespace BlinkStickClient
             }
         }
 
+        public void SelectBySerial(String serial)
+        {
+            TreeIter iter;
+
+            if (comboboxDevices.Model.GetIterFirst(out iter))
+            {
+                do
+                {
+                    BlinkStickDeviceSettings settings = comboboxDevices.Model.GetValue(iter, 0) as BlinkStickDeviceSettings;
+                    if (settings.Serial == serial)
+                    {
+                        comboboxDevices.SetActiveIter(iter);
+                        break;
+                    }
+                } while (comboboxDevices.Model.IterNext(ref iter));
+            }
+        }
+
         private void BlinkStickConnectedRenderer(CellLayout cell_layout, CellRenderer cell, TreeModel model, TreeIter iter)
         {    
             BlinkStickDeviceSettings myclass = model.GetValue(iter, 0) as BlinkStickDeviceSettings;
