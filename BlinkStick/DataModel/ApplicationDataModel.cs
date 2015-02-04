@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 
-namespace BlinkStickClient.Classes
+namespace BlinkStickClient.DataModel
 {
     public class ApplicationDataModel
     {

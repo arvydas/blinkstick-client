@@ -5,7 +5,7 @@ using BlinkStickDotNet;
 using BlinkStickClient.Utils;
 using Gdk;
 
-namespace BlinkStickClient.Classes
+namespace BlinkStickClient.DataModel
 {
     public class Animation
     {

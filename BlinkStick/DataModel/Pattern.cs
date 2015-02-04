@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BlinkStickClient.Classes
+namespace BlinkStickClient.DataModel
 {
     public class Pattern
     {
