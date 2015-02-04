@@ -23,9 +23,12 @@ namespace BlinkStickClient.DataModel
             }
         }
 
-        public static int Register(String category, String name, String description, Type type)
+        public static int Register(String category, String description, Type type)
         {
-            NotificationTypes.Add(new NotificationRegistryEntry(category, name, description, type));
+            using (Notification notification = (Notification)Activator.CreateInstance(type))
+            {
+                NotificationTypes.Add(new NotificationRegistryEntry(category, notification.GetTypeName(), description, type));
+            }
 
             return NotificationTypes.Count - 1;
         }
