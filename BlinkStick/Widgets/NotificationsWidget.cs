@@ -98,7 +98,7 @@ namespace BlinkStickClient
 
         protected void OnTreeviewEventsRowActivated (object o, Gtk.RowActivatedArgs args)
         {
-            //!!!EditNotificationForm.ShowForm(SelectedNotification, Manager);
+            EditNotification(SelectedNotification);
         }
 
         protected void OnTreeviewEventsCursorChanged (object sender, EventArgs e)
@@ -131,58 +131,61 @@ namespace BlinkStickClient
             if (response == (int)ResponseType.Ok)
             {
 
-                using (EditNotificationDialog dialog2 = new EditNotificationDialog())
+                Notification notification = (Notification)Activator.CreateInstance(notificationType);
+
+                if (EditNotification(notification, "New Notification"))
                 {
-                    Notification notification = (Notification)Activator.CreateInstance(notificationType);
-                    dialog2.Notification = notification;
-                    dialog2.BlinkStickDeviceList = this.BlinkStickDeviceList;
-                    dialog2.RefreshDevices();
-                    if (dialog2.Run() == (int)ResponseType.Ok)
-                    {
-                        NotificationListStore.AppendValues(notification);
-                        DataModel.Notifications.Add(notification);
-                    }
-                    dialog2.Destroy();
+                    NotificationListStore.AppendValues(notification);
+                    DataModel.Notifications.Add(notification);
+                    DataModel.Save();
                 }
             }
         }
         protected void OnCopyActionActivated (object sender, EventArgs e)
         {
-            throw new NotImplementedException();
-            /*
-            CustomNotification ev = SelectedNotification.Copy();
-            if (EditNotificationForm.ShowForm(ev, Manager))
+            Notification notification = SelectedNotification.Copy();
+            if (EditNotification(notification, "Copy Notification"))
             {
-                EventListStore.AppendValues(ev);
-                Manager.AddNotification (ev);
-                ev.InitializeServices();
+                NotificationListStore.AppendValues(notification);
+                DataModel.Notifications.Add(notification);
             }
-            */
+        }
+
+        private Boolean EditNotification(Notification notification, String title = "Edit Notification")
+        {
+            int response;
+
+            using (EditNotificationDialog editDialog = new EditNotificationDialog())
+            {
+                editDialog.Title = title;
+                editDialog.BlinkStickDeviceList = this.BlinkStickDeviceList;
+                editDialog.DataModel = this.DataModel;
+                editDialog.RefreshDevices();
+                editDialog.Notification = notification;
+                response = editDialog.Run();
+                editDialog.Destroy();
+            }
+
+            return response == (int)ResponseType.Ok;
         }
 
         protected void OnEditActionActivated (object sender, EventArgs e)
         {
-            throw new NotImplementedException();
-            /*
-            EditNotificationForm.ShowForm(SelectedNotification, Manager);
-            Manager.Save();
-            */
+            EditNotification(SelectedNotification);
+            DataModel.Save();
         }
         protected void OnDeleteActionActivated (object sender, EventArgs e)
         {
-            /*
-            TreeModel modelx;
+            TreeModel model;
             TreeIter iter;
 
             TreeSelection selection = treeviewEvents.Selection;
 
-            if(selection.GetSelected(out modelx, out iter)){
-                SelectedNotification.FinalizeServices();
-                Manager.RemoveNotification(SelectedNotification);
-                EventListStore.Remove(ref iter);
-                Manager.Save();
+            if(selection.GetSelected(out model, out iter)){
+                DataModel.Notifications.Remove(SelectedNotification);
+                NotificationListStore.Remove(ref iter);
+                DataModel.Save();
             }
-            */
         }
         private void RenderNameCell (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
         {
