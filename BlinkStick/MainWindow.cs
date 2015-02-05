@@ -277,6 +277,12 @@ public partial class MainWindow: Gtk.Window
             "Creates an ambilight effect", 
             typeof(NotificationAmbilight));
 
+        NotificationRegistry.Register("Background", 
+            "Runs a Boblight service prefonfigured for BlinkStick " +
+            "which allows applications supporting Boblight protocol " +
+            "to control the device and create ambilight effects", 
+            typeof(NotificationBoblight));
+
         NotificationRegistry.Register("Internet", 
             "Checks your GMail account and notifies when new mail arrives", 
             typeof(NotificationGmail));

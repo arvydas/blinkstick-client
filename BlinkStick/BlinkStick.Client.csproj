@@ -181,6 +181,7 @@
     <Compile Include="gtk-gui\BlinkStickClient.EditNotificationDialog.cs" />
     <Compile Include="Widgets\DeviceComboboxWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.DeviceComboboxWidget.cs" />
+    <Compile Include="DataModel\NotificationBoblight.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
