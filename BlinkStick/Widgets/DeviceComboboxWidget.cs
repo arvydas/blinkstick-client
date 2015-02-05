@@ -21,7 +21,7 @@ namespace BlinkStickClient
 
         private Boolean ignoreComboboxChange = false;
 
-        public BlinkStickDevices BlinkStickDeviceList;
+        private ApplicationDataModel DataModel;
         private ListStore store = new ListStore(typeof (BlinkStickDeviceSettings));
 
         private BlinkStickDeviceSettings _SelectedBlinkStick;
@@ -61,9 +61,9 @@ namespace BlinkStickClient
             comboboxDevices.SetCellDataFunc(blinkStickDeviceSettingsCell, BlinkStickDeviceSettingsClassRenderer);
         }
 
-        public void LoadDevices(BlinkStickDevices devices)
+        public void LoadDevices(ApplicationDataModel dataModel)
         {
-            this.BlinkStickDeviceList = devices;
+            this.DataModel = dataModel;
 
             int previousDeviceIndex = comboboxDevices.Active;
 
@@ -71,7 +71,7 @@ namespace BlinkStickClient
 
             store.Clear();
 
-            foreach (BlinkStickDeviceSettings entity in BlinkStickDeviceList.Devices) {
+            foreach (BlinkStickDeviceSettings entity in dataModel.Devices) {
                 store.AppendValues(entity);
             }
 

@@ -10,6 +10,7 @@ namespace BlinkStickClient.DataModel
     {
         public List<Pattern> Patterns = new List<Pattern>();
         public List<Notification> Notifications = new List<Notification>();
+        public List<BlinkStickDeviceSettings> Devices = new List<BlinkStickDeviceSettings>();
 
         private String FileName;
         private String BackupFileName;
@@ -115,6 +116,59 @@ namespace BlinkStickClient.DataModel
 
             this.Notifications.Clear();
             this.Notifications.AddRange(data.Notifications);
+
+            this.Devices.Clear();
+            this.Devices.AddRange(data.Devices);
+        }
+        #endregion
+
+        #region Device list helpers
+        public Boolean AddIfDoesNotExist(BlinkStickDotNet.BlinkStick led)
+        {
+            Boolean newRecord = true;
+
+            foreach (BlinkStickDeviceSettings current in Devices)
+            {
+                if (current.Serial == led.Serial)
+                {
+                    current.Touched = true;
+                    if (current.Led == null)
+                    {
+                        current.Led = led;
+                        current.Led.OpenDevice();
+                    }
+                    newRecord = false;
+                }
+            }
+
+            if (newRecord)
+            {
+                BlinkStickDeviceSettings settings = new BlinkStickDeviceSettings(led);
+                settings.Touched = true;
+                Devices.Add(settings);
+                led.OpenDevice();
+            }
+
+            return newRecord;
+        }
+
+        public void Untouch()
+        {
+            foreach (BlinkStickDeviceSettings settings in Devices)
+            {
+                settings.Touched = false;
+            }
+        }
+
+        public void ProcessUntouched()
+        {
+            foreach (BlinkStickDeviceSettings settings in Devices)
+            {
+                if (!settings.Touched)
+                {
+                    settings.Led = null;
+                }
+            }
         }
         #endregion
     }

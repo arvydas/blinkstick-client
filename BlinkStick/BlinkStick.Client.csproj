@@ -153,7 +153,6 @@
     <Compile Include="Forms\ConfigureBlinkStickDialog.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.ConfigureBlinkStickDialog.cs" />
     <Compile Include="DataModel\BlinkStickDeviceSettings.cs" />
-    <Compile Include="DataModel\BlinkStickDevices.cs" />
     <Compile Include="DataModel\Notification.cs" />
     <Compile Include="DataModel\Pattern.cs" />
     <Compile Include="DataModel\Animation.cs" />

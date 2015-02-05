@@ -8,7 +8,6 @@ namespace BlinkStickClient
     [System.ComponentModel.ToolboxItem(true)]
     public partial class NotificationsWidget : Gtk.Bin
     {
-        public BlinkStickDevices BlinkStickDeviceList;
         public ApplicationDataModel DataModel;
 
         protected static readonly ILog log = LogManager.GetLogger("Main");  
@@ -158,7 +157,6 @@ namespace BlinkStickClient
             using (EditNotificationDialog editDialog = new EditNotificationDialog())
             {
                 editDialog.Title = title;
-                editDialog.BlinkStickDeviceList = this.BlinkStickDeviceList;
                 editDialog.DataModel = this.DataModel;
                 editDialog.RefreshDevices();
                 editDialog.Notification = notification;

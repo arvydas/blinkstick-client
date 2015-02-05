@@ -64,8 +64,6 @@ public partial class MainWindow: Gtk.Window
         }
     }
 
-    BlinkStickDevices BlinkStickDeviceList = new BlinkStickDevices();
-
     OverviewWidget overviewWidget;
     NotificationsWidget notificationsWidget;
 
@@ -335,8 +333,8 @@ public partial class MainWindow: Gtk.Window
             "Connects to IFTTT and allows remote control of a BlinkStick device", 
             typeof(NotificationIfttt));
 
-        overviewWidget.BlinkStickDeviceList = this.BlinkStickDeviceList;
-        notificationsWidget.BlinkStickDeviceList = this.BlinkStickDeviceList;
+        overviewWidget.DataModel = this.DataModel;
+        notificationsWidget.DataModel = this.DataModel;
 
         RefreshDevices();
 
@@ -345,12 +343,12 @@ public partial class MainWindow: Gtk.Window
 
     void RefreshDevices()
     {
-        BlinkStickDeviceList.Untouch();
+        DataModel.Untouch();
         foreach (BlinkStickDotNet.BlinkStick led in BlinkStickDotNet.BlinkStick.FindAll())
         {
-            BlinkStickDeviceList.AddIfDoesNotExist(led);
+            DataModel.AddIfDoesNotExist(led);
         }
-        BlinkStickDeviceList.ProcessUntouched();
+        DataModel.ProcessUntouched();
 
         overviewWidget.RefreshDevices();
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace BlinkStickClient.DataModel
 {
@@ -12,8 +13,10 @@ namespace BlinkStickClient.DataModel
 
         public int BrightnessLimit { get; set; }
 
+        [JsonIgnore]
         public BlinkStickDotNet.BlinkStick Led;
 
+        [JsonIgnore]
         public Boolean Touched { get; set; }
 
         public BlinkStickDeviceSettings()

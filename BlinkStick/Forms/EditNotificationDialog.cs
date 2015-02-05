@@ -29,7 +29,6 @@ namespace BlinkStickClient
 
         private ListStore store = new ListStore(typeof (Pattern));
 
-        public BlinkStickDevices BlinkStickDeviceList;
         public ApplicationDataModel DataModel;
 
         public Pattern SelectedPattern
@@ -67,7 +66,7 @@ namespace BlinkStickClient
 
         public void RefreshDevices()
         {
-            this.deviceComboboxWidget.LoadDevices(BlinkStickDeviceList);
+            this.deviceComboboxWidget.LoadDevices(DataModel);
         }
 
         protected void OnButtonOkClicked (object sender, EventArgs e)

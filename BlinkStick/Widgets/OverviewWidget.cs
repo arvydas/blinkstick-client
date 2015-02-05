@@ -7,7 +7,7 @@ namespace BlinkStickClient
     [System.ComponentModel.ToolboxItem(true)]
     public partial class OverviewWidget : Gtk.Bin
     {
-        public BlinkStickDevices BlinkStickDeviceList;
+        public ApplicationDataModel DataModel;
 
         ListStore store = new ListStore(typeof (BlinkStickDeviceSettings));
 
@@ -64,7 +64,7 @@ namespace BlinkStickClient
 
         public void RefreshDevices()
         {
-            deviceComboboxWidget.LoadDevices(BlinkStickDeviceList);
+            deviceComboboxWidget.LoadDevices(DataModel);
             UpdateUI();
         }
 
@@ -91,8 +91,8 @@ namespace BlinkStickClient
 
         protected void OnButtonDeleteClicked (object sender, EventArgs e)
         {
-            BlinkStickDeviceList.Devices.Remove(deviceComboboxWidget.SelectedBlinkStick);
-            deviceComboboxWidget.LoadDevices(BlinkStickDeviceList);
+            DataModel.Devices.Remove(deviceComboboxWidget.SelectedBlinkStick);
+            deviceComboboxWidget.LoadDevices(DataModel);
         }
 
         protected void OnButtonConfigureClicked (object sender, EventArgs e)
