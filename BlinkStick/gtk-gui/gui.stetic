@@ -4491,16 +4491,44 @@ Pulse</property>
             <property name="MemberName" />
             <property name="Spacing">6</property>
             <child>
-              <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
+              <widget class="Gtk.VBox" id="vbox2">
                 <property name="MemberName" />
-                <property name="ShadowType">In</property>
+                <property name="Spacing">6</property>
                 <child>
-                  <widget class="Gtk.TreeView" id="treeviewNotifications">
+                  <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
+                    <property name="MemberName" />
+                    <property name="ShadowType">In</property>
+                    <child>
+                      <widget class="Gtk.TreeView" id="treeviewNotifications">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="ShowScrollbars">True</property>
+                        <signal name="CursorChanged" handler="OnTreeviewNotificationsCursorChanged" />
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="Position">0</property>
+                    <property name="AutoSize">True</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.CheckButton" id="checkbuttonDisplayOnlySupported">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
-                    <property name="ShowScrollbars">True</property>
-                    <signal name="CursorChanged" handler="OnTreeviewNotificationsCursorChanged" />
+                    <property name="Label" translatable="yes">Display only supported notification types</property>
+                    <property name="Active">True</property>
+                    <property name="DrawIndicator">True</property>
+                    <property name="HasLabel">True</property>
+                    <property name="UseUnderline">True</property>
+                    <signal name="Toggled" handler="OnCheckbuttonDisplayOnlySupportedToggled" />
                   </widget>
+                  <packing>
+                    <property name="Position">1</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
                 </child>
               </widget>
               <packing>
@@ -4713,7 +4741,7 @@ Pulse</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="BlinkStickClient.EditNotificationDialog" design-size="298 333">
+  <widget class="Gtk.Dialog" id="BlinkStickClient.EditNotificationDialog" design-size="292 333">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Edit Notification</property>
     <property name="WindowPosition">Center</property>

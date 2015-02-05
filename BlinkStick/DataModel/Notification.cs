@@ -31,6 +31,16 @@ namespace BlinkStickClient.DataModel
 
             return notification;
         }
+
+        /// <summary>
+        /// Determines whether notification is supported for current running platform.
+        /// All inherited notifications must override this method to check if they are supported for current running platform.
+        /// </summary>
+        /// <returns><c>true</c> if this instance is supported; otherwise, <c>false</c>.</returns>
+        public virtual Boolean IsSupported()
+        {
+            return false;
+        }
     }
 }
 

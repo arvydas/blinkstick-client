@@ -9,6 +9,9 @@ namespace BlinkStickClient
     {
         Dictionary<String, TreeIter> Categories = new Dictionary<string, TreeIter>();
 
+        TreeModelFilter filter;
+        TreeStore typeListStore;
+
         private NotificationRegistry.NotificationRegistryEntry _SelectedType;
         public NotificationRegistry.NotificationRegistryEntry SelectedType 
         {
@@ -40,7 +43,7 @@ namespace BlinkStickClient
 
             nameColumn.AddAttribute (nameCell, "text", 0);
 
-            TreeStore typeListStore = new TreeStore (typeof (String), typeof (NotificationRegistry.NotificationRegistryEntry));
+            typeListStore = new TreeStore (typeof (String), typeof (NotificationRegistry.NotificationRegistryEntry));
 
             foreach (NotificationRegistry.NotificationRegistryEntry entry in NotificationRegistry.NotificationTypes)
             {
@@ -59,9 +62,52 @@ namespace BlinkStickClient
                 typeListStore.AppendValues (iter, null, entry);
             }
 
-            treeviewNotifications.Model = typeListStore;
+            // Create the filter and tell it to use the musicListStore as it's base Model
+            filter = new TreeModelFilter (typeListStore, null);
+
+            // Specify the function that determines which rows to filter out and which ones to display
+            filter.VisibleFunc = new TreeModelFilterVisibleFunc (FilterTree);
+
+            treeviewNotifications.Model = filter;
 
             UpdateUI();
+        }
+
+        private bool FilterTree (Gtk.TreeModel model, Gtk.TreeIter iter)
+        {
+            if (!checkbuttonDisplayOnlySupported.Active)
+            {
+                return true;
+            }
+
+            object value = model.GetValue(iter, 1);
+
+            if (value is NotificationRegistry.NotificationRegistryEntry)
+            {
+                NotificationRegistry.NotificationRegistryEntry myclass = value as NotificationRegistry.NotificationRegistryEntry;
+                return myclass.IsSupported;
+            }
+            else
+            {
+                TreeIter citer;
+                if (typeListStore.IterHasChild(iter))
+                {
+                    typeListStore.IterChildren(out citer, iter);
+
+                    do
+                    {
+                        NotificationRegistry.NotificationRegistryEntry childType = (NotificationRegistry.NotificationRegistryEntry)model.GetValue(citer, 1);
+                        if (childType != null && childType.IsSupported)
+                        {
+                            return true;
+                        }
+                    }
+                    while (typeListStore.IterNext(ref citer));
+
+                }
+
+                return false;
+            }
         }
 
         private void NameRenderer(Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
@@ -110,7 +156,12 @@ namespace BlinkStickClient
                 labelDescriptionInfo.Text = "";
             }
 
-            this.buttonOk.Sensitive = SelectedType != null;
+            this.buttonOk.Sensitive = SelectedType != null && SelectedType.IsSupported;
+        }
+
+        protected void OnCheckbuttonDisplayOnlySupportedToggled (object sender, EventArgs e)
+        {
+            filter.Refilter();
         }
     }
 }

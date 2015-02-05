@@ -13,13 +13,15 @@ namespace BlinkStickClient.DataModel
             public String Category;
             public String Name;
             public String Description;
+            public Boolean IsSupported;
 
-            public NotificationRegistryEntry(String category, String name, String description, Type type)
+            public NotificationRegistryEntry(String category, String name, String description, Type type, Boolean isSupported)
             {
                 this.Category = category;
                 this.Name = name;
                 this.Description = description;
                 this.NotificationType = type;
+                this.IsSupported = isSupported;
             }
         }
 
@@ -27,7 +29,7 @@ namespace BlinkStickClient.DataModel
         {
             using (Notification notification = (Notification)Activator.CreateInstance(type))
             {
-                NotificationTypes.Add(new NotificationRegistryEntry(category, notification.GetTypeName(), description, type));
+                NotificationTypes.Add(new NotificationRegistryEntry(category, notification.GetTypeName(), description, type, notification.IsSupported()));
             }
 
             return NotificationTypes.Count - 1;

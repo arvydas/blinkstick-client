@@ -22,6 +22,11 @@ namespace BlinkStickClient.DataModel
 
             return base.Copy(notification);
         }
+
+        public override bool IsSupported()
+        {
+            return true;
+        }
     }
 }
 
