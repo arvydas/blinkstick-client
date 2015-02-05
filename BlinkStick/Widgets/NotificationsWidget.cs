@@ -44,20 +44,27 @@ namespace BlinkStickClient
             Gtk.TreeViewColumn blinkStickColumn = new Gtk.TreeViewColumn ();
             blinkStickColumn.Title = "BlinkStick";
 
+            Gtk.TreeViewColumn patternColumn = new Gtk.TreeViewColumn ();
+            patternColumn.Title = "Pattern";
+
             Gtk.CellRendererText nameCell = new Gtk.CellRendererText ();
             Gtk.CellRendererText typeCell = new Gtk.CellRendererText ();
             Gtk.CellRendererText blinkStickCell = new Gtk.CellRendererText ();
+            Gtk.CellRendererText patternCell = new Gtk.CellRendererText ();
 
-            blinkStickColumn.PackEnd (blinkStickCell, true);
-            nameColumn.PackEnd (nameCell, true);
-            typeColumn.PackEnd (typeCell, true);
+            blinkStickColumn.PackEnd (blinkStickCell, false);
+            nameColumn.PackEnd (nameCell, false);
+            typeColumn.PackEnd (typeCell, false);
+            patternColumn.PackEnd (patternCell, false);
 
             nameColumn.SetCellDataFunc (nameCell, new Gtk.TreeCellDataFunc (RenderNameCell));
             typeColumn.SetCellDataFunc (typeCell, new Gtk.TreeCellDataFunc (RenderTypeCell));
             blinkStickColumn.SetCellDataFunc (blinkStickCell, new Gtk.TreeCellDataFunc (RenderBlinkStickCell));
+            patternColumn.SetCellDataFunc (patternCell, new Gtk.TreeCellDataFunc (RenderPatternCell));
 
             treeviewEvents.AppendColumn (blinkStickColumn);
             treeviewEvents.AppendColumn (typeColumn);
+            treeviewEvents.AppendColumn (patternColumn);
             treeviewEvents.AppendColumn (nameColumn);
 
             treeviewEvents.Model = NotificationListStore;
@@ -206,6 +213,19 @@ namespace BlinkStickClient
             if (model.GetValue (iter, 0) is Notification) {
                 Notification notification = (Notification)model.GetValue (iter, 0);
                 (cell as Gtk.CellRendererText).Text = notification.BlinkStickSerial;
+            }
+        }
+
+        private void RenderPatternCell (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
+        {
+            if (model.GetValue(iter, 0) is PatternNotification)
+            {
+                PatternNotification notification = (PatternNotification)model.GetValue(iter, 0);
+                (cell as Gtk.CellRendererText).Text = notification.Pattern.Name;
+            }
+            else
+            {
+                (cell as Gtk.CellRendererText).Text = "";
             }
         }
     }
