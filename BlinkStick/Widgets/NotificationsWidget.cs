@@ -35,6 +35,9 @@ namespace BlinkStickClient
 
             log.Debug( "Setting up treeview");
 
+            Gtk.TreeViewColumn enabledColumn = new Gtk.TreeViewColumn ();
+            enabledColumn.Title = "";
+
             Gtk.TreeViewColumn nameColumn = new Gtk.TreeViewColumn ();
             nameColumn.Title = "Name";
 
@@ -47,25 +50,32 @@ namespace BlinkStickClient
             Gtk.TreeViewColumn patternColumn = new Gtk.TreeViewColumn ();
             patternColumn.Title = "Pattern";
 
+            Gtk.CellRendererPixbuf enabledCell = new Gtk.CellRendererPixbuf ();
             Gtk.CellRendererText nameCell = new Gtk.CellRendererText ();
             Gtk.CellRendererText typeCell = new Gtk.CellRendererText ();
             Gtk.CellRendererText blinkStickCell = new Gtk.CellRendererText ();
             Gtk.CellRendererText patternCell = new Gtk.CellRendererText ();
 
+            enabledColumn.PackEnd (enabledCell, false);
+            enabledColumn.AddAttribute(enabledCell, "stock-id", 0);
             blinkStickColumn.PackEnd (blinkStickCell, false);
             nameColumn.PackEnd (nameCell, false);
             typeColumn.PackEnd (typeCell, false);
             patternColumn.PackEnd (patternCell, false);
 
+            enabledColumn.SetCellDataFunc (enabledCell, new Gtk.TreeCellDataFunc (RenderEnabledCell));
             nameColumn.SetCellDataFunc (nameCell, new Gtk.TreeCellDataFunc (RenderNameCell));
             typeColumn.SetCellDataFunc (typeCell, new Gtk.TreeCellDataFunc (RenderTypeCell));
             blinkStickColumn.SetCellDataFunc (blinkStickCell, new Gtk.TreeCellDataFunc (RenderBlinkStickCell));
             patternColumn.SetCellDataFunc (patternCell, new Gtk.TreeCellDataFunc (RenderPatternCell));
 
-            treeviewEvents.AppendColumn (blinkStickColumn);
+            treeviewEvents.AppendColumn (enabledColumn);
             treeviewEvents.AppendColumn (typeColumn);
             treeviewEvents.AppendColumn (patternColumn);
+            treeviewEvents.AppendColumn (blinkStickColumn);
             treeviewEvents.AppendColumn (nameColumn);
+
+
 
             treeviewEvents.Model = NotificationListStore;
         }
@@ -192,6 +202,14 @@ namespace BlinkStickClient
                 DataModel.Save();
             }
         }
+        private void RenderEnabledCell (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
+        {
+            if (model.GetValue (iter, 0) is Notification) {
+                Notification notification = (Notification)model.GetValue (iter, 0);
+                (cell as Gtk.CellRendererPixbuf).StockId = notification.Enabled ? "gtk-yes" : "gtk-no";
+            }
+        }
+
         private void RenderNameCell (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
         {
             if (model.GetValue (iter, 0) is Notification) {

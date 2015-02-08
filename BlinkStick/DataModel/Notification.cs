@@ -29,6 +29,7 @@ namespace BlinkStickClient.DataModel
                 throw new ArgumentNullException("notification");
             }
 
+            notification.Enabled = this.Enabled;
             notification.Name = this.Name;
             notification.BlinkStickSerial = this.BlinkStickSerial;
 
