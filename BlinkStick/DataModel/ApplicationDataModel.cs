@@ -163,6 +163,19 @@ namespace BlinkStickClient.DataModel
             return newRecord;
         }
 
+        public BlinkStickDeviceSettings FindBySerial(String serial)
+        {
+            foreach (BlinkStickDeviceSettings current in Devices)
+            {
+                if (current.Serial == serial)
+                {
+                    return current;
+                }
+            }
+
+            return null;
+        }
+
         public void Untouch()
         {
             foreach (BlinkStickDeviceSettings settings in Devices)

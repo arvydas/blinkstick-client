@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Threading;
+using System.Collections.Generic;
 using log4net;
 
 namespace BlinkStickClient.DataModel
@@ -12,6 +13,8 @@ namespace BlinkStickClient.DataModel
         public ApplicationDataModel DataModel;
 
         private BackgroundWorker monitorWorker;
+
+        private Queue<TriggeredEvent> EventQueue = new Queue<TriggeredEvent>();
 
         public NotificationService()
         {
@@ -66,7 +69,14 @@ namespace BlinkStickClient.DataModel
                 (sender as Notification).Name, 
                 e.Message);
 
-            DataModel.TriggeredEvents.Add(new TriggeredEvent(sender as Notification, e.Message));
+            TriggeredEvent ev = new TriggeredEvent(sender as Notification, e.Message);
+
+            DataModel.TriggeredEvents.Add(ev);
+
+            lock (EventQueue)
+            {
+                EventQueue.Enqueue(ev);
+            }
         }
 
         public void Stop()
@@ -95,11 +105,74 @@ namespace BlinkStickClient.DataModel
             log.Info("Service thread started");
 
             while (!worker.CancellationPending) {
+                if (EventQueue.Count > 0)
+                {
+                    TriggeredEvent ev;
+
+                    lock (EventQueue)
+                    {
+                        ev = EventQueue.Dequeue();
+                    }
+
+                    if (ev.Notification is PatternNotification)
+                    {
+                        PlayPattern(worker, ev.Notification as PatternNotification);
+                    }
+                }
 
                 Thread.Sleep (100);
             }
 
             log.Info("Service thread stopped");
+        }
+
+        void PlayPattern(BackgroundWorker worker, PatternNotification notification)
+        {
+            if (notification.Pattern == null)
+            {
+                log.WarnFormat("({0}) Pattern is not assigned", notification.Name);
+                return;
+            }
+
+            BlinkStickDeviceSettings settings = DataModel.FindBySerial(notification.BlinkStickSerial);
+
+            if (settings == null)
+            {
+                log.WarnFormat("({0}) BlinkStick with serial {1} not known", notification.Name, notification.BlinkStickSerial);
+                return;
+            }
+
+            if (settings.Led == null)
+            {
+                log.WarnFormat("({0}) BlinkStick with serial {1} is not connected", notification.Name, notification.BlinkStickSerial);
+                return;
+            }
+
+            log.InfoFormat("({0}) Playing pattern -{1}-", notification.Name, notification.Pattern.Name);
+
+            foreach (Animation animation in notification.Pattern.Animations)
+            {
+                if (worker.CancellationPending)
+                    return;
+
+                switch (animation.AnimationType) {
+                    case AnimationTypeEnum.SetColor:
+                        settings.Led.SetColor(animation.Color);
+                        settings.Led.WaitThread(animation.DelaySetColor);
+                        break;
+                    case AnimationTypeEnum.Blink:
+                        settings.Led.Blink(animation.Color, animation.RepeatBlink, animation.DurationBlink);
+                        break;
+                    case AnimationTypeEnum.Pulse:
+                        settings.Led.Pulse(animation.Color, animation.RepeatPulse, animation.DurationPulse);
+                        break;
+                    case AnimationTypeEnum.Morph:
+                        settings.Led.Morph(animation.Color, animation.DurationMorph);
+                        break;
+                }
+            }
+
+            log.InfoFormat("({0}) Pattern -{1}- playback complete", notification.Name, notification.Pattern.Name);
         }
     }
 }
