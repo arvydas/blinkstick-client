@@ -6,13 +6,13 @@ namespace BlinkStickClient.DataModel
     public abstract class Notification : IDisposable
     {
         #region Events
-        public event EventHandler<EventArgs> Triggered;
+        public event EventHandler<TriggeredEventArgs> Triggered;
 
-        protected void OnTriggered()
+        protected void OnTriggered(String message)
         {
             if (Triggered != null)
             {
-                Triggered(this, EventArgs.Empty);
+                Triggered(this, new TriggeredEventArgs(message));
             }
         }
         #endregion
@@ -66,6 +66,16 @@ namespace BlinkStickClient.DataModel
         public virtual Boolean IsSupported()
         {
             return false;
+        }
+    }
+
+    public class TriggeredEventArgs: EventArgs
+    {
+        public String Message;
+
+        public TriggeredEventArgs(String message)
+        {
+            this.Message = message;
         }
     }
 }
