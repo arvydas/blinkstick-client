@@ -59,9 +59,14 @@ namespace BlinkStickClient.DataModel
             }
         }
 
-        void NotificationTriggered (object sender, EventArgs e)
+        private void NotificationTriggered (object sender, TriggeredEventArgs e)
         {
-            log.InfoFormat("Notification [{0}] \"{1}\" triggered", (sender as Notification).GetTypeName(), (sender as Notification).Name);
+            log.InfoFormat("Notification [{0}] \"{1}\" triggered. Message: {2}", 
+                (sender as Notification).GetTypeName(), 
+                (sender as Notification).Name, 
+                e.Message);
+
+            DataModel.TriggeredEvents.Add(new TriggeredEvent(sender as Notification, e.Message));
         }
 
         public void Stop()

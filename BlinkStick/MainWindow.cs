@@ -66,6 +66,7 @@ public partial class MainWindow: Gtk.Window
 
     OverviewWidget overviewWidget;
     NotificationsWidget notificationsWidget;
+    EventsWidget eventsWidget;
 
     NotificationService notificationService;
 
@@ -259,6 +260,11 @@ public partial class MainWindow: Gtk.Window
         patternEditorWidget.DataModel = this.DataModel;
         hbox1.PackEnd(patternEditorWidget, true, true, 0);
         Pages.Add(patternEditorWidget);
+
+        eventsWidget = new EventsWidget();
+        eventsWidget.DataModel = this.DataModel;
+        hbox1.PackEnd(eventsWidget, true, true, 0);
+        Pages.Add(eventsWidget);
 
         BlinkStickTestWidget blinkstickTestWidget = new BlinkStickTestWidget();
         hbox1.PackEnd(blinkstickTestWidget, true, true, 0);

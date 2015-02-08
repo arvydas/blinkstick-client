@@ -35,7 +35,7 @@ namespace BlinkStickClient.DataModel
 
         public void Trigger()
         {
-            OnTriggered();
+            OnTriggered("Triggered with button");
         }
     }
 }

@@ -75,8 +75,6 @@ namespace BlinkStickClient
             treeviewEvents.AppendColumn (blinkStickColumn);
             treeviewEvents.AppendColumn (nameColumn);
 
-
-
             treeviewEvents.Model = NotificationListStore;
         }
 

@@ -115,7 +115,7 @@
         <property name="ShortLabel" translatable="yes">Test</property>
         <property name="DrawAsRadio">False</property>
         <property name="Active">False</property>
-        <property name="Value">3</property>
+        <property name="Value">4</property>
         <property name="Group">selection</property>
         <signal name="Toggled" handler="ToolbarButtonToggled" />
       </action>
@@ -125,7 +125,7 @@
         <property name="ShortLabel" translatable="yes">Help</property>
         <property name="DrawAsRadio">False</property>
         <property name="Active">False</property>
-        <property name="Value">4</property>
+        <property name="Value">5</property>
         <property name="Group">selection</property>
         <signal name="Toggled" handler="ToolbarButtonToggled" />
       </action>
@@ -136,6 +136,16 @@
         <property name="DrawAsRadio">False</property>
         <property name="Active">False</property>
         <property name="Value">2</property>
+        <property name="Group">selection</property>
+        <signal name="Toggled" handler="ToolbarButtonToggled" />
+      </action>
+      <action id="EventsAction">
+        <property name="Type">Radio</property>
+        <property name="Label" translatable="yes">Events</property>
+        <property name="ShortLabel" translatable="yes">Events</property>
+        <property name="DrawAsRadio">False</property>
+        <property name="Active">False</property>
+        <property name="Value">3</property>
         <property name="Group">selection</property>
         <signal name="Toggled" handler="ToolbarButtonToggled" />
       </action>
@@ -196,6 +206,7 @@
                       <node type="Toolitem" action="OverviewToolbarAction" />
                       <node type="Toolitem" action="NotificationsToolbarAction" />
                       <node type="Toolitem" action="PatternsAction1" />
+                      <node type="Toolitem" action="EventsAction" />
                       <node type="Toolitem" action="TestToolbarAction" />
                       <node type="Toolitem" action="HelpToolbarAction" />
                     </node>
@@ -5099,6 +5110,33 @@ Pulse</property>
         </child>
         <child>
           <placeholder />
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Bin" id="BlinkStickClient.EventsWidget" design-size="507 300">
+    <property name="MemberName" />
+    <property name="Visible">False</property>
+    <child>
+      <widget class="Gtk.VBox" id="vbox2">
+        <property name="MemberName" />
+        <property name="Spacing">6</property>
+        <child>
+          <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
+            <property name="MemberName" />
+            <property name="ShadowType">In</property>
+            <child>
+              <widget class="Gtk.TreeView" id="treeviewEvents">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="ShowScrollbars">True</property>
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+          </packing>
         </child>
       </widget>
     </child>

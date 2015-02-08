@@ -41,6 +41,8 @@ public partial class MainWindow
 	
 	private global::Gtk.RadioAction PatternsAction1;
 	
+	private global::Gtk.RadioAction EventsAction;
+	
 	private global::Gtk.VBox vbox2;
 	
 	private global::Gtk.MenuBar menubar2;
@@ -106,18 +108,22 @@ public partial class MainWindow
 		this.NotificationsToolbarAction.Group = this.saveAction.Group;
 		this.NotificationsToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Notifications");
 		w1.Add (this.NotificationsToolbarAction, null);
-		this.TestToolbarAction = new global::Gtk.RadioAction ("TestToolbarAction", global::Mono.Unix.Catalog.GetString ("Test"), null, null, 3);
+		this.TestToolbarAction = new global::Gtk.RadioAction ("TestToolbarAction", global::Mono.Unix.Catalog.GetString ("Test"), null, null, 4);
 		this.TestToolbarAction.Group = this.saveAction.Group;
 		this.TestToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Test");
 		w1.Add (this.TestToolbarAction, null);
-		this.HelpToolbarAction = new global::Gtk.RadioAction ("HelpToolbarAction", global::Mono.Unix.Catalog.GetString ("Help"), null, null, 4);
-		this.HelpToolbarAction.Group = this.saveAction.Group;
+		this.HelpToolbarAction = new global::Gtk.RadioAction ("HelpToolbarAction", global::Mono.Unix.Catalog.GetString ("Help"), null, null, 5);
+		this.HelpToolbarAction.Group = this.TestToolbarAction.Group;
 		this.HelpToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Help");
 		w1.Add (this.HelpToolbarAction, null);
 		this.PatternsAction1 = new global::Gtk.RadioAction ("PatternsAction1", global::Mono.Unix.Catalog.GetString ("Patterns"), null, null, 2);
-		this.PatternsAction1.Group = this.saveAction.Group;
+		this.PatternsAction1.Group = this.TestToolbarAction.Group;
 		this.PatternsAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Patterns");
 		w1.Add (this.PatternsAction1, null);
+		this.EventsAction = new global::Gtk.RadioAction ("EventsAction", global::Mono.Unix.Catalog.GetString ("Events"), null, null, 3);
+		this.EventsAction.Group = this.TestToolbarAction.Group;
+		this.EventsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Events");
+		w1.Add (this.EventsAction, null);
 		this.UIManager.InsertActionGroup (w1, 0);
 		this.AddAccelGroup (this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -145,7 +151,7 @@ public partial class MainWindow
 		this.hbox1.Name = "hbox1";
 		this.hbox1.Spacing = 6;
 		// Container child hbox1.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString (@"<ui><toolbar name='toolbar2'><toolitem name='OverviewToolbarAction' action='OverviewToolbarAction'/><toolitem name='NotificationsToolbarAction' action='NotificationsToolbarAction'/><toolitem name='PatternsAction1' action='PatternsAction1'/><toolitem name='TestToolbarAction' action='TestToolbarAction'/><toolitem name='HelpToolbarAction' action='HelpToolbarAction'/></toolbar></ui>");
+		this.UIManager.AddUiFromString (@"<ui><toolbar name='toolbar2'><toolitem name='OverviewToolbarAction' action='OverviewToolbarAction'/><toolitem name='NotificationsToolbarAction' action='NotificationsToolbarAction'/><toolitem name='PatternsAction1' action='PatternsAction1'/><toolitem name='EventsAction' action='EventsAction'/><toolitem name='TestToolbarAction' action='TestToolbarAction'/><toolitem name='HelpToolbarAction' action='HelpToolbarAction'/></toolbar></ui>");
 		this.toolbar2 = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/toolbar2")));
 		this.toolbar2.Name = "toolbar2";
 		this.toolbar2.Orientation = ((global::Gtk.Orientation)(1));
@@ -194,5 +200,6 @@ public partial class MainWindow
 		this.TestToolbarAction.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
 		this.HelpToolbarAction.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
 		this.PatternsAction1.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
+		this.EventsAction.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
 	}
 }
