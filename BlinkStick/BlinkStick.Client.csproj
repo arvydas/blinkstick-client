@@ -185,6 +185,7 @@
     <Compile Include="Editors\TestEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.TestEditorWidget.cs" />
     <Compile Include="Editors\IEditorInterface.cs" />
+    <Compile Include="DataModel\TriggeredEvent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

@@ -13,6 +13,9 @@ namespace BlinkStickClient.DataModel
         public ObservableCollection<Notification> Notifications = new ObservableCollection<Notification>();
         public List<BlinkStickDeviceSettings> Devices = new List<BlinkStickDeviceSettings>();
 
+        [JsonIgnore]
+        public ObservableCollection<TriggeredEvent> TriggeredEvents = new ObservableCollection<TriggeredEvent>();
+
         private String FileName;
         private String BackupFileName;
 
