@@ -239,7 +239,7 @@ namespace BlinkStickClient
             if (model.GetValue(iter, 0) is PatternNotification)
             {
                 PatternNotification notification = (PatternNotification)model.GetValue(iter, 0);
-                (cell as Gtk.CellRendererText).Text = notification.Pattern.Name;
+                (cell as Gtk.CellRendererText).Text = notification.Pattern == null ? "" : notification.Pattern.Name;
             }
             else
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 
@@ -9,7 +10,7 @@ namespace BlinkStickClient.DataModel
     public class ApplicationDataModel
     {
         public List<Pattern> Patterns = new List<Pattern>();
-        public List<Notification> Notifications = new List<Notification>();
+        public ObservableCollection<Notification> Notifications = new ObservableCollection<Notification>();
         public List<BlinkStickDeviceSettings> Devices = new List<BlinkStickDeviceSettings>();
 
         private String FileName;
@@ -115,7 +116,10 @@ namespace BlinkStickClient.DataModel
             this.Patterns.AddRange(data.Patterns);
 
             this.Notifications.Clear();
-            this.Notifications.AddRange(data.Notifications);
+            foreach (Notification n in data.Notifications)
+            {
+                this.Notifications.Add(n);
+            }
 
             this.Devices.Clear();
             this.Devices.AddRange(data.Devices);

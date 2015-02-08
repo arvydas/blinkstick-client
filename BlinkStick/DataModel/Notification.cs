@@ -1,9 +1,22 @@
 ﻿using System;
+using Gtk;
 
 namespace BlinkStickClient.DataModel
 {
     public abstract class Notification : IDisposable
     {
+        #region Events
+        public event EventHandler<EventArgs> Triggered;
+
+        protected void OnTriggered()
+        {
+            if (Triggered != null)
+            {
+                Triggered(this, EventArgs.Empty);
+            }
+        }
+        #endregion
+
         public Boolean Enabled;
 
         public String Name;
@@ -11,6 +24,15 @@ namespace BlinkStickClient.DataModel
         public String BlinkStickSerial { get; set; }
 
         public abstract String GetTypeName();
+
+        /// <summary>
+        /// Gets the editor widget for the notification type.
+        /// </summary>
+        /// <returns>The editor widget object.</returns>
+        public virtual Widget GetEditorWidget()
+        {
+            return null;
+        }
 
         public Notification()
         {

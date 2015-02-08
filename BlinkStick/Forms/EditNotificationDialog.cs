@@ -130,6 +130,19 @@ namespace BlinkStickClient
                 table2.Remove(comboboxPattern);
                 table2.Remove(buttonPlayPattern);
             }
+
+            Widget editorWidget = Notification.GetEditorWidget();
+
+            if (editorWidget != null)
+            {
+                if (editorWidget is IEditorInterface)
+                {
+                    (editorWidget as IEditorInterface).SetNotification(Notification);
+                }
+
+                GtkAlignment4.Add(editorWidget);
+                editorWidget.ShowAll();
+            }
         }
     }
 }

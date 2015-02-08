@@ -2,7 +2,7 @@
 
 namespace BlinkStickClient.DataModel
 {
-    public class NotificationTest : Notification
+    public class NotificationTest : PatternNotification
     {
         public override string GetTypeName()
         {
@@ -26,6 +26,16 @@ namespace BlinkStickClient.DataModel
         public override bool IsSupported()
         {
             return true;
+        }
+
+        public override Gtk.Widget GetEditorWidget()
+        {
+            return new TestEditorWidget();
+        }
+
+        public void Trigger()
+        {
+            OnTriggered();
         }
     }
 }

@@ -45,6 +45,7 @@ namespace BlinkStickClient
 			this.Name = "BlinkStickClient.EditNotificationDialog";
 			this.Title = global::Mono.Unix.Catalog.GetString ("Edit Notification");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(1));
+			this.AllowShrink = true;
 			this.SkipPagerHint = true;
 			this.SkipTaskbarHint = true;
 			// Internal child BlinkStickClient.EditNotificationDialog.VBox

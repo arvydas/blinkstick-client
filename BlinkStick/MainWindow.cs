@@ -67,6 +67,8 @@ public partial class MainWindow: Gtk.Window
     OverviewWidget overviewWidget;
     NotificationsWidget notificationsWidget;
 
+    NotificationService notificationService;
+
 	private Boolean ApplicationIsClosing = false;
 #if LINUX
 	private ApplicationIndicator indicator;	
@@ -338,6 +340,10 @@ public partial class MainWindow: Gtk.Window
 
         RefreshDevices();
 
+        notificationService = new NotificationService();
+        notificationService.DataModel = this.DataModel;
+        notificationService.Start();
+
 		log.Debug("Initialization done");
 	}
 
@@ -367,9 +373,11 @@ public partial class MainWindow: Gtk.Window
 
 	private void DestroyEnvironment ()
 	{
-        DataModel.Save();
-
         DeviceMonitor.Stop ();
+
+        notificationService.Stop();
+
+        DataModel.Save();
 		
 		Manager.Stop ();
 		Manager.Save ();

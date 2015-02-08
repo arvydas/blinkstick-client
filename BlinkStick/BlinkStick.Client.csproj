@@ -181,6 +181,10 @@
     <Compile Include="Widgets\DeviceComboboxWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.DeviceComboboxWidget.cs" />
     <Compile Include="DataModel\NotificationBoblight.cs" />
+    <Compile Include="DataModel\NotificationService.cs" />
+    <Compile Include="Editors\TestEditorWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.TestEditorWidget.cs" />
+    <Compile Include="Editors\IEditorInterface.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
@@ -232,5 +236,6 @@
   </ProjectExtensions>
   <ItemGroup>
     <Folder Include="DataModel\" />
+    <Folder Include="Editors\" />
   </ItemGroup>
 </Project>
