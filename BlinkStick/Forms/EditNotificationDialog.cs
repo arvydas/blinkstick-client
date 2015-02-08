@@ -96,6 +96,7 @@ namespace BlinkStickClient
 
         private void ControlsToObject()
         {
+            Notification.Enabled = checkbuttonEnabled.Active;
             Notification.Name = entryName.Text;
             Notification.BlinkStickSerial = deviceComboboxWidget.SelectedBlinkStick.Serial;
 
@@ -103,11 +104,11 @@ namespace BlinkStickClient
             {
                 ((PatternNotification)Notification).Pattern = SelectedPattern;
             }
-
         }
 
         private void ObjectToControls()
         {
+            checkbuttonEnabled.Active = Notification.Enabled;
             entryName.Text = Notification.Name;
             deviceComboboxWidget.SelectBySerial(Notification.BlinkStickSerial);
 

@@ -4,6 +4,8 @@ namespace BlinkStickClient.DataModel
 {
     public abstract class Notification : IDisposable
     {
+        public Boolean Enabled;
+
         public String Name;
 
         public String BlinkStickSerial { get; set; }
@@ -12,6 +14,7 @@ namespace BlinkStickClient.DataModel
 
         public Notification()
         {
+            this.Enabled = true;
         }
 
         public virtual void Dispose()
