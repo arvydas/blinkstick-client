@@ -12,8 +12,6 @@ namespace BlinkStickClient.DataModel
         public List<Pattern> Patterns = new List<Pattern>();
         public ObservableCollection<Notification> Notifications = new ObservableCollection<Notification>();
         public List<BlinkStickDeviceSettings> Devices = new List<BlinkStickDeviceSettings>();
-
-        [JsonIgnore]
         public ObservableCollection<TriggeredEvent> TriggeredEvents = new ObservableCollection<TriggeredEvent>();
 
         private String FileName;
@@ -126,6 +124,12 @@ namespace BlinkStickClient.DataModel
 
             this.Devices.Clear();
             this.Devices.AddRange(data.Devices);
+
+            this.TriggeredEvents.Clear();
+            foreach (TriggeredEvent ev in data.TriggeredEvents)
+            {
+                this.TriggeredEvents.Add(ev);
+            }
         }
         #endregion
 
