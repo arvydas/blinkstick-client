@@ -12,10 +12,6 @@ namespace BlinkStickClient.DataModel
 
         public ApplicationDataModel DataModel;
 
-        private BackgroundWorker monitorWorker;
-
-        private Queue<TriggeredEvent> EventQueue = new Queue<TriggeredEvent>();
-
         public NotificationService()
         {
             log.Debug("Creating service...");
@@ -24,24 +20,34 @@ namespace BlinkStickClient.DataModel
 
         public void Start()
         {
-            if (monitorWorker != null)
-            {
-                log.Warn("Service already started.");
-                return;            
-            }
-
-            log.Info("Starting service...");
+            log.Info("Starting notification monitoring...");
             foreach (Notification n in DataModel.Notifications)
             {
                 n.Triggered += NotificationTriggered;
             }
 
             DataModel.Notifications.CollectionChanged += NotificationListChanged;
-            monitorWorker = new BackgroundWorker ();
-            monitorWorker.DoWork += new DoWorkEventHandler (monitorWorker_DoWork);
-            monitorWorker.WorkerSupportsCancellation = true;
-            monitorWorker.RunWorkerAsync ();
-            log.Info("Service started.");
+
+            log.Info("Started.");
+        }
+
+        public void Stop()
+        {
+            log.Info("Stopping monitor...");
+            foreach (Notification n in DataModel.Notifications)
+            {
+                n.Triggered -= NotificationTriggered;
+            }
+
+            DataModel.Notifications.CollectionChanged -= NotificationListChanged;
+
+            log.Debug("Stopping device playback");
+            foreach (BlinkStickDeviceSettings settings in DataModel.Devices)
+            {
+                settings.Stop();
+            }
+
+            log.Info("Service stopped.");
         }
 
         void NotificationListChanged (object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -69,65 +75,12 @@ namespace BlinkStickClient.DataModel
                 (sender as Notification).Name, 
                 e.Message);
 
-            TriggeredEvent ev = new TriggeredEvent(sender as Notification, e.Message);
+            PatternNotification notification = sender as PatternNotification;
+
+            TriggeredEvent ev = new TriggeredEvent(notification, e.Message);
 
             DataModel.TriggeredEvents.Add(ev);
 
-            lock (EventQueue)
-            {
-                EventQueue.Enqueue(ev);
-            }
-        }
-
-        public void Stop()
-        {
-            if (monitorWorker == null)
-            {
-                log.Warn("Service already stopped.");
-                return;            
-            }
-
-            log.Info("Stopping service...");
-            foreach (Notification n in DataModel.Notifications)
-            {
-                n.Triggered -= NotificationTriggered;
-            }
-
-            monitorWorker.CancelAsync();
-            monitorWorker = null;
-            log.Info("Service stopped.");
-        }
-
-        void monitorWorker_DoWork (object sender, DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = (BackgroundWorker)sender;
-
-            log.Info("Service thread started");
-
-            while (!worker.CancellationPending) {
-                if (EventQueue.Count > 0)
-                {
-                    TriggeredEvent ev;
-
-                    lock (EventQueue)
-                    {
-                        ev = EventQueue.Dequeue();
-                    }
-
-                    if (ev.Notification is PatternNotification)
-                    {
-                        PlayPattern(worker, ev.Notification as PatternNotification);
-                    }
-                }
-
-                Thread.Sleep (100);
-            }
-
-            log.Info("Service thread stopped");
-        }
-
-        void PlayPattern(BackgroundWorker worker, PatternNotification notification)
-        {
             if (notification.Pattern == null)
             {
                 log.WarnFormat("({0}) Pattern is not assigned", notification.Name);
@@ -148,31 +101,12 @@ namespace BlinkStickClient.DataModel
                 return;
             }
 
-            log.InfoFormat("({0}) Playing pattern -{1}-", notification.Name, notification.Pattern.Name);
-
-            foreach (Animation animation in notification.Pattern.Animations)
+            lock (settings.EventQueue)
             {
-                if (worker.CancellationPending)
-                    return;
-
-                switch (animation.AnimationType) {
-                    case AnimationTypeEnum.SetColor:
-                        settings.Led.SetColor(animation.Color);
-                        settings.Led.WaitThread(animation.DelaySetColor);
-                        break;
-                    case AnimationTypeEnum.Blink:
-                        settings.Led.Blink(animation.Color, animation.RepeatBlink, animation.DurationBlink);
-                        break;
-                    case AnimationTypeEnum.Pulse:
-                        settings.Led.Pulse(animation.Color, animation.RepeatPulse, animation.DurationPulse);
-                        break;
-                    case AnimationTypeEnum.Morph:
-                        settings.Led.Morph(animation.Color, animation.DurationMorph);
-                        break;
-                }
+                settings.EventQueue.Enqueue(ev);
             }
 
-            log.InfoFormat("({0}) Pattern -{1}- playback complete", notification.Name, notification.Pattern.Name);
+            settings.PlayNextEvent();
         }
     }
 }
