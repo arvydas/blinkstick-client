@@ -42,26 +42,7 @@ namespace BlinkStickClient
     
             UpdateUI();
         }
-
-        private void BlinkStickConnectedRenderer(CellLayout cell_layout, CellRenderer cell, TreeModel model, TreeIter iter)
-        {    
-            BlinkStickDeviceSettings myclass = model.GetValue(iter, 0) as BlinkStickDeviceSettings;
-            if (myclass != null)
-            {
-                (cell as CellRendererPixbuf).StockId = myclass.Led == null ? "gtk-no" : "gtk-yes";
-            }
-        }
-
-        private void BlinkStickDeviceSettingsClassRenderer(CellLayout cell_layout, CellRenderer cell, TreeModel model, TreeIter iter)
-        {    
-            BlinkStickDeviceSettings myclass = model.GetValue(iter, 0) as BlinkStickDeviceSettings;
-            if (myclass != null)
-            {
-                (cell as CellRendererText).Text = myclass.ToString();
-                cell.Xalign = 0;
-            }
-        }
-
+            
         public void RefreshDevices()
         {
             deviceComboboxWidget.LoadDevices(DataModel);
