@@ -4752,7 +4752,7 @@ Pulse</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="BlinkStickClient.EditNotificationDialog" design-size="292 333">
+  <widget class="Gtk.Dialog" id="BlinkStickClient.EditNotificationDialog" design-size="292 238">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Edit Notification</property>
     <property name="WindowPosition">Center</property>

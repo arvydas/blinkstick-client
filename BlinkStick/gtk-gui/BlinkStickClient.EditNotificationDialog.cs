@@ -229,7 +229,7 @@ namespace BlinkStickClient
 				this.Child.ShowAll ();
 			}
 			this.DefaultWidth = 292;
-			this.DefaultHeight = 333;
+			this.DefaultHeight = 238;
 			this.Show ();
 			this.buttonOk.Clicked += new global::System.EventHandler (this.OnButtonOkClicked);
 		}
