@@ -13,6 +13,8 @@ namespace BlinkStickClient
 
         ColorPaletteWidget colorPaletteWidget = new ColorPaletteWidget();
 
+        private BlinkStickDeviceSettings PreviousDeviceSettings;
+
         public OverviewWidget()
         {
             this.Build();
@@ -37,10 +39,27 @@ namespace BlinkStickClient
             };
 
             deviceComboboxWidget.DeviceChanged += (object sender, EventArgs e) => {
+                if (PreviousDeviceSettings != null && PreviousDeviceSettings.Led != null)
+                {
+                    PreviousDeviceSettings.Led.SendColor -= BlinkStickSendColor;
+                }
+
+                PreviousDeviceSettings = deviceComboboxWidget.SelectedBlinkStick;
+
+                if (PreviousDeviceSettings != null && PreviousDeviceSettings.Led != null)
+                {
+                    PreviousDeviceSettings.Led.SendColor += BlinkStickSendColor;
+                }
+
                 UpdateUI();
             };
     
             UpdateUI();
+        }
+
+        void BlinkStickSendColor (object sender, BlinkStickDotNet.SendColorEventArgs e)
+        {
+            blinkstickemulatorwidget1.SetColor(new Gdk.Color(e.R, e.G, e.B));
         }
             
         public void RefreshDevices()
