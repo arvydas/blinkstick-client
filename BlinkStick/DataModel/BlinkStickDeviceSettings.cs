@@ -162,7 +162,7 @@ namespace BlinkStickClient.DataModel
 
         public void Stop()
         {
-            if (patternPlayer.IsBusy)
+            if (patternPlayer != null && patternPlayer.IsBusy)
             {
                 Led.Stop();
                 patternPlayer.CancelAsync();
