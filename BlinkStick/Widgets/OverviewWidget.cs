@@ -28,12 +28,13 @@ namespace BlinkStickClient
                     if (blinkstickemulatorwidget1.SelectedLed == -1)
                     {
                         deviceComboboxWidget.SelectedBlinkStick.SetColor(color.R, color.G, color.B);
-                        blinkstickemulatorwidget1.SetColor(e.Color);
+                        //blinkstickemulatorwidget1.SetColor(e.Color);
                     }
                     else
                     {
-                        deviceComboboxWidget.SelectedBlinkStick.SetColor(0, (byte)blinkstickemulatorwidget1.SelectedLed, color.R, color.G, color.B);
-                        blinkstickemulatorwidget1.SetColor((byte)blinkstickemulatorwidget1.SelectedLed, e.Color);
+                        deviceComboboxWidget.SelectedBlinkStick.SetColor(0, 
+                            (byte)blinkstickemulatorwidget1.SelectedLed, color.R, color.G, color.B);
+                        //blinkstickemulatorwidget1.SetColor((byte)blinkstickemulatorwidget1.SelectedLed, e.Color);
                     }
                 }
             };
@@ -60,7 +61,7 @@ namespace BlinkStickClient
         void BlinkStickSendColor (object sender, BlinkStickDotNet.SendColorEventArgs e)
         {
             Gtk.Application.Invoke(delegate {
-                blinkstickemulatorwidget1.SetColor(new Gdk.Color(e.R, e.G, e.B));
+                blinkstickemulatorwidget1.SetColor(e.Index, new Gdk.Color(e.R, e.G, e.B));
             });
         }
             
