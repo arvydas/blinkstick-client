@@ -59,7 +59,16 @@ public partial class MainWindow: Gtk.Window
                 _VisiblePage = value;
 
                 if (_VisiblePage != null)
-                    _VisiblePage.Show();
+                {
+                    if (_VisiblePage is OverviewWidget)
+                    {
+                        _VisiblePage.ShowAll();
+                    }
+                    else
+                    {
+                        _VisiblePage.Show();
+                    }
+                }
             }
         }
     }
