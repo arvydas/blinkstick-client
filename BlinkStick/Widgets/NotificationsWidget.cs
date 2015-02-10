@@ -57,7 +57,6 @@ namespace BlinkStickClient
             Gtk.CellRendererText patternCell = new Gtk.CellRendererText ();
 
             enabledColumn.PackEnd (enabledCell, false);
-            enabledColumn.AddAttribute(enabledCell, "stock-id", 0);
             blinkStickColumn.PackEnd (blinkStickCell, false);
             nameColumn.PackEnd (nameCell, false);
             typeColumn.PackEnd (typeCell, false);

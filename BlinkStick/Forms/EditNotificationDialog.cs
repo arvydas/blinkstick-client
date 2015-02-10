@@ -47,7 +47,6 @@ namespace BlinkStickClient
 
             CellRendererText blinkStickDeviceSettingsCell = new CellRendererText();
             comboboxPattern.PackStart(blinkStickDeviceSettingsCell, true);
-            comboboxPattern.AddAttribute (blinkStickDeviceSettingsCell, "text", 0);
             comboboxPattern.SetCellDataFunc(blinkStickDeviceSettingsCell, PaternTitleRenderer);
 
             comboboxPattern.Model = store;
