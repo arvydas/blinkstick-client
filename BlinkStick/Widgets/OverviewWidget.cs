@@ -59,7 +59,9 @@ namespace BlinkStickClient
 
         void BlinkStickSendColor (object sender, BlinkStickDotNet.SendColorEventArgs e)
         {
-            blinkstickemulatorwidget1.SetColor(new Gdk.Color(e.R, e.G, e.B));
+            Gtk.Application.Invoke(delegate {
+                blinkstickemulatorwidget1.SetColor(new Gdk.Color(e.R, e.G, e.B));
+            });
         }
             
         public void RefreshDevices()
