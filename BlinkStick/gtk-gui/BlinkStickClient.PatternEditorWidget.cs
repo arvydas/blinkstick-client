@@ -216,6 +216,9 @@ namespace BlinkStickClient
 				this.Child.ShowAll ();
 			}
 			this.Hide ();
+			this.buttonAddPattern.Clicked += new global::System.EventHandler (this.OnButtonAddPatternClicked);
+			this.buttonProperties.Clicked += new global::System.EventHandler (this.OnButtonPropertiesClicked);
+			this.buttonAddAnimation.Clicked += new global::System.EventHandler (this.OnButtonAddAnimationClicked);
 		}
 	}
 }
