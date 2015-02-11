@@ -24,11 +24,48 @@ namespace BlinkStickClient.DataModel
             foreach (Notification n in DataModel.Notifications)
             {
                 n.Triggered += NotificationTriggered;
+                n.ColorSend += NotificationColor;
             }
 
             DataModel.Notifications.CollectionChanged += NotificationListChanged;
+            DataModel.Notifications.ItemUpdated += NotificationListItemUpdated;
+
+            foreach (Notification n in DataModel.Notifications)
+            {
+                if (n.RequiresMonitoring() && n.Enabled)
+                {
+                    n.Start();
+                }
+            }
 
             log.Info("Started.");
+        }
+
+        void NotificationListItemUpdated (object sender, ItemUpdatedEventArgs e)
+        {
+            Notification notification = e.Item as Notification;
+
+            if (notification.RequiresMonitoring())
+            {
+                if (notification.Enabled)
+                {
+                    if (notification.Running)
+                    {
+                        log.DebugFormat("Notification {0} restarting", notification.ToString());
+                        notification.Stop();
+                    }
+                    else
+                    {
+                        log.DebugFormat("Notification {0} starting", notification.ToString());
+                    }
+                    notification.Start();
+                }
+                else if (notification.Running)
+                {
+                    log.DebugFormat("Notification {0} stopping", notification.ToString());
+                    notification.Stop();
+                }
+            }
         }
 
         public void Stop()
@@ -40,6 +77,15 @@ namespace BlinkStickClient.DataModel
             }
 
             DataModel.Notifications.CollectionChanged -= NotificationListChanged;
+            DataModel.Notifications.ItemUpdated -= NotificationListItemUpdated;
+
+            foreach (Notification n in DataModel.Notifications)
+            {
+                if (n.RequiresMonitoring() && n.Running)
+                {
+                    n.Stop();
+                }
+            }
 
             log.Debug("Stopping device playback");
             foreach (BlinkStickDeviceSettings settings in DataModel.Devices)
@@ -57,6 +103,12 @@ namespace BlinkStickClient.DataModel
                 foreach (Notification n in e.NewItems)
                 {
                     n.Triggered += NotificationTriggered;
+                    n.ColorSend += NotificationColor;
+
+                    if (n.RequiresMonitoring() && n.Enabled)
+                    {
+                        n.Start();
+                    }
                 }
             }
             else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
@@ -64,7 +116,37 @@ namespace BlinkStickClient.DataModel
                 foreach (Notification n in e.OldItems)
                 {
                     n.Triggered -= NotificationTriggered;
+                    n.ColorSend -= NotificationColor;
+
+                    if (n.RequiresMonitoring() && n.Enabled)
+                    {
+                        n.Stop();
+                    }
                 }
+            }
+        }
+
+        void NotificationColor (object sender, ColorSendEventArgs e)
+        {
+            PatternNotification notification = sender as PatternNotification;
+
+            BlinkStickDeviceSettings settings = DataModel.FindBySerial(notification.BlinkStickSerial);
+
+            if (settings == null)
+            {
+                log.WarnFormat("({0}) BlinkStick with serial {1} not known", notification.Name, notification.BlinkStickSerial);
+                return;
+            }
+
+            if (settings.Led == null)
+            {
+                log.WarnFormat("({0}) BlinkStick with serial {1} is not connected", notification.Name, notification.BlinkStickSerial);
+                return;
+            }
+
+            if (!settings.Playing)
+            {
+                settings.Led.SetColor(e.R, e.G, e.B);
             }
         }
 
