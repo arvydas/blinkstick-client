@@ -6,7 +6,7 @@ namespace BlinkStickClient
     [System.ComponentModel.ToolboxItem(true)]
     public partial class CpuEditorWidget : Gtk.Bin, IEditorInterface
     {
-        private NotificationCpu Notification;
+        private HardwareNotification Notification;
 
         public CpuEditorWidget()
         {
@@ -17,13 +17,15 @@ namespace BlinkStickClient
 
         public void SetNotification(Notification notification)
         {
-            this.Notification = (NotificationCpu)notification;
+            this.Notification = (HardwareNotification)notification;
 
-            radiobuttonMonitor.Active = this.Notification.Configuration == NotificationCpu.ConfigurationEnum.Monitor;
-            radiobuttonAlert.Active = this.Notification.Configuration == NotificationCpu.ConfigurationEnum.Alert;
-            comboboxTriggerType.Active = this.Notification.TriggerType == NotificationCpu.TriggerTypeEnum.More ? 0 : 1;
+            radiobuttonMonitor.Active = this.Notification.Configuration == HardwareNotification.ConfigurationEnum.Monitor;
+            radiobuttonAlert.Active = this.Notification.Configuration == HardwareNotification.ConfigurationEnum.Alert;
+            comboboxTriggerType.Active = this.Notification.TriggerType == HardwareNotification.TriggerTypeEnum.More ? 0 : 1;
             spinbuttonCheckPeriod.Value = this.Notification.CheckPeriod;
             spinbuttonCpuPercent.Value = this.Notification.AlertPercent;
+
+            GtkLabel2.Markup = String.Format("<b>Configure {0} monitoring</b>", this.Notification.GetTypeName());
 
             UpdateUI();
         }
@@ -36,9 +38,9 @@ namespace BlinkStickClient
         public void UpdateNotification()
         {
             this.Notification.Configuration = radiobuttonMonitor.Active ? 
-                NotificationCpu.ConfigurationEnum.Monitor : NotificationCpu.ConfigurationEnum.Alert;
+                HardwareNotification.ConfigurationEnum.Monitor : HardwareNotification.ConfigurationEnum.Alert;
             this.Notification.TriggerType = comboboxTriggerType.Active == 0 ? 
-                NotificationCpu.TriggerTypeEnum.More : NotificationCpu.TriggerTypeEnum.Less;
+                HardwareNotification.TriggerTypeEnum.More : HardwareNotification.TriggerTypeEnum.Less;
             this.Notification.CheckPeriod = spinbuttonCheckPeriod.ValueAsInt;
             this.Notification.AlertPercent = spinbuttonCpuPercent.ValueAsInt;
         }
