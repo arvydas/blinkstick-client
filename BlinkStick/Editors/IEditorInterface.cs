@@ -7,7 +7,7 @@ namespace BlinkStickClient
     {
         void SetNotification(Notification notification);
 
-        Boolean IsValid();
+        Boolean IsValid(Gtk.Window window);
 
         void UpdateNotification();
     }

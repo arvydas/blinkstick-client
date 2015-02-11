@@ -30,7 +30,7 @@ namespace BlinkStickClient
             UpdateUI();
         }
 
-        public bool IsValid()
+        public bool IsValid(Gtk.Window window)
         {
             return true;
         }

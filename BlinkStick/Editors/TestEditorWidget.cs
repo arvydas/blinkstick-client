@@ -19,7 +19,7 @@ namespace BlinkStickClient
             this.Notification = notification as NotificationTest;
         }
 
-        public bool IsValid()
+        public bool IsValid(Gtk.Window window)
         {
             return true;
         }

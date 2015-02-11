@@ -105,7 +105,7 @@ namespace BlinkStickClient
                 return;
             }
 
-            if (editorInterface != null && !editorInterface.IsValid())
+            if (editorInterface != null && !editorInterface.IsValid(this))
             {
                 return;
             }
