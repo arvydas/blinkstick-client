@@ -188,6 +188,8 @@
     <Compile Include="DataModel\TriggeredEvent.cs" />
     <Compile Include="Widgets\EventsWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.EventsWidget.cs" />
+    <Compile Include="Editors\CpuEditorWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.CpuEditorWidget.cs" />
     <Compile Include="Classes\ObservableCollectionEx.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

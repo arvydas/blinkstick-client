@@ -29,6 +29,8 @@ namespace BlinkStickClient
             }
         }
 
+        public Gtk.Window ParentForm;
+
         public NotificationsWidget()
         {
             this.Build();
@@ -111,7 +113,7 @@ namespace BlinkStickClient
 
         protected void OnTreeviewEventsRowActivated (object o, Gtk.RowActivatedArgs args)
         {
-            EditNotification(SelectedNotification);
+            OnEditActionActivated(0, EventArgs.Empty);
         }
 
         protected void OnTreeviewEventsCursorChanged (object sender, EventArgs e)
@@ -168,23 +170,26 @@ namespace BlinkStickClient
         {
             int response;
 
-            using (EditNotificationDialog editDialog = new EditNotificationDialog())
+            using (EditNotificationDialog editDialog = 
+                new EditNotificationDialog(title, this.ParentForm, this.DataModel, notification))
             {
-                editDialog.Title = title;
-                editDialog.DataModel = this.DataModel;
-                editDialog.RefreshDevices();
-                editDialog.Notification = notification;
                 response = editDialog.Run();
                 editDialog.Destroy();
             }
+
+            log.DebugFormat("Edit notification dialog response {0}", (ResponseType)response);
 
             return response == (int)ResponseType.Ok;
         }
 
         protected void OnEditActionActivated (object sender, EventArgs e)
         {
-            EditNotification(SelectedNotification);
-            DataModel.Save();
+            if (EditNotification(SelectedNotification))
+            {
+                log.DebugFormat("Notification {0} edit complete", SelectedNotification.ToString());
+                DataModel.Save();
+                DataModel.Notifications.NotifyUpdate(SelectedNotification);
+            }
         }
         protected void OnDeleteActionActivated (object sender, EventArgs e)
         {
