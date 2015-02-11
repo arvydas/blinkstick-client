@@ -18,6 +18,15 @@ namespace BlinkStickClient
         {
             this.Notification = notification as NotificationTest;
         }
+
+        public bool IsValid()
+        {
+            return true;
+        }
+
+        public void UpdateNotification()
+        {
+        }
         #endregion
 
         protected void OnButtonTriggerClicked (object sender, EventArgs e)

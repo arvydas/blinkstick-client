@@ -6,6 +6,10 @@ namespace BlinkStickClient
     public interface IEditorInterface
     {
         void SetNotification(Notification notification);
+
+        Boolean IsValid();
+
+        void UpdateNotification();
     }
 }
 
