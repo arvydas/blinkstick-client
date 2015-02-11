@@ -42,6 +42,8 @@ namespace BlinkStickClient.DataModel
 
         private BackgroundWorker performanceCounterInitializer = null;
 
+        protected Boolean UsesPerformanceCounter = false;
+
         public HardwareNotification()
         {
             this.TriggerType = TriggerTypeEnum.More;
@@ -78,7 +80,7 @@ namespace BlinkStickClient.DataModel
 
             base.Start();
 
-            if (performanceCounter == null && performanceCounterInitializer == null)
+            if (performanceCounter == null && performanceCounterInitializer == null && UsesPerformanceCounter)
             {
                 log.Debug("Setting up to initialize performance counter in background");
 
@@ -107,6 +109,8 @@ namespace BlinkStickClient.DataModel
 
         protected abstract void InitializePerformanceCounter (object sender, DoWorkEventArgs e);
 
+        protected abstract int GetValue();
+
         public override void Stop()
         {
             if (!Running)
@@ -127,9 +131,9 @@ namespace BlinkStickClient.DataModel
 
         protected bool CheckUsage()
         {
-            if (performanceCounter != null)
+            if (!UsesPerformanceCounter || UsesPerformanceCounter && performanceCounter != null)
             {
-                int currentUsage = Convert.ToInt32(performanceCounter.NextValue());
+                int currentUsage = GetValue();
 
                 log.DebugFormat("{0} usage {1}%", GetTypeName(), currentUsage);
 
