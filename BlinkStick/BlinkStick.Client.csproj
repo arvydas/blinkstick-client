@@ -191,6 +191,7 @@
     <Compile Include="Editors\CpuEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.CpuEditorWidget.cs" />
     <Compile Include="Classes\ObservableCollectionEx.cs" />
+    <Compile Include="DataModel\HardwareNotification.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
