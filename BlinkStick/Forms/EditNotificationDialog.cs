@@ -31,6 +31,10 @@ namespace BlinkStickClient
 
         public ApplicationDataModel DataModel;
 
+        private Gtk.Window ParentForm;
+
+        IEditorInterface editorInterface;
+
         public Pattern SelectedPattern
         {
             get
@@ -44,14 +48,27 @@ namespace BlinkStickClient
         public EditNotificationDialog()
         {
             this.Build();
+        }
+
+        public EditNotificationDialog(String title, Gtk.Window parent, ApplicationDataModel dataModel, Notification notification) 
+            : base (title, parent, Gtk.DialogFlags.Modal, new object[0])
+        {
+            this.Build();
+
+            ParentForm = parent;
 
             CellRendererText blinkStickDeviceSettingsCell = new CellRendererText();
             comboboxPattern.PackStart(blinkStickDeviceSettingsCell, true);
             comboboxPattern.SetCellDataFunc(blinkStickDeviceSettingsCell, PaternTitleRenderer);
 
             comboboxPattern.Model = store;
-
             deviceComboboxWidget.AutoSelectDevice = false;
+
+            this.DataModel = dataModel;
+            this._Notification = notification;
+
+            RefreshDevices();
+            ObjectToControls();
         }
 
         private void PaternTitleRenderer(CellLayout cell_layout, CellRenderer cell, TreeModel model, TreeIter iter)
@@ -88,6 +105,11 @@ namespace BlinkStickClient
                 return;
             }
 
+            if (editorInterface != null && !editorInterface.IsValid())
+            {
+                return;
+            }
+
             ControlsToObject();
 
             this.Respond(Gtk.ResponseType.Ok);
@@ -102,6 +124,11 @@ namespace BlinkStickClient
             if (Notification is PatternNotification)
             {
                 ((PatternNotification)Notification).Pattern = SelectedPattern;
+            }
+
+            if (editorInterface != null)
+            {
+                editorInterface.UpdateNotification();
             }
         }
 
@@ -136,10 +163,22 @@ namespace BlinkStickClient
             {
                 if (editorWidget is IEditorInterface)
                 {
-                    (editorWidget as IEditorInterface).SetNotification(Notification);
+                    editorInterface = (editorWidget as IEditorInterface);
+                    editorInterface.SetNotification(Notification);
                 }
 
-                GtkAlignment4.Add(editorWidget);
+                vbox3.PackEnd(editorWidget, true, true, 0);
+
+                editorWidget.SizeAllocated += (o, args) => {
+                    int x, y, w, h, myw, myh;
+                    ParentForm.GetPosition(out x, out y);
+                    ParentForm.GetSize(out w, out h);
+
+                    GetSize(out myw, out myh);
+
+                    this.GdkWindow.Move(x + (w - myw) / 2, y + (h - myh) / 2);
+                };
+
                 editorWidget.ShowAll();
             }
         }

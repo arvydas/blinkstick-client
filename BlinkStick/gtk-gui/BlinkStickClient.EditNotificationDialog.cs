@@ -4,6 +4,8 @@ namespace BlinkStickClient
 {
 	public partial class EditNotificationDialog
 	{
+		private global::Gtk.VBox vbox3;
+		
 		private global::Gtk.Frame frame1;
 		
 		private global::Gtk.Alignment GtkAlignment2;
@@ -28,12 +30,6 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Label GtkLabel2;
 		
-		private global::Gtk.Frame frame2;
-		
-		private global::Gtk.Alignment GtkAlignment4;
-		
-		private global::Gtk.Label GtkLabel4;
-		
 		private global::Gtk.Button buttonCancel;
 		
 		private global::Gtk.Button buttonOk;
@@ -44,8 +40,7 @@ namespace BlinkStickClient
 			// Widget BlinkStickClient.EditNotificationDialog
 			this.Name = "BlinkStickClient.EditNotificationDialog";
 			this.Title = global::Mono.Unix.Catalog.GetString ("Edit Notification");
-			this.WindowPosition = ((global::Gtk.WindowPosition)(1));
-			this.AllowShrink = true;
+			this.Resizable = false;
 			this.SkipPagerHint = true;
 			this.SkipTaskbarHint = true;
 			// Internal child BlinkStickClient.EditNotificationDialog.VBox
@@ -53,6 +48,10 @@ namespace BlinkStickClient
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
+			this.vbox3 = new global::Gtk.VBox ();
+			this.vbox3.Name = "vbox3";
+			this.vbox3.Spacing = 6;
+			// Container child vbox3.Gtk.Box+BoxChild
 			this.frame1 = new global::Gtk.Frame ();
 			this.frame1.Name = "frame1";
 			this.frame1.ShadowType = ((global::Gtk.ShadowType)(0));
@@ -172,34 +171,20 @@ namespace BlinkStickClient
 			this.GtkLabel2.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>General</b>");
 			this.GtkLabel2.UseMarkup = true;
 			this.frame1.LabelWidget = this.GtkLabel2;
-			w1.Add (this.frame1);
-			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(w1 [this.frame1]));
+			this.vbox3.Add (this.frame1);
+			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.frame1]));
 			w13.Position = 0;
 			w13.Expand = false;
 			w13.Fill = false;
-			// Container child dialog1_VBox.Gtk.Box+BoxChild
-			this.frame2 = new global::Gtk.Frame ();
-			this.frame2.Name = "frame2";
-			this.frame2.ShadowType = ((global::Gtk.ShadowType)(0));
-			// Container child frame2.Gtk.Container+ContainerChild
-			this.GtkAlignment4 = new global::Gtk.Alignment (0F, 0F, 1F, 1F);
-			this.GtkAlignment4.Name = "GtkAlignment4";
-			this.GtkAlignment4.LeftPadding = ((uint)(12));
-			this.frame2.Add (this.GtkAlignment4);
-			this.GtkLabel4 = new global::Gtk.Label ();
-			this.GtkLabel4.Name = "GtkLabel4";
-			this.GtkLabel4.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Settings</b>");
-			this.GtkLabel4.UseMarkup = true;
-			this.frame2.LabelWidget = this.GtkLabel4;
-			w1.Add (this.frame2);
-			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(w1 [this.frame2]));
-			w15.Position = 1;
+			w1.Add (this.vbox3);
+			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox3]));
+			w14.Position = 0;
 			// Internal child BlinkStickClient.EditNotificationDialog.ActionArea
-			global::Gtk.HButtonBox w16 = this.ActionArea;
-			w16.Name = "dialog1_ActionArea";
-			w16.Spacing = 10;
-			w16.BorderWidth = ((uint)(5));
-			w16.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w15 = this.ActionArea;
+			w15.Name = "dialog1_ActionArea";
+			w15.Spacing = 10;
+			w15.BorderWidth = ((uint)(5));
+			w15.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonCancel = new global::Gtk.Button ();
 			this.buttonCancel.CanDefault = true;
@@ -209,9 +194,9 @@ namespace BlinkStickClient
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-cancel";
 			this.AddActionWidget (this.buttonCancel, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w17 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w16 [this.buttonCancel]));
-			w17.Expand = false;
-			w17.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w16 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w15 [this.buttonCancel]));
+			w16.Expand = false;
+			w16.Fill = false;
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonOk = new global::Gtk.Button ();
 			this.buttonOk.CanDefault = true;
@@ -220,16 +205,16 @@ namespace BlinkStickClient
 			this.buttonOk.UseStock = true;
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
-			w16.Add (this.buttonOk);
-			global::Gtk.ButtonBox.ButtonBoxChild w18 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w16 [this.buttonOk]));
-			w18.Position = 1;
-			w18.Expand = false;
-			w18.Fill = false;
+			w15.Add (this.buttonOk);
+			global::Gtk.ButtonBox.ButtonBoxChild w17 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w15 [this.buttonOk]));
+			w17.Position = 1;
+			w17.Expand = false;
+			w17.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
 			this.DefaultWidth = 292;
-			this.DefaultHeight = 238;
+			this.DefaultHeight = 329;
 			this.Show ();
 			this.buttonOk.Clicked += new global::System.EventHandler (this.OnButtonOkClicked);
 		}

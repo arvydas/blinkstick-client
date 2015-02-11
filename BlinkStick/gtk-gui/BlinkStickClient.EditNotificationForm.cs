@@ -294,7 +294,6 @@ namespace BlinkStickClient
 			this.radiobuttonBlink = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("Blink"));
 			this.radiobuttonBlink.CanFocus = true;
 			this.radiobuttonBlink.Name = "radiobuttonBlink";
-			this.radiobuttonBlink.Active = true;
 			this.radiobuttonBlink.DrawIndicator = true;
 			this.radiobuttonBlink.UseUnderline = true;
 			this.radiobuttonBlink.Group = new global::GLib.SList (global::System.IntPtr.Zero);
