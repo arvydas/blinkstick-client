@@ -192,6 +192,8 @@
     <Compile Include="gtk-gui\BlinkStickClient.CpuEditorWidget.cs" />
     <Compile Include="Classes\ObservableCollectionEx.cs" />
     <Compile Include="DataModel\HardwareNotification.cs" />
+    <Compile Include="Editors\DiskSpaceEditorWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.DiskSpaceEditorWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
