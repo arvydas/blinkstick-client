@@ -15,7 +15,19 @@ namespace BlinkStickClient.DataModel
                 Triggered(this, new TriggeredEventArgs(message));
             }
         }
+
+        public event EventHandler<ColorSendEventArgs> ColorSend;
+
+        protected void OnColorSend(byte r, byte g, byte b)
+        {
+            if (ColorSend != null)
+            {
+                ColorSend(this, new ColorSendEventArgs(r, g, b));
+            }
+        }
         #endregion
+
+        public Boolean Running { protected set; get; }
 
         public Boolean Enabled;
 
@@ -67,6 +79,26 @@ namespace BlinkStickClient.DataModel
         {
             return false;
         }
+
+        public virtual void Start()
+        {
+            Running = true;
+        }
+
+        public virtual void Stop()
+        {
+            Running = false;
+        }
+
+        public virtual Boolean RequiresMonitoring()
+        {
+            return false;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}:{1}", GetTypeName(), Name);
+        }
     }
 
     public class TriggeredEventArgs: EventArgs
@@ -76,6 +108,20 @@ namespace BlinkStickClient.DataModel
         public TriggeredEventArgs(String message)
         {
             this.Message = message;
+        }
+    }
+
+    public class ColorSendEventArgs: EventArgs
+    {
+        public byte R;
+        public byte G;
+        public byte B;
+
+        public ColorSendEventArgs(byte r, byte g, byte b)
+        {
+            this.R = r;
+            this.G = g;
+            this.B = b;
         }
     }
 }
