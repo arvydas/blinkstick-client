@@ -3426,6 +3426,7 @@ Pulse</property>
                     <property name="Icon">stock:gtk-add Menu</property>
                     <property name="Label" translatable="yes">Add New Pattern</property>
                     <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="OnButtonAddPatternClicked" />
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -3488,6 +3489,7 @@ Pulse</property>
                     <property name="Icon">stock:gtk-properties Menu</property>
                     <property name="Label" translatable="yes" />
                     <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="OnButtonPropertiesClicked" />
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -3563,6 +3565,7 @@ Pulse</property>
                     <property name="Icon">stock:gtk-add Menu</property>
                     <property name="Label" translatable="yes">Add New Animation</property>
                     <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="OnButtonAddAnimationClicked" />
                   </widget>
                   <packing>
                     <property name="Position">1</property>
