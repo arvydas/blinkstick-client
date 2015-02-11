@@ -278,7 +278,7 @@ namespace BlinkStickClient
 
         private void AddPattern(Pattern pattern)
         {
-            PatternListStore.AppendValues("gtk-media-play", pattern, "gtk-copy", "gtk-delete");
+            PatternListStore.AppendValues("gtk-media-play", pattern, "gtk-edit", "gtk-copy", "gtk-delete");
             pattern.Animations.Add(new Animation());
             DataModel.Patterns.Add(pattern);
 
