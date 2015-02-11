@@ -10,7 +10,7 @@ namespace BlinkStickClient.DataModel
     public class ApplicationDataModel
     {
         public List<Pattern> Patterns = new List<Pattern>();
-        public ObservableCollection<Notification> Notifications = new ObservableCollection<Notification>();
+        public ObservableCollectionEx<Notification> Notifications = new ObservableCollectionEx<Notification>();
         public List<BlinkStickDeviceSettings> Devices = new List<BlinkStickDeviceSettings>();
         public ObservableCollection<TriggeredEvent> TriggeredEvents = new ObservableCollection<TriggeredEvent>();
 
