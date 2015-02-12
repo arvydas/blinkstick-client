@@ -1,5 +1,6 @@
 ﻿using System;
 using Gtk;
+using Newtonsoft.Json;
 
 namespace BlinkStickClient.DataModel
 {
@@ -27,6 +28,7 @@ namespace BlinkStickClient.DataModel
         }
         #endregion
 
+        [JsonIgnore]
         public Boolean Running { protected set; get; }
 
         public Boolean Enabled;
