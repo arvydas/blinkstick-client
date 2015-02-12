@@ -68,6 +68,9 @@
     <Reference Include="ImapX">
       <HintPath>..\packages\ImapX.2.0.0.16\lib\net40\ImapX.dll</HintPath>
     </Reference>
+    <Reference Include="OpenPop">
+      <HintPath>..\packages\OpenPop.NET.2.0.6.1102\lib\net40\OpenPop.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
