@@ -135,6 +135,7 @@ namespace BlinkStickClient.DataModel
             if (!di.IsReady)
             {
                 log.WarnFormat("Device {0} is not ready", this.Drive);
+                return true;
             }
 
             log.DebugFormat("Disk space reading {0}", HumanSize(di.TotalFreeSpace));
