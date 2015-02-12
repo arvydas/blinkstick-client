@@ -1,8 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Windows.Forms;
+using log4net;
 
 namespace BlinkStickClient.DataModel
 {
-    public class NotificationBattery : PatternNotification
+    public class NotificationBattery : HardwareNotification
     {
         public override string GetTypeName()
         {
@@ -11,6 +14,7 @@ namespace BlinkStickClient.DataModel
 
         public NotificationBattery()
         {
+            IsInitialized = true;
         }
 
         public override Notification Copy(Notification notification)
@@ -21,6 +25,41 @@ namespace BlinkStickClient.DataModel
             }
 
             return base.Copy(notification);
+        }
+
+        public override bool IsSupported()
+        {
+            return HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Windows;
+        }
+
+        public override Gtk.Widget GetEditorWidget()
+        {
+            return new CpuEditorWidget();
+        }
+
+        #region implemented abstract members of HardwareNotification
+
+        public override int GetValue()
+        {
+            if (SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.NoSystemBattery)
+            {
+                throw new Exception("No battery");
+            }
+
+            return (int)(SystemInformation.PowerStatus.BatteryLifePercent * 100);
+        }
+
+        #endregion
+
+        public override void Start()
+        {
+            if (SystemInformation.PowerStatus.BatteryChargeStatus == BatteryChargeStatus.NoSystemBattery)
+            {
+                log.Info("Unable to start monitoring, no battery detected"); 
+                return;
+            }
+
+            base.Start();
         }
     }
 }
