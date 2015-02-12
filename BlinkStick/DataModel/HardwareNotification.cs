@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.ComponentModel;
 using BlinkStickDotNet;
 using log4net;
+using Newtonsoft.Json.Converters;
 
 namespace BlinkStickClient.DataModel
 {
@@ -24,12 +25,14 @@ namespace BlinkStickClient.DataModel
         }
         #endregion
 
+        [JsonConverter(typeof(StringEnumConverter))]
         public TriggerTypeEnum TriggerType
         {
             get;
             set;
         }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         public ConfigurationEnum Configuration { set; get; }
 
         public int AlertPercent { set; get; }
