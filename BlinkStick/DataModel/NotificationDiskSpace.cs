@@ -148,6 +148,18 @@ namespace BlinkStickClient.DataModel
             return true;
         }
 
+        public String GetValue(String drive)
+        {
+            DriveInfo di = new DriveInfo(drive);
+
+            if (!di.IsReady)
+            {
+                throw new Exception(String.Format("{0} is not ready", drive));
+            }
+
+            return HumanSize(di.TotalFreeSpace);
+        }
+
         public override void Dispose()
         {
             Stop();

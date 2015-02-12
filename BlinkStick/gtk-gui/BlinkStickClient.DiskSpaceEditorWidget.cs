@@ -4,6 +4,8 @@ namespace BlinkStickClient
 {
 	public partial class DiskSpaceEditorWidget
 	{
+		private global::Gtk.VBox vbox3;
+		
 		private global::Gtk.Frame frame1;
 		
 		private global::Gtk.Alignment GtkAlignment;
@@ -27,6 +29,18 @@ namespace BlinkStickClient
 		private global::Gtk.SpinButton spinbuttonSize;
 		
 		private global::Gtk.Label GtkLabel;
+		
+		private global::Gtk.Frame frame3;
+		
+		private global::Gtk.Alignment GtkAlignment1;
+		
+		private global::Gtk.HBox hbox1;
+		
+		private global::Gtk.Label labelCurrentValue;
+		
+		private global::Gtk.Button buttonRefresh;
+		
+		private global::Gtk.Label GtkLabel3;
 
 		protected virtual void Build ()
 		{
@@ -35,6 +49,10 @@ namespace BlinkStickClient
 			global::Stetic.BinContainer.Attach (this);
 			this.Name = "BlinkStickClient.DiskSpaceEditorWidget";
 			// Container child BlinkStickClient.DiskSpaceEditorWidget.Gtk.Container+ContainerChild
+			this.vbox3 = new global::Gtk.VBox ();
+			this.vbox3.Name = "vbox3";
+			this.vbox3.Spacing = 6;
+			// Container child vbox3.Gtk.Box+BoxChild
 			this.frame1 = new global::Gtk.Frame ();
 			this.frame1.Name = "frame1";
 			this.frame1.ShadowType = ((global::Gtk.ShadowType)(0));
@@ -153,11 +171,63 @@ namespace BlinkStickClient
 			this.GtkLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Configure Disk Space Notification</b>");
 			this.GtkLabel.UseMarkup = true;
 			this.frame1.LabelWidget = this.GtkLabel;
-			this.Add (this.frame1);
+			this.vbox3.Add (this.frame1);
+			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.frame1]));
+			w11.Position = 0;
+			w11.Expand = false;
+			w11.Fill = false;
+			// Container child vbox3.Gtk.Box+BoxChild
+			this.frame3 = new global::Gtk.Frame ();
+			this.frame3.Name = "frame3";
+			this.frame3.ShadowType = ((global::Gtk.ShadowType)(0));
+			// Container child frame3.Gtk.Container+ContainerChild
+			this.GtkAlignment1 = new global::Gtk.Alignment (0F, 0F, 1F, 1F);
+			this.GtkAlignment1.Name = "GtkAlignment1";
+			this.GtkAlignment1.LeftPadding = ((uint)(12));
+			// Container child GtkAlignment1.Gtk.Container+ContainerChild
+			this.hbox1 = new global::Gtk.HBox ();
+			this.hbox1.Name = "hbox1";
+			this.hbox1.Spacing = 6;
+			// Container child hbox1.Gtk.Box+BoxChild
+			this.labelCurrentValue = new global::Gtk.Label ();
+			this.labelCurrentValue.Name = "labelCurrentValue";
+			this.labelCurrentValue.Xalign = 0F;
+			this.labelCurrentValue.LabelProp = global::Mono.Unix.Catalog.GetString ("Value: (click refresh)");
+			this.labelCurrentValue.UseMarkup = true;
+			this.hbox1.Add (this.labelCurrentValue);
+			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.labelCurrentValue]));
+			w12.Position = 0;
+			// Container child hbox1.Gtk.Box+BoxChild
+			this.buttonRefresh = new global::Gtk.Button ();
+			this.buttonRefresh.CanFocus = true;
+			this.buttonRefresh.Name = "buttonRefresh";
+			this.buttonRefresh.UseUnderline = true;
+			global::Gtk.Image w13 = new global::Gtk.Image ();
+			w13.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-refresh", global::Gtk.IconSize.Menu);
+			this.buttonRefresh.Image = w13;
+			this.hbox1.Add (this.buttonRefresh);
+			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.buttonRefresh]));
+			w14.Position = 1;
+			w14.Expand = false;
+			w14.Fill = false;
+			this.GtkAlignment1.Add (this.hbox1);
+			this.frame3.Add (this.GtkAlignment1);
+			this.GtkLabel3 = new global::Gtk.Label ();
+			this.GtkLabel3.Name = "GtkLabel3";
+			this.GtkLabel3.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Current value</b>");
+			this.GtkLabel3.UseMarkup = true;
+			this.frame3.LabelWidget = this.GtkLabel3;
+			this.vbox3.Add (this.frame3);
+			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.frame3]));
+			w17.Position = 1;
+			w17.Expand = false;
+			w17.Fill = false;
+			this.Add (this.vbox3);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
 			this.Hide ();
+			this.buttonRefresh.Clicked += new global::System.EventHandler (this.OnButtonRefreshClicked);
 		}
 	}
 }

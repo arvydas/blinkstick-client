@@ -57,6 +57,24 @@ namespace BlinkStickClient
             Notification.Drive = comboboxDrive.ActiveText;
         }
 
+
+        protected void OnButtonRefreshClicked (object sender, EventArgs e)
+        {
+            if (comboboxDrive.ActiveText == null || comboboxDrive.ActiveText == "")
+            {
+                labelCurrentValue.Text = "Value: (Please select drive)";
+                return;
+            }
+
+            try
+            {
+                labelCurrentValue.Text = String.Format("Value: {0} of free space", this.Notification.GetValue(comboboxDrive.ActiveText));
+            }
+            catch (Exception ex)
+            {
+                labelCurrentValue.Text = String.Format("Value: {0}", ex.Message);
+            }
+        }
         #endregion
     }
 }
