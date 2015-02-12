@@ -16,7 +16,7 @@ namespace BlinkStickClient.DataModel
 
         public int Port { get; set; }
 
-        public SslProtocols Protocol;
+        public Boolean UseSsl;
 
         public int CheckPeriod { set; get; }
 
@@ -29,7 +29,7 @@ namespace BlinkStickClient.DataModel
 
         public NotificationImap()
         {
-            Protocol = SslProtocols.Default;
+            UseSsl = true;
         }
 
         public override Notification Copy(Notification notification)
@@ -43,7 +43,7 @@ namespace BlinkStickClient.DataModel
             ((NotificationImap)notification).Password = this.Password;
             ((NotificationImap)notification).ServerAddress = this.ServerAddress;
             ((NotificationImap)notification).Port = this.Port;
-            ((NotificationImap)notification).Protocol = this.Protocol;
+            ((NotificationImap)notification).UseSsl = this.UseSsl;
             ((NotificationImap)notification).CheckPeriod = this.CheckPeriod;
 
             return base.Copy(notification);
@@ -106,7 +106,7 @@ namespace BlinkStickClient.DataModel
 
                 try
                 {
-                    unreadEmails = GetValue(this.Username, this.Password, this.ServerAddress, this.Port, this.Protocol);
+                    unreadEmails = GetValue(this.Username, this.Password, this.ServerAddress, this.Port, this.UseSsl);
                 }
                 catch (Exception ex)
                 {
@@ -126,11 +126,11 @@ namespace BlinkStickClient.DataModel
             return true;
         }
 
-        public int GetValue(String username, String password, String server, int port, SslProtocols protocol)
+        public int GetValue(String username, String password, String server, int port, Boolean useSsl)
         {
-            var client = new ImapClient(server, port, protocol, false);
+            var client = new ImapClient(server, port, useSsl ? SslProtocols.Default : SslProtocols.None, false);
 
-            log.DebugFormat("Connecting to {0}:{1} {2}", server, port, protocol);
+            log.DebugFormat("Connecting to {0}:{1} SSL:{2}", server, port, useSsl);
             if (client.Connect())
             {
                 log.DebugFormat("Logging in with {0}", username);

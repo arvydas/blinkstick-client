@@ -30,7 +30,7 @@ namespace BlinkStickClient
             entryPassword.Text = Notification.Password;
             entryServer.Text = Notification.ServerAddress;
             spinbuttonPort.Value = Notification.Port;
-            comboboxEncryption.Active = Notification.Protocol == System.Security.Authentication.SslProtocols.Default ? 1 : 0;
+            checkbuttonUseSSL.Active = Notification.UseSsl;
             spinbuttonCheckPeriod.Value = Notification.CheckPeriod;
 
             UpdateUI();
@@ -39,7 +39,7 @@ namespace BlinkStickClient
 
             if (spinbuttonPort.Value == 0)
             {
-                OnComboboxEncryptionChanged(spinbuttonPort, EventArgs.Empty);
+                OnCheckbuttonUseSSLToggled(checkbuttonUseSSL, EventArgs.Empty);
             }
         }
 
@@ -73,7 +73,7 @@ namespace BlinkStickClient
             Notification.CheckPeriod = spinbuttonCheckPeriod.ValueAsInt;
             Notification.ServerAddress = entryServer.Text;
             Notification.Port = spinbuttonPort.ValueAsInt;
-            Notification.Protocol = comboboxEncryption.Active == 0 ? SslProtocols.None : SslProtocols.Default;
+            Notification.UseSsl = checkbuttonUseSSL.Active;
         }
         #endregion
 
@@ -110,7 +110,7 @@ namespace BlinkStickClient
                             this.entryPassword.Text, 
                             this.entryServer.Text,
                             this.spinbuttonPort.ValueAsInt,
-                            this.comboboxEncryption.Active == 0 ? SslProtocols.None : SslProtocols.Default
+                            this.checkbuttonUseSSL.Active
                         ));
                 }
                 catch (Exception ex)
@@ -125,33 +125,33 @@ namespace BlinkStickClient
             worker.RunWorkerAsync();
         }
 
-        protected void OnComboboxEncryptionChanged (object sender, EventArgs e)
+        private void UpdateUI()
+        {
+            if (checkbuttonUseSSL.Active)
+            {
+                labelPortInfo.Markup = "<i>Default: 993</i>";
+            }
+            else
+            {
+                labelPortInfo.Markup = "<i>Default: 143</i>";
+            }
+        }
+
+        protected void OnCheckbuttonUseSSLToggled (object sender, EventArgs e)
         {
             if (IgnoreChanges)
                 return;
 
-            if (comboboxEncryption.Active == 0)
-            {
-                spinbuttonPort.Value = 143;
-            }
-            else
+            if (checkbuttonUseSSL.Active)
             {
                 spinbuttonPort.Value = 993;
             }
-
-            UpdateUI();
-        }
-
-        private void UpdateUI()
-        {
-            if (comboboxEncryption.Active == 0)
-            {
-                labelPortInfo.Text = "(Default: 143)";
-            }
             else
             {
-                labelPortInfo.Text = "(Default: 993)";
+                spinbuttonPort.Value = 143;
             }
+
+            UpdateUI();
         }
     }
 }

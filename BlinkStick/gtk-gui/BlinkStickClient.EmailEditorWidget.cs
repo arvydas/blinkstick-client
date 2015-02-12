@@ -22,13 +22,11 @@ namespace BlinkStickClient
 		
 		private global::Gtk.SpinButton spinbuttonPort;
 		
-		private global::Gtk.Label labelPortInfo;
+		private global::Gtk.CheckButton checkbuttonUseSSL;
 		
 		private global::Gtk.HBox hbox4;
 		
-		private global::Gtk.ComboBox comboboxEncryption;
-		
-		private global::Gtk.Label labelEncryption;
+		private global::Gtk.Label labelPortInfo;
 		
 		private global::Gtk.Label labelPassword;
 		
@@ -38,7 +36,7 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Label labelUsername;
 		
-		private global::Gtk.Label GtkLabel;
+		private global::Gtk.Label GtkLabel1;
 		
 		private global::Gtk.Frame frame1;
 		
@@ -102,7 +100,6 @@ namespace BlinkStickClient
 			w1.BottomAttach = ((uint)(2));
 			w1.LeftAttach = ((uint)(1));
 			w1.RightAttach = ((uint)(2));
-			w1.XOptions = ((global::Gtk.AttachOptions)(4));
 			w1.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.entryServer = new global::Gtk.Entry ();
@@ -116,7 +113,6 @@ namespace BlinkStickClient
 			w2.BottomAttach = ((uint)(3));
 			w2.LeftAttach = ((uint)(1));
 			w2.RightAttach = ((uint)(2));
-			w2.XOptions = ((global::Gtk.AttachOptions)(4));
 			w2.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.entryUsername = new global::Gtk.Entry ();
@@ -128,7 +124,6 @@ namespace BlinkStickClient
 			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table1 [this.entryUsername]));
 			w3.LeftAttach = ((uint)(1));
 			w3.RightAttach = ((uint)(2));
-			w3.XOptions = ((global::Gtk.AttachOptions)(4));
 			w3.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.hbox3 = new global::Gtk.HBox ();
@@ -147,12 +142,14 @@ namespace BlinkStickClient
 			w4.Expand = false;
 			w4.Fill = false;
 			// Container child hbox3.Gtk.Box+BoxChild
-			this.labelPortInfo = new global::Gtk.Label ();
-			this.labelPortInfo.Name = "labelPortInfo";
-			this.labelPortInfo.Xalign = 0F;
-			this.labelPortInfo.LabelProp = global::Mono.Unix.Catalog.GetString ("(Default: ???)");
-			this.hbox3.Add (this.labelPortInfo);
-			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.labelPortInfo]));
+			this.checkbuttonUseSSL = new global::Gtk.CheckButton ();
+			this.checkbuttonUseSSL.CanFocus = true;
+			this.checkbuttonUseSSL.Name = "checkbuttonUseSSL";
+			this.checkbuttonUseSSL.Label = global::Mono.Unix.Catalog.GetString ("Use SSL");
+			this.checkbuttonUseSSL.DrawIndicator = true;
+			this.checkbuttonUseSSL.UseUnderline = true;
+			this.hbox3.Add (this.checkbuttonUseSSL);
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.checkbuttonUseSSL]));
 			w5.Position = 1;
 			this.table1.Add (this.hbox3);
 			global::Gtk.Table.TableChild w6 = ((global::Gtk.Table.TableChild)(this.table1 [this.hbox3]));
@@ -160,19 +157,20 @@ namespace BlinkStickClient
 			w6.BottomAttach = ((uint)(4));
 			w6.LeftAttach = ((uint)(1));
 			w6.RightAttach = ((uint)(2));
-			w6.XOptions = ((global::Gtk.AttachOptions)(4));
 			w6.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.hbox4 = new global::Gtk.HBox ();
 			this.hbox4.Name = "hbox4";
 			this.hbox4.Spacing = 6;
 			// Container child hbox4.Gtk.Box+BoxChild
-			this.comboboxEncryption = global::Gtk.ComboBox.NewText ();
-			this.comboboxEncryption.AppendText (global::Mono.Unix.Catalog.GetString ("None"));
-			this.comboboxEncryption.AppendText (global::Mono.Unix.Catalog.GetString ("SSL/TLS"));
-			this.comboboxEncryption.Name = "comboboxEncryption";
-			this.hbox4.Add (this.comboboxEncryption);
-			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.comboboxEncryption]));
+			this.labelPortInfo = new global::Gtk.Label ();
+			this.labelPortInfo.Name = "labelPortInfo";
+			this.labelPortInfo.Xpad = 4;
+			this.labelPortInfo.Xalign = 0F;
+			this.labelPortInfo.LabelProp = global::Mono.Unix.Catalog.GetString ("<i>Default: ???</i>");
+			this.labelPortInfo.UseMarkup = true;
+			this.hbox4.Add (this.labelPortInfo);
+			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.hbox4 [this.labelPortInfo]));
 			w7.Position = 0;
 			w7.Expand = false;
 			w7.Fill = false;
@@ -182,73 +180,61 @@ namespace BlinkStickClient
 			w8.BottomAttach = ((uint)(5));
 			w8.LeftAttach = ((uint)(1));
 			w8.RightAttach = ((uint)(2));
-			w8.XOptions = ((global::Gtk.AttachOptions)(4));
 			w8.YOptions = ((global::Gtk.AttachOptions)(4));
-			// Container child table1.Gtk.Table+TableChild
-			this.labelEncryption = new global::Gtk.Label ();
-			this.labelEncryption.Name = "labelEncryption";
-			this.labelEncryption.Xalign = 1F;
-			this.labelEncryption.LabelProp = global::Mono.Unix.Catalog.GetString ("Encryption:");
-			this.table1.Add (this.labelEncryption);
-			global::Gtk.Table.TableChild w9 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelEncryption]));
-			w9.TopAttach = ((uint)(4));
-			w9.BottomAttach = ((uint)(5));
-			w9.XOptions = ((global::Gtk.AttachOptions)(4));
-			w9.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.labelPassword = new global::Gtk.Label ();
 			this.labelPassword.Name = "labelPassword";
 			this.labelPassword.Xalign = 1F;
 			this.labelPassword.LabelProp = global::Mono.Unix.Catalog.GetString ("Password:");
 			this.table1.Add (this.labelPassword);
-			global::Gtk.Table.TableChild w10 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelPassword]));
-			w10.TopAttach = ((uint)(1));
-			w10.BottomAttach = ((uint)(2));
-			w10.XOptions = ((global::Gtk.AttachOptions)(4));
-			w10.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w9 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelPassword]));
+			w9.TopAttach = ((uint)(1));
+			w9.BottomAttach = ((uint)(2));
+			w9.XOptions = ((global::Gtk.AttachOptions)(4));
+			w9.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.labelPort = new global::Gtk.Label ();
 			this.labelPort.Name = "labelPort";
 			this.labelPort.Xalign = 1F;
 			this.labelPort.LabelProp = global::Mono.Unix.Catalog.GetString ("Port:");
 			this.table1.Add (this.labelPort);
-			global::Gtk.Table.TableChild w11 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelPort]));
-			w11.TopAttach = ((uint)(3));
-			w11.BottomAttach = ((uint)(4));
-			w11.XOptions = ((global::Gtk.AttachOptions)(4));
-			w11.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w10 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelPort]));
+			w10.TopAttach = ((uint)(3));
+			w10.BottomAttach = ((uint)(4));
+			w10.XOptions = ((global::Gtk.AttachOptions)(4));
+			w10.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.labelServer = new global::Gtk.Label ();
 			this.labelServer.Name = "labelServer";
 			this.labelServer.Xalign = 1F;
 			this.labelServer.LabelProp = global::Mono.Unix.Catalog.GetString ("Server:");
 			this.table1.Add (this.labelServer);
-			global::Gtk.Table.TableChild w12 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelServer]));
-			w12.TopAttach = ((uint)(2));
-			w12.BottomAttach = ((uint)(3));
-			w12.XOptions = ((global::Gtk.AttachOptions)(4));
-			w12.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w11 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelServer]));
+			w11.TopAttach = ((uint)(2));
+			w11.BottomAttach = ((uint)(3));
+			w11.XOptions = ((global::Gtk.AttachOptions)(4));
+			w11.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.labelUsername = new global::Gtk.Label ();
 			this.labelUsername.Name = "labelUsername";
 			this.labelUsername.Xalign = 1F;
 			this.labelUsername.LabelProp = global::Mono.Unix.Catalog.GetString ("Username:");
 			this.table1.Add (this.labelUsername);
-			global::Gtk.Table.TableChild w13 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelUsername]));
-			w13.XOptions = ((global::Gtk.AttachOptions)(4));
-			w13.YOptions = ((global::Gtk.AttachOptions)(4));
+			global::Gtk.Table.TableChild w12 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelUsername]));
+			w12.XOptions = ((global::Gtk.AttachOptions)(4));
+			w12.YOptions = ((global::Gtk.AttachOptions)(4));
 			this.GtkAlignment.Add (this.table1);
 			this.frame4.Add (this.GtkAlignment);
-			this.GtkLabel = new global::Gtk.Label ();
-			this.GtkLabel.Name = "GtkLabel";
-			this.GtkLabel.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Configure IMAP account settings</b>");
-			this.GtkLabel.UseMarkup = true;
-			this.frame4.LabelWidget = this.GtkLabel;
+			this.GtkLabel1 = new global::Gtk.Label ();
+			this.GtkLabel1.Name = "GtkLabel1";
+			this.GtkLabel1.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Configure IMAP account settings</b>");
+			this.GtkLabel1.UseMarkup = true;
+			this.frame4.LabelWidget = this.GtkLabel1;
 			this.vbox4.Add (this.frame4);
-			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.frame4]));
-			w16.Position = 0;
-			w16.Expand = false;
-			w16.Fill = false;
+			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.frame4]));
+			w15.Position = 0;
+			w15.Expand = false;
+			w15.Fill = false;
 			// Container child vbox4.Gtk.Box+BoxChild
 			this.frame1 = new global::Gtk.Frame ();
 			this.frame1.Name = "frame1";
@@ -268,8 +254,8 @@ namespace BlinkStickClient
 			this.labelCheck.Xalign = 0F;
 			this.labelCheck.LabelProp = global::Mono.Unix.Catalog.GetString ("Check every");
 			this.hbox2.Add (this.labelCheck);
-			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.labelCheck]));
-			w17.Position = 0;
+			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.labelCheck]));
+			w16.Position = 0;
 			// Container child hbox2.Gtk.Box+BoxChild
 			this.spinbuttonCheckPeriod = new global::Gtk.SpinButton (1D, 120D, 1D);
 			this.spinbuttonCheckPeriod.CanFocus = true;
@@ -279,20 +265,20 @@ namespace BlinkStickClient
 			this.spinbuttonCheckPeriod.Numeric = true;
 			this.spinbuttonCheckPeriod.Value = 1D;
 			this.hbox2.Add (this.spinbuttonCheckPeriod);
-			global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.spinbuttonCheckPeriod]));
-			w18.Position = 1;
-			w18.Expand = false;
-			w18.Fill = false;
+			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.spinbuttonCheckPeriod]));
+			w17.Position = 1;
+			w17.Expand = false;
+			w17.Fill = false;
 			// Container child hbox2.Gtk.Box+BoxChild
 			this.labelMinutes = new global::Gtk.Label ();
 			this.labelMinutes.Name = "labelMinutes";
 			this.labelMinutes.Xalign = 0F;
 			this.labelMinutes.LabelProp = global::Mono.Unix.Catalog.GetString ("min");
 			this.hbox2.Add (this.labelMinutes);
-			global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.labelMinutes]));
-			w19.Position = 2;
-			w19.Expand = false;
-			w19.Fill = false;
+			global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.labelMinutes]));
+			w18.Position = 2;
+			w18.Expand = false;
+			w18.Fill = false;
 			this.GtkAlignment3.Add (this.hbox2);
 			this.frame1.Add (this.GtkAlignment3);
 			this.GtkLabel3 = new global::Gtk.Label ();
@@ -301,10 +287,10 @@ namespace BlinkStickClient
 			this.GtkLabel3.UseMarkup = true;
 			this.frame1.LabelWidget = this.GtkLabel3;
 			this.vbox4.Add (this.frame1);
-			global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.frame1]));
-			w22.Position = 1;
-			w22.Expand = false;
-			w22.Fill = false;
+			global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.frame1]));
+			w21.Position = 1;
+			w21.Expand = false;
+			w21.Fill = false;
 			// Container child vbox4.Gtk.Box+BoxChild
 			this.frame5 = new global::Gtk.Frame ();
 			this.frame5.Name = "frame5";
@@ -326,21 +312,21 @@ namespace BlinkStickClient
 			this.labelCurrentValue.UseMarkup = true;
 			this.labelCurrentValue.Wrap = true;
 			this.hbox1.Add (this.labelCurrentValue);
-			global::Gtk.Box.BoxChild w23 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.labelCurrentValue]));
-			w23.Position = 0;
+			global::Gtk.Box.BoxChild w22 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.labelCurrentValue]));
+			w22.Position = 0;
 			// Container child hbox1.Gtk.Box+BoxChild
 			this.buttonRefresh = new global::Gtk.Button ();
 			this.buttonRefresh.CanFocus = true;
 			this.buttonRefresh.Name = "buttonRefresh";
 			this.buttonRefresh.UseUnderline = true;
-			global::Gtk.Image w24 = new global::Gtk.Image ();
-			w24.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-refresh", global::Gtk.IconSize.Menu);
-			this.buttonRefresh.Image = w24;
+			global::Gtk.Image w23 = new global::Gtk.Image ();
+			w23.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-refresh", global::Gtk.IconSize.Menu);
+			this.buttonRefresh.Image = w23;
 			this.hbox1.Add (this.buttonRefresh);
-			global::Gtk.Box.BoxChild w25 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.buttonRefresh]));
-			w25.Position = 1;
-			w25.Expand = false;
-			w25.Fill = false;
+			global::Gtk.Box.BoxChild w24 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.buttonRefresh]));
+			w24.Position = 1;
+			w24.Expand = false;
+			w24.Fill = false;
 			this.GtkAlignment1.Add (this.hbox1);
 			this.frame5.Add (this.GtkAlignment1);
 			this.GtkLabel2 = new global::Gtk.Label ();
@@ -349,16 +335,16 @@ namespace BlinkStickClient
 			this.GtkLabel2.UseMarkup = true;
 			this.frame5.LabelWidget = this.GtkLabel2;
 			this.vbox4.Add (this.frame5);
-			global::Gtk.Box.BoxChild w28 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.frame5]));
-			w28.Position = 2;
-			w28.Expand = false;
-			w28.Fill = false;
+			global::Gtk.Box.BoxChild w27 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.frame5]));
+			w27.Position = 2;
+			w27.Expand = false;
+			w27.Fill = false;
 			this.Add (this.vbox4);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
 			this.Hide ();
-			this.comboboxEncryption.Changed += new global::System.EventHandler (this.OnComboboxEncryptionChanged);
+			this.checkbuttonUseSSL.Toggled += new global::System.EventHandler (this.OnCheckbuttonUseSSLToggled);
 			this.buttonRefresh.Clicked += new global::System.EventHandler (this.OnButtonRefreshClicked);
 		}
 	}
