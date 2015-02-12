@@ -13,6 +13,10 @@ namespace BlinkStickClient
 
         private Boolean IgnoreChanges = false;
 
+        public int DefaultPort = 143;
+
+        public int DefaultSslPort = 993;
+
         public EmailEditorWidget()
         {
             this.Build();
@@ -129,14 +133,18 @@ namespace BlinkStickClient
 
         private void UpdateUI()
         {
+            int port = 0;
+
             if (checkbuttonUseSSL.Active)
             {
-                labelPortInfo.Markup = "<i>Default: 993</i>";
+                port = DefaultSslPort;
             }
             else
             {
-                labelPortInfo.Markup = "<i>Default: 143</i>";
+                port = DefaultPort;
             }
+
+            labelPortInfo.Markup = String.Format("<i>Default: {0}</i>", port);
         }
 
         protected void OnCheckbuttonUseSSLToggled (object sender, EventArgs e)
@@ -146,11 +154,11 @@ namespace BlinkStickClient
 
             if (checkbuttonUseSSL.Active)
             {
-                spinbuttonPort.Value = 993;
+                spinbuttonPort.Value = DefaultSslPort;
             }
             else
             {
-                spinbuttonPort.Value = 143;
+                spinbuttonPort.Value = DefaultPort;
             }
 
             UpdateUI();
