@@ -7,8 +7,6 @@ namespace BlinkStickClient.DataModel
 {
     public class NotificationDiskSpace : PatternNotification
     {
-        private ILog log;  
-
         public String Drive { get; set; }
 
         public int DriveFreeSpaceLimit { get; set; }
@@ -95,11 +93,6 @@ namespace BlinkStickClient.DataModel
         {
             if (Running)
                 return;
-
-            if (log == null)
-            {
-                log = LogManager.GetLogger(String.Format("{0}:{1}", GetTypeName(), this.Name));
-            }
 
             log.InfoFormat("Starting {0} monitoring", GetTypeName());
 

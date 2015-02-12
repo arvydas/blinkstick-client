@@ -9,7 +9,6 @@ namespace BlinkStickClient.DataModel
 {
     public abstract class HardwareNotification : PatternNotification
     {
-        protected ILog log;  
 
         #region Enums
         public enum TriggerTypeEnum
@@ -73,11 +72,6 @@ namespace BlinkStickClient.DataModel
         {
             if (Running)
                 return;
-
-            if (log == null)
-            {
-                log = LogManager.GetLogger(String.Format("{0}:{1}", GetTypeName(), this.Name));
-            }
 
             log.InfoFormat("Starting {0} monitoring", GetTypeName());
 

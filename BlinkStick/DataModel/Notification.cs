@@ -1,11 +1,27 @@
 ﻿using System;
 using Gtk;
+using log4net;
 using Newtonsoft.Json;
 
 namespace BlinkStickClient.DataModel
 {
     public abstract class Notification : IDisposable
     {
+        private ILog _log;
+
+        protected ILog log 
+        {
+            get
+            {
+                if (_log == null)
+                {
+                    _log = LogManager.GetLogger(String.Format("{0}:{1}", GetTypeName(), this.Name));
+                }
+
+                return _log;
+            }
+        }
+
         #region Events
         public event EventHandler<TriggeredEventArgs> Triggered;
 
