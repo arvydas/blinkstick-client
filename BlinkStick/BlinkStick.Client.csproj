@@ -65,6 +65,9 @@
     <Reference Include="log4net">
       <HintPath>..\Components\log4net-1.2.13\bin\net\4.0\release\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="ImapX">
+      <HintPath>..\packages\ImapX.2.0.0.16\lib\net40\ImapX.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -234,6 +237,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
