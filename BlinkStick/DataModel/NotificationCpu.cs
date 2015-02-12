@@ -10,7 +10,6 @@ namespace BlinkStickClient.DataModel
     {
         public NotificationCpu()
         {
-            UsesPerformanceCounter = true;
         }
 
         public override string GetTypeName()
@@ -46,12 +45,13 @@ namespace BlinkStickClient.DataModel
             counter.NextValue();
             //Start using the performance counter
             performanceCounter = counter;
+            base.InitializePerformanceCounter(sender, e);
             log.Debug("CPU performance counter initialization done");
         }
 
         #region implemented abstract members of HardwareNotification
 
-        protected override int GetValue()
+        public override int GetValue()
         {
             return Convert.ToInt32(performanceCounter.NextValue());
         }

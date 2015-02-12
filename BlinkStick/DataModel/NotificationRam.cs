@@ -14,7 +14,7 @@ namespace BlinkStickClient.DataModel
 
         public NotificationRam()
         {
-            UsesPerformanceCounter = false;
+            IsInitialized = true;
         }
 
         public override Notification Copy(Notification notification)
@@ -37,14 +37,9 @@ namespace BlinkStickClient.DataModel
             return new CpuEditorWidget();
         }
 
-        protected override void InitializePerformanceCounter (object sender, DoWorkEventArgs e)
-        {
-            //Not using here
-        }
-
         #region implemented abstract members of HardwareNotification
 
-        protected override int GetValue()
+        public override int GetValue()
         {
             Int64 phav = GetPhysicalAvailableMemoryInMiB();
             Int64 tot = GetTotalMemoryInMiB();

@@ -3,12 +3,22 @@ using System.Diagnostics;
 using System.ComponentModel;
 using BlinkStickDotNet;
 using log4net;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace BlinkStickClient.DataModel
 {
     public abstract class HardwareNotification : PatternNotification
     {
+        public event EventHandler<EventArgs> Initialized;
+
+        protected void OnInitialized()
+        {
+            if (Initialized != null)
+            {
+                Initialized(this, EventArgs.Empty);
+            }
+        }
 
         #region Enums
         public enum TriggerTypeEnum
@@ -44,7 +54,8 @@ namespace BlinkStickClient.DataModel
 
         private BackgroundWorker performanceCounterInitializer = null;
 
-        protected Boolean UsesPerformanceCounter = false;
+        [JsonIgnore]
+        public Boolean IsInitialized { protected set; get; }
 
         public HardwareNotification()
         {
@@ -77,15 +88,7 @@ namespace BlinkStickClient.DataModel
 
             base.Start();
 
-            if (performanceCounter == null && performanceCounterInitializer == null && UsesPerformanceCounter)
-            {
-                log.Debug("Setting up to initialize performance counter in background");
-
-                performanceCounterInitializer = new BackgroundWorker();
-                performanceCounterInitializer.DoWork += InitializePerformanceCounter;
-                performanceCounterInitializer.WorkerSupportsCancellation = false;
-                performanceCounterInitializer.RunWorkerAsync();
-            }
+            Initialize();
 
             //Start timer
             uint updateTimeout = 0;
@@ -104,9 +107,26 @@ namespace BlinkStickClient.DataModel
             log.DebugFormat("{0} monitoring started", GetTypeName());
         }
 
-        protected abstract void InitializePerformanceCounter (object sender, DoWorkEventArgs e);
+        public void Initialize()
+        {
+            if (!IsInitialized)
+            {
+                log.Debug("Setting up to initialize performance counter in background");
 
-        protected abstract int GetValue();
+                performanceCounterInitializer = new BackgroundWorker();
+                performanceCounterInitializer.DoWork += InitializePerformanceCounter;
+                performanceCounterInitializer.WorkerSupportsCancellation = false;
+                performanceCounterInitializer.RunWorkerAsync();
+            }
+        }
+
+        protected virtual void InitializePerformanceCounter (object sender, DoWorkEventArgs e)
+        {
+            IsInitialized = true;
+            OnInitialized();
+        }
+
+        public abstract int GetValue();
 
         public override void Stop()
         {
@@ -128,7 +148,7 @@ namespace BlinkStickClient.DataModel
 
         protected bool CheckUsage()
         {
-            if (!UsesPerformanceCounter || UsesPerformanceCounter && performanceCounter != null)
+            if (IsInitialized)
             {
                 int currentUsage = GetValue();
 
