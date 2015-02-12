@@ -9,7 +9,7 @@ namespace BlinkStickClient
     [System.ComponentModel.ToolboxItem(true)]
     public partial class EmailEditorWidget : Gtk.Bin, IEditorInterface
     {
-        private NotificationImap Notification;
+        private EmailNotification Notification;
 
         private Boolean IgnoreChanges = false;
 
@@ -22,7 +22,9 @@ namespace BlinkStickClient
 
         public void SetNotification(BlinkStickClient.DataModel.Notification notification)
         {
-            Notification = (notification as NotificationImap);
+            Notification = (notification as EmailNotification);
+
+            GtkLabel1.Markup = String.Format("<b>Configure {0} account settings</b>", Notification.GetTypeName());
 
             IgnoreChanges = true;
 

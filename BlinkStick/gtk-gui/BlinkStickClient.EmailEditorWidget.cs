@@ -227,7 +227,7 @@ namespace BlinkStickClient
 			this.frame4.Add (this.GtkAlignment);
 			this.GtkLabel1 = new global::Gtk.Label ();
 			this.GtkLabel1.Name = "GtkLabel1";
-			this.GtkLabel1.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Configure IMAP account settings</b>");
+			this.GtkLabel1.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Configure {0} account settings</b>");
 			this.GtkLabel1.UseMarkup = true;
 			this.frame4.LabelWidget = this.GtkLabel1;
 			this.vbox4.Add (this.frame4);

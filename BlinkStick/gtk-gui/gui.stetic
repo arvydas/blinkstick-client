@@ -6339,7 +6339,7 @@ GB</property>
             <child>
               <widget class="Gtk.Label" id="GtkLabel1">
                 <property name="MemberName" />
-                <property name="LabelProp" translatable="yes">&lt;b&gt;Configure IMAP account settings&lt;/b&gt;</property>
+                <property name="LabelProp" translatable="yes">&lt;b&gt;Configure {0} account settings&lt;/b&gt;</property>
                 <property name="UseMarkup">True</property>
               </widget>
               <packing>
