@@ -71,7 +71,7 @@ namespace BlinkStickClient.DataModel
 
         public virtual void Dispose()
         {
-            //Empty, nothing to dispose in base class
+            Stop();
         }
 
         public virtual Notification Copy(Notification notification = null)

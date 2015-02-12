@@ -117,12 +117,6 @@ namespace BlinkStickClient.DataModel
             return true;
         }
 
-        public override void Dispose()
-        {
-            Stop();
-            base.Dispose();
-        }
-
         public int GetValue(String email, String password)
         {
             try

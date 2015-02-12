@@ -203,12 +203,6 @@ namespace BlinkStickClient.DataModel
 
             return true;
         }
-
-        public override void Dispose()
-        {
-            Stop();
-            base.Dispose();
-        }
     }
 }
 

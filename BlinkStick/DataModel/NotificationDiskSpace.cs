@@ -161,12 +161,6 @@ namespace BlinkStickClient.DataModel
             return HumanSize(di.TotalFreeSpace);
         }
 
-        public override void Dispose()
-        {
-            Stop();
-            base.Dispose();
-        }
-
         private String HumanSize(long value)
         {
             string[] sizes = { "B", "KB", "MB", "GB", "TB" };
