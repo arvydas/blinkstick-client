@@ -199,6 +199,8 @@
     <Compile Include="gtk-gui\BlinkStickClient.DiskSpaceEditorWidget.cs" />
     <Compile Include="Editors\GmailEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.GmailEditorWidget.cs" />
+    <Compile Include="Editors\EmailEditorWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.EmailEditorWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

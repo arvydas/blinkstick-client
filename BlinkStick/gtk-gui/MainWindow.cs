@@ -113,15 +113,15 @@ public partial class MainWindow
 		this.TestToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Test");
 		w1.Add (this.TestToolbarAction, null);
 		this.HelpToolbarAction = new global::Gtk.RadioAction ("HelpToolbarAction", global::Mono.Unix.Catalog.GetString ("Help"), null, null, 5);
-		this.HelpToolbarAction.Group = this.OverviewToolbarAction.Group;
+		this.HelpToolbarAction.Group = this.TestToolbarAction.Group;
 		this.HelpToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Help");
 		w1.Add (this.HelpToolbarAction, null);
 		this.PatternsAction1 = new global::Gtk.RadioAction ("PatternsAction1", global::Mono.Unix.Catalog.GetString ("Patterns"), null, null, 2);
-		this.PatternsAction1.Group = this.OverviewToolbarAction.Group;
+		this.PatternsAction1.Group = this.TestToolbarAction.Group;
 		this.PatternsAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Patterns");
 		w1.Add (this.PatternsAction1, null);
 		this.EventsAction = new global::Gtk.RadioAction ("EventsAction", global::Mono.Unix.Catalog.GetString ("Events"), null, null, 3);
-		this.EventsAction.Group = this.OverviewToolbarAction.Group;
+		this.EventsAction.Group = this.TestToolbarAction.Group;
 		this.EventsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Events");
 		w1.Add (this.EventsAction, null);
 		this.UIManager.InsertActionGroup (w1, 0);
