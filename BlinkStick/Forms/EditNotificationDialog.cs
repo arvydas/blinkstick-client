@@ -157,10 +157,16 @@ namespace BlinkStickClient
                 table2.Remove(buttonPlayPattern);
             }
 
+            HSeparator hseparator;
+
             Widget editorWidget = Notification.GetEditorWidget();
 
             if (editorWidget != null)
             {
+                hseparator = new HSeparator();
+                vbox3.PackEnd(hseparator);
+                hseparator.ShowAll();
+
                 if (editorWidget is IEditorInterface)
                 {
                     editorInterface = (editorWidget as IEditorInterface);
@@ -181,6 +187,10 @@ namespace BlinkStickClient
 
                 editorWidget.ShowAll();
             }
+
+            hseparator = new HSeparator();
+            vbox3.PackEnd(hseparator);
+            hseparator.ShowAll();
         }
     }
 }
