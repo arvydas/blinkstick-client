@@ -201,6 +201,7 @@
     <Compile Include="gtk-gui\BlinkStickClient.GmailEditorWidget.cs" />
     <Compile Include="Editors\EmailEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.EmailEditorWidget.cs" />
+    <Compile Include="DataModel\EmailNotification.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
