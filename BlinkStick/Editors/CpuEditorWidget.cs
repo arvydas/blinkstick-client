@@ -58,6 +58,44 @@ namespace BlinkStickClient
         {
             UpdateUI();
         }
+
+        protected void OnButtonRefreshClicked (object sender, EventArgs e)
+        {
+            if (this.Notification.IsInitialized)
+            {
+                ShowValue();
+            }
+            else
+            {
+                buttonRefresh.Sensitive = false;
+
+                labelCurrentValue.Text = "Value: Initializing...";
+                this.Notification.Initialized += NotificationInitialized;
+                this.Notification.Initialize();
+            }
+        }
+
+        void NotificationInitialized (object sender, EventArgs e)
+        {
+            Gtk.Application.Invoke (delegate {
+                this.Notification.Initialized -= NotificationInitialized;
+                ShowValue();
+            });
+        }
+
+        public void ShowValue()
+        {
+            try
+            {
+                labelCurrentValue.Text = String.Format("Value: {0}%", this.Notification.GetValue());
+            }
+            catch (Exception e)
+            {
+                labelCurrentValue.Text = String.Format("Value: {0}", e.Message);
+            }
+
+            buttonRefresh.Sensitive = true;
+        }
     }
 }
 
