@@ -128,7 +128,7 @@ namespace BlinkStickClient.DataModel
 
         void NotificationColor (object sender, ColorSendEventArgs e)
         {
-            PatternNotification notification = sender as PatternNotification;
+            Notification notification = sender as Notification;
 
             BlinkStickDeviceSettings settings = DataModel.FindBySerial(notification.BlinkStickSerial);
 

@@ -138,6 +138,7 @@ namespace BlinkStickClient
 			w12.Fill = false;
 			// Container child vbox4.Gtk.Box+BoxChild
 			this.frame2 = new global::Gtk.Frame ();
+			this.frame2.Name = "frame2";
 			this.frame2.ShadowType = ((global::Gtk.ShadowType)(0));
 			// Container child frame2.Gtk.Container+ContainerChild
 			this.GtkAlignment8 = new global::Gtk.Alignment (0F, 0F, 1F, 1F);
