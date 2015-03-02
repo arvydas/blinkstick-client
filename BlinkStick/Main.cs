@@ -27,7 +27,14 @@ namespace BlinkStickClient
 	{
 		public static void Main (string[] args)
 		{
-			string logFileConfigPath = System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "log4net.config");
+            if (args.Length > 0 && args[0] == "--ambilight")
+            {
+                AmbilightWindowsService service = new AmbilightWindowsService();
+                service.Run();
+                return;
+            }
+
+            string logFileConfigPath = System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "log4net.config");
 			FileInfo finfo = new FileInfo(logFileConfigPath);
 			log4net.Config.XmlConfigurator.ConfigureAndWatch(finfo); 
 			
