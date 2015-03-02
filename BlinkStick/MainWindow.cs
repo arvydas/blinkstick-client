@@ -299,15 +299,15 @@ public partial class MainWindow: Gtk.Window
             "to control the device and create ambilight effects", 
             typeof(NotificationBoblight));
 
-        NotificationRegistry.Register("Internet", 
+        NotificationRegistry.Register("Email", 
             "Checks your GMail account and notifies when new mail arrives", 
             typeof(NotificationGmail));
 
-        NotificationRegistry.Register("Internet", 
+        NotificationRegistry.Register("Email", 
             "Checks your IMAP email account and notifies when new mail arrives", 
             typeof(NotificationImap));
 
-        NotificationRegistry.Register("Internet", 
+        NotificationRegistry.Register("Email", 
             "Checks your POP3 email account and notifies when new mail arrives", 
             typeof(NotificationPop3));
 
