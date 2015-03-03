@@ -27,39 +27,48 @@ namespace BlinkStickClient
 	{
 		public static void Main (string[] args)
 		{
-            if (args.Length > 0 && args[0] == "--ambilight")
+            Boolean ambilightMode = args.Length > 0 && args[0] == "--ambilight";
+
+            string logFileConfigPath = System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "log4net.config");
+            FileInfo finfo = new FileInfo(logFileConfigPath);
+            log4net.Config.XmlConfigurator.ConfigureAndWatch(finfo); 
+
+            //Create log files in the application data folder
+            if (!Directory.Exists(MainWindow.LogFolder))
+            {
+                Directory.CreateDirectory(MainWindow.LogFolder);
+            }
+
+            //Update file appender to log to the correct location
+            foreach (log4net.Appender.IAppender appender in log4net.LogManager.GetRepository().GetAppenders())
+            {
+                if (appender is log4net.Appender.FileAppender)
+                {
+                    if (ambilightMode)
+                    {
+                        ((log4net.Appender.FileAppender)appender).File = Path.Combine(MainWindow.LogFolder, "ambilight.log");
+                    }
+                    else
+                    {
+                        ((log4net.Appender.FileAppender)appender).File = MainWindow.LogFile;
+                    }
+                    ((log4net.Appender.FileAppender)appender).ActivateOptions();
+
+                    break;
+                }
+            }
+
+            ILog log = LogManager.GetLogger("Main");    
+
+            log.Info("--------------------------------------");
+            log.InfoFormat("BlinkStick Client {0} application started", MainWindow.ApplicationVersion);
+
+            if (ambilightMode)
             {
                 AmbilightWindowsService service = new AmbilightWindowsService();
                 service.Run();
                 return;
             }
-
-            string logFileConfigPath = System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "log4net.config");
-			FileInfo finfo = new FileInfo(logFileConfigPath);
-			log4net.Config.XmlConfigurator.ConfigureAndWatch(finfo); 
-			
-			//Create log files in the application data folder
-			if (!Directory.Exists(MainWindow.LogFolder))
-			{
-				Directory.CreateDirectory(MainWindow.LogFolder);
-			}
-			
-			//Update file appender to log to the correct location
-			foreach (log4net.Appender.IAppender appender in log4net.LogManager.GetRepository().GetAppenders())
-			{
-				if (appender is log4net.Appender.FileAppender)
-				{
-					((log4net.Appender.FileAppender)appender).File = MainWindow.LogFile;
-					((log4net.Appender.FileAppender)appender).ActivateOptions();
-					
-					break;
-				}
-			}
-
-			ILog log = LogManager.GetLogger("Main");	
-
-			log.Info("--------------------------------------");
-			log.InfoFormat("BlinkStick Client {0} application started", MainWindow.ApplicationVersion);
 
             #if !DEBUG
 			GLib.ExceptionManager.UnhandledException += delegate(GLib.UnhandledExceptionArgs args2) {

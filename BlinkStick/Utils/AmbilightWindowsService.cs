@@ -5,11 +5,28 @@ using SlimDX;
 using System.Windows.Forms;
 using System.Threading;
 using System.IO.Pipes;
+using log4net;
 
 namespace BlinkStickClient
 {
     public class AmbilightWindowsService
     {
+        private ILog _log;
+
+        protected ILog log 
+        {
+            get
+            {
+                if (_log == null)
+                {
+                    _log = LogManager.GetLogger("AmbilightWindowsService");
+                }
+
+                return _log;
+            }
+        }
+
+
         private const int RefreshPeriod = 50;
 
         private BackgroundWorker ambilightWorker = null;
@@ -22,6 +39,7 @@ namespace BlinkStickClient
 
         public void Run()
         {
+            log.Info("Initializing DirectX screen capture");
             sc = new DxScreenCapture();
 
             /*
@@ -43,28 +61,37 @@ namespace BlinkStickClient
             ambilightWorker = new BackgroundWorker();
             ambilightWorker.DoWork += AnalyzeBackgroundColor;
             ambilightWorker.WorkerSupportsCancellation = true;
+
+            log.Info("Starting background worker");
+
             ambilightWorker.RunWorkerAsync();
 
             while (ambilightWorker.IsBusy)
             {
                 Thread.Sleep(10);
             }
+
+            log.Info("Service stopped");
         }
 
         protected virtual void AnalyzeBackgroundColor (object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = (BackgroundWorker)sender;
 
+            log.Info("Creating pipe");
             using (NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", "blinkstick_ambilight_local",
                                                           PipeDirection.Out,
                                                           PipeOptions.Asynchronous))
             {
                 try
                 {
+                    log.Info("Connecting to pipe");
                     pipeClient.Connect(2000);
+                    log.Info("Conection to pipe established");
                 }
-                catch
+                catch (Exception ex)
                 {
+                    log.Error("Failed to connect to pipe server: {0}", ex);
                     return;
                 }
 
@@ -109,10 +136,19 @@ namespace BlinkStickClient
                     }
                     else
                     {
+                        log.Info("Client disconnected. Exiting...");
                         return;
                     }
 
                     Thread.Sleep(RefreshPeriod);
+                }
+
+                log.Info("Worker cancelled. Exiting...");
+
+                if (pipeClient.IsConnected)
+                {
+                    pipeClient.Close();
+                    pipeClient.Dispose();
                 }
             }
         }
@@ -136,7 +172,6 @@ namespace BlinkStickClient
                 return s;
             }
         }
-
     }
 }
 
