@@ -51,7 +51,6 @@ namespace BlinkStickClient.DataModel
             ambilightWorker.WorkerSupportsCancellation = true;
             ambilightWorker.RunWorkerAsync();
 
-            Thread.Sleep(1000);
             ProcessStartInfo psi = new ProcessStartInfo();
             psi.FileName = System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName;
             psi.Arguments = "--ambilight";
