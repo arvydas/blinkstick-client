@@ -104,6 +104,8 @@ namespace BlinkStickClient.DataModel
             {
                 MessageBox.Show(ex.Message);
             }
+
+            OnColorSend(0, 0, 0);
         }
 
         public override void Stop()
@@ -111,8 +113,6 @@ namespace BlinkStickClient.DataModel
             if (!Running)
                 return;
             log.InfoFormat("Stopping {0}", GetTypeName());
-
-            //spawnedProcess.Kill();
 
             ambilightWorker.CancelAsync();
 
