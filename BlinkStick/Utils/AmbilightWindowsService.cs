@@ -7,7 +7,7 @@ using System.Threading;
 using System.IO.Pipes;
 using log4net;
 
-namespace BlinkStickClient
+namespace BlinkStickClient.Utils
 {
     public class AmbilightWindowsService
     {
@@ -26,6 +26,7 @@ namespace BlinkStickClient
             }
         }
 
+        FullScreenMonitor fullScreenMonitor;
 
         private const int RefreshPeriod = 50;
 
@@ -41,6 +42,9 @@ namespace BlinkStickClient
         {
             log.Info("Initializing DirectX screen capture");
             sc = new DxScreenCapture();
+
+            fullScreenMonitor = new FullScreenMonitor();
+            fullScreenMonitor.Start();
 
             /*
             var format = SharpDX.Direct3D9.Format.A8B8G8R8;
@@ -68,9 +72,12 @@ namespace BlinkStickClient
 
             while (ambilightWorker.IsBusy)
             {
+                System.Windows.Forms.Application.DoEvents();
                 Thread.Sleep(10);
             }
 
+            log.Info("Stopping active window monitor");
+            fullScreenMonitor.Stop();
             log.Info("Service stopped");
         }
 

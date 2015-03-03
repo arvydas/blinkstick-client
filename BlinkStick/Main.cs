@@ -20,6 +20,7 @@ using System;
 using Gtk;
 using System.IO;
 using log4net;
+using BlinkStickClient.Utils;
 
 namespace BlinkStickClient
 {

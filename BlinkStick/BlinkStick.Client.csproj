@@ -80,6 +80,7 @@
     <Reference Include="SharpDX.Direct3D9">
       <HintPath>..\packages\SharpDX.2.6.3\Bin\DirectX11-Signed-net40\SharpDX.Direct3D9.dll</HintPath>
     </Reference>
+    <Reference Include="System.Management" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -217,6 +218,8 @@
     <Compile Include="Editors\MoodlightEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.MoodlightEditorWidget.cs" />
     <Compile Include="Utils\AmbilightWindowsService.cs" />
+    <Compile Include="Utils\ActiveWindowMonitor.cs" />
+    <Compile Include="Utils\FullScreenMonitor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\SharpDX.2.6.3\build\SharpDX.targets" Condition="Exists('..\packages\SharpDX.2.6.3\build\SharpDX.targets')" />
