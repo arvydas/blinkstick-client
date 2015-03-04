@@ -21,7 +21,6 @@ namespace BlinkStickClient.Utils
 
         protected void OnChanged(uint processId, Boolean fullScreen)
         {
-            log.DebugFormat("Active process id changed to {0}, fullScreen:{1}", processId, fullScreen);
             if (Changed != null)
             {
                 Changed(this, new ChangedEventArgs(processId, fullScreen));
@@ -80,7 +79,12 @@ namespace BlinkStickClient.Utils
                     WindowHandle = hWnd;
                     FullScreen = runningFullScreen;
 
+                    uint processID = 0;
+                    uint threadID = GetWindowThreadProcessId(hWnd, out processID);
+
                     log.DebugFormat("Change detected {0} (FullScreen:{1})", WindowHandle.ToInt64(), FullScreen);
+
+                    OnChanged(processID, FullScreen);
                 }
 
                 DateTime last = DateTime.Now;
@@ -96,8 +100,6 @@ namespace BlinkStickClient.Utils
 
             log.Info("Thread exited.");
         }
-
-
 
         [StructLayout(LayoutKind.Sequential)]
         public struct RECT
@@ -123,6 +125,9 @@ namespace BlinkStickClient.Utils
         [DllImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
     }
 
     #region EventArgs subclasses

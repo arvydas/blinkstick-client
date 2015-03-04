@@ -6,6 +6,10 @@ using System.Windows.Forms;
 using System.Threading;
 using System.IO.Pipes;
 using log4net;
+using Capture.Interface;
+using Capture.Hook;
+using Capture;
+using System.Diagnostics;
 
 namespace BlinkStickClient.Utils
 {
@@ -26,13 +30,45 @@ namespace BlinkStickClient.Utils
             }
         }
 
+        Boolean ignorePipeError = true;
+
         FullScreenMonitor fullScreenMonitor;
 
-        private const int RefreshPeriod = 50;
+        private const int RefreshPeriod = 1000;
 
         private BackgroundWorker ambilightWorker = null;
 
         DxScreenCapture sc;
+
+        private CaptureInterface captureInterface;
+        private CaptureProcess captureProcess;
+
+        private uint HookedProcessId = 0;
+
+        private CaptureModeEnum _CaptureMode = CaptureModeEnum.Desktop;
+        private CaptureModeEnum CaptureMode
+        {
+            get
+            {
+                return _CaptureMode;
+            }
+            set
+            {
+                if (_CaptureMode != value)
+                {
+                    _CaptureMode = value;
+
+                    log.InfoFormat("Capture mode changed to {0}", value);
+                }
+            }
+        }
+
+        private enum CaptureModeEnum
+        {
+            None,
+            Desktop,
+            Application
+        }
 
         public AmbilightWindowsService()
         {
@@ -44,6 +80,7 @@ namespace BlinkStickClient.Utils
             sc = new DxScreenCapture();
 
             fullScreenMonitor = new FullScreenMonitor();
+            fullScreenMonitor.Changed += HandleFullScreenApplicationChanged;
             fullScreenMonitor.Start();
 
             /*
@@ -76,20 +113,99 @@ namespace BlinkStickClient.Utils
                 Thread.Sleep(10);
             }
 
+            DetachFromHookedProcess();
+
             log.Info("Stopping active window monitor");
             fullScreenMonitor.Stop();
             log.Info("Service stopped");
         }
 
+        void HandleFullScreenApplicationChanged (object sender, ChangedEventArgs e)
+        {
+            Process p = Process.GetProcessById((int)e.ProcessId);
+
+            if (e.FullScreen || p.MainWindowTitle.Contains("Spelunky"))
+            {
+                if (HookedProcessId != e.ProcessId)
+                {
+                    //Disable capture while hooking into process
+                    CaptureMode = CaptureModeEnum.None;
+
+                    //Thread.Sleep(10000);
+
+                    HookedProcessId = e.ProcessId;
+
+                    if (HookManager.IsHooked((int)e.ProcessId))
+                    {
+                        log.InfoFormat("Process {0} is already hooked", HookedProcessId);
+                    }
+                    else
+                    {
+                        log.InfoFormat("Hooking into {0}", HookedProcessId);
+
+                        CaptureConfig cc = new CaptureConfig()
+                        {
+                            Direct3DVersion = Direct3DVersion.AutoDetect,
+                            ShowOverlay = false
+                        };
+
+                        captureInterface = new CaptureInterface();
+                        captureInterface.RemoteMessage += HandleRemoteMessage;
+
+                        Process process = Process.GetProcessById((int)HookedProcessId);
+
+                        log.InfoFormat("Starting {0}:{1} process capture", HookedProcessId, process.MainWindowTitle);
+                        try
+                        {
+                            captureProcess = new CaptureProcess(process, cc, captureInterface);
+                            log.InfoFormat("Hooking into {0} complete", HookedProcessId);
+                        }
+                        catch (Exception ex)
+                        {
+                            log.ErrorFormat("Failed to hook into process {0}", ex);
+                        }
+                    }
+                }
+
+                CaptureMode = CaptureModeEnum.Application;
+            }
+            else
+            {
+                CaptureMode = CaptureModeEnum.Desktop;
+
+                DetachFromHookedProcess();
+            }
+        }
+
+        void HandleRemoteMessage (MessageReceivedEventArgs message)
+        {
+            switch (message.MessageType)
+            {
+                case MessageType.Debug:
+                    log.Debug(message.Message);
+                    break;
+                case MessageType.Error:
+                    log.Error(message.Message);
+                    break;
+                case MessageType.Information:
+                    log.Info(message.Message);
+                    break;
+                case MessageType.Warning:
+                    log.Warn(message.Message);
+                    break;
+            }
+        }
+
         protected virtual void AnalyzeBackgroundColor (object sender, DoWorkEventArgs e)
         {
-            BackgroundWorker worker = (BackgroundWorker)sender;
-
-            log.Info("Creating pipe");
-            using (NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", "blinkstick_ambilight_local",
-                                                          PipeDirection.Out,
-                                                          PipeOptions.Asynchronous))
+            try
             {
+                BackgroundWorker worker = (BackgroundWorker)sender;
+
+                log.Info("Creating pipe");
+                NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", "blinkstick_ambilight_local",
+                                                       PipeDirection.Out,
+                                                       PipeOptions.Asynchronous);
                 try
                 {
                     log.Info("Connecting to pipe");
@@ -98,53 +214,108 @@ namespace BlinkStickClient.Utils
                 }
                 catch (Exception ex)
                 {
+                    pipeClient = null;
                     log.Error("Failed to connect to pipe server: {0}", ex);
-                    return;
+                    if (!ignorePipeError)
+                    {
+                        return;
+                    }
                 }
 
                 while (!worker.CancellationPending)
                 {
-                    Surface s = sc.CaptureScreen();
-                    DataRectangle dr = s.LockRectangle(LockFlags.None);
-                    DataStream gs = dr.Data;
-
-                    byte[] bu = new byte[4];
-                    uint r = 0;
-                    uint g = 0;
-                    uint b = 0;
-                    const int Bpp = 4; //Bytes per pixel
-
-                    int count = 0;
-
-                    int step = 4;
-
-                    for (int j = 0; j < Screen.PrimaryScreen.Bounds.Height / step; j++)
+                    if (CaptureMode == CaptureModeEnum.Desktop)
                     {
-                        for (int i = 0; i < Screen.PrimaryScreen.Bounds.Width / step; i++)
+                        Surface s = sc.CaptureScreen();
+                        DataRectangle dr = s.LockRectangle(LockFlags.None);
+                        DataStream gs = dr.Data;
+
+                        byte[] bu = new byte[4];
+                        uint r = 0;
+                        uint g = 0;
+                        uint b = 0;
+                        const int Bpp = 4; //Bytes per pixel
+
+                        int count = 0;
+
+                        int step = 4;
+
+                        for (int j = 0; j < Screen.PrimaryScreen.Bounds.Height / step; j++)
                         {
-                            gs.Position = (j * step * Screen.PrimaryScreen.Bounds.Height + i * step) * Bpp;
+                            for (int i = 0; i < Screen.PrimaryScreen.Bounds.Width / step; i++)
+                            {
+                                gs.Position = (j * step * Screen.PrimaryScreen.Bounds.Width + i * step) * Bpp;
 
-                            gs.Read(bu, 0, 4);
+                                gs.Read(bu, 0, 4);
 
-                            r += bu[2];
-                            g += bu[1];
-                            b += bu[0];
+                                r += bu[2];
+                                g += bu[1];
+                                b += bu[0];
 
-                            count++;
+                                count++;
+                            }
+                        }
+
+                        s.UnlockRectangle();
+                        s.Dispose();
+
+                        if (pipeClient != null)
+                        {
+                            if (pipeClient.IsConnected)
+                            {
+                                pipeClient.Write(new byte[] { (byte)(r / count), (byte)(g / count), (byte)(b / count) }, 0, 3);
+                            }
+                            else
+                            {
+                                if (!ignorePipeError)
+                                {
+                                    log.Info("Client disconnected. Exiting...");
+                                    return;
+                                }
+                            }
                         }
                     }
-
-                    s.UnlockRectangle();
-                    s.Dispose();
-
-                    if (pipeClient.IsConnected)
+                    else if (CaptureMode == CaptureModeEnum.Application)
                     {
-                        pipeClient.Write(new byte[] { (byte)(r / count), (byte)(g / count), (byte)(b / count) }, 0, 3);
-                    }
-                    else
-                    {
-                        log.Info("Client disconnected. Exiting...");
-                        return;
+                        if (!ignorePipeError && pipeClient != null && !pipeClient.IsConnected)
+                        {
+                            log.Info("Client disconnected. Exiting...");
+                            return;
+                        }
+
+                        /*
+                        log.Info("Request on top");
+                        captureProcess.BringProcessWindowToFront();
+
+                        log.Info("Begin screenshot");
+                        captureProcess.CaptureInterface.BeginGetScreenshot(
+                            new System.Drawing.Rectangle(0, 0, 0, 0), 
+                            new TimeSpan(0, 0, 2), 
+                            //Callback, 
+                            (IAsyncResult Result) => {
+                                if (captureProcess == null)
+                                    return;
+
+                                using (Screenshot screenshot = captureProcess.CaptureInterface.EndGetScreenshot(Result))
+                                {
+                                    if (screenshot == null)
+                                    {
+                                        log.Info("Callback received: null");
+                                    }
+                                    else
+                                    {
+                                        log.InfoFormat("Callback received: {0},{1},{2}", screenshot.R, screenshot.G, screenshot.B);
+        
+                                        if (pipeClient != null && pipeClient.IsConnected)
+                                        {
+                                            pipeClient.Write(new byte[] { screenshot.R, screenshot.G, screenshot.B }, 0, 3);
+                                        }
+                                    }
+                                }
+                            },
+                            null, 
+                            ImageFormat.AverageColor);
+                        */
                     }
 
                     Thread.Sleep(RefreshPeriod);
@@ -157,8 +328,47 @@ namespace BlinkStickClient.Utils
                     pipeClient.Close();
                     pipeClient.Dispose();
                 }
+            } 
+            catch (Exception ex)
+            {
+                log.ErrorFormat("Background color analyzer crash {0}", ex);
             }
         }
+
+        void DetachFromHookedProcess()
+        {
+            if (HookedProcessId != 0)
+            {
+                log.InfoFormat("Detaching from hooked process {0}", HookedProcessId);
+
+                captureProcess.CaptureInterface.Disconnect();
+
+                log.Info("Unhooking process");
+                HookManager.RemoveHookedProcess((int)HookedProcessId);
+
+                captureProcess = null;
+                captureInterface = null;
+
+                HookedProcessId = 0;
+            }
+        }
+
+        /*
+        void Callback(IAsyncResult Result) 
+        {
+            using (Screenshot screenshot = captureProcess.CaptureInterface.EndGetScreenshot(Result))
+            {
+                if (screenshot == null)
+                {
+                    log.Info("Callback received: null");
+                }
+                else
+                {
+                    log.InfoFormat("Callback received: {0},{1},{2}", screenshot.R, screenshot.G, screenshot.B);
+                }
+            }
+        }
+        */
 
         public class DxScreenCapture
         {
