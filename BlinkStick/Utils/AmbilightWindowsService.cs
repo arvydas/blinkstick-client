@@ -34,7 +34,7 @@ namespace BlinkStickClient.Utils
 
         FullScreenMonitor fullScreenMonitor;
 
-        private const int RefreshPeriod = 1000;
+        private const int RefreshPeriod = 50;
 
         private BackgroundWorker ambilightWorker = null;
 
@@ -124,14 +124,12 @@ namespace BlinkStickClient.Utils
         {
             Process p = Process.GetProcessById((int)e.ProcessId);
 
-            if (e.FullScreen || p.MainWindowTitle.Contains("Spelunky"))
+            if (e.FullScreen)
             {
                 if (HookedProcessId != e.ProcessId)
                 {
                     //Disable capture while hooking into process
                     CaptureMode = CaptureModeEnum.None;
-
-                    //Thread.Sleep(10000);
 
                     HookedProcessId = e.ProcessId;
 
@@ -283,7 +281,6 @@ namespace BlinkStickClient.Utils
                             return;
                         }
 
-                        /*
                         log.Info("Request on top");
                         captureProcess.BringProcessWindowToFront();
 
@@ -293,29 +290,35 @@ namespace BlinkStickClient.Utils
                             new TimeSpan(0, 0, 2), 
                             //Callback, 
                             (IAsyncResult Result) => {
-                                if (captureProcess == null)
-                                    return;
-
-                                using (Screenshot screenshot = captureProcess.CaptureInterface.EndGetScreenshot(Result))
+                                try
                                 {
-                                    if (screenshot == null)
+                                    if (captureProcess == null)
+                                        return;
+
+                                    using (Screenshot screenshot = captureProcess.CaptureInterface.EndGetScreenshot(Result))
                                     {
-                                        log.Info("Callback received: null");
+                                            if (screenshot == null)
+                                            {
+                                                log.Info("Callback received: null");
+                                            }
+                                            else
+                                            {
+                                                log.InfoFormat("Callback received: {0},{1},{2}", screenshot.R, screenshot.G, screenshot.B);
+                
+                                                if (pipeClient != null && pipeClient.IsConnected)
+                                                {
+                                                    pipeClient.Write(new byte[] { screenshot.R, screenshot.G, screenshot.B }, 0, 3);
+                                                }
+                                            }
                                     }
-                                    else
-                                    {
-                                        log.InfoFormat("Callback received: {0},{1},{2}", screenshot.R, screenshot.G, screenshot.B);
-        
-                                        if (pipeClient != null && pipeClient.IsConnected)
-                                        {
-                                            pipeClient.Write(new byte[] { screenshot.R, screenshot.G, screenshot.B }, 0, 3);
-                                        }
-                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    log.ErrorFormat("Unable to process captured data {0}", ex);
                                 }
                             },
                             null, 
                             ImageFormat.AverageColor);
-                        */
                     }
 
                     Thread.Sleep(RefreshPeriod);
@@ -341,7 +344,10 @@ namespace BlinkStickClient.Utils
             {
                 log.InfoFormat("Detaching from hooked process {0}", HookedProcessId);
 
-                captureProcess.CaptureInterface.Disconnect();
+                if (captureProcess != null)
+                {
+                    captureProcess.CaptureInterface.Disconnect();
+                }
 
                 log.Info("Unhooking process");
                 HookManager.RemoveHookedProcess((int)HookedProcessId);
@@ -352,23 +358,6 @@ namespace BlinkStickClient.Utils
                 HookedProcessId = 0;
             }
         }
-
-        /*
-        void Callback(IAsyncResult Result) 
-        {
-            using (Screenshot screenshot = captureProcess.CaptureInterface.EndGetScreenshot(Result))
-            {
-                if (screenshot == null)
-                {
-                    log.Info("Callback received: null");
-                }
-                else
-                {
-                    log.InfoFormat("Callback received: {0},{1},{2}", screenshot.R, screenshot.G, screenshot.B);
-                }
-            }
-        }
-        */
 
         public class DxScreenCapture
         {
