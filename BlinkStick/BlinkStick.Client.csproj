@@ -214,6 +214,7 @@
     <Compile Include="Utils\AmbilightWindowsService.cs" />
     <Compile Include="Utils\ActiveWindowMonitor.cs" />
     <Compile Include="Utils\FullScreenMonitor.cs" />
+    <Compile Include="Utils\Win32Api.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

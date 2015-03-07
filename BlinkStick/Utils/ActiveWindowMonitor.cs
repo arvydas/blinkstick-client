@@ -25,17 +25,6 @@ namespace BlinkStickClient.Utils
                 ProcessChanged(this, new ProcessChangedEventArgs(executableFileName));
             }
         }
-
-        public event EventHandler<ProcessIdChangedEventArgs> ProcessIdChanged;
-
-        protected void OnProcessIdChanged(uint processId, Boolean fullScreen)
-        {
-            log.DebugFormat("Active process id changed to {0}, fullScreen:{1}", processId, fullScreen);
-            if (ProcessIdChanged != null)
-            {
-                ProcessIdChanged(this, new ProcessIdChangedEventArgs(processId, fullScreen));
-            }
-        }
         #endregion
 
         #region Fields
@@ -59,64 +48,11 @@ namespace BlinkStickClient.Utils
             }
         }
 
-        private uint _ActiveProcessId;
-
-        public uint ActiveProcessId
-        {
-            get { return _ActiveProcessId; }
-            private set 
-            {
-                if (_ActiveProcessId != value)
-                {
-                    _ActiveProcessId = value;
-                }
-            }
-        }
-
         public Boolean UseThreadPool = true;
         #endregion
 
         #region Win32API
-        delegate void WinEventDelegate(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
-
-        WinEventDelegate dele;
-
-        [DllImport("user32.dll")]
-        static extern IntPtr SetWinEventHook(uint eventMin, uint eventMax, IntPtr hmodWinEventProc, WinEventDelegate lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
-
-        private const uint WINEVENT_OUTOFCONTEXT = 0;
-        private const uint EVENT_SYSTEM_FOREGROUND = 3;
-
-        [DllImport("user32.dll")]
-        static extern IntPtr GetForegroundWindow();
-
-        [DllImport("user32.dll")]
-        static extern int GetWindowText(IntPtr hWnd, StringBuilder text, int count);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
-
-        [DllImport("user32.dll")]
-        static extern bool UnhookWinEvent(IntPtr hWinEventHook);
-
-        [DllImport("user32.dll")]
-        static extern int GetSystemMetrics(int smIndex);
-
-        public const int SM_CXSCREEN = 0;
-        public const int SM_CYSCREEN = 1;
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct RECT
-        {
-            public int Left;
-            public int Top;
-            public int Right;
-            public int Bottom;
-        }
+        Win32Api.WinEventDelegate dele;
         #endregion
 
         #region Start/Stop
@@ -126,8 +62,8 @@ namespace BlinkStickClient.Utils
             {
                 log.Info("Starting ActiveWindowMonitor...");
                 CheckTopLevelProcess();
-                dele = new WinEventDelegate(WinEventProc);
-                m_hhook = SetWinEventHook(EVENT_SYSTEM_FOREGROUND, EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, dele, 0, 0, WINEVENT_OUTOFCONTEXT);
+                dele = new Win32Api.WinEventDelegate(WinEventProc);
+                m_hhook = Win32Api.SetWinEventHook(Win32Api.EVENT_SYSTEM_FOREGROUND, Win32Api.EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, dele, 0, 0, Win32Api.WINEVENT_OUTOFCONTEXT);
 
                 log.Info("ActiveWindowMonitor started");
             }
@@ -138,7 +74,7 @@ namespace BlinkStickClient.Utils
             if (m_hhook != IntPtr.Zero)
             {
                 log.Info("Stopping ActiveWindowMonitor...");
-                UnhookWinEvent(m_hhook);
+                Win32Api.UnhookWinEvent(m_hhook);
                 m_hhook = IntPtr.Zero;
                 log.Info("ActiveWindowMonitor stopped");
             }
@@ -161,32 +97,10 @@ namespace BlinkStickClient.Utils
         private void CheckTopLevelProcess()
         {
             IntPtr handle = IntPtr.Zero;
-            handle = GetForegroundWindow();
+            handle = Win32Api.GetForegroundWindow();
 
             uint processID = 0;
-            uint threadID = GetWindowThreadProcessId(handle, out processID);
-
-            if (ProcessIdChanged != null)
-            {
-                Boolean fullScreen = false;
-
-                int scrX = GetSystemMetrics(SM_CXSCREEN),
-                scrY = GetSystemMetrics(SM_CYSCREEN);
-
-                RECT wRect;
-                if (GetWindowRect(handle, out wRect))
-                {
-                    log.DebugFormat("{0}:{1} {2},{3},{4},{5}", scrX, scrY, wRect.Right, wRect.Left, wRect.Bottom, wRect.Top);
-                    fullScreen = scrX == (wRect.Right - wRect.Left) && scrY == (wRect.Bottom - wRect.Top);
-                }
-
-                //if (ActiveProcessId != processID)
-                {
-                    ActiveProcessId = processID;
-                    //OnProcessIdChanged(processID, fullScreen);
-                    OnProcessIdChanged(processID, AreApplicationFullScreen());
-                }
-            }
+            uint threadID = Win32Api.GetWindowThreadProcessId(handle, out processID);
 
             if (ProcessChanged != null)
             {
@@ -195,39 +109,6 @@ namespace BlinkStickClient.Utils
                 ActiveProcess = ProcessExecutablePath(process);
             }
         }
-
-        private static IntPtr desktopHandle;
-        private static IntPtr shellHandle;
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetDesktopWindow(); 
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetShellWindow(); 
-
-        public static bool AreApplicationFullScreen() {
-            desktopHandle = GetDesktopWindow();
-            shellHandle = GetShellWindow();
-
-            bool runningFullScreen = false;
-            RECT appBounds;
-            System.Drawing.Rectangle screenBounds;
-            IntPtr hWnd;
-            hWnd = GetForegroundWindow();
-
-            if (hWnd != null && !hWnd.Equals(IntPtr.Zero)) {
-                if (!(hWnd.Equals(desktopHandle) || hWnd.Equals(shellHandle))) {
-                    GetWindowRect(hWnd, out appBounds);
-                    screenBounds = System.Windows.Forms.Screen.FromHandle(hWnd).Bounds;
-                    if ((appBounds.Bottom - appBounds.Top) == screenBounds.Height
-                        && (appBounds.Right - appBounds.Left) == screenBounds.Width) {
-                        runningFullScreen = true;
-                    }
-                }
-            }
-
-            return runningFullScreen;
-        } 
 
         private string ProcessExecutablePath(Process process)
         {
@@ -275,18 +156,6 @@ namespace BlinkStickClient.Utils
         public ProcessChangedEventArgs(String executableFileName)
         {
             ExecutableFileName = executableFileName;
-        }
-    }
-
-    public class ProcessIdChangedEventArgs : EventArgs
-    {
-        public uint ProcessId;
-        public Boolean FullScreen;
-
-        public ProcessIdChangedEventArgs(uint processId, Boolean fullScreen)
-        {
-            this.ProcessId = processId;
-            this.FullScreen = fullScreen;
         }
     }
     #endregion

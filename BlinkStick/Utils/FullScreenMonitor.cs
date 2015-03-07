@@ -13,6 +13,9 @@ namespace BlinkStickClient.Utils
         private IntPtr WindowHandle;
         private Boolean FullScreen;
 
+        private static IntPtr desktopHandle;
+        private static IntPtr shellHandle;
+
         #region Fields
         ILog log = LogManager.GetLogger("FullScreenMonitor");
         #endregion
@@ -54,18 +57,18 @@ namespace BlinkStickClient.Utils
         {
             while (!worker.CancellationPending)
             {
-                desktopHandle = GetDesktopWindow();
-                shellHandle = GetShellWindow();
+                desktopHandle = Win32Api.GetDesktopWindow();
+                shellHandle = Win32Api.GetShellWindow();
 
                 bool runningFullScreen = false;
-                RECT appBounds;
+                Win32Api.RECT appBounds;
                 System.Drawing.Rectangle screenBounds;
                 IntPtr hWnd;
-                hWnd = GetForegroundWindow();
+                hWnd = Win32Api.GetForegroundWindow();
 
                 if (hWnd != null && !hWnd.Equals(IntPtr.Zero)) {
                     if (!(hWnd.Equals(desktopHandle) || hWnd.Equals(shellHandle))) {
-                        GetWindowRect(hWnd, out appBounds);
+                        Win32Api.GetWindowRect(hWnd, out appBounds);
                         screenBounds = System.Windows.Forms.Screen.FromHandle(hWnd).Bounds;
                         if ((appBounds.Bottom - appBounds.Top) == screenBounds.Height
                             && (appBounds.Right - appBounds.Left) == screenBounds.Width) {
@@ -80,7 +83,7 @@ namespace BlinkStickClient.Utils
                     FullScreen = runningFullScreen;
 
                     uint processID = 0;
-                    uint threadID = GetWindowThreadProcessId(hWnd, out processID);
+                    uint threadID = Win32Api.GetWindowThreadProcessId(hWnd, out processID);
 
                     log.DebugFormat("Change detected {0} (FullScreen:{1})", WindowHandle.ToInt64(), FullScreen);
 
@@ -100,34 +103,6 @@ namespace BlinkStickClient.Utils
 
             log.Info("Thread exited.");
         }
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct RECT
-        {
-            public int Left;
-            public int Top;
-            public int Right;
-            public int Bottom;
-        }
-
-        private static IntPtr desktopHandle;
-        private static IntPtr shellHandle;
-
-        [DllImport("user32.dll")]
-        static extern IntPtr GetForegroundWindow();
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetDesktopWindow(); 
-
-        [DllImport("user32.dll")]
-        private static extern IntPtr GetShellWindow(); 
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
     }
 
     #region EventArgs subclasses
