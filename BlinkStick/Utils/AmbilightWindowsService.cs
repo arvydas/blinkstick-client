@@ -10,6 +10,7 @@ using Capture.Interface;
 using Capture.Hook;
 using Capture;
 using System.Diagnostics;
+using System.IO;
 
 namespace BlinkStickClient.Utils
 {
@@ -123,8 +124,9 @@ namespace BlinkStickClient.Utils
         void HandleFullScreenApplicationChanged (object sender, ChangedEventArgs e)
         {
             Process p = Process.GetProcessById((int)e.ProcessId);
+            String processFileName = Path.GetFileName(p.MainModule.FileName).ToLower();
 
-            if (e.FullScreen)
+            if (e.FullScreen && !processFileName.Contains("powerptn.exe"))
             {
                 if (HookedProcessId != e.ProcessId)
                 {
