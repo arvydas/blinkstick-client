@@ -25,14 +25,34 @@ namespace BlinkStickClient.Utils
                 ProcessChanged(this, new ProcessChangedEventArgs(executableFileName));
             }
         }
+
+        public event EventHandler<WindowTextChangedEventArgs> WindowTextChanged;
+
+        protected void OnWindowTextChanged(String windowText)
+        {
+            log.DebugFormat("Window text changed to {0} ", windowText);
+            if (WindowTextChanged != null)
+            {
+                WindowTextChanged(this, new WindowTextChangedEventArgs(windowText));
+            }
+        }
         #endregion
 
         #region Fields
         ILog log = LogManager.GetLogger("ActiveWindowMonitor");
         IntPtr m_hhook = IntPtr.Zero;
+        IntPtr OldWindowHandle = IntPtr.Zero;
         #endregion
 
         #region Properties
+        public Boolean Running
+        {
+            get
+            {
+                return m_hhook != IntPtr.Zero;
+            }
+        }
+
         private String _ActiveProcess;
 
         public String ActiveProcess
@@ -58,7 +78,7 @@ namespace BlinkStickClient.Utils
         #region Start/Stop
         public void Start()
         {
-            if (m_hhook == IntPtr.Zero)
+            if (!Running)
             {
                 log.Info("Starting ActiveWindowMonitor...");
                 CheckTopLevelProcess();
@@ -71,7 +91,7 @@ namespace BlinkStickClient.Utils
 
         public void Stop()
         {
-            if (m_hhook != IntPtr.Zero)
+            if (Running)
             {
                 log.Info("Stopping ActiveWindowMonitor...");
                 Win32Api.UnhookWinEvent(m_hhook);
@@ -96,15 +116,21 @@ namespace BlinkStickClient.Utils
 
         private void CheckTopLevelProcess()
         {
-            IntPtr handle = IntPtr.Zero;
-            handle = Win32Api.GetForegroundWindow();
+            IntPtr handle = Win32Api.GetForegroundWindow();
 
             uint processID = 0;
             uint threadID = Win32Api.GetWindowThreadProcessId(handle, out processID);
 
+            Process process = Process.GetProcessById((int)processID);
+
+            if (handle.ToInt32() != OldWindowHandle.ToInt32())
+            {
+                OldWindowHandle = handle;
+                OnWindowTextChanged(process.MainWindowTitle);
+            }
+
             if (ProcessChanged != null)
             {
-                Process process = Process.GetProcessById((int)processID);
 
                 ActiveProcess = ProcessExecutablePath(process);
             }
@@ -118,7 +144,6 @@ namespace BlinkStickClient.Utils
             }
             catch
             {
-
                 try
                 {
                     string query = "SELECT ExecutablePath FROM Win32_Process WHERE ProcessID=" + process.Id.ToString();
@@ -156,6 +181,16 @@ namespace BlinkStickClient.Utils
         public ProcessChangedEventArgs(String executableFileName)
         {
             ExecutableFileName = executableFileName;
+        }
+    }
+
+    public class WindowTextChangedEventArgs : EventArgs
+    {
+        public String WindowText;
+
+        public WindowTextChangedEventArgs(String windowText)
+        {
+            WindowText = windowText;
         }
     }
     #endregion

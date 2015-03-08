@@ -215,6 +215,8 @@
     <Compile Include="Utils\ActiveWindowMonitor.cs" />
     <Compile Include="Utils\FullScreenMonitor.cs" />
     <Compile Include="Utils\Win32Api.cs" />
+    <Compile Include="Editors\ApplicationEditorWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.ApplicationEditorWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
