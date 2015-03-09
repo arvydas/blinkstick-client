@@ -121,7 +121,7 @@ public partial class MainWindow
 		this.PatternsAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Patterns");
 		w1.Add (this.PatternsAction1, null);
 		this.EventsAction = new global::Gtk.RadioAction ("EventsAction", global::Mono.Unix.Catalog.GetString ("Events"), null, null, 3);
-		this.EventsAction.Group = this.NotificationsToolbarAction.Group;
+		this.EventsAction.Group = this.PatternsAction1.Group;
 		this.EventsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Events");
 		w1.Add (this.EventsAction, null);
 		this.UIManager.InsertActionGroup (w1, 0);

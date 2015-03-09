@@ -29,6 +29,30 @@ namespace BlinkStickClient.DataModel
             }
         } 
 
+        public String ApiAccessAddress {
+            get;
+            set;
+        }
+
+        private const String DefaultApiAccessAddress = "http://live.blinkstick.com:9292/faye";
+
+        public String CurrentApiAccessAddress {
+            get {
+                if (ApiAccessAddress == "" || ApiAccessAddress == null)
+                {
+                    return DefaultApiAccessAddress;
+                }
+                else
+                {
+                    return ApiAccessAddress;
+                }
+            }
+        }
+
+        public Boolean ShouldSerialzeApiAccessAddress()
+        {
+            return ApiAccessAddress != null && ApiAccessAddress != "";
+        }
 
         public ApplicationDataModel()
         {

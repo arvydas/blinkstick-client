@@ -217,6 +217,8 @@
     <Compile Include="Utils\Win32Api.cs" />
     <Compile Include="Editors\ApplicationEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.ApplicationEditorWidget.cs" />
+    <Compile Include="Editors\BlinkStickDotComEditorWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.BlinkStickDotComEditorWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
