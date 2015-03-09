@@ -53,6 +53,10 @@ namespace BlinkStickClient.DataModel
 
         public String BlinkStickSerial { get; set; }
 
+        [JsonIgnore]
+        public ApplicationDataModel DataModel;
+
+
         public abstract String GetTypeName();
 
         /// <summary>

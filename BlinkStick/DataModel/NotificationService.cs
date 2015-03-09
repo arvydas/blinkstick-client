@@ -32,6 +32,7 @@ namespace BlinkStickClient.DataModel
 
             foreach (Notification n in DataModel.Notifications)
             {
+                n.DataModel = DataModel;
                 if (n.RequiresMonitoring() && n.Enabled)
                 {
                     n.Start();
@@ -104,6 +105,7 @@ namespace BlinkStickClient.DataModel
                 {
                     n.Triggered += NotificationTriggered;
                     n.ColorSend += NotificationColor;
+                    n.DataModel = DataModel;
 
                     if (n.RequiresMonitoring() && n.Enabled)
                     {
@@ -117,6 +119,7 @@ namespace BlinkStickClient.DataModel
                 {
                     n.Triggered -= NotificationTriggered;
                     n.ColorSend -= NotificationColor;
+                    n.DataModel = null;;
 
                     if (n.RequiresMonitoring() && n.Enabled)
                     {
