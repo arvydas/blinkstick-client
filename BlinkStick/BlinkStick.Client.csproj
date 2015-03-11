@@ -219,6 +219,9 @@
     <Compile Include="gtk-gui\BlinkStickClient.ApplicationEditorWidget.cs" />
     <Compile Include="Editors\BlinkStickDotComEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.BlinkStickDotComEditorWidget.cs" />
+    <Compile Include="Utils\RemoteControlServer.cs" />
+    <Compile Include="Editors\RemoteControlEditorWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.RemoteControlEditorWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
