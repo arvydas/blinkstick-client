@@ -99,18 +99,6 @@ public partial class MainWindow: Gtk.Window
 		}
 	}
 
-	private static String _ApplicationVersion = "";
-	public static String ApplicationVersion {
-		get {
-			if (_ApplicationVersion == "")
-			{
-				_ApplicationVersion = System.Reflection.Assembly.GetExecutingAssembly ().GetName ().Version.ToString ();
-				_ApplicationVersion = _ApplicationVersion.Substring (0, _ApplicationVersion.LastIndexOf ('.'));
-			}
-			return _ApplicationVersion;
-		}
-	}
-
     public static String LogFolder
     {
         get
@@ -136,7 +124,7 @@ public partial class MainWindow: Gtk.Window
 
 		Build ();
 
-		this.Title = "BlinkStick " + ApplicationVersion;
+		this.Title = "BlinkStick " + ApplicationDataModel.ApplicationVersion;
 
         log.Info("Loading data");
         DataModel.Load();

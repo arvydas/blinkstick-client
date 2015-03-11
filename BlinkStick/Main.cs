@@ -21,6 +21,7 @@ using Gtk;
 using System.IO;
 using log4net;
 using BlinkStickClient.Utils;
+using BlinkStickClient.DataModel;
 
 namespace BlinkStickClient
 {
@@ -62,7 +63,7 @@ namespace BlinkStickClient
             ILog log = LogManager.GetLogger("Main");    
 
             log.Info("--------------------------------------");
-            log.InfoFormat("BlinkStick Client {0} application started", MainWindow.ApplicationVersion);
+            log.InfoFormat("BlinkStick Client {0} application started", ApplicationDataModel.ApplicationVersion);
 
             if (ambilightMode)
             {

@@ -54,6 +54,18 @@ namespace BlinkStickClient.DataModel
             return ApiAccessAddress != null && ApiAccessAddress != "";
         }
 
+        private static String _ApplicationVersion = "";
+        public static String ApplicationVersion {
+            get {
+                if (_ApplicationVersion == "")
+                {
+                    _ApplicationVersion = System.Reflection.Assembly.GetExecutingAssembly ().GetName ().Version.ToString ();
+                    _ApplicationVersion = _ApplicationVersion.Substring (0, _ApplicationVersion.LastIndexOf ('.'));
+                }
+                return _ApplicationVersion;
+            }
+        }
+
         public ApplicationDataModel()
         {
             FileName = Path.Combine (DefaultSettingsFolder, "data.json");
