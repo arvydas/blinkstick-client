@@ -55,16 +55,10 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\Components\Json.Net\Bin\Net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="Mono.Cairo, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
     <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
-    <Reference Include="log4net">
-      <HintPath>..\Components\log4net-1.2.13\bin\net\4.0\release\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="ImapX">
       <HintPath>..\packages\ImapX.2.0.0.16\lib\net40\ImapX.dll</HintPath>
     </Reference>
@@ -75,6 +69,12 @@
       <HintPath>..\packages\SlimDX.4.0.13.44\lib\NET40\SlimDX.dll</HintPath>
     </Reference>
     <Reference Include="System.Management" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -144,7 +144,6 @@
     <Compile Include="Widgets\AnimationWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.AnimationWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.BlinkStickEmulatorWidget.cs" />
-    <Compile Include="Utils\ExtensionMethods.cs" />
     <Compile Include="Widgets\BlinkStickTestWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.BlinkStickTestWidget.cs" />
     <Compile Include="Widgets\BlinkStickInfoWidget.cs" />
@@ -162,64 +161,33 @@
     <Compile Include="Widgets\BlinkStickEmulatorWidget.cs" />
     <Compile Include="Forms\ConfigureBlinkStickDialog.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.ConfigureBlinkStickDialog.cs" />
-    <Compile Include="DataModel\BlinkStickDeviceSettings.cs" />
-    <Compile Include="DataModel\Notification.cs" />
-    <Compile Include="DataModel\Pattern.cs" />
-    <Compile Include="DataModel\Animation.cs" />
-    <Compile Include="DataModel\PatternNotification.cs" />
-    <Compile Include="DataModel\ApplicationDataModel.cs" />
-    <Compile Include="DataModel\NotificationRegistry.cs" />
-    <Compile Include="DataModel\NotificationTest.cs" />
     <Compile Include="Forms\SelectNotificationDialog.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.SelectNotificationDialog.cs" />
-    <Compile Include="DataModel\NotificationAmbilight.cs" />
-    <Compile Include="DataModel\NotificationGmail.cs" />
-    <Compile Include="DataModel\NotificationImap.cs" />
-    <Compile Include="DataModel\NotificationPop3.cs" />
-    <Compile Include="DataModel\NotificationMood.cs" />
-    <Compile Include="DataModel\NotificationCpu.cs" />
-    <Compile Include="DataModel\NotificationDiskSpace.cs" />
-    <Compile Include="DataModel\NotificationRam.cs" />
-    <Compile Include="DataModel\NotificationBattery.cs" />
-    <Compile Include="DataModel\NotificationRemoteControl.cs" />
-    <Compile Include="DataModel\NotificationMqtt.cs" />
-    <Compile Include="DataModel\NotificationBlinkStickDotCom.cs" />
-    <Compile Include="DataModel\NotificationIfttt.cs" />
-    <Compile Include="DataModel\NotificationApplication.cs" />
     <Compile Include="Forms\EditNotificationDialog.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.EditNotificationDialog.cs" />
     <Compile Include="Widgets\DeviceComboboxWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.DeviceComboboxWidget.cs" />
-    <Compile Include="DataModel\NotificationBoblight.cs" />
-    <Compile Include="DataModel\NotificationService.cs" />
     <Compile Include="Editors\TestEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.TestEditorWidget.cs" />
     <Compile Include="Editors\IEditorInterface.cs" />
-    <Compile Include="DataModel\TriggeredEvent.cs" />
     <Compile Include="Widgets\EventsWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.EventsWidget.cs" />
     <Compile Include="Editors\CpuEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.CpuEditorWidget.cs" />
-    <Compile Include="Classes\ObservableCollectionEx.cs" />
-    <Compile Include="DataModel\HardwareNotification.cs" />
     <Compile Include="Editors\DiskSpaceEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.DiskSpaceEditorWidget.cs" />
     <Compile Include="Editors\GmailEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.GmailEditorWidget.cs" />
     <Compile Include="Editors\EmailEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.EmailEditorWidget.cs" />
-    <Compile Include="DataModel\EmailNotification.cs" />
     <Compile Include="Editors\MoodlightEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.MoodlightEditorWidget.cs" />
     <Compile Include="Utils\AmbilightWindowsService.cs" />
-    <Compile Include="Utils\ActiveWindowMonitor.cs" />
     <Compile Include="Utils\FullScreenMonitor.cs" />
-    <Compile Include="Utils\Win32Api.cs" />
     <Compile Include="Editors\ApplicationEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.ApplicationEditorWidget.cs" />
     <Compile Include="Editors\BlinkStickDotComEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.BlinkStickDotComEditorWidget.cs" />
-    <Compile Include="Utils\RemoteControlServer.cs" />
     <Compile Include="Editors\RemoteControlEditorWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.RemoteControlEditorWidget.cs" />
   </ItemGroup>
@@ -245,6 +213,10 @@
     <ProjectReference Include="..\Capture\Capture.csproj">
       <Project>{23178A3D-2AC0-419A-B1B6-59CA45191270}</Project>
       <Name>Capture</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlinkStickClient.Base\BlinkStickClient.Base.csproj">
+      <Project>{3655D94E-C564-4993-9D53-20EF5E934F91}</Project>
+      <Name>BlinkStickClient.Base</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -277,7 +249,6 @@
     </MonoDevelop>
   </ProjectExtensions>
   <ItemGroup>
-    <Folder Include="DataModel\" />
     <Folder Include="Editors\" />
   </ItemGroup>
 </Project>
