@@ -104,7 +104,7 @@
       <Project>{7AAEBEBE-E38D-47B1-A04C-A055DCEB0757}</Project>
       <Name>BlinkStickDotNet</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BlinkStick.Bayeux\BlinkStick.Bayeux.csproj">
+    <ProjectReference Include="..\BlinkStickClient.Bayeux\BlinkStickClient.Bayeux.csproj">
       <Project>{2E6D4FBF-99F5-4424-9555-BD211545A5FA}</Project>
       <Name>BlinkStick.Bayeux</Name>
     </ProjectReference>

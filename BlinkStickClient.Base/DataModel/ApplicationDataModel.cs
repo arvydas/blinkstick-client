@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
+using BlinkStickDotNet;
 
 namespace BlinkStickClient.DataModel
 {
@@ -170,7 +171,7 @@ namespace BlinkStickClient.DataModel
         #endregion
 
         #region Device list helpers
-        public Boolean AddIfDoesNotExist(BlinkStickDotNet.BlinkStick led)
+        public Boolean AddIfDoesNotExist(BlinkStick led)
         {
             Boolean newRecord = true;
 

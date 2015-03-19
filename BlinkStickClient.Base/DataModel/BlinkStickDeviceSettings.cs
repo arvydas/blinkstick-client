@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using log4net;
+using BlinkStickDotNet;
 
 namespace BlinkStickClient.DataModel
 {
@@ -28,7 +29,7 @@ namespace BlinkStickClient.DataModel
         public Queue<TriggeredEvent> EventQueue = new Queue<TriggeredEvent>();
 
         [JsonIgnore]
-        public BlinkStickDotNet.BlinkStick Led;
+        public BlinkStick Led;
 
         [JsonIgnore]
         public Boolean Touched { get; set; }
@@ -42,7 +43,7 @@ namespace BlinkStickClient.DataModel
             this.Playing = false;
         }
 
-        public BlinkStickDeviceSettings(BlinkStickDotNet.BlinkStick led)
+        public BlinkStickDeviceSettings(BlinkStick led)
         {
             this.Led = led;
             this.Serial = led.Serial;

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using BlinkStick.Bayeux;
+using BlinkStickClient.Bayeux;
 using BlinkStickDotNet;
 using Newtonsoft.Json;
 
