@@ -6,6 +6,10 @@ namespace BlinkStickClient
 	{
 		private global::Gtk.HBox hbox1;
 		
+		private global::Gtk.Label labelFrequency;
+		
+		private global::Gtk.ComboBox comboboxFrequency;
+		
 		private global::Gtk.Button buttonTrigger;
 
 		protected virtual void Build ()
@@ -18,17 +22,45 @@ namespace BlinkStickClient
 			this.hbox1 = new global::Gtk.HBox ();
 			this.hbox1.Name = "hbox1";
 			this.hbox1.Spacing = 6;
+			this.hbox1.BorderWidth = ((uint)(6));
+			// Container child hbox1.Gtk.Box+BoxChild
+			this.labelFrequency = new global::Gtk.Label ();
+			this.labelFrequency.Name = "labelFrequency";
+			this.labelFrequency.LabelProp = global::Mono.Unix.Catalog.GetString ("Frequency:");
+			this.hbox1.Add (this.labelFrequency);
+			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.labelFrequency]));
+			w1.Position = 0;
+			w1.Expand = false;
+			w1.Fill = false;
+			// Container child hbox1.Gtk.Box+BoxChild
+			this.comboboxFrequency = global::Gtk.ComboBox.NewText ();
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("Disabled"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("1 second"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("5 seconds"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("15 seconds"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("30 seconds"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("1 minute"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("5 minutes"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("15 minutes"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("30 minutes"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("1 hour"));
+			this.comboboxFrequency.Name = "comboboxFrequency";
+			this.hbox1.Add (this.comboboxFrequency);
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.comboboxFrequency]));
+			w2.Position = 1;
+			w2.Expand = false;
+			w2.Fill = false;
 			// Container child hbox1.Gtk.Box+BoxChild
 			this.buttonTrigger = new global::Gtk.Button ();
 			this.buttonTrigger.CanFocus = true;
 			this.buttonTrigger.Name = "buttonTrigger";
 			this.buttonTrigger.UseUnderline = true;
-			this.buttonTrigger.Label = global::Mono.Unix.Catalog.GetString ("Trigger");
+			this.buttonTrigger.Label = global::Mono.Unix.Catalog.GetString ("Trigger Now!");
 			this.hbox1.Add (this.buttonTrigger);
-			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.buttonTrigger]));
-			w1.Position = 0;
-			w1.Expand = false;
-			w1.Fill = false;
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.buttonTrigger]));
+			w3.Position = 2;
+			w3.Expand = false;
+			w3.Fill = false;
 			this.Add (this.hbox1);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

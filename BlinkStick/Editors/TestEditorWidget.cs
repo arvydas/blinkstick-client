@@ -17,6 +17,7 @@ namespace BlinkStickClient
         public void SetNotification(BlinkStickClient.DataModel.Notification notification)
         {
             this.Notification = notification as NotificationTest;
+            comboboxFrequency.Active = (int)Notification.Frequency;
         }
 
         public bool IsValid(Gtk.Window window)
@@ -26,6 +27,7 @@ namespace BlinkStickClient
 
         public void UpdateNotification()
         {
+            Notification.Frequency = (TestFrequencyEnum)comboboxFrequency.Active;
         }
         #endregion
 
