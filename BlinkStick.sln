@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibUsbDotNet", "Components\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capture", "Capture\Capture.csproj", "{23178A3D-2AC0-419A-B1B6-59CA45191270}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlinkStickClient.Base", "BlinkStickClient.Base\BlinkStickClient.Base.csproj", "{3655D94E-C564-4993-9D53-20EF5E934F91}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -93,6 +95,18 @@ Global
 		{2E6D4FBF-99F5-4424-9555-BD211545A5FA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{2E6D4FBF-99F5-4424-9555-BD211545A5FA}.Release|x86.ActiveCfg = Release|Any CPU
 		{2E6D4FBF-99F5-4424-9555-BD211545A5FA}.Release|x86.Build.0 = Release|Any CPU
+		{3655D94E-C564-4993-9D53-20EF5E934F91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3655D94E-C564-4993-9D53-20EF5E934F91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3655D94E-C564-4993-9D53-20EF5E934F91}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{3655D94E-C564-4993-9D53-20EF5E934F91}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{3655D94E-C564-4993-9D53-20EF5E934F91}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3655D94E-C564-4993-9D53-20EF5E934F91}.Debug|x86.Build.0 = Debug|Any CPU
+		{3655D94E-C564-4993-9D53-20EF5E934F91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3655D94E-C564-4993-9D53-20EF5E934F91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3655D94E-C564-4993-9D53-20EF5E934F91}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{3655D94E-C564-4993-9D53-20EF5E934F91}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{3655D94E-C564-4993-9D53-20EF5E934F91}.Release|x86.ActiveCfg = Release|Any CPU
+		{3655D94E-C564-4993-9D53-20EF5E934F91}.Release|x86.Build.0 = Release|Any CPU
 		{59397BA2-2777-4E79-A4F0-8DD0E89B8308}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{59397BA2-2777-4E79-A4F0-8DD0E89B8308}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{59397BA2-2777-4E79-A4F0-8DD0E89B8308}.Debug|Mixed Platforms.Build.0 = Debug|x86

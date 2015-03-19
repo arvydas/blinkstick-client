@@ -28,6 +28,12 @@ namespace BlinkStickClient
         {
             Notification = (notification as EmailNotification);
 
+            if (Notification is NotificationPop3)
+            {
+                DefaultPort = 110;
+                DefaultSslPort = 995;
+            }
+
             GtkLabel1.Markup = String.Format("<b>Configure {0} account settings</b>", Notification.GetTypeName());
 
             IgnoreChanges = true;

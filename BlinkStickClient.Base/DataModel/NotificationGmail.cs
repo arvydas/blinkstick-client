@@ -49,11 +49,6 @@ namespace BlinkStickClient.DataModel
             return true;
         }
 
-        public override Gtk.Widget GetEditorWidget()
-        {
-            return new GmailEditorWidget();
-        }
-
         public override void Start()
         {
             if (Running)

@@ -42,11 +42,6 @@ namespace BlinkStickClient.DataModel
             return HttpListener.IsSupported;
         }
 
-        public override Gtk.Widget GetEditorWidget()
-        {
-            return new RemoteControlEditorWidget();
-        }
-
         public override void Start()
         {
             if (Running)

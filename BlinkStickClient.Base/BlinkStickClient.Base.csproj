@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3655D94E-C564-4993-9D53-20EF5E934F91}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BlinkStickClient.Base</RootNamespace>
+    <AssemblyName>BlinkStickClient.Base</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ImapX">
+      <HintPath>..\packages\ImapX.2.0.0.16\lib\net40\ImapX.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenPop">
+      <HintPath>..\packages\OpenPop.2.0.6.2\lib\net20\OpenPop.dll</HintPath>
+    </Reference>
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
+    <Reference Include="System.Management" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DataModel\Animation.cs" />
+    <Compile Include="DataModel\ApplicationDataModel.cs" />
+    <Compile Include="DataModel\BlinkStickDeviceSettings.cs" />
+    <Compile Include="DataModel\EmailNotification.cs" />
+    <Compile Include="DataModel\HardwareNotification.cs" />
+    <Compile Include="DataModel\Notification.cs" />
+    <Compile Include="DataModel\NotificationAmbilight.cs" />
+    <Compile Include="DataModel\NotificationApplication.cs" />
+    <Compile Include="DataModel\NotificationBattery.cs" />
+    <Compile Include="DataModel\NotificationBlinkStickDotCom.cs" />
+    <Compile Include="DataModel\NotificationBoblight.cs" />
+    <Compile Include="DataModel\NotificationCpu.cs" />
+    <Compile Include="DataModel\NotificationDiskSpace.cs" />
+    <Compile Include="DataModel\NotificationGmail.cs" />
+    <Compile Include="DataModel\NotificationIfttt.cs" />
+    <Compile Include="DataModel\NotificationImap.cs" />
+    <Compile Include="DataModel\NotificationMood.cs" />
+    <Compile Include="DataModel\NotificationMqtt.cs" />
+    <Compile Include="DataModel\NotificationPop3.cs" />
+    <Compile Include="DataModel\NotificationRam.cs" />
+    <Compile Include="DataModel\NotificationRegistry.cs" />
+    <Compile Include="DataModel\NotificationRemoteControl.cs" />
+    <Compile Include="DataModel\NotificationService.cs" />
+    <Compile Include="DataModel\NotificationTest.cs" />
+    <Compile Include="DataModel\Pattern.cs" />
+    <Compile Include="DataModel\PatternNotification.cs" />
+    <Compile Include="DataModel\TriggeredEvent.cs" />
+    <Compile Include="Utils\ExtensionMethods.cs" />
+    <Compile Include="Classes\ObservableCollectionEx.cs" />
+    <Compile Include="Utils\ActiveWindowMonitor.cs" />
+    <Compile Include="Utils\RemoteControlServer.cs" />
+    <Compile Include="Utils\Win32Api.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="DataModel\" />
+    <Folder Include="Utils\" />
+    <Folder Include="Classes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Components\BlinkStickDotNet\Components\LibWinUsb\LibUsbDotNet.csproj">
+      <Project>{0A78F6FF-5586-4052-8104-E23FF83A7CE1}</Project>
+      <Name>LibUsbDotNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Components\BlinkStickDotNet\Components\HidSharp\HidSharp.csproj">
+      <Project>{0DB86674-2A7B-4BDC-93C1-3F7DC771426C}</Project>
+      <Name>HidSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Components\BlinkStickDotNet\BlinkStickDotNet\BlinkStickDotNet.csproj">
+      <Project>{7AAEBEBE-E38D-47B1-A04C-A055DCEB0757}</Project>
+      <Name>BlinkStickDotNet</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlinkStick.Bayeux\BlinkStick.Bayeux.csproj">
+      <Project>{2E6D4FBF-99F5-4424-9555-BD211545A5FA}</Project>
+      <Name>BlinkStick.Bayeux</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>

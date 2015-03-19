@@ -73,11 +73,6 @@ namespace BlinkStickClient.DataModel
             return HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Windows;
         }
 
-        public override Gtk.Widget GetEditorWidget()
-        {
-            return new DiskSpaceEditorWidget();
-        }
-
         public string[] GetDrives()
         {
             List<string> drives = new List<string>();

@@ -14,6 +14,12 @@ namespace BlinkStickClient.DataModel
         [JsonIgnore]
         public String LastDisplay;
 
+        [JsonIgnore]
+        public DateTime? Started;
+
+        [JsonIgnore]
+        public int AnimationIndex;
+
         public TriggeredEvent()
         {
         }

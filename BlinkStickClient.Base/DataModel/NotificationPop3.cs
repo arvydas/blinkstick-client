@@ -24,14 +24,6 @@ namespace BlinkStickClient.DataModel
             return base.Copy(notification);
         }
 
-        public override Gtk.Widget GetEditorWidget()
-        {
-            EmailEditorWidget widget = new EmailEditorWidget();
-            widget.DefaultPort = 110;
-            widget.DefaultSslPort = 995;
-            return widget;
-        }
-
         public override bool IsSupported()
         {
             return true;

@@ -59,11 +59,6 @@ namespace BlinkStickClient.DataModel
             return true;
         }
 
-        public override Gtk.Widget GetEditorWidget()
-        {
-            return new BlinkStickDotComEditorWidget();
-        }
-
         public override bool RequiresMonitoring()
         {
             return true;

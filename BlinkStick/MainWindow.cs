@@ -275,69 +275,69 @@ public partial class MainWindow: Gtk.Window
 
         NotificationRegistry.Register("Test", 
             "Simple test notification", 
-            typeof(NotificationTest));
+            typeof(NotificationTest), typeof(TestEditorWidget));
 
         NotificationRegistry.Register("Background", 
             "Creates an ambilight effect", 
-            typeof(NotificationAmbilight));
+            typeof(NotificationAmbilight), null);
 
         NotificationRegistry.Register("Background", 
             "Runs a Boblight service prefonfigured for BlinkStick " +
             "which allows applications supporting Boblight protocol " +
             "to control the device and create ambilight effects", 
-            typeof(NotificationBoblight));
+            typeof(NotificationBoblight), null);
 
         NotificationRegistry.Register("Email", 
             "Checks your GMail account and notifies when new mail arrives", 
-            typeof(NotificationGmail));
+            typeof(NotificationGmail), typeof(GmailEditorWidget));
 
         NotificationRegistry.Register("Email", 
             "Checks your IMAP email account and notifies when new mail arrives", 
-            typeof(NotificationImap));
+            typeof(NotificationImap), typeof(EmailEditorWidget));
 
         NotificationRegistry.Register("Email", 
             "Checks your POP3 email account and notifies when new mail arrives", 
-            typeof(NotificationPop3));
+            typeof(NotificationPop3), typeof(EmailEditorWidget));
 
         NotificationRegistry.Register("Background", 
             "Randomly changes BlinkStick color to create color mood", 
-            typeof(NotificationMood));
+            typeof(NotificationMood), typeof(MoodlightEditorWidget));
 
         NotificationRegistry.Register("Background", 
             "Sets color for currently activated application", 
-            typeof(NotificationApplication));
+            typeof(NotificationApplication), typeof(ApplicationEditorWidget));
 
         NotificationRegistry.Register("Hardware", 
             "Displays a notification when CPU usage is above limit", 
-            typeof(NotificationCpu));
+            typeof(NotificationCpu), typeof(CpuEditorWidget));
 
         NotificationRegistry.Register("Hardware", 
             "Displays a notification when RAM usage is above limit", 
-            typeof(NotificationRam));
+            typeof(NotificationRam), typeof(CpuEditorWidget));
 
         NotificationRegistry.Register("Hardware", 
             "Displays a notification when battery charge drops below certain limit", 
-            typeof(NotificationBattery));
+            typeof(NotificationBattery), typeof(CpuEditorWidget));
 
         NotificationRegistry.Register("Hardware", 
             "Displays a notification when available disk space drops below certain limit", 
-            typeof(NotificationDiskSpace));
+            typeof(NotificationDiskSpace), typeof(DiskSpaceEditorWidget));
 
         NotificationRegistry.Register("Services", 
             "Creates a remote control server accessible via HTTP.", 
-            typeof(NotificationRemoteControl));
+            typeof(NotificationRemoteControl), typeof(RemoteControlEditorWidget));
 
         NotificationRegistry.Register("Services", 
             "Creates an MQTT server which allows remote control of connected BlinkStick devices via MQTT protocol.", 
-            typeof(NotificationMqtt));
+            typeof(NotificationMqtt), null);
 
         NotificationRegistry.Register("Services", 
             "Connects to www.blinkstick.com and allows remote control of a BlinkStick device", 
-            typeof(NotificationBlinkStickDotCom));
+            typeof(NotificationBlinkStickDotCom), typeof(BlinkStickDotComEditorWidget));
 
         NotificationRegistry.Register("Services", 
             "Connects to IFTTT and allows remote control of a BlinkStick device", 
-            typeof(NotificationIfttt));
+            typeof(NotificationIfttt), null);
 
         overviewWidget.DataModel = this.DataModel;
         notificationsWidget.DataModel = this.DataModel;

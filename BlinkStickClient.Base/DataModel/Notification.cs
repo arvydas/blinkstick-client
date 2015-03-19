@@ -59,15 +59,6 @@ namespace BlinkStickClient.DataModel
 
         public abstract String GetTypeName();
 
-        /// <summary>
-        /// Gets the editor widget for the notification type.
-        /// </summary>
-        /// <returns>The editor widget object.</returns>
-        public virtual Widget GetEditorWidget()
-        {
-            return null;
-        }
-
         public Notification()
         {
             this.Enabled = true;

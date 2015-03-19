@@ -55,11 +55,6 @@ namespace BlinkStickClient.DataModel
             return true;
         }
 
-        public override Gtk.Widget GetEditorWidget()
-        {
-            return new MoodlightEditorWidget();
-        }
-
         public override void Start()
         {
             if (Running)

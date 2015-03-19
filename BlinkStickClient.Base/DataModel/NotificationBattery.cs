@@ -32,11 +32,6 @@ namespace BlinkStickClient.DataModel
             return HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Windows;
         }
 
-        public override Gtk.Widget GetEditorWidget()
-        {
-            return new CpuEditorWidget();
-        }
-
         #region implemented abstract members of HardwareNotification
 
         public override int GetValue()

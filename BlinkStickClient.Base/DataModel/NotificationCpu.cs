@@ -32,11 +32,6 @@ namespace BlinkStickClient.DataModel
             return HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Windows;
         }
 
-        public override Gtk.Widget GetEditorWidget()
-        {
-            return new CpuEditorWidget();
-        }
-
         protected override void InitializePerformanceCounter (object sender, DoWorkEventArgs e)
         {
             log.Debug("Initializing CPU performance counter in background");

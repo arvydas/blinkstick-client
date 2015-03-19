@@ -27,11 +27,6 @@ namespace BlinkStickClient.DataModel
             return base.Copy(notification);
         }
 
-        public override Gtk.Widget GetEditorWidget()
-        {
-            return new EmailEditorWidget();
-        }
-
         public override bool IsSupported()
         {
             return true;

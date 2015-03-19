@@ -107,11 +107,6 @@ namespace BlinkStickClient.DataModel
             return Frequency != TestFrequencyEnum.Disabled;
         }
 
-        public override Gtk.Widget GetEditorWidget()
-        {
-            return new TestEditorWidget();
-        }
-
         public void Trigger()
         {
             OnTriggered("Triggered with button");

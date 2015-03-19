@@ -51,11 +51,6 @@ namespace BlinkStickClient.DataModel
             return HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Windows;
         }
 
-        public override Gtk.Widget GetEditorWidget()
-        {
-            return new ApplicationEditorWidget();
-        }
-
         public override bool RequiresMonitoring()
         {
             return true;

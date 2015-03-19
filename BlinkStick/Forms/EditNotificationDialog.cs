@@ -159,10 +159,14 @@ namespace BlinkStickClient
 
             HSeparator hseparator;
 
-            Widget editorWidget = Notification.GetEditorWidget();
+            Type editorType = NotificationRegistry.FindEditorType(Notification.GetType());
 
-            if (editorWidget != null)
+            object editorWidgetObject = Activator.CreateInstance(editorType);
+
+            if (editorWidgetObject != null && editorWidgetObject is Widget)
             {
+                Widget editorWidget = (Widget)editorWidgetObject;
+
                 hseparator = new HSeparator();
                 vbox3.PackEnd(hseparator);
                 hseparator.ShowAll();
