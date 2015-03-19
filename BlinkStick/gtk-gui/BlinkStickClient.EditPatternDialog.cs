@@ -4,11 +4,23 @@ namespace BlinkStickClient
 {
 	public partial class EditPatternDialog
 	{
-		private global::Gtk.VBox vbox2;
+		private global::Gtk.Table table1;
+		
+		private global::Gtk.Alignment alignment1;
+		
+		private global::Gtk.SpinButton spinbuttonStart;
+		
+		private global::Gtk.Alignment alignment2;
+		
+		private global::Gtk.SpinButton spinbuttonEnd;
+		
+		private global::Gtk.Entry entryName;
+		
+		private global::Gtk.Label labelEndIndex;
 		
 		private global::Gtk.Label labelName;
 		
-		private global::Gtk.Entry entryName;
+		private global::Gtk.Label labelStartIndex;
 		
 		private global::Gtk.Button buttonCancel;
 		
@@ -27,41 +39,105 @@ namespace BlinkStickClient
 			w1.Name = "dialog1_VBox";
 			w1.BorderWidth = ((uint)(2));
 			// Container child dialog1_VBox.Gtk.Box+BoxChild
-			this.vbox2 = new global::Gtk.VBox ();
-			this.vbox2.Name = "vbox2";
-			this.vbox2.Spacing = 6;
-			// Container child vbox2.Gtk.Box+BoxChild
-			this.labelName = new global::Gtk.Label ();
-			this.labelName.Name = "labelName";
-			this.labelName.Xalign = 0F;
-			this.labelName.LabelProp = global::Mono.Unix.Catalog.GetString ("Name:");
-			this.vbox2.Add (this.labelName);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.labelName]));
-			w2.Position = 0;
-			w2.Expand = false;
-			w2.Fill = false;
-			// Container child vbox2.Gtk.Box+BoxChild
+			this.table1 = new global::Gtk.Table (((uint)(3)), ((uint)(2)), false);
+			this.table1.Name = "table1";
+			this.table1.RowSpacing = ((uint)(6));
+			this.table1.ColumnSpacing = ((uint)(6));
+			this.table1.BorderWidth = ((uint)(12));
+			// Container child table1.Gtk.Table+TableChild
+			this.alignment1 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
+			this.alignment1.Name = "alignment1";
+			this.alignment1.RightPadding = ((uint)(100));
+			// Container child alignment1.Gtk.Container+ContainerChild
+			this.spinbuttonStart = new global::Gtk.SpinButton (0D, 63D, 1D);
+			this.spinbuttonStart.CanFocus = true;
+			this.spinbuttonStart.Name = "spinbuttonStart";
+			this.spinbuttonStart.Adjustment.PageIncrement = 10D;
+			this.spinbuttonStart.ClimbRate = 1D;
+			this.spinbuttonStart.Numeric = true;
+			this.alignment1.Add (this.spinbuttonStart);
+			this.table1.Add (this.alignment1);
+			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table1 [this.alignment1]));
+			w3.TopAttach = ((uint)(1));
+			w3.BottomAttach = ((uint)(2));
+			w3.LeftAttach = ((uint)(1));
+			w3.RightAttach = ((uint)(2));
+			w3.XOptions = ((global::Gtk.AttachOptions)(4));
+			w3.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
+			this.alignment2 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
+			this.alignment2.Name = "alignment2";
+			this.alignment2.RightPadding = ((uint)(100));
+			// Container child alignment2.Gtk.Container+ContainerChild
+			this.spinbuttonEnd = new global::Gtk.SpinButton (0D, 63D, 1D);
+			this.spinbuttonEnd.CanFocus = true;
+			this.spinbuttonEnd.Name = "spinbuttonEnd";
+			this.spinbuttonEnd.Adjustment.PageIncrement = 10D;
+			this.spinbuttonEnd.ClimbRate = 1D;
+			this.spinbuttonEnd.Numeric = true;
+			this.alignment2.Add (this.spinbuttonEnd);
+			this.table1.Add (this.alignment2);
+			global::Gtk.Table.TableChild w5 = ((global::Gtk.Table.TableChild)(this.table1 [this.alignment2]));
+			w5.TopAttach = ((uint)(2));
+			w5.BottomAttach = ((uint)(3));
+			w5.LeftAttach = ((uint)(1));
+			w5.RightAttach = ((uint)(2));
+			w5.XOptions = ((global::Gtk.AttachOptions)(4));
+			w5.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
 			this.entryName = new global::Gtk.Entry ();
 			this.entryName.CanFocus = true;
 			this.entryName.Name = "entryName";
 			this.entryName.IsEditable = true;
 			this.entryName.InvisibleChar = '●';
-			this.vbox2.Add (this.entryName);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.entryName]));
-			w3.Position = 1;
-			w3.Expand = false;
-			w3.Fill = false;
-			w1.Add (this.vbox2);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
-			w4.Position = 0;
-			w4.Expand = false;
-			w4.Fill = false;
+			this.table1.Add (this.entryName);
+			global::Gtk.Table.TableChild w6 = ((global::Gtk.Table.TableChild)(this.table1 [this.entryName]));
+			w6.LeftAttach = ((uint)(1));
+			w6.RightAttach = ((uint)(2));
+			w6.XOptions = ((global::Gtk.AttachOptions)(4));
+			w6.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
+			this.labelEndIndex = new global::Gtk.Label ();
+			this.labelEndIndex.Name = "labelEndIndex";
+			this.labelEndIndex.Xalign = 0F;
+			this.labelEndIndex.LabelProp = global::Mono.Unix.Catalog.GetString ("Last LED:");
+			this.table1.Add (this.labelEndIndex);
+			global::Gtk.Table.TableChild w7 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelEndIndex]));
+			w7.TopAttach = ((uint)(2));
+			w7.BottomAttach = ((uint)(3));
+			w7.XOptions = ((global::Gtk.AttachOptions)(4));
+			w7.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
+			this.labelName = new global::Gtk.Label ();
+			this.labelName.Name = "labelName";
+			this.labelName.Xalign = 0F;
+			this.labelName.LabelProp = global::Mono.Unix.Catalog.GetString ("Name:");
+			this.table1.Add (this.labelName);
+			global::Gtk.Table.TableChild w8 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelName]));
+			w8.XOptions = ((global::Gtk.AttachOptions)(4));
+			w8.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
+			this.labelStartIndex = new global::Gtk.Label ();
+			this.labelStartIndex.Name = "labelStartIndex";
+			this.labelStartIndex.Xalign = 0F;
+			this.labelStartIndex.LabelProp = global::Mono.Unix.Catalog.GetString ("First LED:");
+			this.table1.Add (this.labelStartIndex);
+			global::Gtk.Table.TableChild w9 = ((global::Gtk.Table.TableChild)(this.table1 [this.labelStartIndex]));
+			w9.TopAttach = ((uint)(1));
+			w9.BottomAttach = ((uint)(2));
+			w9.XOptions = ((global::Gtk.AttachOptions)(4));
+			w9.YOptions = ((global::Gtk.AttachOptions)(4));
+			w1.Add (this.table1);
+			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(w1 [this.table1]));
+			w10.Position = 0;
+			w10.Expand = false;
+			w10.Fill = false;
 			// Internal child BlinkStickClient.EditPatternDialog.ActionArea
-			global::Gtk.HButtonBox w5 = this.ActionArea;
-			w5.Name = "dialog1_ActionArea";
-			w5.Spacing = 10;
-			w5.BorderWidth = ((uint)(5));
-			w5.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w11 = this.ActionArea;
+			w11.Name = "dialog1_ActionArea";
+			w11.Spacing = 10;
+			w11.BorderWidth = ((uint)(5));
+			w11.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonCancel = new global::Gtk.Button ();
 			this.buttonCancel.CanDefault = true;
@@ -71,9 +147,9 @@ namespace BlinkStickClient
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-cancel";
 			this.AddActionWidget (this.buttonCancel, -6);
-			global::Gtk.ButtonBox.ButtonBoxChild w6 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w5 [this.buttonCancel]));
-			w6.Expand = false;
-			w6.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w12 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w11 [this.buttonCancel]));
+			w12.Expand = false;
+			w12.Fill = false;
 			// Container child dialog1_ActionArea.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonOk = new global::Gtk.Button ();
 			this.buttonOk.CanDefault = true;
@@ -82,16 +158,16 @@ namespace BlinkStickClient
 			this.buttonOk.UseStock = true;
 			this.buttonOk.UseUnderline = true;
 			this.buttonOk.Label = "gtk-ok";
-			w5.Add (this.buttonOk);
-			global::Gtk.ButtonBox.ButtonBoxChild w7 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w5 [this.buttonOk]));
-			w7.Position = 1;
-			w7.Expand = false;
-			w7.Fill = false;
+			w11.Add (this.buttonOk);
+			global::Gtk.ButtonBox.ButtonBoxChild w13 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w11 [this.buttonOk]));
+			w13.Position = 1;
+			w13.Expand = false;
+			w13.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
-			this.DefaultWidth = 400;
-			this.DefaultHeight = 143;
+			this.DefaultWidth = 254;
+			this.DefaultHeight = 190;
 			this.Show ();
 			this.buttonOk.Clicked += new global::System.EventHandler (this.OnButtonOkClicked);
 		}

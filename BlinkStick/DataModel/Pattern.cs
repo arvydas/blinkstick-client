@@ -11,6 +11,9 @@ namespace BlinkStickClient.DataModel
             set;
         }
 
+        public int LedFirstIndex { get; set; }
+        public int LedLastIndex { get; set; }
+
         public List<Animation> Animations = new List<Animation>();
 
         public Pattern()
@@ -21,6 +24,8 @@ namespace BlinkStickClient.DataModel
         public Pattern(String name)
         {
             this.Name = name;
+            this.LedFirstIndex = 0;
+            this.LedLastIndex = 0;
         }
 
         public override String ToString()
@@ -30,6 +35,9 @@ namespace BlinkStickClient.DataModel
 
         public void Assign(Pattern pattern)
         {
+            this.LedFirstIndex = pattern.LedFirstIndex;
+            this.LedLastIndex = pattern.LedLastIndex;
+
             foreach (Animation animation in pattern.Animations)
             {
                 Animation newAnimation = new Animation();
