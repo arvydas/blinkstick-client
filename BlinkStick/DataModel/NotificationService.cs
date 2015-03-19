@@ -189,12 +189,33 @@ namespace BlinkStickClient.DataModel
                 return;
             }
 
+            Boolean found = false;
+
             lock (settings.EventQueue)
             {
-                settings.EventQueue.Enqueue(ev);
+                foreach (TriggeredEvent pendingEvent in settings.EventQueue.ToArray())
+                {
+                    if (pendingEvent.Notification == notification)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found)
+                {
+                    log.InfoFormat("Notification {0} already pending to play. Skipping.", notification.Name);
+                }
+                else
+                {
+                    settings.EventQueue.Enqueue(ev);
+                }
             }
 
-            settings.PlayNextEvent();
+            if (!found)
+            {
+                settings.PlayNextEvent();
+            }
         }
     }
 }
