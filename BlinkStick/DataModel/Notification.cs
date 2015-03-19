@@ -25,7 +25,7 @@ namespace BlinkStickClient.DataModel
         #region Events
         public event EventHandler<TriggeredEventArgs> Triggered;
 
-        protected void OnTriggered(String message)
+        protected void OnTriggered(String message = "")
         {
             if (Triggered != null)
             {

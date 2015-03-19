@@ -164,7 +164,10 @@ namespace BlinkStickClient.DataModel
 
             TriggeredEvent ev = new TriggeredEvent(notification, e.Message);
 
-            DataModel.TriggeredEvents.Add(ev);
+            if (e.Message != "")
+            {
+                DataModel.TriggeredEvents.Add(ev);
+            }
 
             if (notification.Pattern == null)
             {
