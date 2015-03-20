@@ -1851,34 +1851,8 @@ Pulse</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="BlinkStickClient.NotificationsWidget" design-size="987 668">
-    <action-group name="Default">
-      <action id="newAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes">New</property>
-        <property name="ShortLabel" translatable="yes">New</property>
-        <property name="StockId">gtk-new</property>
-        <signal name="Activated" handler="OnNewActionActivated" />
-      </action>
-      <action id="copyAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes" />
-        <property name="StockId">gtk-copy</property>
-        <signal name="Activated" handler="OnCopyActionActivated" />
-      </action>
-      <action id="deleteAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes" />
-        <property name="StockId">gtk-delete</property>
-        <signal name="Activated" handler="OnDeleteActionActivated" />
-      </action>
-      <action id="editAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes" />
-        <property name="StockId">gtk-edit</property>
-        <signal name="Activated" handler="OnEditActionActivated" />
-      </action>
-    </action-group>
+  <widget class="Gtk.Bin" id="BlinkStickClient.NotificationsWidget" design-size="583 434">
+    <action-group name="Default" />
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -1886,17 +1860,44 @@ Pulse</property>
         <property name="MemberName" />
         <property name="Spacing">6</property>
         <child>
-          <widget class="Gtk.Toolbar" id="toolbar1">
+          <widget class="Gtk.HBox" id="hbox1">
             <property name="MemberName" />
-            <property name="ShowArrow">False</property>
-            <property name="ButtonStyle">Both</property>
-            <property name="IconSize">Menu</property>
-            <node name="toolbar1" type="Toolbar">
-              <node type="Toolitem" action="newAction" />
-              <node type="Toolitem" action="copyAction" />
-              <node type="Toolitem" action="editAction" />
-              <node type="Toolitem" action="deleteAction" />
-            </node>
+            <property name="Spacing">6</property>
+            <child>
+              <widget class="Gtk.Label" id="label1">
+                <property name="MemberName" />
+                <property name="Xpad">10</property>
+                <property name="Xalign">0</property>
+                <property name="UseMarkup">True</property>
+              </widget>
+              <packing>
+                <property name="Position">0</property>
+                <property name="AutoSize">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.Alignment" id="alignment1">
+                <property name="MemberName" />
+                <property name="RightPadding">5</property>
+                <child>
+                  <widget class="Gtk.Button" id="buttonAddNotification">
+                    <property name="MemberName" />
+                    <property name="CanFocus">True</property>
+                    <property name="Type">TextAndIcon</property>
+                    <property name="Icon">stock:gtk-add SmallToolbar</property>
+                    <property name="Label" translatable="yes" />
+                    <property name="UseUnderline">True</property>
+                    <signal name="Clicked" handler="OnButtonAddNotificationClicked" />
+                  </widget>
+                </child>
+              </widget>
+              <packing>
+                <property name="Position">1</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
           </widget>
           <packing>
             <property name="Position">0</property>

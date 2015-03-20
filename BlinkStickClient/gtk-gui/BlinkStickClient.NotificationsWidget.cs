@@ -6,17 +6,15 @@ namespace BlinkStickClient
 	{
 		private global::Gtk.UIManager UIManager;
 		
-		private global::Gtk.Action newAction;
-		
-		private global::Gtk.Action copyAction;
-		
-		private global::Gtk.Action deleteAction;
-		
-		private global::Gtk.Action editAction;
-		
 		private global::Gtk.VBox vbox5;
 		
-		private global::Gtk.Toolbar toolbar1;
+		private global::Gtk.HBox hbox1;
+		
+		private global::Gtk.Label label1;
+		
+		private global::Gtk.Alignment alignment1;
+		
+		private global::Gtk.Button buttonAddNotification;
 		
 		private global::Gtk.ScrolledWindow GtkScrolledWindow;
 		
@@ -29,15 +27,6 @@ namespace BlinkStickClient
 			Stetic.BinContainer w1 = global::Stetic.BinContainer.Attach (this);
 			this.UIManager = new global::Gtk.UIManager ();
 			global::Gtk.ActionGroup w2 = new global::Gtk.ActionGroup ("Default");
-			this.newAction = new global::Gtk.Action ("newAction", global::Mono.Unix.Catalog.GetString ("New"), null, "gtk-new");
-			this.newAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("New");
-			w2.Add (this.newAction, null);
-			this.copyAction = new global::Gtk.Action ("copyAction", null, null, "gtk-copy");
-			w2.Add (this.copyAction, null);
-			this.deleteAction = new global::Gtk.Action ("deleteAction", null, null, "gtk-delete");
-			w2.Add (this.deleteAction, null);
-			this.editAction = new global::Gtk.Action ("editAction", null, null, "gtk-edit");
-			w2.Add (this.editAction, null);
 			this.UIManager.InsertActionGroup (w2, 0);
 			this.Name = "BlinkStickClient.NotificationsWidget";
 			// Container child BlinkStickClient.NotificationsWidget.Gtk.Container+ContainerChild
@@ -45,20 +34,41 @@ namespace BlinkStickClient
 			this.vbox5.Name = "vbox5";
 			this.vbox5.Spacing = 6;
 			// Container child vbox5.Gtk.Box+BoxChild
-			this.UIManager.AddUiFromString ("<ui><toolbar name=\'toolbar1\'><toolitem name=\'newAction\' action=\'newAction\'/><tool" +
-			"item name=\'copyAction\' action=\'copyAction\'/><toolitem name=\'editAction\' action=\'" +
-			"editAction\'/><toolitem name=\'deleteAction\' action=\'deleteAction\'/></toolbar></ui" +
-			">");
-			this.toolbar1 = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/toolbar1")));
-			this.toolbar1.Name = "toolbar1";
-			this.toolbar1.ShowArrow = false;
-			this.toolbar1.ToolbarStyle = ((global::Gtk.ToolbarStyle)(2));
-			this.toolbar1.IconSize = ((global::Gtk.IconSize)(1));
-			this.vbox5.Add (this.toolbar1);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.toolbar1]));
+			this.hbox1 = new global::Gtk.HBox ();
+			this.hbox1.Name = "hbox1";
+			this.hbox1.Spacing = 6;
+			// Container child hbox1.Gtk.Box+BoxChild
+			this.label1 = new global::Gtk.Label ();
+			this.label1.Name = "label1";
+			this.label1.Xpad = 10;
+			this.label1.Xalign = 0F;
+			this.label1.UseMarkup = true;
+			this.hbox1.Add (this.label1);
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.label1]));
 			w3.Position = 0;
-			w3.Expand = false;
-			w3.Fill = false;
+			// Container child hbox1.Gtk.Box+BoxChild
+			this.alignment1 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
+			this.alignment1.Name = "alignment1";
+			this.alignment1.RightPadding = ((uint)(5));
+			// Container child alignment1.Gtk.Container+ContainerChild
+			this.buttonAddNotification = new global::Gtk.Button ();
+			this.buttonAddNotification.CanFocus = true;
+			this.buttonAddNotification.Name = "buttonAddNotification";
+			this.buttonAddNotification.UseUnderline = true;
+			global::Gtk.Image w4 = new global::Gtk.Image ();
+			w4.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.SmallToolbar);
+			this.buttonAddNotification.Image = w4;
+			this.alignment1.Add (this.buttonAddNotification);
+			this.hbox1.Add (this.alignment1);
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.alignment1]));
+			w6.Position = 1;
+			w6.Expand = false;
+			w6.Fill = false;
+			this.vbox5.Add (this.hbox1);
+			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.hbox1]));
+			w7.Position = 0;
+			w7.Expand = false;
+			w7.Fill = false;
 			// Container child vbox5.Gtk.Box+BoxChild
 			this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
 			this.GtkScrolledWindow.Name = "GtkScrolledWindow";
@@ -69,18 +79,15 @@ namespace BlinkStickClient
 			this.treeviewEvents.Name = "treeviewEvents";
 			this.GtkScrolledWindow.Add (this.treeviewEvents);
 			this.vbox5.Add (this.GtkScrolledWindow);
-			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.GtkScrolledWindow]));
-			w5.Position = 1;
+			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.GtkScrolledWindow]));
+			w9.Position = 1;
 			this.Add (this.vbox5);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
 			w1.SetUiManager (UIManager);
 			this.Hide ();
-			this.newAction.Activated += new global::System.EventHandler (this.OnNewActionActivated);
-			this.copyAction.Activated += new global::System.EventHandler (this.OnCopyActionActivated);
-			this.deleteAction.Activated += new global::System.EventHandler (this.OnDeleteActionActivated);
-			this.editAction.Activated += new global::System.EventHandler (this.OnEditActionActivated);
+			this.buttonAddNotification.Clicked += new global::System.EventHandler (this.OnButtonAddNotificationClicked);
 			this.treeviewEvents.RowActivated += new global::Gtk.RowActivatedHandler (this.OnTreeviewEventsRowActivated);
 			this.treeviewEvents.CursorChanged += new global::System.EventHandler (this.OnTreeviewEventsCursorChanged);
 		}

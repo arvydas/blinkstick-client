@@ -12,7 +12,7 @@ namespace BlinkStickClient
 
         protected static readonly ILog log = LogManager.GetLogger("Main");  
 
-        Gtk.ListStore NotificationListStore = new ListStore(typeof(Notification));
+        Gtk.ListStore NotificationListStore = new ListStore(typeof(Notification), typeof(String), typeof(String), typeof(String));
 
         private Notification _SelectedNotification = null;
 
@@ -24,7 +24,6 @@ namespace BlinkStickClient
                 if (_SelectedNotification != value)
                 {
                     _SelectedNotification = value;
-                    UpdateButtons();
                 }
             }
         }
@@ -60,7 +59,7 @@ namespace BlinkStickClient
 
             enabledColumn.PackEnd (enabledCell, false);
             blinkStickColumn.PackEnd (blinkStickCell, false);
-            nameColumn.PackEnd (nameCell, false);
+            nameColumn.PackEnd (nameCell, true);
             typeColumn.PackEnd (typeCell, false);
             patternColumn.PackEnd (patternCell, false);
 
@@ -76,6 +75,12 @@ namespace BlinkStickClient
             treeviewEvents.AppendColumn (blinkStickColumn);
             treeviewEvents.AppendColumn (nameColumn);
 
+            treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 1);
+            treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 2);
+            treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 3);
+
+            treeviewEvents.Columns[4].Expand = true;
+
             treeviewEvents.Model = NotificationListStore;
         }
 
@@ -83,17 +88,8 @@ namespace BlinkStickClient
         {
             log.Debug("Adding notifications to the tree");
             foreach (Notification e in DataModel.Notifications) {
-                NotificationListStore.AppendValues (e);
+                NotificationListStore.AppendValues (e, "gtk-edit", "gtk-copy", "gtk-delete");
             } 
-
-            UpdateButtons();
-        }
-
-        private void UpdateButtons()
-        {
-            editAction.Sensitive = SelectedNotification != null;
-            deleteAction.Sensitive = SelectedNotification != null;
-            copyAction.Sensitive = SelectedNotification != null;
         }
 
         public void NotificationUpdated(Notification notification)
@@ -113,7 +109,7 @@ namespace BlinkStickClient
 
         protected void OnTreeviewEventsRowActivated (object o, Gtk.RowActivatedArgs args)
         {
-            OnEditActionActivated(0, EventArgs.Empty);
+            EditNotification();
         }
 
         protected void OnTreeviewEventsCursorChanged (object sender, EventArgs e)
@@ -125,44 +121,40 @@ namespace BlinkStickClient
 
             if(selection.GetSelected(out model, out iter)){
                 SelectedNotification = (Notification)model.GetValue (iter, 0);
-            }
-        }
-        protected void OnNewActionActivated (object sender, EventArgs e)
-        {
-            int response;
 
-            Type notificationType = typeof(Notification);
+                TreePath path;
+                TreeViewColumn column;
+                (sender as TreeView).GetCursor(out path, out column);
 
-            using (SelectNotificationDialog dialog = new SelectNotificationDialog())
-            {
-                response = dialog.Run();
-                if (response == (int)ResponseType.Ok)
+                if (column == (sender as TreeView).Columns[7]) //Delete clicked
                 {
-                    notificationType = dialog.SelectedType.NotificationType;
-                }
-                dialog.Destroy();
-            }
-
-            if (response == (int)ResponseType.Ok)
-            {
-
-                Notification notification = (Notification)Activator.CreateInstance(notificationType);
-
-                if (EditNotification(notification, "New Notification"))
-                {
-                    NotificationListStore.AppendValues(notification);
-                    DataModel.Notifications.Add(notification);
+                    DataModel.Notifications.Remove(SelectedNotification);
+                    NotificationListStore.Remove(ref iter);
                     DataModel.Save();
                 }
+                else if (column == (sender as TreeView).Columns[6]) //Copy clicked
+                {
+                    Notification notification = SelectedNotification.Copy();
+                    notification.Name = "";
+                    if (EditNotification(notification, "Copy Notification"))
+                    {
+                        NotificationListStore.AppendValues(notification, "gtk-edit", "gtk-copy", "gtk-delete");
+                        DataModel.Notifications.Add(notification);
+                    }
+                }
+                else if (column == (sender as TreeView).Columns[5]) //Edit clicked
+                {
+                    EditNotification();
+                }
             }
         }
-        protected void OnCopyActionActivated (object sender, EventArgs e)
+        private void EditNotification()
         {
-            Notification notification = SelectedNotification.Copy();
-            if (EditNotification(notification, "Copy Notification"))
+            if (SelectedNotification != null && EditNotification(SelectedNotification))
             {
-                NotificationListStore.AppendValues(notification);
-                DataModel.Notifications.Add(notification);
+                log.DebugFormat("Notification {0} edit complete", SelectedNotification.ToString());
+                DataModel.Save();
+                DataModel.Notifications.NotifyUpdate(SelectedNotification);
             }
         }
 
@@ -182,28 +174,6 @@ namespace BlinkStickClient
             return response == (int)ResponseType.Ok;
         }
 
-        protected void OnEditActionActivated (object sender, EventArgs e)
-        {
-            if (EditNotification(SelectedNotification))
-            {
-                log.DebugFormat("Notification {0} edit complete", SelectedNotification.ToString());
-                DataModel.Save();
-                DataModel.Notifications.NotifyUpdate(SelectedNotification);
-            }
-        }
-        protected void OnDeleteActionActivated (object sender, EventArgs e)
-        {
-            TreeModel model;
-            TreeIter iter;
-
-            TreeSelection selection = treeviewEvents.Selection;
-
-            if(selection.GetSelected(out model, out iter)){
-                DataModel.Notifications.Remove(SelectedNotification);
-                NotificationListStore.Remove(ref iter);
-                DataModel.Save();
-            }
-        }
         private void RenderEnabledCell (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
         {
             if (model.GetValue (iter, 0) is Notification) {
@@ -246,6 +216,36 @@ namespace BlinkStickClient
             else
             {
                 (cell as Gtk.CellRendererText).Text = "";
+            }
+        }
+
+        protected void OnButtonAddNotificationClicked(object sender, EventArgs e)
+        {
+            int response;
+
+            Type notificationType = typeof(Notification);
+
+            using (SelectNotificationDialog dialog = new SelectNotificationDialog())
+            {
+                response = dialog.Run();
+                if (response == (int)ResponseType.Ok)
+                {
+                    notificationType = dialog.SelectedType.NotificationType;
+                }
+                dialog.Destroy();
+            }
+
+            if (response == (int)ResponseType.Ok)
+            {
+
+                Notification notification = (Notification)Activator.CreateInstance(notificationType);
+
+                if (EditNotification(notification, "New Notification"))
+                {
+                    NotificationListStore.AppendValues(notification, "gtk-edit", "gtk-copy", "gtk-delete");
+                    DataModel.Notifications.Add(notification);
+                    DataModel.Save();
+                }
             }
         }
     }
