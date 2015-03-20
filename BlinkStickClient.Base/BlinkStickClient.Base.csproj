@@ -106,7 +106,7 @@
     </ProjectReference>
     <ProjectReference Include="..\BlinkStickClient.Bayeux\BlinkStickClient.Bayeux.csproj">
       <Project>{2E6D4FBF-99F5-4424-9555-BD211545A5FA}</Project>
-      <Name>BlinkStick.Bayeux</Name>
+      <Name>BlinkStickClient.Bayeux</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
