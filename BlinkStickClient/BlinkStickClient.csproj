@@ -105,7 +105,6 @@
     <Compile Include="Classes\HistoryItem.cs" />
     <Compile Include="Classes\BlinkstickService.cs" />
     <Compile Include="Widgets\BlinkstickServiceSettingsWidget.cs" />
-    <Compile Include="Forms\BlinkStickManageForm.cs" />
     <Compile Include="Classes\DeviceEntity.cs" />
     <Compile Include="Classes\CpuUsageNotification.cs" />
     <Compile Include="Forms\AboutDialog.cs" />
@@ -127,7 +126,6 @@
     <Compile Include="gtk-gui\BlinkStickClient.HistoryItemWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.HistoryWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.BlinkstickServiceSettingsWidget.cs" />
-    <Compile Include="gtk-gui\BlinkStickClient.BlinkStickManageForm.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.AboutDialog.cs" />
     <Compile Include="Forms\PatternDialog.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.PatternDialog.cs" />

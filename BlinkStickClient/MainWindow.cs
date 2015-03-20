@@ -407,11 +407,6 @@ public partial class MainWindow: Gtk.Window
         Gtk.Application.Quit ();
 	}
 
-	protected void OnManageActionActivated (object sender, EventArgs e)
-	{
-		BlinkStickManageForm.ShowForm(Manager);
-	}
-
 	protected void OnHideActionActivated (object sender, EventArgs e)
 	{
 		this.Hide ();
