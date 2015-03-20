@@ -111,6 +111,11 @@ namespace BlinkStickClient.DataModel
 
                 NeedsLedUpdate = true;
             }
+
+            if (!Running)
+            {
+                this.Start();
+            }
         }
 
         public void SetColor(byte r, byte g, byte b)
