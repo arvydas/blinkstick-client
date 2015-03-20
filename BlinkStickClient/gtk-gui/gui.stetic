@@ -8,7 +8,34 @@
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <widget-library name="../bin/Debug/BlinkStickClient.exe" internal="true" />
   </import>
-  <widget class="Gtk.Window" id="MainWindow" design-size="655 607">
+  <icon-factory>
+    <icon-set id="blinkstick-patterns">
+      <source>
+        <property name="Image">resource:BlinkStickClient.Resources.icons.blinkstick-patterns.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="blinkstick-notifications">
+      <source>
+        <property name="Image">resource:BlinkStickClient.Resources.icons.blinkstick-notifications.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="blinkstick-overview">
+      <source>
+        <property name="Image">resource:BlinkStickClient.Resources.icons.blinkstick-overview.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="blinkstick-events">
+      <source>
+        <property name="Image">resource:BlinkStickClient.Resources.icons.blinkstick-events.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="blinkstick-help">
+      <source>
+        <property name="Image">resource:BlinkStickClient.Resources.icons.blinkstick-help.png</property>
+      </source>
+    </icon-set>
+  </icon-factory>
+  <widget class="Gtk.Window" id="MainWindow" design-size="706 584">
     <action-group name="Default">
       <action id="saveAction">
         <property name="Type">Radio</property>
@@ -77,20 +104,23 @@
         <property name="ShortLabel" translatable="yes">Patterns...</property>
         <signal name="Activated" handler="OnPatternsActionActivated" />
       </action>
-      <action id="OverviewToolbarAction">
+      <action id="OverviewAction">
         <property name="Type">Radio</property>
         <property name="Label" translatable="yes">Overview</property>
         <property name="ShortLabel" translatable="yes">Overview</property>
+        <property name="StockId">blinkstick-overview</property>
+        <property name="Tooltip" translatable="yes">Overview</property>
         <property name="DrawAsRadio">False</property>
         <property name="Active">True</property>
         <property name="Value">0</property>
         <property name="Group">selection</property>
         <signal name="Toggled" handler="ToolbarButtonToggled" />
       </action>
-      <action id="NotificationsToolbarAction">
+      <action id="NotificationsAction">
         <property name="Type">Radio</property>
         <property name="Label" translatable="yes">Notifications</property>
         <property name="ShortLabel" translatable="yes">Notifications</property>
+        <property name="StockId">blinkstick-notifications</property>
         <property name="DrawAsRadio">False</property>
         <property name="Active">False</property>
         <property name="Value">1</property>
@@ -107,10 +137,11 @@
         <property name="Group">selection</property>
         <signal name="Toggled" handler="ToolbarButtonToggled" />
       </action>
-      <action id="HelpToolbarAction">
+      <action id="HelpAction1">
         <property name="Type">Radio</property>
         <property name="Label" translatable="yes">Help</property>
         <property name="ShortLabel" translatable="yes">Help</property>
+        <property name="StockId">blinkstick-help</property>
         <property name="DrawAsRadio">False</property>
         <property name="Active">False</property>
         <property name="Value">4</property>
@@ -121,6 +152,7 @@
         <property name="Type">Radio</property>
         <property name="Label" translatable="yes">Patterns</property>
         <property name="ShortLabel" translatable="yes">Patterns</property>
+        <property name="StockId">blinkstick-patterns</property>
         <property name="DrawAsRadio">False</property>
         <property name="Active">False</property>
         <property name="Value">2</property>
@@ -131,6 +163,7 @@
         <property name="Type">Radio</property>
         <property name="Label" translatable="yes">Events</property>
         <property name="ShortLabel" translatable="yes">Events</property>
+        <property name="StockId">blinkstick-events</property>
         <property name="DrawAsRadio">False</property>
         <property name="Active">False</property>
         <property name="Value">3</property>
@@ -186,14 +219,14 @@
                     <property name="MemberName" />
                     <property name="Orientation">Vertical</property>
                     <property name="ShowArrow">False</property>
-                    <property name="ButtonStyle">Both</property>
+                    <property name="ButtonStyle">BothHoriz</property>
                     <property name="IconSize">LargeToolbar</property>
                     <node name="toolbar2" type="Toolbar">
-                      <node type="Toolitem" action="OverviewToolbarAction" />
-                      <node type="Toolitem" action="NotificationsToolbarAction" />
+                      <node type="Toolitem" action="OverviewAction" />
+                      <node type="Toolitem" action="NotificationsAction" />
                       <node type="Toolitem" action="PatternsAction1" />
                       <node type="Toolitem" action="EventsAction" />
-                      <node type="Toolitem" action="HelpToolbarAction" />
+                      <node type="Toolitem" action="HelpAction1" />
                     </node>
                   </widget>
                   <packing>

@@ -10,6 +10,18 @@ namespace Stetic
 		{
 			if ((Stetic.Gui.initialized == false)) {
 				Stetic.Gui.initialized = true;
+				global::Gtk.IconFactory w1 = new global::Gtk.IconFactory ();
+				global::Gtk.IconSet w2 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.blinkstick-patterns.png"));
+				w1.Add ("blinkstick-patterns", w2);
+				global::Gtk.IconSet w3 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.blinkstick-notifications.png"));
+				w1.Add ("blinkstick-notifications", w3);
+				global::Gtk.IconSet w4 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.blinkstick-overview.png"));
+				w1.Add ("blinkstick-overview", w4);
+				global::Gtk.IconSet w5 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.blinkstick-events.png"));
+				w1.Add ("blinkstick-events", w5);
+				global::Gtk.IconSet w6 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.blinkstick-help.png"));
+				w1.Add ("blinkstick-help", w6);
+				w1.AddDefault ();
 			}
 		}
 	}

@@ -78,6 +78,11 @@
     <EmbeddedResource Include="Resources\blinkstick-pro.png" />
     <EmbeddedResource Include="Resources\blinkstick-square.png" />
     <EmbeddedResource Include="Resources\blinkstick-strip.png" />
+    <EmbeddedResource Include="Resources\icons\blinkstick-patterns.png" />
+    <EmbeddedResource Include="Resources\icons\blinkstick-notifications.png" />
+    <EmbeddedResource Include="Resources\icons\blinkstick-overview.png" />
+    <EmbeddedResource Include="Resources\icons\blinkstick-events.png" />
+    <EmbeddedResource Include="Resources\icons\blinkstick-help.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -184,6 +189,9 @@
     <Content Include="icon.png">
       <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="darktable.png">
+      <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
     </Content>
   </ItemGroup>
   <ItemGroup>
