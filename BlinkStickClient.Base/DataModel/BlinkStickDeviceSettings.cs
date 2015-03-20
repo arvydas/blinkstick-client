@@ -23,7 +23,7 @@ namespace BlinkStickClient.DataModel
 
         public int BrightnessLimit { get; set; }
 
-        private BackgroundWorker patternPlayer;
+        private BackgroundWorker patternAnimator;
 
         [JsonIgnore]
         public Queue<TriggeredEvent> EventQueue = new Queue<TriggeredEvent>();
@@ -36,6 +36,7 @@ namespace BlinkStickClient.DataModel
 
         private Boolean[] LedBusy = new Boolean[64];
         private byte[] LedFrame = new byte[8 * 3];
+        private Boolean NeedsLedUpdate = false;
 
         [JsonIgnore]
         public BlinkStickDeviceEnum BlinkStickDevice
@@ -89,6 +90,29 @@ namespace BlinkStickClient.DataModel
             }
         }
 
+        public void SetColor(Notification notification, byte r, byte g, byte b)
+        {
+            if (BrightnessLimit < 100 && BrightnessLimit >= 0)
+            {
+                r = (byte)(BrightnessLimit / 100.0 * r);
+                g = (byte)(BrightnessLimit / 100.0 * g);
+                b = (byte)(BrightnessLimit / 100.0 * b);
+            }
+
+            lock (this)
+            {
+                //TODO: Copy first and last indexes to event
+                for (int i = notification.LedFirstIndex; i <= notification.LedLastIndex; i++)
+                {
+                    LedFrame[i * 3] = g;
+                    LedFrame[i * 3 + 1] = r;
+                    LedFrame[i * 3 + 2] = b;
+                }
+
+                NeedsLedUpdate = true;
+            }
+        }
+
         public void SetColor(byte r, byte g, byte b)
         {
             if (BrightnessLimit < 100 && BrightnessLimit >= 0)
@@ -98,26 +122,30 @@ namespace BlinkStickClient.DataModel
                 b = (byte)(BrightnessLimit / 100.0 * b);
             }
 
-            if (Led != null)
+            lock (this)
             {
-                Led.SetColor(r, g, b);
+                NeedsLedUpdate = false;
+
+                LedFrame[0] = g;
+                LedFrame[1] = r;
+                LedFrame[2] = b;
             }
         }
 
-        public void PlayNextEvent()
+        public void Start()
         {
-            if (EventQueue.Count == 0 || Playing)
+            if (Playing)
                 return;
 
             Playing = true;
 
-            patternPlayer = new BackgroundWorker ();
-            patternPlayer.DoWork += new DoWorkEventHandler (patternPlayer_DoWork);
-            patternPlayer.WorkerSupportsCancellation = true;
-            patternPlayer.RunWorkerAsync ();
+            patternAnimator = new BackgroundWorker ();
+            patternAnimator.DoWork += new DoWorkEventHandler (patternAnimator_DoWork);
+            patternAnimator.WorkerSupportsCancellation = true;
+            patternAnimator.RunWorkerAsync ();
         }
 
-        void patternPlayer_DoWork (object sender, DoWorkEventArgs e)
+        void patternAnimator_DoWork (object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = (BackgroundWorker)sender;
 
@@ -174,12 +202,9 @@ namespace BlinkStickClient.DataModel
 
                         PatternNotification notification = evnt.Notification as PatternNotification;
 
-                        //TODO: Copy first and last indexes to event
-                        for (int i = notification.LedFirstIndex; i <= notification.LedLastIndex; i++)
+                        lock (this)
                         {
-                            LedFrame[i * 3] = color.G;
-                            LedFrame[i * 3 + 1] = color.R;
-                            LedFrame[i * 3 + 2] = color.B;
+                            SetColor(notification, color.R, color.G, color.B);
                         }
 
                         if (evnt.Animations[evnt.AnimationIndex].AnimationFinished)
@@ -197,7 +222,15 @@ namespace BlinkStickClient.DataModel
                         }
                     }
 
-                    Led.SetColors(0, LedFrame);
+                    if (Led != null && NeedsLedUpdate)
+                    {
+                        lock (this)
+                        {
+                            NeedsLedUpdate = false;
+                        }
+
+                        Led.SetColors(0, LedFrame);
+                    }
 
                     Thread.Sleep(40);
                 }
@@ -234,43 +267,12 @@ namespace BlinkStickClient.DataModel
             }
         }
 
-        void PlayPattern(BackgroundWorker worker, PatternNotification notification)
-        {
-            log.InfoFormat("({0}) Playing pattern -{1}-", notification.Name, notification.Pattern.Name);
-
-            Led.Enable();
-
-            foreach (Animation animation in notification.Pattern.Animations)
-            {
-                if (worker.CancellationPending)
-                    return;
-
-                switch (animation.AnimationType) {
-                    case AnimationTypeEnum.SetColor:
-                        Led.SetColor(animation.Color);
-                        Led.WaitThread(animation.DelaySetColor);
-                        break;
-                    case AnimationTypeEnum.Blink:
-                        Led.Blink(animation.Color, animation.RepeatBlink, animation.DurationBlink);
-                        break;
-                    case AnimationTypeEnum.Pulse:
-                        Led.Pulse(animation.Color, animation.RepeatPulse, animation.DurationPulse);
-                        break;
-                    case AnimationTypeEnum.Morph:
-                        Led.Morph(animation.Color, animation.DurationMorph);
-                        break;
-                }
-            }
-
-            log.InfoFormat("({0}) Pattern -{1}- playback complete", notification.Name, notification.Pattern.Name);
-        }
-
         public void Stop()
         {
-            if (patternPlayer != null && patternPlayer.IsBusy)
+            if (patternAnimator != null && patternAnimator.IsBusy)
             {
                 Led.Stop();
-                patternPlayer.CancelAsync();
+                patternAnimator.CancelAsync();
             }
         }
     }

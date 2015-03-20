@@ -147,10 +147,7 @@ namespace BlinkStickClient.DataModel
                 return;
             }
 
-            if (!settings.Playing)
-            {
-                settings.Led.SetColor(e.R, e.G, e.B);
-            }
+            settings.SetColor(notification, e.R, e.G, e.B);
         }
 
         private void NotificationTriggered (object sender, TriggeredEventArgs e)
@@ -214,7 +211,7 @@ namespace BlinkStickClient.DataModel
 
             if (!found)
             {
-                settings.PlayNextEvent();
+                settings.Start();
             }
         }
     }
