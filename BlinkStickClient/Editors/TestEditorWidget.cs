@@ -18,6 +18,8 @@ namespace BlinkStickClient
         {
             this.Notification = notification as NotificationTest;
             comboboxFrequency.Active = (int)Notification.Frequency;
+
+            buttonTrigger.Sensitive = this.Notification.DataModel != null;
         }
 
         public bool IsValid(Gtk.Window window)
