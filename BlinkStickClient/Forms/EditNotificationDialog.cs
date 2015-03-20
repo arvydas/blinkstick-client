@@ -174,7 +174,12 @@ namespace BlinkStickClient
 
             Type editorType = NotificationRegistry.FindEditorType(Notification.GetType());
 
-            object editorWidgetObject = Activator.CreateInstance(editorType);
+            object editorWidgetObject = null;
+
+            if (editorType != null)
+            {
+                editorWidgetObject = Activator.CreateInstance(editorType);
+            }
 
             if (editorWidgetObject != null && editorWidgetObject is Widget)
             {
