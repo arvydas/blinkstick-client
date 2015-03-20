@@ -1630,29 +1630,11 @@ Pulse</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
-                <property name="MemberName" />
-                <property name="ShadowType">In</property>
-                <child>
-                  <widget class="Gtk.TreeView" id="treeviewPatterns">
-                    <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="ShowScrollbars">True</property>
-                    <property name="HeadersVisible">False</property>
-                  </widget>
-                </child>
-              </widget>
-              <packing>
-                <property name="Position">1</property>
-                <property name="AutoSize">True</property>
-              </packing>
-            </child>
-            <child>
               <widget class="Gtk.HBox" id="hboxNewPatternButtons">
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
-                  <widget class="Gtk.Alignment" id="alignment1">
+                  <widget class="Gtk.Alignment" id="alignment2">
                     <property name="MemberName" />
                     <child>
                       <placeholder />
@@ -1666,11 +1648,10 @@ Pulse</property>
                 <child>
                   <widget class="Gtk.Button" id="buttonAddPattern">
                     <property name="MemberName" />
-                    <property name="WidthRequest">200</property>
                     <property name="CanFocus">True</property>
                     <property name="Type">TextAndIcon</property>
                     <property name="Icon">stock:gtk-add Menu</property>
-                    <property name="Label" translatable="yes">Add New Pattern</property>
+                    <property name="Label" translatable="yes" />
                     <property name="UseUnderline">True</property>
                     <signal name="Clicked" handler="OnButtonAddPatternClicked" />
                   </widget>
@@ -1681,24 +1662,30 @@ Pulse</property>
                     <property name="Fill">False</property>
                   </packing>
                 </child>
+              </widget>
+              <packing>
+                <property name="Position">1</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
+                <property name="MemberName" />
+                <property name="ShadowType">In</property>
                 <child>
-                  <widget class="Gtk.Alignment" id="alignment2">
+                  <widget class="Gtk.TreeView" id="treeviewPatterns">
                     <property name="MemberName" />
-                    <child>
-                      <placeholder />
-                    </child>
+                    <property name="CanFocus">True</property>
+                    <property name="ShowScrollbars">True</property>
+                    <property name="HeadersVisible">False</property>
                   </widget>
-                  <packing>
-                    <property name="Position">2</property>
-                    <property name="AutoSize">True</property>
-                  </packing>
                 </child>
               </widget>
               <packing>
                 <property name="Position">2</property>
                 <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
               </packing>
             </child>
           </widget>
@@ -1724,18 +1711,17 @@ Pulse</property>
                   <packing>
                     <property name="Position">0</property>
                     <property name="AutoSize">False</property>
-                    <property name="Fill">False</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.Button" id="buttonProperties">
+                  <widget class="Gtk.Button" id="buttonAddAnimation">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-properties Menu</property>
+                    <property name="Icon">stock:gtk-add Menu</property>
                     <property name="Label" translatable="yes" />
                     <property name="UseUnderline">True</property>
-                    <signal name="Clicked" handler="OnButtonPropertiesClicked" />
+                    <signal name="Clicked" handler="OnButtonAddAnimationClicked" />
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -1786,60 +1772,6 @@ Pulse</property>
                 <property name="AutoSize">True</property>
               </packing>
             </child>
-            <child>
-              <widget class="Gtk.HBox" id="hboxNewAnimationButtons">
-                <property name="MemberName" />
-                <property name="Spacing">6</property>
-                <child>
-                  <widget class="Gtk.Alignment" id="alignment3">
-                    <property name="MemberName" />
-                    <child>
-                      <placeholder />
-                    </child>
-                  </widget>
-                  <packing>
-                    <property name="Position">0</property>
-                    <property name="AutoSize">True</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="Gtk.Button" id="buttonAddAnimation">
-                    <property name="MemberName" />
-                    <property name="WidthRequest">200</property>
-                    <property name="CanFocus">True</property>
-                    <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-add Menu</property>
-                    <property name="Label" translatable="yes">Add New Animation</property>
-                    <property name="UseUnderline">True</property>
-                    <signal name="Clicked" handler="OnButtonAddAnimationClicked" />
-                  </widget>
-                  <packing>
-                    <property name="Position">1</property>
-                    <property name="AutoSize">True</property>
-                    <property name="Expand">False</property>
-                    <property name="Fill">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="Gtk.Alignment" id="alignment4">
-                    <property name="MemberName" />
-                    <child>
-                      <placeholder />
-                    </child>
-                  </widget>
-                  <packing>
-                    <property name="Position">2</property>
-                    <property name="AutoSize">True</property>
-                  </packing>
-                </child>
-              </widget>
-              <packing>
-                <property name="Position">2</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
-              </packing>
-            </child>
           </widget>
           <packing>
             <property name="Position">1</property>
@@ -1884,7 +1816,7 @@ Pulse</property>
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-add SmallToolbar</property>
+                    <property name="Icon">stock:gtk-add Menu</property>
                     <property name="Label" translatable="yes" />
                     <property name="UseUnderline">True</property>
                     <signal name="Clicked" handler="OnButtonAddNotificationClicked" />

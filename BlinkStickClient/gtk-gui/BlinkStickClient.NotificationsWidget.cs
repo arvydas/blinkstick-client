@@ -56,7 +56,7 @@ namespace BlinkStickClient
 			this.buttonAddNotification.Name = "buttonAddNotification";
 			this.buttonAddNotification.UseUnderline = true;
 			global::Gtk.Image w4 = new global::Gtk.Image ();
-			w4.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.SmallToolbar);
+			w4.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.Menu);
 			this.buttonAddNotification.Image = w4;
 			this.alignment1.Add (this.buttonAddNotification);
 			this.hbox1.Add (this.alignment1);

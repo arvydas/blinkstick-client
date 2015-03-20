@@ -104,7 +104,6 @@ namespace BlinkStickClient
 
         void UpdateButtons()
         {
-            buttonProperties.Sensitive = SelectedPattern != null;
             buttonAddAnimation.Sensitive = SelectedPattern != null;
         }
 
