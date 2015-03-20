@@ -13,8 +13,6 @@ public partial class MainWindow
 	
 	private global::Gtk.Action BlinkStickAction;
 	
-	private global::Gtk.Action TestAction;
-	
 	private global::Gtk.Action ManageAction;
 	
 	private global::Gtk.Action HelpAction;
@@ -73,9 +71,6 @@ public partial class MainWindow
 		this.BlinkStickAction = new global::Gtk.Action ("BlinkStickAction", global::Mono.Unix.Catalog.GetString ("BlinkStick"), null, null);
 		this.BlinkStickAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Device");
 		w1.Add (this.BlinkStickAction, null);
-		this.TestAction = new global::Gtk.Action ("TestAction", global::Mono.Unix.Catalog.GetString ("Test..."), null, null);
-		this.TestAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Test...");
-		w1.Add (this.TestAction, null);
 		this.ManageAction = new global::Gtk.Action ("ManageAction", global::Mono.Unix.Catalog.GetString ("Manage..."), null, null);
 		this.ManageAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Manage...");
 		w1.Add (this.ManageAction, null);
@@ -105,23 +100,23 @@ public partial class MainWindow
 		this.OverviewToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Overview");
 		w1.Add (this.OverviewToolbarAction, null);
 		this.NotificationsToolbarAction = new global::Gtk.RadioAction ("NotificationsToolbarAction", global::Mono.Unix.Catalog.GetString ("Notifications"), null, null, 1);
-		this.NotificationsToolbarAction.Group = this.OverviewToolbarAction.Group;
+		this.NotificationsToolbarAction.Group = this.saveAction.Group;
 		this.NotificationsToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Notifications");
 		w1.Add (this.NotificationsToolbarAction, null);
 		this.TestToolbarAction = new global::Gtk.RadioAction ("TestToolbarAction", global::Mono.Unix.Catalog.GetString ("Test"), null, null, 4);
-		this.TestToolbarAction.Group = this.OverviewToolbarAction.Group;
+		this.TestToolbarAction.Group = this.saveAction.Group;
 		this.TestToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Test");
 		w1.Add (this.TestToolbarAction, null);
 		this.HelpToolbarAction = new global::Gtk.RadioAction ("HelpToolbarAction", global::Mono.Unix.Catalog.GetString ("Help"), null, null, 4);
-		this.HelpToolbarAction.Group = this.OverviewToolbarAction.Group;
+		this.HelpToolbarAction.Group = this.saveAction.Group;
 		this.HelpToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Help");
 		w1.Add (this.HelpToolbarAction, null);
 		this.PatternsAction1 = new global::Gtk.RadioAction ("PatternsAction1", global::Mono.Unix.Catalog.GetString ("Patterns"), null, null, 2);
-		this.PatternsAction1.Group = this.OverviewToolbarAction.Group;
+		this.PatternsAction1.Group = this.HelpToolbarAction.Group;
 		this.PatternsAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Patterns");
 		w1.Add (this.PatternsAction1, null);
 		this.EventsAction = new global::Gtk.RadioAction ("EventsAction", global::Mono.Unix.Catalog.GetString ("Events"), null, null, 3);
-		this.EventsAction.Group = this.OverviewToolbarAction.Group;
+		this.EventsAction.Group = this.HelpToolbarAction.Group;
 		this.EventsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Events");
 		w1.Add (this.EventsAction, null);
 		this.UIManager.InsertActionGroup (w1, 0);
@@ -134,7 +129,7 @@ public partial class MainWindow
 		this.vbox2.Name = "vbox2";
 		this.vbox2.Spacing = 6;
 		// Container child vbox2.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString (@"<ui><menubar name='menubar2'><menu name='FileAction' action='FileAction'><menuitem name='HideAction' action='HideAction'/><menuitem name='quitAction' action='quitAction'/></menu><menu name='BlinkStickAction' action='BlinkStickAction'><menuitem name='TestAction' action='TestAction'/><menuitem name='ManageAction' action='ManageAction'/><menuitem name='PatternsAction' action='PatternsAction'/></menu><menu name='HelpAction' action='HelpAction'><menuitem name='SupportAction' action='SupportAction'/><menuitem name='ReportABugAction' action='ReportABugAction'/><menuitem name='OpenLogAction' action='OpenLogAction'/><separator/><menuitem name='AboutAction' action='AboutAction'/></menu></menubar></ui>");
+		this.UIManager.AddUiFromString (@"<ui><menubar name='menubar2'><menu name='FileAction' action='FileAction'><menuitem name='HideAction' action='HideAction'/><menuitem name='quitAction' action='quitAction'/></menu><menu name='BlinkStickAction' action='BlinkStickAction'><menuitem name='ManageAction' action='ManageAction'/><menuitem name='PatternsAction' action='PatternsAction'/></menu><menu name='HelpAction' action='HelpAction'><menuitem name='SupportAction' action='SupportAction'/><menuitem name='ReportABugAction' action='ReportABugAction'/><menuitem name='OpenLogAction' action='OpenLogAction'/><separator/><menuitem name='AboutAction' action='AboutAction'/></menu></menubar></ui>");
 		this.menubar2 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar2")));
 		this.menubar2.Name = "menubar2";
 		this.vbox2.Add (this.menubar2);
@@ -187,7 +182,6 @@ public partial class MainWindow
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		this.quitAction.Activated += new global::System.EventHandler (this.OnQuitActionActivated);
-		this.TestAction.Activated += new global::System.EventHandler (this.OnTestActionActivated);
 		this.ManageAction.Activated += new global::System.EventHandler (this.OnManageActionActivated);
 		this.SupportAction.Activated += new global::System.EventHandler (this.OnSupportActionActivated);
 		this.AboutAction.Activated += new global::System.EventHandler (this.OnAboutActionActivated);

@@ -85,7 +85,6 @@ public partial class MainWindow: Gtk.Window
 	private StatusIcon trayIcon;
 #endif
 	UsbMonitor DeviceMonitor;
-	BlinkStickTestForm testForm;
 
 	private Menu popupMenu;
 	private static String _ExecutableFolder = "";
@@ -144,11 +143,6 @@ public partial class MainWindow: Gtk.Window
         DeviceMonitor.UsbDevicesChanged += (object sender, EventArgs e) => {
 			Gtk.Application.Invoke (delegate {
 				//Manager.UpdateControllers();
-
-				if (testForm != null)
-				{
-					testForm.PopulateForm();
-				}
 
                 RefreshDevices();
 			});
@@ -498,16 +492,6 @@ public partial class MainWindow: Gtk.Window
     protected void OnPatternsActionActivated (object sender, EventArgs e)
     {
         PatternDialog.ShowForm(DataModel);
-    }
-
-    protected void OnTestActionActivated (object sender, EventArgs e)
-    {
-        testForm = new BlinkStickTestForm ();
-        testForm.Manager = this.Manager;
-        testForm.PopulateForm();
-        testForm.Run ();
-        testForm.Destroy();
-        testForm = null;
     }
 
     protected void ToolbarButtonToggled (object sender, EventArgs e)
