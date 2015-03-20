@@ -37,6 +37,15 @@ namespace BlinkStickClient.DataModel
         private Boolean[] LedBusy = new Boolean[64];
         private byte[] LedFrame = new byte[8 * 3];
 
+        [JsonIgnore]
+        public BlinkStickDeviceEnum BlinkStickDevice
+        {
+            get
+            {
+                return BlinkStick.BlinkStickDeviceFromSerial(this.Serial);
+            }
+        }
+
         public BlinkStickDeviceSettings()
         {
             this.Touched = true;
