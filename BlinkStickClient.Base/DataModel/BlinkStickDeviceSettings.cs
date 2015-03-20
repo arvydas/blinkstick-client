@@ -166,7 +166,7 @@ namespace BlinkStickClient.DataModel
                         PatternNotification notification = evnt.Notification as PatternNotification;
 
                         //TODO: Copy first and last indexes to event
-                        for (int i = notification.Pattern.LedFirstIndex; i <= notification.Pattern.LedLastIndex; i++)
+                        for (int i = notification.LedFirstIndex; i <= notification.LedLastIndex; i++)
                         {
                             LedFrame[i * 3] = color.G;
                             LedFrame[i * 3 + 1] = color.R;
@@ -206,7 +206,7 @@ namespace BlinkStickClient.DataModel
         Boolean CanPlayEvent(TriggeredEvent ev)
         {
             PatternNotification notification = (PatternNotification)ev.Notification;
-            for (int i = notification.Pattern.LedFirstIndex; i <= notification.Pattern.LedLastIndex; i++)
+            for (int i = notification.LedFirstIndex; i <= notification.LedLastIndex; i++)
             {
                 //If there is at least one LED currently in use, event needs to wait
                 if (LedBusy[i])
@@ -219,7 +219,7 @@ namespace BlinkStickClient.DataModel
         void AssignBusyLeds(TriggeredEvent ev, Boolean busy)
         {
             PatternNotification notification = (PatternNotification)ev.Notification;
-            for (int i = notification.Pattern.LedFirstIndex; i <= notification.Pattern.LedLastIndex; i++)
+            for (int i = notification.LedFirstIndex; i <= notification.LedLastIndex; i++)
             {
                 LedBusy[i] = busy;
             }

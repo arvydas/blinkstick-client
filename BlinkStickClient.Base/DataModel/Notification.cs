@@ -53,15 +53,19 @@ namespace BlinkStickClient.DataModel
 
         public String BlinkStickSerial { get; set; }
 
+        public int LedFirstIndex { get; set; }
+        public int LedLastIndex { get; set; }
+
         [JsonIgnore]
         public ApplicationDataModel DataModel;
-
 
         public abstract String GetTypeName();
 
         public Notification()
         {
             this.Enabled = true;
+            this.LedFirstIndex = 0;
+            this.LedLastIndex = 0;
         }
 
         public virtual void Dispose()
@@ -79,6 +83,8 @@ namespace BlinkStickClient.DataModel
             notification.Enabled = this.Enabled;
             notification.Name = this.Name;
             notification.BlinkStickSerial = this.BlinkStickSerial;
+            notification.LedFirstIndex = this.LedFirstIndex;
+            notification.LedLastIndex = this.LedLastIndex;
 
             return notification;
         }

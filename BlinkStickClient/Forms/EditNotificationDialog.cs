@@ -105,6 +105,12 @@ namespace BlinkStickClient
                 return;
             }
 
+            if (spinbuttonLedsFrom.ValueAsInt > spinbuttonLedsTo.ValueAsInt)
+            {
+                Utils.MessageBox.Show(this, "First LED index can not be greater than last LED index", MessageType.Error);
+                return;
+            }
+
             if (editorInterface != null && !editorInterface.IsValid(this))
             {
                 return;
@@ -120,6 +126,8 @@ namespace BlinkStickClient
             Notification.Enabled = checkbuttonEnabled.Active;
             Notification.Name = entryName.Text;
             Notification.BlinkStickSerial = deviceComboboxWidget.SelectedBlinkStick.Serial;
+            Notification.LedFirstIndex = spinbuttonLedsFrom.ValueAsInt;
+            Notification.LedLastIndex = spinbuttonLedsTo.ValueAsInt;
 
             if (Notification is PatternNotification)
             {
@@ -137,6 +145,8 @@ namespace BlinkStickClient
             checkbuttonEnabled.Active = Notification.Enabled;
             entryName.Text = Notification.Name;
             deviceComboboxWidget.SelectBySerial(Notification.BlinkStickSerial);
+            spinbuttonLedsFrom.Value = Notification.LedFirstIndex;
+            spinbuttonLedsTo.Value = Notification.LedLastIndex;
 
             if (Notification is PatternNotification)
             {
