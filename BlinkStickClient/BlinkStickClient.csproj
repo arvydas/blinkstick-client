@@ -94,8 +94,6 @@
     <Compile Include="Imap\ImapBase.cs" />
     <Compile Include="Imap\ImapException.cs" />
     <Compile Include="Classes\CustomNotification.cs" />
-    <Compile Include="Forms\EditNotificationForm.cs" />
-    <Compile Include="Forms\SelectNotificationTypeForm.cs" />
     <Compile Include="Classes\GoogleEmailNotification.cs" />
     <Compile Include="Classes\ImapEmailNotification.cs" />
     <Compile Include="Classes\NotificationManager.cs" />
@@ -119,9 +117,7 @@
     <Compile Include="MacInterop\Carbon.cs" />
     <Compile Include="MacInterop\AppleEvent.cs" />
     <Compile Include="MacInterop\CoreFoundation.cs" />
-    <Compile Include="gtk-gui\BlinkStickClient.EditNotificationForm.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.GoogleEmailSettingsWidget.cs" />
-    <Compile Include="gtk-gui\BlinkStickClient.SelectNotificationTypeForm.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.ImapEmailSettingsWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.HistoryItemWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.HistoryWidget.cs" />
