@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace BlinkStickClient.DataModel
@@ -19,6 +20,9 @@ namespace BlinkStickClient.DataModel
 
         [JsonIgnore]
         public int AnimationIndex;
+
+        [JsonIgnore]
+        public List<Animation> Animations = new List<Animation>();
 
         public TriggeredEvent()
         {

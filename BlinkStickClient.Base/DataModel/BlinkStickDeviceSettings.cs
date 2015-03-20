@@ -35,6 +35,7 @@ namespace BlinkStickClient.DataModel
         public Boolean Touched { get; set; }
 
         private Boolean[] LedBusy = new Boolean[64];
+        private byte[] LedFrame = new byte[8 * 3];
 
         public BlinkStickDeviceSettings()
         {
@@ -111,42 +112,90 @@ namespace BlinkStickClient.DataModel
         {
             BackgroundWorker worker = (BackgroundWorker)sender;
 
-            log.InfoFormat("[{0}] Starting pattern playback", this.Serial);
-
-            List<TriggeredEvent> eventsPlaying = new List<TriggeredEvent>();
-
-            while (!worker.CancellationPending)
+            try
             {
-                TriggeredEvent ev = null;
+                log.InfoFormat("[{0}] Starting pattern playback", this.Serial);
 
-                lock (EventQueue)
+                List<TriggeredEvent> eventsPlaying = new List<TriggeredEvent>();
+
+                while (!worker.CancellationPending)
                 {
-                    for (int i = 0; i < EventQueue.Count; i++)
-                    {
-                        ev = EventQueue.Dequeue();
+                    TriggeredEvent ev = null;
 
-                        if (CanPlayEvent(ev))
+                    lock (EventQueue)
+                    {
+                        for (int i = 0; i < EventQueue.Count; i++)
                         {
-                            break;
-                        }
-                        else
-                        {
-                            EventQueue.Enqueue(ev);
-                            ev = null;
+                            ev = EventQueue.Dequeue();
+
+                            if (CanPlayEvent(ev))
+                            {
+                                break;
+                            }
+                            else
+                            {
+                                EventQueue.Enqueue(ev);
+                                ev = null;
+                            }
                         }
                     }
+
+                    if (ev != null && ev.Notification is PatternNotification)
+                    {
+                        ev.Started = DateTime.Now;
+
+                        PatternNotification notification = ev.Notification as PatternNotification;
+                        foreach (Animation animation in notification.Pattern.Animations)
+                        {
+                            Animation copyAnimation = new Animation();
+                            copyAnimation.Assign(animation);
+                            ev.Animations.Add(copyAnimation);
+                        }
+
+                        AssignBusyLeds(ev, true);
+                        eventsPlaying.Add(ev);
+                    }
+
+                    //Prepare next frame of data to send to LEDs
+                    for (int ii = eventsPlaying.Count - 1; ii >= 0; ii--)
+                    {
+                        TriggeredEvent evnt = eventsPlaying[ii];
+
+                        RgbColor color = evnt.Animations[evnt.AnimationIndex].GetColor(evnt.Started.Value, DateTime.Now);
+
+                        PatternNotification notification = evnt.Notification as PatternNotification;
+
+                        //TODO: Copy first and last indexes to event
+                        for (int i = notification.Pattern.LedFirstIndex; i <= notification.Pattern.LedLastIndex; i++)
+                        {
+                            LedFrame[i * 3] = color.G;
+                            LedFrame[i * 3 + 1] = color.R;
+                            LedFrame[i * 3 + 2] = color.B;
+                        }
+
+                        if (evnt.Animations[evnt.AnimationIndex].AnimationFinished)
+                        {
+                            evnt.AnimationIndex += 1;
+                            if (evnt.AnimationIndex == evnt.Animations.Count)
+                            {
+                                eventsPlaying.RemoveAt(ii);
+                                AssignBusyLeds(evnt, false);
+                            }
+                            else
+                            {
+                                evnt.Started = DateTime.Now;
+                            }
+                        }
+                    }
+
+                    Led.SetColors(0, LedFrame);
+
+                    Thread.Sleep(40);
                 }
-
-                if (ev != null && ev.Notification is PatternNotification)
-                {
-                    ev.Started = DateTime.Now;
-                    AssignBusyLeds(ev);
-                    eventsPlaying.Add(ev);
-                }
-
-                //Prepare next frame of data to send to LEDs
-
-
+            }
+            catch (Exception ex)
+            {
+                log.ErrorFormat("Pattern playback crash {0}", ex);
             }
 
             log.InfoFormat("[{0}] Pattern playback stopped", this.Serial);
@@ -167,12 +216,12 @@ namespace BlinkStickClient.DataModel
             return true;
         }
 
-        void AssignBusyLeds(TriggeredEvent ev)
+        void AssignBusyLeds(TriggeredEvent ev, Boolean busy)
         {
             PatternNotification notification = (PatternNotification)ev.Notification;
             for (int i = notification.Pattern.LedFirstIndex; i <= notification.Pattern.LedLastIndex; i++)
             {
-                LedBusy[i] = true;
+                LedBusy[i] = busy;
             }
         }
 
