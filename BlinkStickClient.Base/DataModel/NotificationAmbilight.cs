@@ -11,6 +11,8 @@ namespace BlinkStickClient.DataModel
     {
         Process spawnedProcess;
 
+        AutoResetEvent resetEvent = new AutoResetEvent(false);
+
         private BackgroundWorker ambilightWorker = null;
 
         public override string GetTypeName()
@@ -105,6 +107,8 @@ namespace BlinkStickClient.DataModel
             }
 
             OnColorSend(0, 0, 0);
+
+            resetEvent.Set();
         }
 
         public override void Stop()
@@ -114,6 +118,8 @@ namespace BlinkStickClient.DataModel
             log.InfoFormat("Stopping {0}", GetTypeName());
 
             ambilightWorker.CancelAsync();
+
+            resetEvent.WaitOne();
 
             base.Stop();
             log.DebugFormat("{0} stopped", GetTypeName());
