@@ -22,12 +22,16 @@ using System.IO;
 using log4net;
 using BlinkStickClient.Utils;
 using BlinkStickClient.DataModel;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace BlinkStickClient
 {
 	class MainClass
 	{
-		public static void Main (string[] args)
+        public static ILog log;
+
+		public static int Main (string[] args)
 		{
             Boolean ambilightMode = args.Length > 0 && args[0] == "--ambilight";
 
@@ -60,7 +64,7 @@ namespace BlinkStickClient
                 }
             }
 
-            ILog log = LogManager.GetLogger("Main");    
+            log = LogManager.GetLogger("Main");    
 
             log.Info("--------------------------------------");
             log.InfoFormat("BlinkStick Client {0} application started", ApplicationDataModel.ApplicationVersion);
@@ -69,7 +73,7 @@ namespace BlinkStickClient
             {
                 AmbilightWindowsService service = new AmbilightWindowsService();
                 service.Run();
-                return;
+                return 0;
             }
 
             #if !DEBUG
@@ -96,13 +100,78 @@ namespace BlinkStickClient
 			};
             #endif
 
-			Application.Init ();
-            //Gtk.Rc.Parse(Path.Combine(MainWindow.ExecutableFolder, "Theme", "gtkrc")); 
-			MainWindow win = new MainWindow ();
+            //TODO: Check if platform is Windows
+            if (!CheckWindowsGtk ())
+                return 1;
+
+            Environment.SetEnvironmentVariable("GTK2_RC_FILES", Path.Combine(MainWindow.ExecutableFolder, "Theme", "Clearlooks", "gtk-2.0", "gtkrc"));
+
+            Application.Init ();
+            MainWindow win = new MainWindow ();
 			win.Show ();
 			Application.Run ();
 
             HidSharp.HidDeviceLoader.FreeUsbResources();
+
+            return 0;
 		}
+
+        [System.Runtime.InteropServices.DllImport("kernel32.dll", CharSet = System.Runtime.InteropServices.CharSet.Unicode, SetLastError = true)]
+        [return: System.Runtime.InteropServices.MarshalAs(System.Runtime.InteropServices.UnmanagedType.Bool)]
+        static extern bool SetDllDirectory (string lpPathName);
+
+        static bool CheckWindowsGtk ()
+        {
+            string location = null;
+            Version version = null;
+            Version minVersion = new Version (2, 12, 22);
+            using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Xamarin\GtkSharp\InstallFolder")) {
+                if (key != null)
+                    location = key.GetValue (null) as string;
+            }
+            using (var key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey (@"SOFTWARE\Xamarin\GtkSharp\Version")) {
+                if (key != null)
+                    Version.TryParse (key.GetValue (null) as string, out version);
+            }
+            //TODO: check build version of GTK# dlls in GAC
+            if (version == null || version < minVersion || location == null || !File.Exists (Path.Combine (location, "bin", "libgtk-win32-2.0-0.dll"))) {
+                log.Error ("Did not find required GTK# installation");
+                string url = "http://monodevelop.com/Download";
+                string caption = "Fatal Error";
+                string message =
+                    "{0} did not find the required version of GTK#. Please click OK to open the download page, where " +
+                    "you can download and install the latest version.";
+                if (DisplayWindowsOkCancelMessage (
+                    string.Format (message, "BlinkStick Client " + ApplicationDataModel.ApplicationVersion, url), caption)
+                ) {
+                    Process.Start (url);
+                }
+                return false;
+            }
+            log.Info ("Found GTK# version " + version);
+            var path = Path.Combine (location, @"bin");
+            try {
+                if (SetDllDirectory (path)) {
+                    return true;
+                }
+            } catch (EntryPointNotFoundException) {
+            }
+            // this shouldn't happen unless something is weird in Windows
+            log.Error ("Unable to set GTK+ dll directory");
+            return true;
+        }
+
+        static bool DisplayWindowsOkCancelMessage (string message, string caption)
+        {
+            var name = typeof(int).Assembly.FullName.Replace ("mscorlib", "System.Windows.Forms");
+            var asm = Assembly.Load (name);
+            var md = asm.GetType ("System.Windows.Forms.MessageBox");
+            var mbb = asm.GetType ("System.Windows.Forms.MessageBoxButtons");
+            var okCancel = Enum.ToObject (mbb, 1);
+            var dr = asm.GetType ("System.Windows.Forms.DialogResult");
+            var ok = Enum.ToObject (dr, 1);
+            const BindingFlags flags = BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static;
+            return md.InvokeMember ("Show", flags, null, null, new object[] { message, caption, okCancel }).Equals (ok);
+        }
 	}
 }
