@@ -263,10 +263,6 @@ public partial class MainWindow: Gtk.Window
         hbox1.PackEnd(eventsWidget, true, true, 0);
         Pages.Add(eventsWidget);
 
-        BlinkStickTestWidget blinkstickTestWidget = new BlinkStickTestWidget();
-        hbox1.PackEnd(blinkstickTestWidget, true, true, 0);
-        Pages.Add(blinkstickTestWidget);
-
         HelpWidget helpWidget = new HelpWidget();
         hbox1.PackEnd(helpWidget, true, true, 0);
         Pages.Add(helpWidget);

@@ -138,8 +138,6 @@
     <Compile Include="Widgets\AnimationWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.AnimationWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.BlinkStickEmulatorWidget.cs" />
-    <Compile Include="Widgets\BlinkStickTestWidget.cs" />
-    <Compile Include="gtk-gui\BlinkStickClient.BlinkStickTestWidget.cs" />
     <Compile Include="Widgets\BlinkStickInfoWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.BlinkStickInfoWidget.cs" />
     <Compile Include="Widgets\OverviewWidget.cs" />
