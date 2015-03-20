@@ -118,6 +118,13 @@ namespace BlinkStickClient.DataModel
             }
         }
 
+        public RgbColor GetColor(Notification notification)
+        {
+            int index = notification.LedFirstIndex * 3;
+
+            return RgbColor.FromRgb(LedFrame[index + 1], LedFrame[index], LedFrame[index + 2]);
+        }
+
         public void SetColor(byte r, byte g, byte b)
         {
             if (BrightnessLimit < 100 && BrightnessLimit >= 0)
@@ -194,6 +201,8 @@ namespace BlinkStickClient.DataModel
                             ev.Animations.Add(copyAnimation);
                         }
 
+                        ev.Animations[0].ReferenceColor = GetColor(ev.Notification);
+
                         AssignBusyLeds(ev, true);
                         eventsPlaying.Add(ev);
                     }
@@ -203,7 +212,7 @@ namespace BlinkStickClient.DataModel
                     {
                         TriggeredEvent evnt = eventsPlaying[ii];
 
-                        RgbColor color = evnt.Animations[evnt.AnimationIndex].GetColor(evnt.Started.Value, DateTime.Now);
+                        RgbColor color = evnt.Animations[evnt.AnimationIndex].GetColor(evnt.Started.Value, DateTime.Now, evnt.Animations[evnt.AnimationIndex].ReferenceColor);
 
                         PatternNotification notification = evnt.Notification as PatternNotification;
 
@@ -222,6 +231,7 @@ namespace BlinkStickClient.DataModel
                             }
                             else
                             {
+                                evnt.Animations[evnt.AnimationIndex].ReferenceColor = GetColor(evnt.Notification);
                                 evnt.Started = DateTime.Now;
                             }
                         }

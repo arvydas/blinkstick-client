@@ -50,6 +50,9 @@ namespace BlinkStickClient.DataModel
 		[JsonIgnore]
 		public Boolean AnimationFinished { get; private set; }
 
+        [JsonIgnore]
+        public RgbColor ReferenceColor;
+
         public Animation()
         {
             this.AnimationType = AnimationTypeEnum.SetColor;
