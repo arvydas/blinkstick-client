@@ -35,7 +35,7 @@ namespace BlinkStickClient.DataModel
         public Boolean Touched { get; set; }
 
         private Boolean[] LedBusy = new Boolean[64];
-        private byte[] LedFrame = new byte[8 * 3];
+        private byte[] LedFrame = new byte[64 * 3];
         private Boolean NeedsLedUpdate = false;
 
         [JsonIgnore]
@@ -241,7 +241,11 @@ namespace BlinkStickClient.DataModel
                         }
                         else
                         {
-                            Led.SetColors(0, LedFrame);
+                            byte[] frame = new byte[this.LedsR * 3];
+
+                            Array.Copy(LedFrame, 0, frame, 0, frame.Length); 
+
+                            Led.SetColors(0, frame);
                         }
                     }
 
