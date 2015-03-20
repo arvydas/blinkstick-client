@@ -234,7 +234,15 @@ namespace BlinkStickClient.DataModel
                             NeedsLedUpdate = false;
                         }
 
-                        Led.SetColors(0, LedFrame);
+                        if (Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStick || 
+                            Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro && Led.Mode < 2)
+                        {
+                            Led.SetColor(LedFrame[1], LedFrame[0], LedFrame[2]);
+                        }
+                        else
+                        {
+                            Led.SetColors(0, LedFrame);
+                        }
                     }
 
                     Thread.Sleep(40);
