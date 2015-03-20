@@ -1,7 +1,6 @@
 ﻿using System;
 using Gtk;
 using Gdk;
-using BlinkStickClient.Classes;
 using BlinkStickClient.Utils;
 using System.ComponentModel;
 using System.Threading;

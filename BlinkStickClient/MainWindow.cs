@@ -23,7 +23,6 @@ using Gdk;
 using Gtk;
 using log4net;
 using BlinkStickClient;
-using BlinkStickClient.Classes;
 using BlinkStickClient.DataModel;
 using BlinkStickDotNet;
 using BlinkStickClient.Utils;
@@ -40,8 +39,6 @@ public partial class MainWindow: Gtk.Window
     public BlinkStickClient.Utils.EventSignalledHandler eventSignalled;
 
     ApplicationDataModel DataModel = new ApplicationDataModel();
-
-	NotificationManager Manager;
 
     List<Widget> Pages = new List<Widget>();
     Widget _VisiblePage;
@@ -133,25 +130,13 @@ public partial class MainWindow: Gtk.Window
 		log.Debug ("Loading main form icon");
 		this.Icon = new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "icon.png"));
 
-		log.Debug("Setting up notification manager");
-		Manager = new NotificationManager ();
-		Manager.NotificationUpdated += HandleNotificationUpdated;
-		Manager.Load ();
-		Manager.UpdateControllers();
-
 		DeviceMonitor = new UsbMonitor();
         DeviceMonitor.UsbDevicesChanged += (object sender, EventArgs e) => {
 			Gtk.Application.Invoke (delegate {
-				//Manager.UpdateControllers();
-
                 RefreshDevices();
 			});
 		};
 		DeviceMonitor.Start ();
-
-
-		log.Debug("Starting notification manager");
-		Manager.Start ();
 
 		log.Debug ("Building popup menu");
 		//Build Popup Menu for TrayIcon
@@ -240,7 +225,6 @@ public partial class MainWindow: Gtk.Window
         VisiblePage = overviewWidget;
 
         notificationsWidget = new NotificationsWidget();
-        //!!!notificationsWidget.Manager = this.Manager;
         notificationsWidget.ParentForm = this;
         notificationsWidget.DataModel = DataModel;
         notificationsWidget.Initialize();
@@ -357,13 +341,6 @@ public partial class MainWindow: Gtk.Window
 		this.Visible = !this.Visible; 
 	}
 
-	void HandleNotificationUpdated (object sender, NotificationManager.NotificationUpdatedEventArgs e)
-	{
-		Gtk.Application.Invoke (delegate {
-            //!!!notificationsWidget.NotificationUpdated(e.Notification);
-		});
-	}
-
 	private void DestroyEnvironment ()
 	{
         DeviceMonitor.Stop ();
@@ -372,9 +349,6 @@ public partial class MainWindow: Gtk.Window
 
         DataModel.Save();
 		
-		Manager.Stop ();
-		Manager.Save ();
-
 #if !LINUX
 		trayIcon.Visible = false;
 #endif

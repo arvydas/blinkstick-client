@@ -49,6 +49,7 @@ namespace BlinkStickClient
 			global::Stetic.Gui.Initialize (this);
 			// Widget BlinkStickClient.PatternDialog
 			this.Name = "BlinkStickClient.PatternDialog";
+			this.Title = global::Mono.Unix.Catalog.GetString ("window1");
 			this.WindowPosition = ((global::Gtk.WindowPosition)(1));
 			// Internal child BlinkStickClient.PatternDialog.VBox
 			global::Gtk.VBox w1 = this.VBox;
