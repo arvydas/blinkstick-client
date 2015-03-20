@@ -27,7 +27,7 @@ namespace BlinkStickClient.DataModel
 
         public override string GetTypeName()
         {
-            return "Active Application";
+            return "Application";
         }
 
         public NotificationApplication()
