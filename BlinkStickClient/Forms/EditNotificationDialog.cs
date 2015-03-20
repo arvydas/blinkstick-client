@@ -56,6 +56,8 @@ namespace BlinkStickClient
         {
             this.Build();
 
+            this.Title = title;
+
             this.deviceComboboxWidget.DeviceChanged += OnDeviceComboboxWidgetDeviceChanged;
 
             ParentForm = parent;
