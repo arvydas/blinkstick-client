@@ -1,6 +1,7 @@
 ﻿using System;
 using BlinkStickClient.DataModel;
 using BlinkStickClient.Utils;
+using BlinkStickDotNet;
 using Gtk;
 
 namespace BlinkStickClient
@@ -54,6 +55,8 @@ namespace BlinkStickClient
             : base (title, parent, Gtk.DialogFlags.Modal, new object[0])
         {
             this.Build();
+
+            this.deviceComboboxWidget.DeviceChanged += OnDeviceComboboxWidgetDeviceChanged;
 
             ParentForm = parent;
 
@@ -202,9 +205,38 @@ namespace BlinkStickClient
                 editorWidget.ShowAll();
             }
 
+            OnDeviceComboboxWidgetDeviceChanged(null, null);
+
             hseparator = new HSeparator();
             vbox3.PackEnd(hseparator);
             hseparator.ShowAll();
+        }
+
+        protected void OnDeviceComboboxWidgetDeviceChanged(object sender, EventArgs e)
+        {
+            if (deviceComboboxWidget.SelectedBlinkStick == null)
+            {
+                spinbuttonLedsTo.Sensitive = false;
+                spinbuttonLedsFrom.Sensitive = false;
+                return;
+            }
+
+            switch (deviceComboboxWidget.SelectedBlinkStick.BlinkStickDevice)
+            {
+                case BlinkStickDeviceEnum.BlinkStick:
+                    spinbuttonLedsTo.Value = 0;
+                    spinbuttonLedsFrom.Value = 0;
+
+                    spinbuttonLedsTo.Sensitive = false;
+                    spinbuttonLedsFrom.Sensitive = false;
+                    break;
+                case BlinkStickDeviceEnum.BlinkStickPro:
+                case BlinkStickDeviceEnum.BlinkStickSquare:
+                case BlinkStickDeviceEnum.BlinkStickStrip:
+                    spinbuttonLedsTo.Sensitive = true;
+                    spinbuttonLedsFrom.Sensitive = true;
+                    break;
+            }
         }
     }
 }
