@@ -13,7 +13,7 @@ namespace BlinkStickClient.DataModel
         protected static readonly ILog log = LogManager.GetLogger("BlinkStickDeviceSettings");  
 
         [JsonIgnore]
-        public Boolean Playing { get; private set; }
+        public Boolean Running { get; private set; }
 
         public String Serial { get; set; }
 
@@ -51,7 +51,7 @@ namespace BlinkStickClient.DataModel
         {
             this.Touched = true;
             this.BrightnessLimit = 100;
-            this.Playing = false;
+            this.Running = false;
         }
 
         public BlinkStickDeviceSettings(BlinkStick led)
@@ -60,7 +60,7 @@ namespace BlinkStickClient.DataModel
             this.Serial = led.Serial;
             this.Touched = true;
             this.BrightnessLimit = 100;
-            this.Playing = false;
+            this.Running = false;
         }
 
         public override string ToString()
@@ -134,10 +134,10 @@ namespace BlinkStickClient.DataModel
 
         public void Start()
         {
-            if (Playing)
+            if (Running)
                 return;
 
-            Playing = true;
+            Running = true;
 
             patternAnimator = new BackgroundWorker ();
             patternAnimator.DoWork += new DoWorkEventHandler (patternAnimator_DoWork);
@@ -242,7 +242,7 @@ namespace BlinkStickClient.DataModel
 
             log.InfoFormat("[{0}] Pattern playback stopped", this.Serial);
 
-            Playing = false;
+            Running = false;
         }
 
         Boolean CanPlayEvent(TriggeredEvent ev)
