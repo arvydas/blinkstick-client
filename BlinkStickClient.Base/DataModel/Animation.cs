@@ -47,6 +47,9 @@ namespace BlinkStickClient.DataModel
 
         public int DurationMorph { get; set; }
 
+		[JsonIgnore]
+		public Boolean AnimationFinished { get; private set; }
+
         public Animation()
         {
             this.AnimationType = AnimationTypeEnum.SetColor;
@@ -70,6 +73,111 @@ namespace BlinkStickClient.DataModel
             this.DurationMorph = animation.DurationMorph;
             this.ColorString = animation.ColorString;
         }
+
+		public RgbColor GetColor (DateTime start, DateTime current, RgbColor refColor = null)
+		{
+			double fraction = 0;
+			double frame = (current - start).TotalMilliseconds;
+
+			switch (this.AnimationType) {
+				case AnimationTypeEnum.SetColor:
+					if (frame >= this.DelaySetColor)
+					{
+						this.AnimationFinished = true;
+						frame = this.DelaySetColor;
+					}
+
+					break;
+				case AnimationTypeEnum.Blink:
+					if (frame >= this.DurationBlink * this.RepeatBlink)
+					{
+						this.AnimationFinished = true;
+						frame = this.DurationBlink * this.RepeatBlink - 1;
+					}
+
+					if (frame % this.DurationBlink < this.DurationBlink / 2) {
+						return this.Color;
+					} else {
+						return RgbColor.Black();
+					}
+				case AnimationTypeEnum.Pulse:
+					if (frame >= this.DurationPulse * this.RepeatPulse)
+					{
+						this.AnimationFinished = true;
+						frame = this.DurationPulse * this.RepeatPulse;
+					}
+
+					fraction = frame % this.DurationPulse / this.DurationPulse;
+
+					byte r;
+					byte g;
+					byte b;
+
+					if (fraction <= 0.5) //Fade in
+					{
+						fraction = fraction * 2;
+
+						r = (byte)Math.Ceiling(Color.R * fraction);
+						g = (byte)Math.Ceiling(Color.G * fraction);
+						b = (byte)Math.Ceiling(Color.B * fraction);
+					}
+					else //Fade out
+					{
+						fraction = 1 - (fraction - 0.5) * 2;
+
+						r = (byte)Math.Floor(Color.R * fraction);
+						g = (byte)Math.Floor(Color.G * fraction);
+						b = (byte)Math.Floor(Color.B * fraction);
+					}
+
+					return RgbColor.FromRgb(r, g, b);
+				case AnimationTypeEnum.Morph:
+					if (refColor == null)
+						throw new ArgumentNullException("refColor", "Reference color is required for Morph animation");
+
+					if (frame >= this.DurationMorph)
+					{
+						this.AnimationFinished = true;
+						frame = this.DurationMorph;
+					}
+
+					fraction = frame / this.DurationMorph;
+
+					if (Color.R > refColor.R)
+					{
+						r = (byte)Math.Ceiling(refColor.R + (Color.R - refColor.R) * fraction);
+					}
+					else
+					{
+						r = (byte)Math.Floor(refColor.R + (Color.R - refColor.R) * fraction);
+					}
+
+					if (Color.G > refColor.G)
+					{
+						g = (byte)Math.Ceiling(refColor.G + (Color.G - refColor.G) * fraction);
+					}
+					else
+					{
+						g = (byte)Math.Floor(refColor.G + (Color.G - refColor.G) * fraction);
+					}
+
+					if (Color.B > refColor.B)
+					{
+						b = (byte)Math.Ceiling(refColor.B + (Color.B - refColor.B) * fraction);
+					}
+					else
+					{
+						b = (byte)Math.Floor(refColor.B + (Color.B - refColor.B) * fraction);
+					}
+
+					return RgbColor.FromRgb(r, g, b);
+				default:
+					break;
+			}
+
+
+			return this.Color;
+		}
     }
 
     public enum AnimationTypeEnum {
