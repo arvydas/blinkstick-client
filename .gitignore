@@ -119,5 +119,6 @@ UpgradeLog*.XML
 !/Components/log4net-1.2.13/*/*/*/*/*
 !/Components/plossum-commandline/*
 
+/=*
 
 
