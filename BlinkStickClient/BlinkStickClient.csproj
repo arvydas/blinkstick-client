@@ -190,9 +190,6 @@
       <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="darktable.png">
-      <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="log4net.config">

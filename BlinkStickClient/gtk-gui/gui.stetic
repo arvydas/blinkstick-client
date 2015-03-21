@@ -1539,29 +1539,6 @@ Pulse</property>
           </packing>
         </child>
         <child>
-          <widget class="Gtk.HSeparator" id="hseparator1">
-            <property name="MemberName" />
-          </widget>
-          <packing>
-            <property name="Position">2</property>
-            <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
-        </child>
-        <child>
-          <widget class="BlinkStickClient.BlinkStickInfoWidget" id="blinkstickinfowidget2">
-            <property name="MemberName" />
-            <property name="Events">ButtonPressMask</property>
-          </widget>
-          <packing>
-            <property name="Position">3</property>
-            <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
-        </child>
-        <child>
           <widget class="Gtk.Frame" id="frame2">
             <property name="MemberName" />
             <property name="ShadowType">None</property>
@@ -1600,8 +1577,31 @@ Pulse</property>
             </child>
           </widget>
           <packing>
+            <property name="Position">2</property>
+            <property name="AutoSize">True</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.HSeparator" id="hseparator1">
+            <property name="MemberName" />
+          </widget>
+          <packing>
+            <property name="Position">3</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="BlinkStickClient.BlinkStickInfoWidget" id="blinkstickinfowidget2">
+            <property name="MemberName" />
+            <property name="Events">ButtonPressMask</property>
+          </widget>
+          <packing>
             <property name="Position">4</property>
             <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
           </packing>
         </child>
       </widget>

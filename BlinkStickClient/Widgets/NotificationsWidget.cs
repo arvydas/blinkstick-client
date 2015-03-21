@@ -69,17 +69,17 @@ namespace BlinkStickClient
             blinkStickColumn.SetCellDataFunc (blinkStickCell, new Gtk.TreeCellDataFunc (RenderBlinkStickCell));
             patternColumn.SetCellDataFunc (patternCell, new Gtk.TreeCellDataFunc (RenderPatternCell));
 
-            treeviewEvents.AppendColumn (enabledColumn);
             treeviewEvents.AppendColumn (typeColumn);
             treeviewEvents.AppendColumn (patternColumn);
             treeviewEvents.AppendColumn (blinkStickColumn);
             treeviewEvents.AppendColumn (nameColumn);
 
+            treeviewEvents.AppendColumn (enabledColumn);
             treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 1);
             treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 2);
             treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 3);
 
-            treeviewEvents.Columns[4].Expand = true;
+            treeviewEvents.Columns[3].Expand = true;
 
             treeviewEvents.Model = NotificationListStore;
         }
