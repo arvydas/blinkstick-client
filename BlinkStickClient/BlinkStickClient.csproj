@@ -83,6 +83,23 @@
     <EmbeddedResource Include="Resources\icons\blinkstick-overview.png" />
     <EmbeddedResource Include="Resources\icons\blinkstick-events.png" />
     <EmbeddedResource Include="Resources\icons\blinkstick-help.png" />
+    <EmbeddedResource Include="Resources\notifications\notification-ambilight.png" />
+    <EmbeddedResource Include="Resources\notifications\notification-moodlight.png" />
+    <EmbeddedResource Include="Resources\notifications\notification-application.png" />
+    <EmbeddedResource Include="Resources\notifications\notification-mail.png" />
+    <EmbeddedResource Include="Resources\notifications\notification-gmail.png" />
+    <EmbeddedResource Include="Resources\notifications\notification-ram.png" />
+    <EmbeddedResource Include="Resources\notifications\notification-hdd.png" />
+    <EmbeddedResource Include="Resources\notifications\notification-battery.png" />
+    <EmbeddedResource Include="Resources\notifications\notification-cpu.png" />
+    <EmbeddedResource Include="Resources\notifications\notification-blinkstickdotcom.png" />
+    <EmbeddedResource Include="Resources\notifications\notification-remote-control.png" />
+    <EmbeddedResource Include="Resources\notifications\notification-test.png" />
+    <EmbeddedResource Include="Resources\notifications\group-background.png" />
+    <EmbeddedResource Include="Resources\notifications\group-hardware.png" />
+    <EmbeddedResource Include="Resources\notifications\group-services.png" />
+    <EmbeddedResource Include="Resources\notifications\group-test.png" />
+    <EmbeddedResource Include="Resources\notifications\group-email.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />

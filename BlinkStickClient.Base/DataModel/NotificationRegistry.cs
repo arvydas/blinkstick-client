@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Gtk;
+using Gdk;
 
 namespace BlinkStickClient.DataModel
 {
@@ -16,8 +17,9 @@ namespace BlinkStickClient.DataModel
             public String Name;
             public String Description;
             public Boolean IsSupported;
+            public Pixbuf Icon;
 
-			public NotificationRegistryEntry(String category, String name, String description, Type type, Boolean isSupported, Type editorType)
+            public NotificationRegistryEntry(String category, String name, String description, Type type, Boolean isSupported, Type editorType, Pixbuf icon)
             {
                 this.Category = category;
                 this.Name = name;
@@ -25,10 +27,11 @@ namespace BlinkStickClient.DataModel
                 this.NotificationType = type;
                 this.IsSupported = isSupported;
 				this.EditorType = editorType;
+                this.Icon = icon;
             }
         }
 
-        public static int Register(String category, String description, Type type, Type editorType)
+        public static int Register(String category, String description, Type type, Type editorType, Pixbuf icon = null)
         {
             using (Notification notification = (Notification)Activator.CreateInstance(type))
             {
@@ -39,7 +42,8 @@ namespace BlinkStickClient.DataModel
 						description, 
 						type, 
 						notification.IsSupported(), 
-						editorType));
+						editorType,
+                    icon));
             }
 
             return NotificationTypes.Count - 1;
@@ -55,6 +59,17 @@ namespace BlinkStickClient.DataModel
 
 			return null;
 		}
+
+        public static Pixbuf FindIcon(Type notificationType)
+        {
+            foreach (NotificationRegistryEntry entry in NotificationTypes) {
+                if (entry.NotificationType == notificationType) {
+                    return entry.Icon;
+                }
+            }
+
+            return null;
+        }
     }
 }
 

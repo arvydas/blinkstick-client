@@ -2,6 +2,7 @@
 using BlinkStickClient.DataModel;
 using log4net;
 using Gtk;
+using Gdk;
 
 namespace BlinkStickClient
 {
@@ -12,7 +13,7 @@ namespace BlinkStickClient
 
         protected static readonly ILog log = LogManager.GetLogger("Main");  
 
-        Gtk.ListStore NotificationListStore = new ListStore(typeof(Notification), typeof(String), typeof(String), typeof(String));
+        Gtk.ListStore NotificationListStore = new ListStore(typeof(Notification), typeof(String), typeof(String), typeof(String), typeof(Pixbuf));
 
         private Notification _SelectedNotification = null;
 
@@ -42,9 +43,6 @@ namespace BlinkStickClient
             Gtk.TreeViewColumn nameColumn = new Gtk.TreeViewColumn ();
             nameColumn.Title = "Name";
 
-            Gtk.TreeViewColumn typeColumn = new Gtk.TreeViewColumn ();
-            typeColumn.Title = "Type";
-
             Gtk.TreeViewColumn blinkStickColumn = new Gtk.TreeViewColumn ();
             blinkStickColumn.Title = "BlinkStick";
 
@@ -57,29 +55,29 @@ namespace BlinkStickClient
             Gtk.CellRendererText blinkStickCell = new Gtk.CellRendererText ();
             Gtk.CellRendererText patternCell = new Gtk.CellRendererText ();
 
+            CellRendererPixbuf iconCell = new CellRendererPixbuf();
+            nameColumn.PackStart(iconCell, false);
+            nameColumn.AddAttribute(iconCell, "pixbuf", 4);
+
             enabledColumn.PackEnd (enabledCell, false);
             blinkStickColumn.PackEnd (blinkStickCell, false);
             nameColumn.PackEnd (nameCell, true);
-            typeColumn.PackEnd (typeCell, false);
             patternColumn.PackEnd (patternCell, false);
 
             enabledColumn.SetCellDataFunc (enabledCell, new Gtk.TreeCellDataFunc (RenderEnabledCell));
             nameColumn.SetCellDataFunc (nameCell, new Gtk.TreeCellDataFunc (RenderNameCell));
-            typeColumn.SetCellDataFunc (typeCell, new Gtk.TreeCellDataFunc (RenderTypeCell));
             blinkStickColumn.SetCellDataFunc (blinkStickCell, new Gtk.TreeCellDataFunc (RenderBlinkStickCell));
             patternColumn.SetCellDataFunc (patternCell, new Gtk.TreeCellDataFunc (RenderPatternCell));
 
-            treeviewEvents.AppendColumn (typeColumn);
+            treeviewEvents.AppendColumn (nameColumn);
+            treeviewEvents.Columns[0].Expand = true;
+
             treeviewEvents.AppendColumn (patternColumn);
             treeviewEvents.AppendColumn (blinkStickColumn);
-            treeviewEvents.AppendColumn (nameColumn);
-
             treeviewEvents.AppendColumn (enabledColumn);
             treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 1);
             treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 2);
             treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 3);
-
-            treeviewEvents.Columns[3].Expand = true;
 
             treeviewEvents.Model = NotificationListStore;
         }
@@ -88,7 +86,7 @@ namespace BlinkStickClient
         {
             log.Debug("Adding notifications to the tree");
             foreach (Notification e in DataModel.Notifications) {
-                NotificationListStore.AppendValues (e, "gtk-edit", "gtk-copy", "gtk-delete");
+                NotificationListStore.AppendValues (e, "gtk-edit", "gtk-copy", "gtk-delete", NotificationRegistry.FindIcon(e.GetType()));
             } 
         }
 
@@ -126,23 +124,23 @@ namespace BlinkStickClient
                 TreeViewColumn column;
                 (sender as TreeView).GetCursor(out path, out column);
 
-                if (column == (sender as TreeView).Columns[7]) //Delete clicked
+                if (column == (sender as TreeView).Columns[6]) //Delete clicked
                 {
                     DataModel.Notifications.Remove(SelectedNotification);
                     NotificationListStore.Remove(ref iter);
                     DataModel.Save();
                 }
-                else if (column == (sender as TreeView).Columns[6]) //Copy clicked
+                else if (column == (sender as TreeView).Columns[5]) //Copy clicked
                 {
                     Notification notification = SelectedNotification.Copy();
                     notification.Name = "";
                     if (EditNotification(notification, "Copy Notification"))
                     {
-                        NotificationListStore.AppendValues(notification, "gtk-edit", "gtk-copy", "gtk-delete");
+                        NotificationListStore.AppendValues(notification, "gtk-edit", "gtk-copy", "gtk-delete", NotificationRegistry.FindIcon(notification.GetType()));
                         DataModel.Notifications.Add(notification);
                     }
                 }
-                else if (column == (sender as TreeView).Columns[5]) //Edit clicked
+                else if (column == (sender as TreeView).Columns[4]) //Edit clicked
                 {
                     EditNotification();
                 }
@@ -190,14 +188,6 @@ namespace BlinkStickClient
             }
         }
 
-        private void RenderTypeCell (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
-        {
-            if (model.GetValue (iter, 0) is Notification) {
-                Notification notification = (Notification)model.GetValue (iter, 0);
-                (cell as Gtk.CellRendererText).Text = notification.GetTypeName();
-            }
-        }
-
         private void RenderBlinkStickCell (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
         {
             if (model.GetValue (iter, 0) is Notification) {
@@ -242,7 +232,7 @@ namespace BlinkStickClient
 
                 if (EditNotification(notification, "New Notification"))
                 {
-                    NotificationListStore.AppendValues(notification, "gtk-edit", "gtk-copy", "gtk-delete");
+                    NotificationListStore.AppendValues(notification, "gtk-edit", "gtk-copy", "gtk-delete", NotificationRegistry.FindIcon(notification.GetType()));
                     DataModel.Notifications.Add(notification);
                     DataModel.Save();
                 }

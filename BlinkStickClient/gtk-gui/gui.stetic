@@ -375,7 +375,6 @@
   </widget>
   <widget class="Gtk.Dialog" id="BlinkStickClient.PatternDialog" design-size="673 514">
     <property name="MemberName" />
-    <property name="Title" translatable="yes">window1</property>
     <property name="WindowPosition">Center</property>
     <property name="Buttons">1</property>
     <property name="HelpButton">False</property>

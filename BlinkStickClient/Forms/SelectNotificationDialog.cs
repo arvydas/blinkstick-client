@@ -35,15 +35,21 @@ namespace BlinkStickClient
 
             TreeViewColumn nameColumn = new TreeViewColumn ();
             nameColumn.Title = "Notification";
+
+            CellRendererPixbuf iconCell = new CellRendererPixbuf();
+            nameColumn.PackStart(iconCell, false);
+            nameColumn.AddAttribute(iconCell, "pixbuf", 2);
+
             CellRendererText nameCell = new CellRendererText ();
             nameColumn.PackStart (nameCell, true);
             nameColumn.SetCellDataFunc(nameCell, NameRenderer);
 
             treeviewNotifications.AppendColumn (nameColumn);
 
+
             nameColumn.AddAttribute (nameCell, "text", 0);
 
-            typeListStore = new TreeStore (typeof (String), typeof (NotificationRegistry.NotificationRegistryEntry));
+            typeListStore = new TreeStore (typeof(String), typeof(NotificationRegistry.NotificationRegistryEntry), typeof (Gdk.Pixbuf));
 
             foreach (NotificationRegistry.NotificationRegistryEntry entry in NotificationRegistry.NotificationTypes)
             {
@@ -55,11 +61,21 @@ namespace BlinkStickClient
                 }
                 else
                 {
-                    iter = typeListStore.AppendValues (entry.Category, null);
+                    Gdk.Pixbuf icon = null;
+
+                    try
+                    {
+                        icon = Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.notifications.group-" + entry.Category.ToLower() + ".png");
+                    }
+                    catch
+                    {
+                    }
+
+                    iter = typeListStore.AppendValues (entry.Category, null, icon);
                     Categories[entry.Category] = iter;
                 }
 
-                typeListStore.AppendValues (iter, null, entry);
+                typeListStore.AppendValues (iter, null, entry, entry.Icon);
             }
 
             // Create the filter and tell it to use the musicListStore as it's base Model
