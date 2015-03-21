@@ -20,7 +20,6 @@ using System;
 using System.Collections.Generic;
 using BlinkStickDotNet;
 using Plossum.CommandLine;
-using BlinkStickDotNet;
 
 namespace BlinkStickClient.CLI
 {
