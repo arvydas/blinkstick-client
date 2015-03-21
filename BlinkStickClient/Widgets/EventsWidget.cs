@@ -9,11 +9,18 @@ namespace BlinkStickClient
     [System.ComponentModel.ToolboxItem(true)]
     public partial class EventsWidget : Gtk.Bin
     {
+
+        private ApplicationDataModel _DataModel;
         public ApplicationDataModel DataModel
         {
             set
             {
+                _DataModel = value;
                 HookIntoDataModel(value);
+            }
+            get
+            {
+                return _DataModel;
             }
         }
 
@@ -126,6 +133,13 @@ namespace BlinkStickClient
                 TriggeredEvent ev = (TriggeredEvent)model.GetValue (iter, 0);
                 (cell as Gtk.CellRendererText).Text = ev.Message;
             }
+        }
+
+        protected void OnButtonClearClicked(object sender, EventArgs e)
+        {
+            EventListStore.Clear();
+            DataModel.TriggeredEvents.Clear();
+            DataModel.Save();
         }
     }
 }

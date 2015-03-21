@@ -6,6 +6,14 @@ namespace BlinkStickClient
 	{
 		private global::Gtk.VBox vbox2;
 		
+		private global::Gtk.HBox hbox2;
+		
+		private global::Gtk.Alignment alignment3;
+		
+		private global::Gtk.Alignment alignment4;
+		
+		private global::Gtk.Button buttonClear;
+		
 		private global::Gtk.ScrolledWindow GtkScrolledWindow;
 		
 		private global::Gtk.TreeView treeviewEvents;
@@ -21,6 +29,39 @@ namespace BlinkStickClient
 			this.vbox2.Name = "vbox2";
 			this.vbox2.Spacing = 6;
 			// Container child vbox2.Gtk.Box+BoxChild
+			this.hbox2 = new global::Gtk.HBox ();
+			this.hbox2.Name = "hbox2";
+			this.hbox2.Spacing = 6;
+			// Container child hbox2.Gtk.Box+BoxChild
+			this.alignment3 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
+			this.alignment3.Name = "alignment3";
+			this.hbox2.Add (this.alignment3);
+			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.alignment3]));
+			w1.Position = 0;
+			// Container child hbox2.Gtk.Box+BoxChild
+			this.alignment4 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
+			this.alignment4.Name = "alignment4";
+			this.alignment4.RightPadding = ((uint)(5));
+			// Container child alignment4.Gtk.Container+ContainerChild
+			this.buttonClear = new global::Gtk.Button ();
+			this.buttonClear.CanFocus = true;
+			this.buttonClear.Name = "buttonClear";
+			this.buttonClear.UseUnderline = true;
+			global::Gtk.Image w2 = new global::Gtk.Image ();
+			w2.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-clear", global::Gtk.IconSize.Menu);
+			this.buttonClear.Image = w2;
+			this.alignment4.Add (this.buttonClear);
+			this.hbox2.Add (this.alignment4);
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.alignment4]));
+			w4.Position = 1;
+			w4.Expand = false;
+			w4.Fill = false;
+			this.vbox2.Add (this.hbox2);
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.hbox2]));
+			w5.Position = 0;
+			w5.Expand = false;
+			w5.Fill = false;
+			// Container child vbox2.Gtk.Box+BoxChild
 			this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
 			this.GtkScrolledWindow.Name = "GtkScrolledWindow";
 			this.GtkScrolledWindow.ShadowType = ((global::Gtk.ShadowType)(1));
@@ -30,13 +71,14 @@ namespace BlinkStickClient
 			this.treeviewEvents.Name = "treeviewEvents";
 			this.GtkScrolledWindow.Add (this.treeviewEvents);
 			this.vbox2.Add (this.GtkScrolledWindow);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.GtkScrolledWindow]));
-			w2.Position = 0;
+			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.GtkScrolledWindow]));
+			w7.Position = 1;
 			this.Add (this.vbox2);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
 			this.Hide ();
+			this.buttonClear.Clicked += new global::System.EventHandler (this.OnButtonClearClicked);
 		}
 	}
 }
