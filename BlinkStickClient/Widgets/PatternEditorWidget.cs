@@ -245,12 +245,10 @@ namespace BlinkStickClient
 
         protected void OnTreeviewPatternsRowActivated (object o, RowActivatedArgs args)
         {
-            EditPatternDialog.ShowForm(SelectedPattern, DataModel, "Edit Pattern");
-        }
-
-        protected void OnButtonPropertiesClicked (object sender, EventArgs e)
-        {
-            EditPatternDialog.ShowForm(SelectedPattern, DataModel, "Edit Pattern");
+            if (SelectedPattern != null)
+            {
+                EditPatternDialog.ShowForm(SelectedPattern, DataModel, "Edit Pattern");
+            }
         }
 
         protected void OnButtonAddPatternClicked (object sender, EventArgs e)
