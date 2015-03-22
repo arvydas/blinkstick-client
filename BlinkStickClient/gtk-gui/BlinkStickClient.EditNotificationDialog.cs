@@ -12,7 +12,7 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Table table2;
 		
-		private global::Gtk.Button buttonPlayPattern;
+		private global::Gtk.Button buttonEditPatterns;
 		
 		private global::Gtk.CheckButton checkbuttonEnabled;
 		
@@ -75,15 +75,15 @@ namespace BlinkStickClient
 			this.table2.RowSpacing = ((uint)(6));
 			this.table2.ColumnSpacing = ((uint)(6));
 			// Container child table2.Gtk.Table+TableChild
-			this.buttonPlayPattern = new global::Gtk.Button ();
-			this.buttonPlayPattern.CanFocus = true;
-			this.buttonPlayPattern.Name = "buttonPlayPattern";
-			this.buttonPlayPattern.UseUnderline = true;
+			this.buttonEditPatterns = new global::Gtk.Button ();
+			this.buttonEditPatterns.CanFocus = true;
+			this.buttonEditPatterns.Name = "buttonEditPatterns";
+			this.buttonEditPatterns.UseUnderline = true;
 			global::Gtk.Image w2 = new global::Gtk.Image ();
-			w2.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-media-play", global::Gtk.IconSize.Menu);
-			this.buttonPlayPattern.Image = w2;
-			this.table2.Add (this.buttonPlayPattern);
-			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table2 [this.buttonPlayPattern]));
+			w2.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-edit", global::Gtk.IconSize.Menu);
+			this.buttonEditPatterns.Image = w2;
+			this.table2.Add (this.buttonEditPatterns);
+			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table2 [this.buttonEditPatterns]));
 			w3.TopAttach = ((uint)(3));
 			w3.BottomAttach = ((uint)(4));
 			w3.LeftAttach = ((uint)(2));
@@ -282,6 +282,7 @@ namespace BlinkStickClient
 			this.DefaultWidth = 309;
 			this.DefaultHeight = 373;
 			this.Show ();
+			this.buttonEditPatterns.Clicked += new global::System.EventHandler (this.OnButtonEditPatternsClicked);
 			this.buttonOk.Clicked += new global::System.EventHandler (this.OnButtonOkClicked);
 		}
 	}

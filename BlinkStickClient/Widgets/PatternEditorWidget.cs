@@ -44,11 +44,17 @@ namespace BlinkStickClient
 
                 if (_DataModel != value)
                 {
-                    _DataModel = value;
-                    PatternListStore.Clear();
-                    foreach (Pattern pattern in DataModel.Patterns)
+                    if (_DataModel != null)
                     {
-                        PatternListStore.AppendValues("gtk-media-play", pattern, "gtk-edit", "gtk-copy", "gtk-delete");
+                        _DataModel.PatternsUpdated -= HandlePatternsUpdated;
+                    }
+
+                    _DataModel = value;
+
+                    if (_DataModel != null)
+                    {
+                        _DataModel.PatternsUpdated += HandlePatternsUpdated;
+                        LoadPatterns();
                     }
                 }
             }
@@ -58,6 +64,12 @@ namespace BlinkStickClient
             }
         }
 
+        public Pattern PreselectedPattern;
+
+        void HandlePatternsUpdated (object sender, EventArgs e)
+        {
+            LoadPatterns();
+        }
 
         public PatternEditorWidget()
         {
@@ -100,6 +112,27 @@ namespace BlinkStickClient
 
             UpdateButtons();
 
+        }
+
+        public override void Dispose()
+        {
+            DataModel = null;
+            base.Dispose();
+        }
+
+        public void LoadPatterns()
+        {
+            PatternListStore.Clear();
+            foreach (Pattern pattern in DataModel.Patterns)
+            {
+                TreeIter iter = PatternListStore.AppendValues("gtk-media-play", pattern, "gtk-edit", "gtk-copy", "gtk-delete");
+
+                if (pattern == PreselectedPattern)
+                {
+                    treeviewPatterns.Selection.SelectIter(iter);
+                    SelectedPattern = pattern;
+                }
+            }
         }
 
         void UpdateButtons()
@@ -209,6 +242,7 @@ namespace BlinkStickClient
 
                 if (column == (sender as TreeView).Columns[4]) //Delete clicked
                 {
+                    ignoreNextClick = true;
                     PatternListStore.Remove(ref iter);
                     DataModel.Patterns.Remove(SelectedPattern);
                     SelectedPattern = null;

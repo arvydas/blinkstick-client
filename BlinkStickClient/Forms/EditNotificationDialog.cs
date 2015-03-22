@@ -155,21 +155,13 @@ namespace BlinkStickClient
 
             if (Notification is PatternNotification)
             {
-                foreach (Pattern pattern in DataModel.Patterns)
-                {
-                    TreeIter iter = store.AppendValues(pattern);
-
-                    if (pattern == (Notification as PatternNotification).Pattern)
-                    {
-                        comboboxPattern.SetActiveIter(iter);
-                    }
-                }
+                LoadPatterns((Notification as PatternNotification).Pattern);
             }
             else
             {
                 table2.Remove(labelPattern);
                 table2.Remove(comboboxPattern);
-                table2.Remove(buttonPlayPattern);
+                table2.Remove(buttonEditPatterns);
             }
 
             HSeparator hseparator;
@@ -219,6 +211,20 @@ namespace BlinkStickClient
             hseparator.ShowAll();
         }
 
+        void LoadPatterns(Pattern selectedPattern)
+        {
+            store.Clear();
+
+            foreach (Pattern pattern in DataModel.Patterns)
+            {
+                TreeIter iter = store.AppendValues(pattern);
+                if (pattern == selectedPattern)
+                {
+                    comboboxPattern.SetActiveIter(iter);
+                }
+            }
+        }
+
         protected void OnDeviceComboboxWidgetDeviceChanged(object sender, EventArgs e)
         {
             if (deviceComboboxWidget.SelectedBlinkStick == null)
@@ -244,6 +250,13 @@ namespace BlinkStickClient
                     spinbuttonLedsFrom.Sensitive = true;
                     break;
             }
+        }
+
+        protected void OnButtonEditPatternsClicked(object sender, EventArgs e)
+        {
+            PatternDialog.ShowForm(DataModel, SelectedPattern);
+            Pattern selectedPattern = SelectedPattern;
+            LoadPatterns(selectedPattern);
         }
     }
 }
