@@ -17,6 +17,8 @@ namespace BlinkStickClient
 
         private Notification _SelectedNotification = null;
 
+        Boolean ignoreNexClick = false;
+
         public Notification SelectedNotification {
             get {
                 return _SelectedNotification;
@@ -123,6 +125,9 @@ namespace BlinkStickClient
 
         protected void OnTreeviewEventsCursorChanged (object sender, EventArgs e)
         {
+            if (ignoreNexClick)
+                return;
+
             TreeModel model;
             TreeIter iter;
 
@@ -149,6 +154,9 @@ namespace BlinkStickClient
                     {
                         NotificationListStore.AppendValues(notification, "gtk-edit", "gtk-copy", "gtk-delete", NotificationRegistry.FindIcon(notification.GetType()));
                         DataModel.Notifications.Add(notification);
+                        ignoreNexClick = true;
+                        SelectNotificationInTree(notification);
+                        ignoreNexClick = false;
                     }
                 }
                 else if (column == (sender as TreeView).Columns[4]) //Edit clicked
@@ -246,8 +254,26 @@ namespace BlinkStickClient
                     NotificationListStore.AppendValues(notification, "gtk-edit", "gtk-copy", "gtk-delete", NotificationRegistry.FindIcon(notification.GetType()));
                     DataModel.Notifications.Add(notification);
                     DataModel.Save();
+
+                    SelectNotificationInTree(notification);
                 }
             }
+        }
+
+        private void SelectNotificationInTree(Notification notification)
+        {
+            TreeIter iterator;
+            NotificationListStore.GetIterFirst(out iterator);
+
+            do
+            {
+                if (notification == (Notification)NotificationListStore.GetValue(iterator, 0))
+                {
+                    treeviewEvents.SetCursor(NotificationListStore.GetPath(iterator), treeviewEvents.Columns[0], false);
+                    break;
+                }
+            } 
+            while (NotificationListStore.IterNext(ref iterator));
         }
     }
 }
