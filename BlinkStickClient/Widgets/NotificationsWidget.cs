@@ -79,6 +79,17 @@ namespace BlinkStickClient
             treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 2);
             treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 3);
 
+            NotificationListStore.SetSortFunc(0, delegate(TreeModel model, TreeIter a, TreeIter b) {
+                Notification n1 = (Notification)model.GetValue(a, 0);
+                Notification n2 = (Notification)model.GetValue(b, 0);
+                if (n1 == null || n2 == null) 
+                    return 0;
+                return String.Compare(n1.Name, n2.Name);
+            });
+
+            NotificationListStore.SetSortColumnId(0, SortType.Ascending);
+
+
             treeviewEvents.Model = NotificationListStore;
         }
 
