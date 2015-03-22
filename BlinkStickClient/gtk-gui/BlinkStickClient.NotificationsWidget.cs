@@ -10,11 +10,9 @@ namespace BlinkStickClient
 		
 		private global::Gtk.HBox hbox1;
 		
-		private global::Gtk.Label label1;
-		
-		private global::Gtk.Alignment alignment1;
-		
 		private global::Gtk.Button buttonAddNotification;
+		
+		private global::Gtk.Label label1;
 		
 		private global::Gtk.ScrolledWindow GtkScrolledWindow;
 		
@@ -38,37 +36,32 @@ namespace BlinkStickClient
 			this.hbox1.Name = "hbox1";
 			this.hbox1.Spacing = 6;
 			// Container child hbox1.Gtk.Box+BoxChild
+			this.buttonAddNotification = new global::Gtk.Button ();
+			this.buttonAddNotification.CanFocus = true;
+			this.buttonAddNotification.Name = "buttonAddNotification";
+			this.buttonAddNotification.UseUnderline = true;
+			global::Gtk.Image w3 = new global::Gtk.Image ();
+			w3.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.Menu);
+			this.buttonAddNotification.Image = w3;
+			this.hbox1.Add (this.buttonAddNotification);
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.buttonAddNotification]));
+			w4.Position = 0;
+			w4.Expand = false;
+			w4.Fill = false;
+			// Container child hbox1.Gtk.Box+BoxChild
 			this.label1 = new global::Gtk.Label ();
 			this.label1.Name = "label1";
 			this.label1.Xpad = 10;
 			this.label1.Xalign = 0F;
 			this.label1.UseMarkup = true;
 			this.hbox1.Add (this.label1);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.label1]));
-			w3.Position = 0;
-			// Container child hbox1.Gtk.Box+BoxChild
-			this.alignment1 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
-			this.alignment1.Name = "alignment1";
-			this.alignment1.RightPadding = ((uint)(5));
-			// Container child alignment1.Gtk.Container+ContainerChild
-			this.buttonAddNotification = new global::Gtk.Button ();
-			this.buttonAddNotification.CanFocus = true;
-			this.buttonAddNotification.Name = "buttonAddNotification";
-			this.buttonAddNotification.UseUnderline = true;
-			global::Gtk.Image w4 = new global::Gtk.Image ();
-			w4.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.Menu);
-			this.buttonAddNotification.Image = w4;
-			this.alignment1.Add (this.buttonAddNotification);
-			this.hbox1.Add (this.alignment1);
-			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.alignment1]));
-			w6.Position = 1;
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.label1]));
+			w5.Position = 1;
+			this.vbox5.Add (this.hbox1);
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.hbox1]));
+			w6.Position = 0;
 			w6.Expand = false;
 			w6.Fill = false;
-			this.vbox5.Add (this.hbox1);
-			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.hbox1]));
-			w7.Position = 0;
-			w7.Expand = false;
-			w7.Fill = false;
 			// Container child vbox5.Gtk.Box+BoxChild
 			this.GtkScrolledWindow = new global::Gtk.ScrolledWindow ();
 			this.GtkScrolledWindow.Name = "GtkScrolledWindow";
@@ -79,8 +72,8 @@ namespace BlinkStickClient
 			this.treeviewEvents.Name = "treeviewEvents";
 			this.GtkScrolledWindow.Add (this.treeviewEvents);
 			this.vbox5.Add (this.GtkScrolledWindow);
-			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.GtkScrolledWindow]));
-			w9.Position = 1;
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox5 [this.GtkScrolledWindow]));
+			w8.Position = 1;
 			this.Add (this.vbox5);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

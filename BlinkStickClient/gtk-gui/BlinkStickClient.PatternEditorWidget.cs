@@ -12,9 +12,9 @@ namespace BlinkStickClient
 		
 		private global::Gtk.HBox hboxNewPatternButtons;
 		
-		private global::Gtk.Alignment alignment2;
-		
 		private global::Gtk.Button buttonAddPattern;
+		
+		private global::Gtk.Alignment alignment2;
 		
 		private global::Gtk.ScrolledWindow GtkScrolledWindow;
 		
@@ -24,9 +24,9 @@ namespace BlinkStickClient
 		
 		private global::Gtk.HBox hboxAnimationsTitle;
 		
-		private global::Gtk.Label labelPattern;
-		
 		private global::Gtk.Button buttonAddAnimation;
+		
+		private global::Gtk.Label labelPattern;
 		
 		private global::Gtk.ScrolledWindow scrolledwindowAnimations;
 		
@@ -59,24 +59,24 @@ namespace BlinkStickClient
 			this.hboxNewPatternButtons.Name = "hboxNewPatternButtons";
 			this.hboxNewPatternButtons.Spacing = 6;
 			// Container child hboxNewPatternButtons.Gtk.Box+BoxChild
-			this.alignment2 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
-			this.alignment2.Name = "alignment2";
-			this.hboxNewPatternButtons.Add (this.alignment2);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hboxNewPatternButtons [this.alignment2]));
-			w2.Position = 0;
-			// Container child hboxNewPatternButtons.Gtk.Box+BoxChild
 			this.buttonAddPattern = new global::Gtk.Button ();
 			this.buttonAddPattern.CanFocus = true;
 			this.buttonAddPattern.Name = "buttonAddPattern";
 			this.buttonAddPattern.UseUnderline = true;
-			global::Gtk.Image w3 = new global::Gtk.Image ();
-			w3.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.Menu);
-			this.buttonAddPattern.Image = w3;
+			global::Gtk.Image w2 = new global::Gtk.Image ();
+			w2.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.Menu);
+			this.buttonAddPattern.Image = w2;
 			this.hboxNewPatternButtons.Add (this.buttonAddPattern);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hboxNewPatternButtons [this.buttonAddPattern]));
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hboxNewPatternButtons [this.buttonAddPattern]));
+			w3.Position = 0;
+			w3.Expand = false;
+			w3.Fill = false;
+			// Container child hboxNewPatternButtons.Gtk.Box+BoxChild
+			this.alignment2 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
+			this.alignment2.Name = "alignment2";
+			this.hboxNewPatternButtons.Add (this.alignment2);
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hboxNewPatternButtons [this.alignment2]));
 			w4.Position = 1;
-			w4.Expand = false;
-			w4.Fill = false;
 			this.vboxLeft.Add (this.hboxNewPatternButtons);
 			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vboxLeft [this.hboxNewPatternButtons]));
 			w5.Position = 1;
@@ -108,25 +108,25 @@ namespace BlinkStickClient
 			this.hboxAnimationsTitle.Name = "hboxAnimationsTitle";
 			this.hboxAnimationsTitle.Spacing = 6;
 			// Container child hboxAnimationsTitle.Gtk.Box+BoxChild
-			this.labelPattern = new global::Gtk.Label ();
-			this.labelPattern.Name = "labelPattern";
-			this.labelPattern.LabelProp = global::Mono.Unix.Catalog.GetString ("Pattern Animations");
-			this.hboxAnimationsTitle.Add (this.labelPattern);
-			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.hboxAnimationsTitle [this.labelPattern]));
-			w9.Position = 0;
-			// Container child hboxAnimationsTitle.Gtk.Box+BoxChild
 			this.buttonAddAnimation = new global::Gtk.Button ();
 			this.buttonAddAnimation.CanFocus = true;
 			this.buttonAddAnimation.Name = "buttonAddAnimation";
 			this.buttonAddAnimation.UseUnderline = true;
-			global::Gtk.Image w10 = new global::Gtk.Image ();
-			w10.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.Menu);
-			this.buttonAddAnimation.Image = w10;
+			global::Gtk.Image w9 = new global::Gtk.Image ();
+			w9.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.Menu);
+			this.buttonAddAnimation.Image = w9;
 			this.hboxAnimationsTitle.Add (this.buttonAddAnimation);
-			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.hboxAnimationsTitle [this.buttonAddAnimation]));
+			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hboxAnimationsTitle [this.buttonAddAnimation]));
+			w10.Position = 0;
+			w10.Expand = false;
+			w10.Fill = false;
+			// Container child hboxAnimationsTitle.Gtk.Box+BoxChild
+			this.labelPattern = new global::Gtk.Label ();
+			this.labelPattern.Name = "labelPattern";
+			this.labelPattern.LabelProp = global::Mono.Unix.Catalog.GetString ("Pattern Animations");
+			this.hboxAnimationsTitle.Add (this.labelPattern);
+			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.hboxAnimationsTitle [this.labelPattern]));
 			w11.Position = 1;
-			w11.Expand = false;
-			w11.Fill = false;
 			this.vboxRight.Add (this.hboxAnimationsTitle);
 			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.vboxRight [this.hboxAnimationsTitle]));
 			w12.Position = 0;

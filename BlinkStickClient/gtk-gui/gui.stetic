@@ -1633,18 +1633,6 @@ Pulse</property>
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
-                  <widget class="Gtk.Alignment" id="alignment2">
-                    <property name="MemberName" />
-                    <child>
-                      <placeholder />
-                    </child>
-                  </widget>
-                  <packing>
-                    <property name="Position">0</property>
-                    <property name="AutoSize">True</property>
-                  </packing>
-                </child>
-                <child>
                   <widget class="Gtk.Button" id="buttonAddPattern">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
@@ -1655,10 +1643,22 @@ Pulse</property>
                     <signal name="Clicked" handler="OnButtonAddPatternClicked" />
                   </widget>
                   <packing>
-                    <property name="Position">1</property>
+                    <property name="Position">0</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Alignment" id="alignment2">
+                    <property name="MemberName" />
+                    <child>
+                      <placeholder />
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="Position">1</property>
+                    <property name="AutoSize">True</property>
                   </packing>
                 </child>
               </widget>
@@ -1703,16 +1703,6 @@ Pulse</property>
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
-                  <widget class="Gtk.Label" id="labelPattern">
-                    <property name="MemberName" />
-                    <property name="LabelProp" translatable="yes">Pattern Animations</property>
-                  </widget>
-                  <packing>
-                    <property name="Position">0</property>
-                    <property name="AutoSize">False</property>
-                  </packing>
-                </child>
-                <child>
                   <widget class="Gtk.Button" id="buttonAddAnimation">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
@@ -1723,10 +1713,20 @@ Pulse</property>
                     <signal name="Clicked" handler="OnButtonAddAnimationClicked" />
                   </widget>
                   <packing>
-                    <property name="Position">1</property>
+                    <property name="Position">0</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Label" id="labelPattern">
+                    <property name="MemberName" />
+                    <property name="LabelProp" translatable="yes">Pattern Animations</property>
+                  </widget>
+                  <packing>
+                    <property name="Position">1</property>
+                    <property name="AutoSize">False</property>
                   </packing>
                 </child>
               </widget>
@@ -1795,6 +1795,23 @@ Pulse</property>
             <property name="MemberName" />
             <property name="Spacing">6</property>
             <child>
+              <widget class="Gtk.Button" id="buttonAddNotification">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="Type">TextAndIcon</property>
+                <property name="Icon">stock:gtk-add Menu</property>
+                <property name="Label" translatable="yes" />
+                <property name="UseUnderline">True</property>
+                <signal name="Clicked" handler="OnButtonAddNotificationClicked" />
+              </widget>
+              <packing>
+                <property name="Position">0</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
+            <child>
               <widget class="Gtk.Label" id="label1">
                 <property name="MemberName" />
                 <property name="Xpad">10</property>
@@ -1802,31 +1819,8 @@ Pulse</property>
                 <property name="UseMarkup">True</property>
               </widget>
               <packing>
-                <property name="Position">0</property>
-                <property name="AutoSize">False</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="Gtk.Alignment" id="alignment1">
-                <property name="MemberName" />
-                <property name="RightPadding">5</property>
-                <child>
-                  <widget class="Gtk.Button" id="buttonAddNotification">
-                    <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Type">TextAndIcon</property>
-                    <property name="Icon">stock:gtk-add Menu</property>
-                    <property name="Label" translatable="yes" />
-                    <property name="UseUnderline">True</property>
-                    <signal name="Clicked" handler="OnButtonAddNotificationClicked" />
-                  </widget>
-                </child>
-              </widget>
-              <packing>
                 <property name="Position">1</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
+                <property name="AutoSize">False</property>
               </packing>
             </child>
           </widget>
