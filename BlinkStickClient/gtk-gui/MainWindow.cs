@@ -95,23 +95,23 @@ public partial class MainWindow
 		this.OverviewAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Overview");
 		w1.Add (this.OverviewAction, null);
 		this.NotificationsAction = new global::Gtk.RadioAction ("NotificationsAction", global::Mono.Unix.Catalog.GetString ("Notifications"), null, "blinkstick-notifications", 1);
-		this.NotificationsAction.Group = this.saveAction.Group;
+		this.NotificationsAction.Group = this.OverviewAction.Group;
 		this.NotificationsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Notifications");
 		w1.Add (this.NotificationsAction, null);
 		this.TestToolbarAction = new global::Gtk.RadioAction ("TestToolbarAction", global::Mono.Unix.Catalog.GetString ("Test"), null, null, 4);
-		this.TestToolbarAction.Group = this.saveAction.Group;
+		this.TestToolbarAction.Group = this.OverviewAction.Group;
 		this.TestToolbarAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Test");
 		w1.Add (this.TestToolbarAction, null);
 		this.HelpAction1 = new global::Gtk.RadioAction ("HelpAction1", global::Mono.Unix.Catalog.GetString ("Help"), null, "blinkstick-help", 4);
-		this.HelpAction1.Group = this.TestToolbarAction.Group;
+		this.HelpAction1.Group = this.OverviewAction.Group;
 		this.HelpAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Help");
 		w1.Add (this.HelpAction1, null);
 		this.PatternsAction1 = new global::Gtk.RadioAction ("PatternsAction1", global::Mono.Unix.Catalog.GetString ("Patterns"), null, "blinkstick-patterns", 2);
-		this.PatternsAction1.Group = this.TestToolbarAction.Group;
+		this.PatternsAction1.Group = this.HelpAction1.Group;
 		this.PatternsAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Patterns");
 		w1.Add (this.PatternsAction1, null);
 		this.EventsAction = new global::Gtk.RadioAction ("EventsAction", global::Mono.Unix.Catalog.GetString ("Events"), null, "blinkstick-events", 3);
-		this.EventsAction.Group = this.TestToolbarAction.Group;
+		this.EventsAction.Group = this.HelpAction1.Group;
 		this.EventsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Events");
 		w1.Add (this.EventsAction, null);
 		this.UIManager.InsertActionGroup (w1, 0);
@@ -124,7 +124,7 @@ public partial class MainWindow
 		this.vbox2.Name = "vbox2";
 		this.vbox2.Spacing = 6;
 		// Container child vbox2.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString (@"<ui><menubar name='menubar2'><menu name='FileAction' action='FileAction'><menuitem name='HideAction' action='HideAction'/><menuitem name='quitAction' action='quitAction'/></menu><menu name='BlinkStickAction' action='BlinkStickAction'><menuitem name='PatternsAction' action='PatternsAction'/></menu><menu name='HelpAction' action='HelpAction'><menuitem name='SupportAction' action='SupportAction'/><menuitem name='ReportABugAction' action='ReportABugAction'/><menuitem name='OpenLogAction' action='OpenLogAction'/><separator/><menuitem name='AboutAction' action='AboutAction'/></menu></menubar></ui>");
+		this.UIManager.AddUiFromString (@"<ui><menubar name='menubar2'><menu name='FileAction' action='FileAction'><menuitem name='HideAction' action='HideAction'/><menuitem name='quitAction' action='quitAction'/></menu><menu name='HelpAction' action='HelpAction'><menuitem name='SupportAction' action='SupportAction'/><menuitem name='ReportABugAction' action='ReportABugAction'/><menuitem name='OpenLogAction' action='OpenLogAction'/><separator/><menuitem name='AboutAction' action='AboutAction'/></menu></menubar></ui>");
 		this.menubar2 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar2")));
 		this.menubar2.Name = "menubar2";
 		this.vbox2.Add (this.menubar2);

@@ -187,9 +187,6 @@
                 <node type="Menuitem" action="HideAction" />
                 <node type="Menuitem" action="quitAction" />
               </node>
-              <node type="Menu" action="BlinkStickAction">
-                <node type="Menuitem" action="PatternsAction" />
-              </node>
               <node type="Menu" action="HelpAction">
                 <node type="Menuitem" action="SupportAction" />
                 <node type="Menuitem" action="ReportABugAction" />
