@@ -11,6 +11,16 @@ namespace BlinkStickClient.DataModel
 {
     public class ApplicationDataModel
     {
+        public event EventHandler<EventArgs> PatternsUpdated;
+
+        public void OnPatternsUpdated()
+        {
+            if (PatternsUpdated != null)
+            {
+                PatternsUpdated(this, EventArgs.Empty);
+            }
+        }
+
         public List<Pattern> Patterns = new List<Pattern>();
         public ObservableCollectionEx<Notification> Notifications = new ObservableCollectionEx<Notification>();
         public List<BlinkStickDeviceSettings> Devices = new List<BlinkStickDeviceSettings>();
