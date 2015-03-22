@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json;
 using BlinkStickDotNet;
@@ -230,6 +231,78 @@ namespace BlinkStickClient.DataModel
                     settings.Led = null;
                 }
             }
+        }
+        #endregion
+
+        #region Naming helpers
+        public String GetPatternName(string baseName = "Pattern", int start = 1)
+        {
+            Regex r = new Regex(@"(\d+)$");
+            Match m = r.Match(baseName);
+
+            if (m.Success)
+            {
+                start = Convert.ToInt32(m.Groups[0].Value);
+                baseName = baseName.Substring(0, m.Groups[0].Index);
+            }
+
+            String name = "";
+            int i = start;
+            Boolean found;
+
+            do
+            {
+                found = false;
+                name = String.Format("{0}{1}", baseName, i);
+
+                foreach (Pattern p in Patterns)
+                {
+                    if (p.Name == name)
+                    {
+                        i++;
+                        name = "";
+                        found = true;
+                    }
+                }
+            } 
+            while (found && i < 100);
+
+            return name;
+        }
+
+        public String GetNotificationName(string baseName, int start = 1)
+        {
+            Regex r = new Regex(@"(\d+)$");
+            Match m = r.Match(baseName);
+
+            if (m.Success)
+            {
+                start = Convert.ToInt32(m.Groups[0].Value);
+                baseName = baseName.Substring(0, m.Groups[0].Index);
+            }
+
+            String name = "";
+            int i = start;
+            Boolean found;
+
+            do
+            {
+                found = false;
+                name = String.Format("{0}{1}", baseName, i);
+
+                foreach (Notification n in Notifications)
+                {
+                    if (n.Name == name)
+                    {
+                        i++;
+                        name = "";
+                        found = true;
+                    }
+                }
+            } 
+            while (found && i < 100);
+
+            return name;
         }
         #endregion
     }

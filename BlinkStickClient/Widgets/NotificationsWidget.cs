@@ -149,7 +149,8 @@ namespace BlinkStickClient
                 else if (column == (sender as TreeView).Columns[5]) //Copy clicked
                 {
                     Notification notification = SelectedNotification.Copy();
-                    notification.Name = "";
+                    notification.Name = DataModel.GetNotificationName(notification.Name, 2);
+
                     if (EditNotification(notification, "Copy Notification"))
                     {
                         NotificationListStore.AppendValues(notification, "gtk-edit", "gtk-copy", "gtk-delete", NotificationRegistry.FindIcon(notification.GetType()));
@@ -248,6 +249,7 @@ namespace BlinkStickClient
             {
 
                 Notification notification = (Notification)Activator.CreateInstance(notificationType);
+                notification.Name = DataModel.GetNotificationName(notification.GetTypeName());
 
                 if (EditNotification(notification, "New Notification"))
                 {

@@ -217,7 +217,7 @@ namespace BlinkStickClient
                 {
                     Pattern pattern = new Pattern();
                     pattern.Assign(SelectedPattern);
-                    pattern.Name = "";
+                    pattern.Name = DataModel.GetPatternName(SelectedPattern.Name, 2);
 
                     if (EditPatternDialog.ShowForm(pattern, DataModel, "Copy Pattern " + SelectedPattern.Name))
                     {
@@ -254,6 +254,7 @@ namespace BlinkStickClient
         protected void OnButtonAddPatternClicked (object sender, EventArgs e)
         {
             Pattern pattern = new Pattern();
+            pattern.Name = DataModel.GetPatternName();
 
             if (EditPatternDialog.ShowForm(pattern, DataModel, "Add Pattern"))
             {
