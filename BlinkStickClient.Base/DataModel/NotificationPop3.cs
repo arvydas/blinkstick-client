@@ -14,7 +14,7 @@ namespace BlinkStickClient.DataModel
         {
         }
 
-        public override Notification Copy(Notification notification)
+        public override CustomNotification Copy(CustomNotification notification)
         {
             if (notification == null)
             {

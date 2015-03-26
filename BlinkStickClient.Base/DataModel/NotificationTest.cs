@@ -49,7 +49,7 @@ namespace BlinkStickClient.DataModel
             this.Frequency = TestFrequencyEnum.Disabled;
         }
 
-        public override Notification Copy(Notification notification)
+        public override CustomNotification Copy(CustomNotification notification)
         {
             if (notification == null)
             {

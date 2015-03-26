@@ -13,13 +13,13 @@ namespace BlinkStickClient
 
         protected static readonly ILog log = LogManager.GetLogger("Main");  
 
-        Gtk.ListStore NotificationListStore = new ListStore(typeof(Notification), typeof(String), typeof(String), typeof(String), typeof(Pixbuf));
+        Gtk.ListStore NotificationListStore = new ListStore(typeof(CustomNotification), typeof(String), typeof(String), typeof(String), typeof(Pixbuf));
 
-        private Notification _SelectedNotification = null;
+        private CustomNotification _SelectedNotification = null;
 
         Boolean ignoreNexClick = false;
 
-        public Notification SelectedNotification {
+        public CustomNotification SelectedNotification {
             get {
                 return _SelectedNotification;
             }
@@ -82,8 +82,8 @@ namespace BlinkStickClient
             treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 3);
 
             NotificationListStore.SetSortFunc(0, delegate(TreeModel model, TreeIter a, TreeIter b) {
-                Notification n1 = (Notification)model.GetValue(a, 0);
-                Notification n2 = (Notification)model.GetValue(b, 0);
+                CustomNotification n1 = (CustomNotification)model.GetValue(a, 0);
+                CustomNotification n2 = (CustomNotification)model.GetValue(b, 0);
                 if (n1 == null || n2 == null) 
                     return 0;
                 return String.Compare(n1.Name, n2.Name);
@@ -98,12 +98,12 @@ namespace BlinkStickClient
         public void Initialize()
         {
             log.Debug("Adding notifications to the tree");
-            foreach (Notification e in DataModel.Notifications) {
+            foreach (CustomNotification e in DataModel.Notifications) {
                 NotificationListStore.AppendValues (e, "gtk-edit", "gtk-copy", "gtk-delete", NotificationRegistry.FindIcon(e.GetType()));
             } 
         }
 
-        public void NotificationUpdated(Notification notification)
+        public void NotificationUpdated(CustomNotification notification)
         {
             TreeIter iter;
             Boolean searchMore = NotificationListStore.GetIterFirst(out iter);
@@ -134,7 +134,7 @@ namespace BlinkStickClient
             TreeSelection selection = (sender as TreeView).Selection;
 
             if(selection.GetSelected(out model, out iter)){
-                SelectedNotification = (Notification)model.GetValue (iter, 0);
+                SelectedNotification = (CustomNotification)model.GetValue (iter, 0);
 
                 TreePath path;
                 TreeViewColumn column;
@@ -148,7 +148,7 @@ namespace BlinkStickClient
                 }
                 else if (column == (sender as TreeView).Columns[5]) //Copy clicked
                 {
-                    Notification notification = SelectedNotification.Copy();
+                    CustomNotification notification = SelectedNotification.Copy();
                     notification.Name = DataModel.GetNotificationName(notification.Name, 2);
 
                     if (EditNotification(notification, "Copy Notification"))
@@ -176,7 +176,7 @@ namespace BlinkStickClient
             }
         }
 
-        private Boolean EditNotification(Notification notification, String title = "Edit Notification")
+        private Boolean EditNotification(CustomNotification notification, String title = "Edit Notification")
         {
             int response;
 
@@ -194,24 +194,24 @@ namespace BlinkStickClient
 
         private void RenderEnabledCell (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
         {
-            if (model.GetValue (iter, 0) is Notification) {
-                Notification notification = (Notification)model.GetValue (iter, 0);
+            if (model.GetValue (iter, 0) is CustomNotification) {
+                CustomNotification notification = (CustomNotification)model.GetValue (iter, 0);
                 (cell as Gtk.CellRendererPixbuf).StockId = notification.Enabled ? "gtk-yes" : "gtk-no";
             }
         }
 
         private void RenderNameCell (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
         {
-            if (model.GetValue (iter, 0) is Notification) {
-                Notification notification = (Notification)model.GetValue (iter, 0);
+            if (model.GetValue (iter, 0) is CustomNotification) {
+                CustomNotification notification = (CustomNotification)model.GetValue (iter, 0);
                 (cell as Gtk.CellRendererText).Text = notification.Name;
             }
         }
 
         private void RenderBlinkStickCell (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
         {
-            if (model.GetValue (iter, 0) is Notification) {
-                Notification notification = (Notification)model.GetValue (iter, 0);
+            if (model.GetValue (iter, 0) is CustomNotification) {
+                CustomNotification notification = (CustomNotification)model.GetValue (iter, 0);
                 (cell as Gtk.CellRendererText).Text = notification.BlinkStickSerial;
             }
         }
@@ -233,7 +233,7 @@ namespace BlinkStickClient
         {
             int response;
 
-            Type notificationType = typeof(Notification);
+            Type notificationType = typeof(CustomNotification);
 
             using (SelectNotificationDialog dialog = new SelectNotificationDialog())
             {
@@ -248,7 +248,7 @@ namespace BlinkStickClient
             if (response == (int)ResponseType.Ok)
             {
 
-                Notification notification = (Notification)Activator.CreateInstance(notificationType);
+                CustomNotification notification = (CustomNotification)Activator.CreateInstance(notificationType);
                 notification.Name = DataModel.GetNotificationName(notification.GetTypeName());
 
                 if (EditNotification(notification, "New Notification"))
@@ -262,14 +262,14 @@ namespace BlinkStickClient
             }
         }
 
-        private void SelectNotificationInTree(Notification notification)
+        private void SelectNotificationInTree(CustomNotification notification)
         {
             TreeIter iterator;
             NotificationListStore.GetIterFirst(out iterator);
 
             do
             {
-                if (notification == (Notification)NotificationListStore.GetValue(iterator, 0))
+                if (notification == (CustomNotification)NotificationListStore.GetValue(iterator, 0))
                 {
                     treeviewEvents.SetCursor(NotificationListStore.GetPath(iterator), treeviewEvents.Columns[0], false);
                     break;

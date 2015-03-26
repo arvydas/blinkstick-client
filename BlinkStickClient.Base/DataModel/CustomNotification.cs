@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace BlinkStickClient.DataModel
 {
-    public abstract class Notification : IDisposable
+    public abstract class CustomNotification : IDisposable
     {
         private ILog _log;
 
@@ -61,7 +61,7 @@ namespace BlinkStickClient.DataModel
 
         public abstract String GetTypeName();
 
-        public Notification()
+        public CustomNotification()
         {
             this.Enabled = true;
             this.LedFirstIndex = 0;
@@ -73,7 +73,7 @@ namespace BlinkStickClient.DataModel
             Stop();
         }
 
-        public virtual Notification Copy(Notification notification = null)
+        public virtual CustomNotification Copy(CustomNotification notification = null)
         {
             if (notification == null)
             {

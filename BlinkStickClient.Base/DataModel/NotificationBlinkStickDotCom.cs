@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace BlinkStickClient.DataModel
 {
-    public class NotificationBlinkStickDotCom : Notification
+    public class NotificationBlinkStickDotCom : CustomNotification
     {
         [JsonIgnore]
         public static BayeuxClient _client;
@@ -42,7 +42,7 @@ namespace BlinkStickClient.DataModel
 
         }
 
-        public override Notification Copy(Notification notification)
+        public override CustomNotification Copy(CustomNotification notification)
         {
             if (notification == null)
             {

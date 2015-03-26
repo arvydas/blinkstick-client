@@ -24,7 +24,7 @@ namespace BlinkStickClient
             }
         }
 
-        ListStore EventListStore = new ListStore(typeof(Notification));
+        ListStore EventListStore = new ListStore(typeof(CustomNotification));
 
         uint RefreshTimer;
 

@@ -24,7 +24,7 @@ namespace BlinkStickClient.DataModel
             UseSsl = true;
         }
 
-        public override Notification Copy(Notification notification)
+        public override CustomNotification Copy(CustomNotification notification)
         {
             ((EmailNotification)notification).Username = this.Username;
             ((EmailNotification)notification).Password = this.Password;

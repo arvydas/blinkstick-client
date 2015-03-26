@@ -7,7 +7,7 @@ using System.IO.Pipes;
 
 namespace BlinkStickClient.DataModel
 {
-    public class NotificationAmbilight : Notification
+    public class NotificationAmbilight : CustomNotification
     {
         Process spawnedProcess;
 
@@ -24,7 +24,7 @@ namespace BlinkStickClient.DataModel
         {
         }
     
-        public override Notification Copy(Notification notification)
+        public override CustomNotification Copy(CustomNotification notification)
         {
             if (notification == null)
             {

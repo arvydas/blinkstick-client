@@ -8,8 +8,8 @@ namespace BlinkStickClient
 {
     public partial class EditNotificationDialog : Gtk.Dialog
     {
-        private Notification _Notification;
-        public Notification Notification { 
+        private CustomNotification _Notification;
+        public CustomNotification Notification { 
             get
             {
                 return _Notification;
@@ -51,7 +51,7 @@ namespace BlinkStickClient
             this.Build();
         }
 
-        public EditNotificationDialog(String title, Gtk.Window parent, ApplicationDataModel dataModel, Notification notification) 
+        public EditNotificationDialog(String title, Gtk.Window parent, ApplicationDataModel dataModel, CustomNotification notification) 
             : base (title, parent, Gtk.DialogFlags.Modal, new object[0])
         {
             this.Build();

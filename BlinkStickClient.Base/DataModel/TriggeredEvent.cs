@@ -8,7 +8,7 @@ namespace BlinkStickClient.DataModel
     {
         public DateTime TimeStamp;
 
-        public Notification Notification;
+        public CustomNotification Notification;
 
         public String Message;
 
@@ -28,7 +28,7 @@ namespace BlinkStickClient.DataModel
         {
         }
 
-        public TriggeredEvent(Notification notification, String message)
+        public TriggeredEvent(CustomNotification notification, String message)
         {
             this.TimeStamp = DateTime.Now;
             this.Notification = notification;

@@ -21,7 +21,7 @@ namespace BlinkStickClient.DataModel
         public void Start()
         {
             log.Info("Starting notification monitoring...");
-            foreach (Notification n in DataModel.Notifications)
+            foreach (CustomNotification n in DataModel.Notifications)
             {
                 n.Triggered += NotificationTriggered;
                 n.ColorSend += NotificationColor;
@@ -30,7 +30,7 @@ namespace BlinkStickClient.DataModel
             DataModel.Notifications.CollectionChanged += NotificationListChanged;
             DataModel.Notifications.ItemUpdated += NotificationListItemUpdated;
 
-            foreach (Notification n in DataModel.Notifications)
+            foreach (CustomNotification n in DataModel.Notifications)
             {
                 n.DataModel = DataModel;
                 if (n.RequiresMonitoring() && n.Enabled)
@@ -44,7 +44,7 @@ namespace BlinkStickClient.DataModel
 
         void NotificationListItemUpdated (object sender, ItemUpdatedEventArgs e)
         {
-            Notification notification = e.Item as Notification;
+            CustomNotification notification = e.Item as CustomNotification;
 
             if (notification.RequiresMonitoring())
             {
@@ -72,7 +72,7 @@ namespace BlinkStickClient.DataModel
         public void Stop()
         {
             log.Info("Stopping monitor...");
-            foreach (Notification n in DataModel.Notifications)
+            foreach (CustomNotification n in DataModel.Notifications)
             {
                 n.Triggered -= NotificationTriggered;
             }
@@ -80,7 +80,7 @@ namespace BlinkStickClient.DataModel
             DataModel.Notifications.CollectionChanged -= NotificationListChanged;
             DataModel.Notifications.ItemUpdated -= NotificationListItemUpdated;
 
-            foreach (Notification n in DataModel.Notifications)
+            foreach (CustomNotification n in DataModel.Notifications)
             {
                 if (n.RequiresMonitoring() && n.Running)
                 {
@@ -101,7 +101,7 @@ namespace BlinkStickClient.DataModel
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
-                foreach (Notification n in e.NewItems)
+                foreach (CustomNotification n in e.NewItems)
                 {
                     n.Triggered += NotificationTriggered;
                     n.ColorSend += NotificationColor;
@@ -115,7 +115,7 @@ namespace BlinkStickClient.DataModel
             }
             else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
             {
-                foreach (Notification n in e.OldItems)
+                foreach (CustomNotification n in e.OldItems)
                 {
                     n.Triggered -= NotificationTriggered;
                     n.ColorSend -= NotificationColor;
@@ -131,7 +131,7 @@ namespace BlinkStickClient.DataModel
 
         void NotificationColor (object sender, ColorSendEventArgs e)
         {
-            Notification notification = sender as Notification;
+            CustomNotification notification = sender as CustomNotification;
 
             BlinkStickDeviceSettings settings = DataModel.FindBySerial(notification.BlinkStickSerial);
 
@@ -153,8 +153,8 @@ namespace BlinkStickClient.DataModel
         private void NotificationTriggered (object sender, TriggeredEventArgs e)
         {
             log.InfoFormat("Notification [{0}] \"{1}\" triggered. Message: {2}", 
-                (sender as Notification).GetTypeName(), 
-                (sender as Notification).Name, 
+                (sender as CustomNotification).GetTypeName(), 
+                (sender as CustomNotification).Name, 
                 e.Message);
 
             PatternNotification notification = sender as PatternNotification;

@@ -2,7 +2,7 @@
 
 namespace BlinkStickClient.DataModel
 {
-    public class NotificationMood : Notification
+    public class NotificationMood : CustomNotification
     {
         public MoodlightSpeedEnum MoodlightSpeed;
 
@@ -38,7 +38,7 @@ namespace BlinkStickClient.DataModel
             this.MoodlightSpeed = MoodlightSpeedEnum.Normal;
         }
 
-        public override Notification Copy(Notification notification)
+        public override CustomNotification Copy(CustomNotification notification)
         {
             if (notification == null)
             {

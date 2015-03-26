@@ -30,7 +30,7 @@ namespace BlinkStickClient.DataModel
             this.CheckPeriod = 1;
         }
 
-        public override Notification Copy(Notification notification)
+        public override CustomNotification Copy(CustomNotification notification)
         {
             if (notification == null)
             {

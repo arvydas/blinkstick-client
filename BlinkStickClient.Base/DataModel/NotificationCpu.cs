@@ -17,7 +17,7 @@ namespace BlinkStickClient.DataModel
             return "CPU";
         }
 
-        public override Notification Copy(Notification notification)
+        public override CustomNotification Copy(CustomNotification notification)
         {
             if (notification == null)
             {

@@ -19,7 +19,7 @@ namespace BlinkStickClient
 
         #region IEditorInterface implementation
 
-        public void SetNotification(BlinkStickClient.DataModel.Notification notification)
+        public void SetNotification(BlinkStickClient.DataModel.CustomNotification notification)
         {
             this.Notification = (NotificationBlinkStickDotCom)notification;
 

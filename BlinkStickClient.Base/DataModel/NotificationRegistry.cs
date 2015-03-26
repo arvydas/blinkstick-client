@@ -33,7 +33,7 @@ namespace BlinkStickClient.DataModel
 
         public static int Register(String category, String description, Type type, Type editorType, Pixbuf icon = null)
         {
-            using (Notification notification = (Notification)Activator.CreateInstance(type))
+            using (CustomNotification notification = (CustomNotification)Activator.CreateInstance(type))
             {
 				NotificationTypes.Add(
 					new NotificationRegistryEntry(

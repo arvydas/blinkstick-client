@@ -6,7 +6,7 @@ using BlinkStickDotNet;
 
 namespace BlinkStickClient.DataModel
 {
-    public class NotificationRemoteControl : Notification
+    public class NotificationRemoteControl : CustomNotification
     {
         private RemoteControlServer server;
 
@@ -24,7 +24,7 @@ namespace BlinkStickClient.DataModel
             this.ApiAccessPort = 9000;
         }
 
-        public override Notification Copy(Notification notification)
+        public override CustomNotification Copy(CustomNotification notification)
         {
             if (notification == null)
             {

@@ -22,7 +22,7 @@ namespace BlinkStickClient.DataModel
         }
 
         public List<Pattern> Patterns = new List<Pattern>();
-        public ObservableCollectionEx<Notification> Notifications = new ObservableCollectionEx<Notification>();
+        public ObservableCollectionEx<CustomNotification> Notifications = new ObservableCollectionEx<CustomNotification>();
         public List<BlinkStickDeviceSettings> Devices = new List<BlinkStickDeviceSettings>();
         public ObservableCollection<TriggeredEvent> TriggeredEvents = new ObservableCollection<TriggeredEvent>();
 
@@ -165,7 +165,7 @@ namespace BlinkStickClient.DataModel
             this.Patterns.AddRange(data.Patterns);
 
             this.Notifications.Clear();
-            foreach (Notification n in data.Notifications)
+            foreach (CustomNotification n in data.Notifications)
             {
                 this.Notifications.Add(n);
             }
@@ -300,7 +300,7 @@ namespace BlinkStickClient.DataModel
                 found = false;
                 name = String.Format("{0}{1}", baseName, i);
 
-                foreach (Notification n in Notifications)
+                foreach (CustomNotification n in Notifications)
                 {
                     if (n.Name == name)
                     {

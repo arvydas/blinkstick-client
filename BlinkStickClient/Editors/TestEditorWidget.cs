@@ -14,7 +14,7 @@ namespace BlinkStickClient
         }
 
         #region EditorInterface implementation
-        public void SetNotification(BlinkStickClient.DataModel.Notification notification)
+        public void SetNotification(BlinkStickClient.DataModel.CustomNotification notification)
         {
             this.Notification = notification as NotificationTest;
             comboboxFrequency.Active = (int)Notification.Frequency;

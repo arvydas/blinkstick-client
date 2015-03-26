@@ -90,7 +90,7 @@ namespace BlinkStickClient.DataModel
             }
         }
 
-        public void SetColor(Notification notification, byte r, byte g, byte b)
+        public void SetColor(CustomNotification notification, byte r, byte g, byte b)
         {
             if (BrightnessLimit < 100 && BrightnessLimit >= 0)
             {
@@ -118,7 +118,7 @@ namespace BlinkStickClient.DataModel
             }
         }
 
-        public RgbColor GetColor(Notification notification)
+        public RgbColor GetColor(CustomNotification notification)
         {
             int index = notification.LedFirstIndex * 3;
 

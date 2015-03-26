@@ -2,7 +2,7 @@
 
 namespace BlinkStickClient.DataModel
 {
-    public class NotificationBoblight : Notification
+    public class NotificationBoblight : CustomNotification
     {
         public override string GetTypeName()
         {
@@ -13,7 +13,7 @@ namespace BlinkStickClient.DataModel
         {
         }
 
-        public override Notification Copy(Notification notification)
+        public override CustomNotification Copy(CustomNotification notification)
         {
             if (notification == null)
             {

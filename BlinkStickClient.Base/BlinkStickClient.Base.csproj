@@ -57,7 +57,6 @@
     <Compile Include="DataModel\BlinkStickDeviceSettings.cs" />
     <Compile Include="DataModel\EmailNotification.cs" />
     <Compile Include="DataModel\HardwareNotification.cs" />
-    <Compile Include="DataModel\Notification.cs" />
     <Compile Include="DataModel\NotificationAmbilight.cs" />
     <Compile Include="DataModel\NotificationApplication.cs" />
     <Compile Include="DataModel\NotificationBattery.cs" />
@@ -84,6 +83,7 @@
     <Compile Include="Utils\ActiveWindowMonitor.cs" />
     <Compile Include="Utils\RemoteControlServer.cs" />
     <Compile Include="Utils\Win32Api.cs" />
+    <Compile Include="DataModel\CustomNotification.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

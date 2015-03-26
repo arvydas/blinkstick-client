@@ -15,7 +15,7 @@ namespace BlinkStickClient
 
         #region IEditorInterface implementation
 
-        public void SetNotification(Notification notification)
+        public void SetNotification(CustomNotification notification)
         {
             this.Notification = (HardwareNotification)notification;
 

@@ -5,7 +5,7 @@ namespace BlinkStickClient
 {
     public interface IEditorInterface
     {
-        void SetNotification(Notification notification);
+        void SetNotification(CustomNotification notification);
 
         Boolean IsValid(Gtk.Window window);
 
