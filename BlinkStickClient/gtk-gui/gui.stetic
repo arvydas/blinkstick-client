@@ -2757,7 +2757,6 @@ Pulse</property>
                             <property name="Icon">stock:gtk-edit Menu</property>
                             <property name="Label" translatable="yes" />
                             <property name="UseUnderline">True</property>
-                            <signal name="Clicked" handler="OnButtonEditPatternsClicked" />
                           </widget>
                           <packing>
                             <property name="TopAttach">3</property>
@@ -2866,7 +2865,7 @@ Pulse</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.HBox" id="hbox1">
+                          <widget class="Gtk.HBox" id="hboxLedConfiguration">
                             <property name="MemberName" />
                             <property name="Spacing">6</property>
                             <child>
@@ -2953,7 +2952,7 @@ Pulse</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Label" id="label4">
+                          <widget class="Gtk.Label" id="labelBlinkStick">
                             <property name="MemberName" />
                             <property name="Xalign">1</property>
                             <property name="LabelProp" translatable="yes">BlinkStick:</property>

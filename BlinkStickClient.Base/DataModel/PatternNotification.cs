@@ -2,7 +2,7 @@
 
 namespace BlinkStickClient.DataModel
 {
-    public abstract class PatternNotification : CustomNotification
+    public abstract class PatternNotification : DeviceNotification
     {
         public Pattern Pattern { get; set; }
 

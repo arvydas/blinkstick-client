@@ -210,9 +210,13 @@ namespace BlinkStickClient
 
         private void RenderBlinkStickCell (Gtk.TreeViewColumn column, Gtk.CellRenderer cell, Gtk.TreeModel model, Gtk.TreeIter iter)
         {
-            if (model.GetValue (iter, 0) is CustomNotification) {
-                CustomNotification notification = (CustomNotification)model.GetValue (iter, 0);
+            if (model.GetValue (iter, 0) is DeviceNotification) {
+                DeviceNotification notification = (DeviceNotification)model.GetValue (iter, 0);
                 (cell as Gtk.CellRendererText).Text = notification.BlinkStickSerial;
+            }
+            else
+            {
+                (cell as Gtk.CellRendererText).Text = "";
             }
         }
 

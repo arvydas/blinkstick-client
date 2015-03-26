@@ -2,7 +2,7 @@
 
 namespace BlinkStickClient.DataModel
 {
-    public class NotificationMood : CustomNotification
+    public class NotificationMood : DeviceNotification
     {
         public MoodlightSpeedEnum MoodlightSpeed;
 

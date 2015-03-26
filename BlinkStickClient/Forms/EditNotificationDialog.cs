@@ -98,7 +98,7 @@ namespace BlinkStickClient
                 return;
             }
 
-            if (deviceComboboxWidget.SelectedBlinkStick == null)
+            if (Notification is DeviceNotification && deviceComboboxWidget.SelectedBlinkStick == null)
             {
                 MessageBox.Show(this, "Please select BlinkStick device", Gtk.MessageType.Error);
                 return;
@@ -130,9 +130,12 @@ namespace BlinkStickClient
         {
             Notification.Enabled = checkbuttonEnabled.Active;
             Notification.Name = entryName.Text;
-            Notification.BlinkStickSerial = deviceComboboxWidget.SelectedBlinkStick.Serial;
-            Notification.LedFirstIndex = spinbuttonLedsFrom.ValueAsInt;
-            Notification.LedLastIndex = spinbuttonLedsTo.ValueAsInt;
+            if (Notification is DeviceNotification)
+            {
+                ((DeviceNotification)Notification).BlinkStickSerial = deviceComboboxWidget.SelectedBlinkStick.Serial;
+                ((DeviceNotification)Notification).LedFirstIndex = spinbuttonLedsFrom.ValueAsInt;
+                ((DeviceNotification)Notification).LedLastIndex = spinbuttonLedsTo.ValueAsInt;
+            }
 
             if (Notification is PatternNotification)
             {
@@ -149,9 +152,20 @@ namespace BlinkStickClient
         {
             checkbuttonEnabled.Active = Notification.Enabled;
             entryName.Text = Notification.Name;
-            deviceComboboxWidget.SelectBySerial(Notification.BlinkStickSerial);
-            spinbuttonLedsFrom.Value = Notification.LedFirstIndex;
-            spinbuttonLedsTo.Value = Notification.LedLastIndex;
+
+            if (Notification is DeviceNotification)
+            {
+                deviceComboboxWidget.SelectBySerial(((DeviceNotification)Notification).BlinkStickSerial);
+                spinbuttonLedsFrom.Value = ((DeviceNotification)Notification).LedFirstIndex;
+                spinbuttonLedsTo.Value = ((DeviceNotification)Notification).LedLastIndex;
+            }
+            else
+            {
+                table2.Remove(labelBlinkStick);
+                table2.Remove(deviceComboboxWidget);
+                table2.Remove(labelLeds);
+                table2.Remove(hboxLedConfiguration);
+            }
 
             if (Notification is PatternNotification)
             {

@@ -2,7 +2,7 @@
 
 namespace BlinkStickClient.DataModel
 {
-    public class NotificationBoblight : CustomNotification
+    public class NotificationBoblight : DeviceNotification
     {
         public override string GetTypeName()
         {

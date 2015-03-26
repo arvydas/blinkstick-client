@@ -84,6 +84,7 @@
     <Compile Include="Utils\RemoteControlServer.cs" />
     <Compile Include="Utils\Win32Api.cs" />
     <Compile Include="DataModel\CustomNotification.cs" />
+    <Compile Include="DataModel\DeviceNotification.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

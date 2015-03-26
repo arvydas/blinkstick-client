@@ -22,7 +22,7 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Entry entryName;
 		
-		private global::Gtk.HBox hbox1;
+		private global::Gtk.HBox hboxLedConfiguration;
 		
 		private global::Gtk.SpinButton spinbuttonLedsFrom;
 		
@@ -32,7 +32,7 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Label label3;
 		
-		private global::Gtk.Label label4;
+		private global::Gtk.Label labelBlinkStick;
 		
 		private global::Gtk.Label labelLeds;
 		
@@ -142,44 +142,44 @@ namespace BlinkStickClient
 			w7.XOptions = ((global::Gtk.AttachOptions)(4));
 			w7.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table2.Gtk.Table+TableChild
-			this.hbox1 = new global::Gtk.HBox ();
-			this.hbox1.Name = "hbox1";
-			this.hbox1.Spacing = 6;
-			// Container child hbox1.Gtk.Box+BoxChild
+			this.hboxLedConfiguration = new global::Gtk.HBox ();
+			this.hboxLedConfiguration.Name = "hboxLedConfiguration";
+			this.hboxLedConfiguration.Spacing = 6;
+			// Container child hboxLedConfiguration.Gtk.Box+BoxChild
 			this.spinbuttonLedsFrom = new global::Gtk.SpinButton (0D, 63D, 1D);
 			this.spinbuttonLedsFrom.CanFocus = true;
 			this.spinbuttonLedsFrom.Name = "spinbuttonLedsFrom";
 			this.spinbuttonLedsFrom.Adjustment.PageIncrement = 10D;
 			this.spinbuttonLedsFrom.ClimbRate = 1D;
 			this.spinbuttonLedsFrom.Numeric = true;
-			this.hbox1.Add (this.spinbuttonLedsFrom);
-			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.spinbuttonLedsFrom]));
+			this.hboxLedConfiguration.Add (this.spinbuttonLedsFrom);
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hboxLedConfiguration [this.spinbuttonLedsFrom]));
 			w8.Position = 0;
 			w8.Expand = false;
 			w8.Fill = false;
-			// Container child hbox1.Gtk.Box+BoxChild
+			// Container child hboxLedConfiguration.Gtk.Box+BoxChild
 			this.labelLedsTo = new global::Gtk.Label ();
 			this.labelLedsTo.Name = "labelLedsTo";
 			this.labelLedsTo.LabelProp = global::Mono.Unix.Catalog.GetString ("to");
-			this.hbox1.Add (this.labelLedsTo);
-			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.labelLedsTo]));
+			this.hboxLedConfiguration.Add (this.labelLedsTo);
+			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.hboxLedConfiguration [this.labelLedsTo]));
 			w9.Position = 1;
 			w9.Expand = false;
 			w9.Fill = false;
-			// Container child hbox1.Gtk.Box+BoxChild
+			// Container child hboxLedConfiguration.Gtk.Box+BoxChild
 			this.spinbuttonLedsTo = new global::Gtk.SpinButton (0D, 63D, 1D);
 			this.spinbuttonLedsTo.CanFocus = true;
 			this.spinbuttonLedsTo.Name = "spinbuttonLedsTo";
 			this.spinbuttonLedsTo.Adjustment.PageIncrement = 10D;
 			this.spinbuttonLedsTo.ClimbRate = 1D;
 			this.spinbuttonLedsTo.Numeric = true;
-			this.hbox1.Add (this.spinbuttonLedsTo);
-			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.spinbuttonLedsTo]));
+			this.hboxLedConfiguration.Add (this.spinbuttonLedsTo);
+			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hboxLedConfiguration [this.spinbuttonLedsTo]));
 			w10.Position = 2;
 			w10.Expand = false;
 			w10.Fill = false;
-			this.table2.Add (this.hbox1);
-			global::Gtk.Table.TableChild w11 = ((global::Gtk.Table.TableChild)(this.table2 [this.hbox1]));
+			this.table2.Add (this.hboxLedConfiguration);
+			global::Gtk.Table.TableChild w11 = ((global::Gtk.Table.TableChild)(this.table2 [this.hboxLedConfiguration]));
 			w11.TopAttach = ((uint)(4));
 			w11.BottomAttach = ((uint)(5));
 			w11.LeftAttach = ((uint)(1));
@@ -198,12 +198,12 @@ namespace BlinkStickClient
 			w12.XOptions = ((global::Gtk.AttachOptions)(4));
 			w12.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table2.Gtk.Table+TableChild
-			this.label4 = new global::Gtk.Label ();
-			this.label4.Name = "label4";
-			this.label4.Xalign = 1F;
-			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString ("BlinkStick:");
-			this.table2.Add (this.label4);
-			global::Gtk.Table.TableChild w13 = ((global::Gtk.Table.TableChild)(this.table2 [this.label4]));
+			this.labelBlinkStick = new global::Gtk.Label ();
+			this.labelBlinkStick.Name = "labelBlinkStick";
+			this.labelBlinkStick.Xalign = 1F;
+			this.labelBlinkStick.LabelProp = global::Mono.Unix.Catalog.GetString ("BlinkStick:");
+			this.table2.Add (this.labelBlinkStick);
+			global::Gtk.Table.TableChild w13 = ((global::Gtk.Table.TableChild)(this.table2 [this.labelBlinkStick]));
 			w13.TopAttach = ((uint)(2));
 			w13.BottomAttach = ((uint)(3));
 			w13.XOptions = ((global::Gtk.AttachOptions)(4));
@@ -282,7 +282,6 @@ namespace BlinkStickClient
 			this.DefaultWidth = 309;
 			this.DefaultHeight = 373;
 			this.Show ();
-			this.buttonEditPatterns.Clicked += new global::System.EventHandler (this.OnButtonEditPatternsClicked);
 			this.buttonOk.Clicked += new global::System.EventHandler (this.OnButtonOkClicked);
 		}
 	}
