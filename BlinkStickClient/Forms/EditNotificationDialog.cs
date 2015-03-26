@@ -165,8 +165,6 @@ namespace BlinkStickClient
 
                 if (Notification is DeviceNotification)
                 {
-                    table2.Attach(labelLeds, 0, 1, 3, 4);
-                    table2.Attach(hboxLedConfiguration, 1, 2, 3, 4);
                     table2.NRows -= 1;
                 }
             }

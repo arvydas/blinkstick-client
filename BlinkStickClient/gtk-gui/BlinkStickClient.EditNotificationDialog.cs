@@ -84,8 +84,8 @@ namespace BlinkStickClient
 			this.buttonEditPatterns.Image = w2;
 			this.table2.Add (this.buttonEditPatterns);
 			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table2 [this.buttonEditPatterns]));
-			w3.TopAttach = ((uint)(3));
-			w3.BottomAttach = ((uint)(4));
+			w3.TopAttach = ((uint)(4));
+			w3.BottomAttach = ((uint)(5));
 			w3.LeftAttach = ((uint)(2));
 			w3.RightAttach = ((uint)(3));
 			w3.XOptions = ((global::Gtk.AttachOptions)(4));
@@ -108,8 +108,8 @@ namespace BlinkStickClient
 			this.comboboxPattern.Name = "comboboxPattern";
 			this.table2.Add (this.comboboxPattern);
 			global::Gtk.Table.TableChild w5 = ((global::Gtk.Table.TableChild)(this.table2 [this.comboboxPattern]));
-			w5.TopAttach = ((uint)(3));
-			w5.BottomAttach = ((uint)(4));
+			w5.TopAttach = ((uint)(4));
+			w5.BottomAttach = ((uint)(5));
 			w5.LeftAttach = ((uint)(1));
 			w5.RightAttach = ((uint)(2));
 			w5.XOptions = ((global::Gtk.AttachOptions)(4));
@@ -180,8 +180,8 @@ namespace BlinkStickClient
 			w10.Fill = false;
 			this.table2.Add (this.hboxLedConfiguration);
 			global::Gtk.Table.TableChild w11 = ((global::Gtk.Table.TableChild)(this.table2 [this.hboxLedConfiguration]));
-			w11.TopAttach = ((uint)(4));
-			w11.BottomAttach = ((uint)(5));
+			w11.TopAttach = ((uint)(3));
+			w11.BottomAttach = ((uint)(4));
 			w11.LeftAttach = ((uint)(1));
 			w11.RightAttach = ((uint)(2));
 			w11.XOptions = ((global::Gtk.AttachOptions)(4));
@@ -215,8 +215,8 @@ namespace BlinkStickClient
 			this.labelLeds.LabelProp = global::Mono.Unix.Catalog.GetString ("LEDs:");
 			this.table2.Add (this.labelLeds);
 			global::Gtk.Table.TableChild w14 = ((global::Gtk.Table.TableChild)(this.table2 [this.labelLeds]));
-			w14.TopAttach = ((uint)(4));
-			w14.BottomAttach = ((uint)(5));
+			w14.TopAttach = ((uint)(3));
+			w14.BottomAttach = ((uint)(4));
 			w14.XOptions = ((global::Gtk.AttachOptions)(4));
 			w14.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table2.Gtk.Table+TableChild
@@ -226,8 +226,8 @@ namespace BlinkStickClient
 			this.labelPattern.LabelProp = global::Mono.Unix.Catalog.GetString ("Pattern:");
 			this.table2.Add (this.labelPattern);
 			global::Gtk.Table.TableChild w15 = ((global::Gtk.Table.TableChild)(this.table2 [this.labelPattern]));
-			w15.TopAttach = ((uint)(3));
-			w15.BottomAttach = ((uint)(4));
+			w15.TopAttach = ((uint)(4));
+			w15.BottomAttach = ((uint)(5));
 			w15.XOptions = ((global::Gtk.AttachOptions)(4));
 			w15.YOptions = ((global::Gtk.AttachOptions)(4));
 			this.GtkAlignment2.Add (this.table2);
@@ -282,6 +282,7 @@ namespace BlinkStickClient
 			this.DefaultWidth = 309;
 			this.DefaultHeight = 373;
 			this.Show ();
+			this.buttonEditPatterns.Clicked += new global::System.EventHandler (this.OnButtonEditPatternsClicked);
 			this.buttonOk.Clicked += new global::System.EventHandler (this.OnButtonOkClicked);
 		}
 	}
