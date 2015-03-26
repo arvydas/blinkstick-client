@@ -42,6 +42,11 @@ namespace BlinkStickClient.DataModel
             return HttpListener.IsSupported;
         }
 
+        public override bool IsUnique()
+        {
+            return true;
+        }
+
         public override void Start()
         {
             if (Running)

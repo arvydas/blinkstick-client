@@ -2433,7 +2433,7 @@ Pulse</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="BlinkStickClient.SelectNotificationDialog" design-size="576 389">
+  <widget class="Gtk.Dialog" id="BlinkStickClient.SelectNotificationDialog" design-size="642 389">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Add notification</property>
     <property name="WindowPosition">Center</property>
@@ -2499,11 +2499,14 @@ Pulse</property>
             <child>
               <widget class="Gtk.Table" id="table1">
                 <property name="MemberName" />
-                <property name="NRows">4</property>
+                <property name="NRows">5</property>
                 <property name="NColumns">2</property>
                 <property name="RowSpacing">6</property>
                 <property name="ColumnSpacing">6</property>
                 <property name="BorderWidth">12</property>
+                <child>
+                  <placeholder />
+                </child>
                 <child>
                   <placeholder />
                 </child>
@@ -2629,6 +2632,30 @@ Pulse</property>
                   <packing>
                     <property name="TopAttach">1</property>
                     <property name="BottomAttach">2</property>
+                    <property name="LeftAttach">1</property>
+                    <property name="RightAttach">2</property>
+                    <property name="AutoSize">True</property>
+                    <property name="XOptions">Fill</property>
+                    <property name="YOptions">Fill</property>
+                    <property name="XExpand">False</property>
+                    <property name="XFill">True</property>
+                    <property name="XShrink">False</property>
+                    <property name="YExpand">False</property>
+                    <property name="YFill">True</property>
+                    <property name="YShrink">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Label" id="labelUniqueWarning">
+                    <property name="MemberName" />
+                    <property name="WidthRequest">200</property>
+                    <property name="LabelProp" translatable="yes">&lt;b&gt;You already have this notification configured. This type of notification can only be added once.&lt;/b&gt;</property>
+                    <property name="UseMarkup">True</property>
+                    <property name="Wrap">True</property>
+                  </widget>
+                  <packing>
+                    <property name="TopAttach">3</property>
+                    <property name="BottomAttach">4</property>
                     <property name="LeftAttach">1</property>
                     <property name="RightAttach">2</property>
                     <property name="AutoSize">True</property>

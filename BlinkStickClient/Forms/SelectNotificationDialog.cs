@@ -29,6 +29,8 @@ namespace BlinkStickClient
             }
         }
 
+        public ApplicationDataModel DataModel;
+
         public SelectNotificationDialog()
         {
             this.Build();
@@ -159,20 +161,27 @@ namespace BlinkStickClient
 
         private void UpdateUI()
         {
+            Boolean canAdd = false;
+
             if (SelectedType != null)
             {
                 labelCategoryInfo.Text = SelectedType.Category;
                 labelNameInfo.Text = SelectedType.Name;
                 labelDescriptionInfo.Text = SelectedType.Description;
+
+                canAdd = DataModel.CanAddNotification(SelectedType);
+
+                labelUniqueWarning.Visible = !canAdd;
             }
             else
             {
                 labelCategoryInfo.Text = "";
                 labelNameInfo.Text = "";
                 labelDescriptionInfo.Text = "";
+                labelUniqueWarning.Visible = false;
             }
 
-            this.buttonOk.Sensitive = SelectedType != null && SelectedType.IsSupported;
+            this.buttonOk.Sensitive = SelectedType != null && SelectedType.IsSupported && canAdd;
         }
 
         protected void OnCheckbuttonDisplayOnlySupportedToggled (object sender, EventArgs e)

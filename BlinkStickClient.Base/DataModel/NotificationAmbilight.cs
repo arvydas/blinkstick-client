@@ -39,6 +39,11 @@ namespace BlinkStickClient.DataModel
             return HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Windows;
         }
 
+        public override bool IsUnique()
+        {
+            return true;
+        }
+
         public override void Start()
         {
             if (Running)

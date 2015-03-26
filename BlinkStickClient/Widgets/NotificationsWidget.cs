@@ -1,5 +1,6 @@
 ﻿using System;
 using BlinkStickClient.DataModel;
+using BlinkStickClient.Utils;
 using log4net;
 using Gtk;
 using Gdk;
@@ -148,6 +149,12 @@ namespace BlinkStickClient
                 }
                 else if (column == (sender as TreeView).Columns[5]) //Copy clicked
                 {
+                    if (SelectedNotification.IsUnique())
+                    {
+                        MessageBox.Show(ParentForm, String.Format("Only one {0} notification can be used", SelectedNotification.GetTypeName()), MessageType.Error);
+                        return;
+                    }
+
                     CustomNotification notification = SelectedNotification.Copy();
                     notification.Name = DataModel.GetNotificationName(notification.Name, 2);
 
@@ -241,6 +248,7 @@ namespace BlinkStickClient
 
             using (SelectNotificationDialog dialog = new SelectNotificationDialog())
             {
+                dialog.DataModel = this.DataModel;
                 response = dialog.Run();
                 if (response == (int)ResponseType.Ok)
                 {

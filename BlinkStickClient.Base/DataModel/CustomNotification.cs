@@ -89,6 +89,15 @@ namespace BlinkStickClient.DataModel
             return false;
         }
 
+        /// <summary>
+        /// Determines whether notification has to be unique.
+        /// </summary>
+        /// <returns><c>true</c> if this instance is unique; otherwise, <c>false</c>.</returns>
+        public virtual Boolean IsUnique()
+        {
+            return false;
+        }
+
         public virtual void Start()
         {
             Running = true;

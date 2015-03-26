@@ -315,6 +315,19 @@ namespace BlinkStickClient.DataModel
             return name;
         }
         #endregion
+
+        public Boolean CanAddNotification(NotificationRegistry.NotificationRegistryEntry entry)
+        {
+            foreach (CustomNotification notification in Notifications)
+            {
+                if (entry.Name == notification.GetTypeName() && notification.IsUnique())
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }
 
