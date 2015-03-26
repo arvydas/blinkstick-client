@@ -153,6 +153,24 @@ namespace BlinkStickClient
             checkbuttonEnabled.Active = Notification.Enabled;
             entryName.Text = Notification.Name;
 
+            if (Notification is PatternNotification)
+            {
+                LoadPatterns((Notification as PatternNotification).Pattern);
+            }
+            else
+            {
+                table2.Remove(labelPattern);
+                table2.Remove(comboboxPattern);
+                table2.Remove(buttonEditPatterns);
+
+                if (Notification is DeviceNotification)
+                {
+                    table2.Attach(labelLeds, 0, 1, 3, 4);
+                    table2.Attach(hboxLedConfiguration, 1, 2, 3, 4);
+                    table2.NRows -= 1;
+                }
+            }
+
             if (Notification is DeviceNotification)
             {
                 deviceComboboxWidget.SelectBySerial(((DeviceNotification)Notification).BlinkStickSerial);
@@ -165,17 +183,7 @@ namespace BlinkStickClient
                 table2.Remove(deviceComboboxWidget);
                 table2.Remove(labelLeds);
                 table2.Remove(hboxLedConfiguration);
-            }
-
-            if (Notification is PatternNotification)
-            {
-                LoadPatterns((Notification as PatternNotification).Pattern);
-            }
-            else
-            {
-                table2.Remove(labelPattern);
-                table2.Remove(comboboxPattern);
-                table2.Remove(buttonEditPatterns);
+                table2.NRows -= 3;
             }
 
             HSeparator hseparator;
