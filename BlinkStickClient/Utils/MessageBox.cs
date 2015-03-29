@@ -23,27 +23,17 @@ namespace BlinkStickClient.Utils
 {
     public static class MessageBox
     {
-        public static void Show(Window parent_window, string msg, MessageType messageType)
+        public static ResponseType Show(Window parent_window, string msg, MessageType messageType, ButtonsType buttons = ButtonsType.Ok)
         {
-        	MessageDialog md = Show(parent_window, msg, messageType, true); 
-        	md.Destroy();
-        }
-        
-        public static MessageDialog Show(Window parent_window, string msg, MessageType messageType, Boolean showModal)
-        {
-            MessageDialog md = new MessageDialog (parent_window, DialogFlags.Modal, messageType, ButtonsType.Ok, msg);
-            if (showModal)
-			{
-	            md.Run ();
-			}
-			else
-			{
-	            md.Show ();
-			}
+            int response = 0;
+            using (MessageDialog md = new MessageDialog (parent_window, DialogFlags.Modal, messageType, buttons, msg))
+            {
+                response = md.Run ();
+                md.Destroy();
+            }
 			
-			return md;
+            return (ResponseType) response;
         }
-        
 	}
 }
 
