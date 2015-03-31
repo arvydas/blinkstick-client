@@ -183,7 +183,7 @@ public partial class MainWindow: Gtk.Window
             MacMenu.GlobalKeyHandlerEnabled = true;
 
             //Tell the IGE library to use your GTK menu as the Mac main menu
-            MacMenu.MenuBar = menubar2;
+            //MacMenu.MenuBar = menubar2;
 
             //tell IGE which menu item should be used for the app menu's quit item
             MacMenu.QuitMenuItem = menuItemQuit;
@@ -194,7 +194,7 @@ public partial class MainWindow: Gtk.Window
             appGroup.AddMenuItem (menuItemQuit, "Preferences...");
 
             //hide the menu bar so it no longer displays within the window
-            menubar2.Hide ();
+            //menubar2.Hide ();
 
 
             ApplicationEvents.Quit += delegate(object sender, ApplicationQuitEventArgs e)
@@ -412,46 +412,6 @@ public partial class MainWindow: Gtk.Window
 	{
 		this.Hide ();
 	}
-
-	protected void OnSupportActionActivated (object sender, EventArgs e)
-	{
-		try
-		{
-			System.Diagnostics.Process.Start("http://www.blinkstick.com/help");
-		}
-		catch
-		{
-		}
-	}
-
-	protected void OnReportABugActionActivated (object sender, EventArgs e)
-	{
-		try
-		{
-			System.Diagnostics.Process.Start("http://blinkstick.zendesk.com");
-		}
-		catch
-		{
-		}
-	}
-
-	protected void OnAboutActionActivated (object sender, EventArgs e)
-	{
-		BlinkStickClient.AboutDialog.ShowDialog(this.Title);
-	}
-
-
-	protected void OnOpenLogActionActivated (object sender, EventArgs e)
-	{
-		try
-		{
-			System.Diagnostics.Process.Start("notepad", LogFile);
-		}
-		catch
-		{
-		}
-	}
-
 	
 	#region Singleton enforcment methods
 	private void SetupSingleInstanceEvent()

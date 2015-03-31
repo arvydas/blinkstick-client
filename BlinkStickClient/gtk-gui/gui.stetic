@@ -37,73 +37,6 @@
   </icon-factory>
   <widget class="Gtk.Window" id="MainWindow" design-size="706 584">
     <action-group name="Default">
-      <action id="saveAction">
-        <property name="Type">Radio</property>
-        <property name="Label" translatable="yes" />
-        <property name="StockId">gtk-save</property>
-        <property name="DrawAsRadio">False</property>
-        <property name="Active">False</property>
-        <property name="Value">0</property>
-        <property name="Group">selection</property>
-      </action>
-      <action id="FileAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes">File</property>
-        <property name="ShortLabel" translatable="yes">File</property>
-      </action>
-      <action id="quitAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes">Exit</property>
-        <property name="ShortLabel" translatable="yes">Exit</property>
-        <property name="StockId">gtk-quit</property>
-        <signal name="Activated" handler="OnQuitActionActivated" />
-      </action>
-      <action id="BlinkStickAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes">BlinkStick</property>
-        <property name="ShortLabel" translatable="yes">Device</property>
-      </action>
-      <action id="HelpAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes">Help</property>
-        <property name="ShortLabel" translatable="yes">Help</property>
-      </action>
-      <action id="SupportAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes">Support</property>
-        <property name="ShortLabel" translatable="yes">Support</property>
-        <signal name="Activated" handler="OnSupportActionActivated" />
-      </action>
-      <action id="AboutAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes">About</property>
-        <property name="ShortLabel" translatable="yes">About</property>
-        <signal name="Activated" handler="OnAboutActionActivated" />
-      </action>
-      <action id="HideAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes">Hide</property>
-        <property name="ShortLabel" translatable="yes">Hide</property>
-        <signal name="Activated" handler="OnHideActionActivated" />
-      </action>
-      <action id="ReportABugAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes">Report a Bug</property>
-        <property name="ShortLabel" translatable="yes">Report a Bug</property>
-        <signal name="Activated" handler="OnReportABugActionActivated" />
-      </action>
-      <action id="OpenLogAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes">Open Log</property>
-        <property name="ShortLabel" translatable="yes">Open Log</property>
-        <signal name="Activated" handler="OnOpenLogActionActivated" />
-      </action>
-      <action id="PatternsAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes">Patterns...</property>
-        <property name="ShortLabel" translatable="yes">Patterns...</property>
-        <signal name="Activated" handler="OnPatternsActionActivated" />
-      </action>
       <action id="OverviewAction">
         <property name="Type">Radio</property>
         <property name="Label" translatable="yes">Overview</property>
@@ -124,16 +57,6 @@
         <property name="DrawAsRadio">False</property>
         <property name="Active">False</property>
         <property name="Value">1</property>
-        <property name="Group">selection</property>
-        <signal name="Toggled" handler="ToolbarButtonToggled" />
-      </action>
-      <action id="TestToolbarAction">
-        <property name="Type">Radio</property>
-        <property name="Label" translatable="yes">Test</property>
-        <property name="ShortLabel" translatable="yes">Test</property>
-        <property name="DrawAsRadio">False</property>
-        <property name="Active">False</property>
-        <property name="Value">4</property>
         <property name="Group">selection</property>
         <signal name="Toggled" handler="ToolbarButtonToggled" />
       </action>
@@ -180,30 +103,6 @@
         <property name="MemberName" />
         <property name="Spacing">6</property>
         <child>
-          <widget class="Gtk.MenuBar" id="menubar2">
-            <property name="MemberName" />
-            <node name="menubar2" type="Menubar">
-              <node type="Menu" action="FileAction">
-                <node type="Menuitem" action="HideAction" />
-                <node type="Menuitem" action="quitAction" />
-              </node>
-              <node type="Menu" action="HelpAction">
-                <node type="Menuitem" action="SupportAction" />
-                <node type="Menuitem" action="ReportABugAction" />
-                <node type="Menuitem" action="OpenLogAction" />
-                <node type="Separator" />
-                <node type="Menuitem" action="AboutAction" />
-              </node>
-            </node>
-          </widget>
-          <packing>
-            <property name="Position">0</property>
-            <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
-        </child>
-        <child>
           <widget class="Gtk.VBox" id="vbox3">
             <property name="MemberName" />
             <property name="Spacing">6</property>
@@ -244,7 +143,7 @@
             </child>
           </widget>
           <packing>
-            <property name="Position">1</property>
+            <property name="Position">0</property>
             <property name="AutoSize">True</property>
           </packing>
         </child>
@@ -254,115 +153,8 @@
             <property name="Spacing">6</property>
           </widget>
           <packing>
-            <property name="Position">2</property>
+            <property name="Position">1</property>
             <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
-        </child>
-      </widget>
-    </child>
-  </widget>
-  <widget class="Gtk.Dialog" id="BlinkStickClient.AboutDialog" design-size="400 252">
-    <property name="MemberName" />
-    <property name="Title" translatable="yes">About</property>
-    <property name="WindowPosition">Center</property>
-    <property name="Resizable">False</property>
-    <property name="SkipPagerHint">True</property>
-    <property name="SkipTaskbarHint">True</property>
-    <property name="Buttons">1</property>
-    <property name="HelpButton">False</property>
-    <child internal-child="VBox">
-      <widget class="Gtk.VBox" id="dialog1_VBox">
-        <property name="MemberName" />
-        <property name="BorderWidth">2</property>
-        <child>
-          <widget class="Gtk.VBox" id="vbox2">
-            <property name="MemberName" />
-            <property name="Spacing">12</property>
-            <property name="BorderWidth">12</property>
-            <child>
-              <widget class="Gtk.Image" id="imageLogo">
-                <property name="MemberName" />
-              </widget>
-              <packing>
-                <property name="Position">0</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="Gtk.Label" id="label1">
-                <property name="MemberName" />
-                <property name="LabelProp" translatable="yes">&lt;b&gt;&lt;big&gt;BlinkStick Client Application&lt;/big&gt;&lt;/b&gt;</property>
-                <property name="UseMarkup">True</property>
-              </widget>
-              <packing>
-                <property name="Position">1</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="Gtk.Label" id="label2">
-                <property name="MemberName" />
-                <property name="LabelProp" translatable="yes">Copyright by Agile Innovative Ltd 2013</property>
-              </widget>
-              <packing>
-                <property name="Position">2</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="Gtk.EventBox" id="eventbox1">
-                <property name="MemberName" />
-                <child>
-                  <widget class="Gtk.Label" id="label3">
-                    <property name="MemberName" />
-                    <property name="LabelProp" translatable="yes">www.agileinnovative.co.uk</property>
-                  </widget>
-                </child>
-              </widget>
-              <packing>
-                <property name="Position">3</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
-              </packing>
-            </child>
-          </widget>
-          <packing>
-            <property name="Position">0</property>
-            <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
-        </child>
-      </widget>
-    </child>
-    <child internal-child="ActionArea">
-      <widget class="Gtk.HButtonBox" id="dialog1_ActionArea">
-        <property name="MemberName" />
-        <property name="Spacing">10</property>
-        <property name="BorderWidth">5</property>
-        <property name="Size">1</property>
-        <property name="LayoutStyle">End</property>
-        <child>
-          <widget class="Gtk.Button" id="buttonCancel">
-            <property name="MemberName" />
-            <property name="CanDefault">True</property>
-            <property name="CanFocus">True</property>
-            <property name="UseStock">True</property>
-            <property name="Type">StockItem</property>
-            <property name="StockId">gtk-close</property>
-            <property name="ResponseId">-7</property>
-            <property name="label">gtk-close</property>
-          </widget>
-          <packing>
             <property name="Expand">False</property>
             <property name="Fill">False</property>
           </packing>
@@ -3294,7 +3086,6 @@ Pulse</property>
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="Label" translatable="yes">Monitor</property>
-                        <property name="Active">True</property>
                         <property name="DrawIndicator">True</property>
                         <property name="HasLabel">True</property>
                         <property name="UseUnderline">True</property>

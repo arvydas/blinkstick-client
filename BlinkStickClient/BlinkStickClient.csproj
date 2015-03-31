@@ -108,7 +108,6 @@
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Utils\MessageBox.cs" />
-    <Compile Include="Forms\AboutDialog.cs" />
     <Compile Include="Utils\AbstractScreenCapture.cs" />
     <Compile Include="Utils\XorgAPI.cs" />
     <Compile Include="Utils\LinuxScreenCapture.cs" />
@@ -118,7 +117,6 @@
     <Compile Include="MacInterop\Carbon.cs" />
     <Compile Include="MacInterop\AppleEvent.cs" />
     <Compile Include="MacInterop\CoreFoundation.cs" />
-    <Compile Include="gtk-gui\BlinkStickClient.AboutDialog.cs" />
     <Compile Include="Forms\PatternDialog.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.PatternDialog.cs" />
     <Compile Include="Forms\EditPatternDialog.cs" />
