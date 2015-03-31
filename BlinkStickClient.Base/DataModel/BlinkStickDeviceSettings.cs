@@ -61,6 +61,27 @@ namespace BlinkStickClient.DataModel
             this.Touched = true;
             this.BrightnessLimit = 100;
             this.Running = false;
+
+			switch (this.Led.BlinkStickDevice) {
+			case BlinkStickDeviceEnum.BlinkStick:
+				this.LedsR = 1;
+				this.LedsG = 1;
+				this.LedsB = 1;
+				break;
+			case BlinkStickDeviceEnum.BlinkStickPro:
+				this.LedsR = 64;
+				this.LedsG = 64;
+				this.LedsB = 64;
+				break;
+			case BlinkStickDeviceEnum.BlinkStickSquare:
+			case BlinkStickDeviceEnum.BlinkStickStrip:
+				this.LedsR = 8;
+				this.LedsG = 0;
+				this.LedsB = 0;
+				break;
+			default:
+				break;
+			}
         }
 
         public override string ToString()
