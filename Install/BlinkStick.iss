@@ -43,7 +43,6 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: dep\gtk-sharp-2.12.20.msi; DestDir: "{tmp}"; Check: IsGtkNotInstalled
 Source: "..\BlinkStick\bin\Release\BlinkStick.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\BlinkStick\bin\Release\BlinkStick.Bayeux.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\BlinkStick\bin\Release\BlinkStick.Hid.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -55,6 +54,7 @@ Source: "..\BlinkStick\bin\Release\LibUsbDotNet.dll"; DestDir: "{app}"; Flags: i
 Source: "..\BlinkStick\bin\Release\log4net.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\BlinkStick\bin\Release\log4net.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\BlinkStick\bin\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: dep\gtk-sharp-2.12.25.msi; DestDir: "{tmp}"; Check: IsGtkNotInstalled; AfterInstall: InstallGtkSharp
 
 [Icons]
 Name: "{group}\{#AppName}"; Filename: "{app}\{#AppExeName}"
@@ -65,7 +65,6 @@ Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#AppName}"; Filen
 
 [Run]
 Filename: "{app}\{#AppExeName}"; Flags: nowait postinstall skipifsilent; Description: "{cm:LaunchProgram,{#StringChange(AppName, '&', '&&')}}"
-Filename: "msiexec.exe"; Parameters: "/i ""{tmp}\gtk-sharp-2.12.20.msi"" /PASSIVE /NORESTART"; Description: "Installing GTK# Runtime"; Check: IsGtkNotInstalled
 
 [Registry]
 Root: HKLM; Subkey: SOFTWARE\Agile Innovative Ltd\BlinkStick; ValueType: string; ValueName: InstallDir; ValueData: {app}; Flags: uninsdeletekeyifempty uninsdeletevalue
@@ -91,6 +90,18 @@ var
 Function IsGtkNotInstalled() : Boolean;
 begin
   Result := Not RegKeyExists(HKLM, 'SOFTWARE\Xamarin\GtkSharp\InstallFolder');
+end;
+
+procedure InstallGtkSharp;
+var
+  ResultCode: Integer;
+begin
+  if not Exec('msiexec.exe', ExpandConstant('/i "{tmp}\gtk-sharp-2.12.25.msi" /PASSIVE /NORESTART'), '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
+  begin
+    // you can interact with the user that the installation failed
+    MsgBox('GtkSharp installation failed with code: ' + IntToStr(ResultCode) + '.',
+      mbError, MB_OK);
+  end;
 end;
 
 function InitializeSetup(): Boolean;
