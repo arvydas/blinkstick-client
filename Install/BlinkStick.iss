@@ -1,11 +1,11 @@
 #define use_dotnetfx40
 
 #define AppName "BlinkStick Client"
-#define MyGetVersion() ParseVersion(AddBackslash(SourcePath) + "..\BlinkStick\bin\Release\BlinkStick.exe", Local[0], Local[1], Local[2], Local[3]), Str(Local[0]) + "." + Str(Local[1]) + "." + Str(Local[2]);
-#define AppVersion GetFileVersion(AddBackslash(SourcePath) + "..\BlinkStick\bin\Release\BlinkStick.exe")
+#define MyGetVersion() ParseVersion(AddBackslash(SourcePath) + "..\BlinkStickClient\bin\Release\BlinkStickClient.exe", Local[0], Local[1], Local[2], Local[3]), Str(Local[0]) + "." + Str(Local[1]) + "." + Str(Local[2]);
+#define AppVersion GetFileVersion(AddBackslash(SourcePath) + "..\BlinkStickClient\bin\Release\BlinkStickClient.exe")
 #define AppPublisher "Agile Innovative Ltd"
 #define AppURL "http://www.blinkstick.com/"
-#define AppExeName "BlinkStick.exe"
+#define AppExeName "BlinkStickClient.exe"
 
 [CustomMessages]
 win_sp_title=Windows %1 Service Pack %2
@@ -22,14 +22,14 @@ AppUpdatesURL={#AppURL}
 DefaultDirName={pf}\{#AppName}
 DefaultGroupName={#AppName}
 OutputDir=setup
-OutputBaseFilename=BlinkStick_Setup_{#MyGetVersion()}
+OutputBaseFilename=BlinkStickClient_Setup_{#MyGetVersion()}
 Compression=lzma
 SolidCompression=yes
 ShowLanguageDialog=no
 AlwaysShowGroupOnReadyPage=True
 AlwaysShowDirOnReadyPage=True
 AppCopyright=Agile Innovative Ltd
-UninstallDisplayName=Uninstall BlinkStick
+UninstallDisplayName=Uninstall BlinkStick Client
 UninstallDisplayIcon={app}\icon.ico
 MinVersion=0,5.01sp3
 LicenseFile=..\LICENSE.txt
@@ -43,18 +43,15 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "..\BlinkStick\bin\Release\BlinkStick.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\BlinkStick\bin\Release\BlinkStick.Bayeux.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\BlinkStick\bin\Release\BlinkStick.Hid.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\BlinkStick\bin\Release\HidSharp.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\BlinkStick\bin\Release\icon.ico"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\BlinkStick\bin\Release\icon.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\BlinkStick\bin\Release\logo.png"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\BlinkStick\bin\Release\LibUsbDotNet.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\BlinkStick\bin\Release\log4net.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\BlinkStick\bin\Release\log4net.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\BlinkStick\bin\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: dep\gtk-sharp-2.12.25.msi; DestDir: "{tmp}"; Check: IsGtkNotInstalled; AfterInstall: InstallGtkSharp
+Source: "ClearLooks\*"; DestDir: "{app}\Theme\ClearLooks"; Flags: ignoreversion recursesubdirs
+Source: "theme\*"; DestDir: "{code:GtkInstallDir}"; Flags: ignoreversion recursesubdirs
+Source: "..\BlinkStickClient\bin\Release\*.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\BlinkStickClient\bin\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\BlinkStickClient\bin\Release\*.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\BlinkStickClient\bin\Release\icon.ico"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\BlinkStickClient\bin\Release\icon.png"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\BlinkStickClient\bin\Release\logo.png"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#AppName}"; Filename: "{app}\{#AppExeName}"
@@ -90,6 +87,16 @@ var
 Function IsGtkNotInstalled() : Boolean;
 begin
   Result := Not RegKeyExists(HKLM, 'SOFTWARE\Xamarin\GtkSharp\InstallFolder');
+end;
+
+Function GtkInstallDir(param: String) : String;
+var
+  dir: String;
+begin
+  
+  RegQueryStringValue(HKLM, 'SOFTWARE\Xamarin\GtkSharp\InstallFolder', '', dir);
+
+  Result := dir;
 end;
 
 procedure InstallGtkSharp;
