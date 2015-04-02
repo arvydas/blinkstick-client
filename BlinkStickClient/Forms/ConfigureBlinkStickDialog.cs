@@ -59,6 +59,10 @@ namespace BlinkStickClient
                                 spinbuttonChannelG.Value = 1;
                                 spinbuttonChannelB.Value = 1;
                             }
+
+                            radiobuttonModeRGB.Active = mode == 0;
+                            radiobuttonModeInverse.Active = mode == 1;
+                            radiobuttonModeMultiLED.Active = mode == 2;
                         }
                         break;
                     case BlinkStickDeviceEnum.BlinkStickSquare:
