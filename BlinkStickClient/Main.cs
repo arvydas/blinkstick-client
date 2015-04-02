@@ -33,6 +33,11 @@ namespace BlinkStickClient
 
 		public static int Main (string[] args)
 		{
+            String version = System.Reflection.Assembly.GetExecutingAssembly ().GetName ().Version.ToString ();
+            version = version.Substring (0, version.LastIndexOf ('.'));
+
+            ApplicationDataModel.ApplicationVersion = version;
+
             Boolean ambilightMode = args.Length > 0 && args[0] == "--ambilight";
 
             string logFileConfigPath = System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "log4net.config");
