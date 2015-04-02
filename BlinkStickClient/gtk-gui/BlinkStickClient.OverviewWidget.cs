@@ -58,7 +58,6 @@ namespace BlinkStickClient
 			w1.Fill = false;
 			// Container child hboxMiniMenu.Gtk.Box+BoxChild
 			this.deviceComboboxWidget = new global::BlinkStickClient.DeviceComboboxWidget ();
-			this.deviceComboboxWidget.WidthRequest = 130;
 			this.deviceComboboxWidget.Events = ((global::Gdk.EventMask)(256));
 			this.deviceComboboxWidget.Name = "deviceComboboxWidget";
 			this.deviceComboboxWidget.AutoSelectDevice = true;
