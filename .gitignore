@@ -113,4 +113,9 @@ UpgradeLog*.XML
 
 /=*
 
+!/Install/theme/*
+!/Install/theme/*/*
+!/Install/theme/*/*/*
+!/Install/theme/*/*/*/*
+!/Install/theme/*/*/*/*/*
 
