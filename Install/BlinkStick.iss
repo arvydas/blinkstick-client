@@ -44,7 +44,6 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 [Files]
 Source: dep\gtk-sharp-2.12.20.msi; DestDir: "{tmp}"; Check: IsGtkNotInstalled
-Source: "gtk2\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs
 Source: "..\BlinkStick\bin\Release\BlinkStick.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\BlinkStick\bin\Release\BlinkStick.Bayeux.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\BlinkStick\bin\Release\BlinkStick.Hid.dll"; DestDir: "{app}"; Flags: ignoreversion
