@@ -17,6 +17,7 @@
 #endregion
 
 using System;
+using System.Linq;
 using Gtk;
 using System.IO;
 using log4net;
@@ -34,9 +35,29 @@ namespace BlinkStickClient
 		public static int Main (string[] args)
 		{
             String version = System.Reflection.Assembly.GetExecutingAssembly ().GetName ().Version.ToString ();
-            version = version.Substring (0, version.LastIndexOf ('.'));
+            String versionName = version.Substring (0, version.LastIndexOf ('.'));
+            versionName = versionName.Substring (0, versionName.LastIndexOf ('.'));
 
-            ApplicationDataModel.ApplicationVersion = version;
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            object[] attributes = assembly.GetCustomAttributes(true);
+            object configRaw = attributes.FirstOrDefault(a => a.GetType() == typeof(AssemblyConfigurationAttribute));
+            if (configRaw != null) {
+                AssemblyConfigurationAttribute config = (AssemblyConfigurationAttribute)configRaw;
+                if (config.Configuration != "")
+                {
+                    versionName += "-" + config.Configuration;
+                }
+            }
+
+            ApplicationDataModel.ApplicationVersion = versionName;
+
+            if (args.Length > 1 && args[0] == "--build-config")
+            {
+                System.IO.StreamWriter file = new System.IO.StreamWriter(args[1]);
+                file.WriteLine(String.Format("#define AppVersion \"{0}\"\r\n#define AppFullVersion \"{1}\"", versionName, version));
+                file.Close();
+                return 0;
+            }
 
             Boolean ambilightMode = args.Length > 0 && args[0] == "--ambilight";
 

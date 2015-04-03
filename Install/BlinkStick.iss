@@ -1,8 +1,9 @@
 #define use_dotnetfx40
 
+#expr Exec(AddBackslash(SourcePath) + "..\BlinkStickClient\bin\Release\BlinkStickClient.exe", "--build-config """ + AddBackslash(SourcePath) + "version.iss""")
+#include AddBackslash(SourcePath) + "version.iss"
+
 #define AppName "BlinkStick Client"
-#define MyGetVersion() ParseVersion(AddBackslash(SourcePath) + "..\BlinkStickClient\bin\Release\BlinkStickClient.exe", Local[0], Local[1], Local[2], Local[3]), Str(Local[0]) + "." + Str(Local[1]) + "." + Str(Local[2]);
-#define AppVersion GetFileVersion(AddBackslash(SourcePath) + "..\BlinkStickClient\bin\Release\BlinkStickClient.exe")
 #define AppPublisher "Agile Innovative Ltd"
 #define AppURL "http://www.blinkstick.com/"
 #define AppExeName "BlinkStickClient.exe"
@@ -13,8 +14,8 @@ win_sp_title=Windows %1 Service Pack %2
 [Setup]
 AppId={{1C20C67E-1414-49A9-8A5C-2409A420A26E}
 AppName={#AppName}
-AppVersion={#MyGetVersion()}
-AppVerName={#AppName} {#MyGetVersion()}
+AppVersion={#AppVersion}
+AppVerName={#AppName} {#AppVersion}
 AppPublisher={#AppPublisher}
 AppPublisherURL={#AppURL}
 AppSupportURL={#AppURL}
@@ -22,7 +23,7 @@ AppUpdatesURL={#AppURL}
 DefaultDirName={pf}\{#AppName}
 DefaultGroupName={#AppName}
 OutputDir=setup
-OutputBaseFilename=BlinkStickClient_Setup_{#MyGetVersion()}
+OutputBaseFilename=BlinkStickClient-Setup-{#AppVersion}-x86
 Compression=lzma
 SolidCompression=yes
 ShowLanguageDialog=no
@@ -43,7 +44,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: dep\gtk-sharp-2.12.25.msi; DestDir: "{tmp}"; Check: IsGtkNotInstalled; AfterInstall: InstallGtkSharp
+Source: dep\gtk-sharp-2.12.25.msi; DestDir: "{tmp}"; Check: GtkNeedsInstallOrUpgrade; AfterInstall: InstallGtkSharp
 Source: "ClearLooks\*"; DestDir: "{app}\Theme\ClearLooks"; Flags: ignoreversion recursesubdirs
 Source: "theme\*"; DestDir: "{code:GtkInstallDir}"; Flags: ignoreversion recursesubdirs
 Source: "..\BlinkStickClient\bin\Release\*.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -65,7 +66,8 @@ Filename: "{app}\{#AppExeName}"; Flags: nowait postinstall skipifsilent; Descrip
 
 [Registry]
 Root: HKLM; Subkey: SOFTWARE\Agile Innovative Ltd\BlinkStick; ValueType: string; ValueName: InstallDir; ValueData: {app}; Flags: uninsdeletekeyifempty uninsdeletevalue
-Root: HKLM; Subkey: SOFTWARE\Agile Innovative Ltd\BlinkStick; ValueType: string; ValueName: Version; ValueData: {#AppVersion}; Flags: uninsdeletevalue
+Root: HKLM; Subkey: SOFTWARE\Agile Innovative Ltd\BlinkStick; ValueType: string; ValueName: VersionName; ValueData: {#AppVersion}; Flags: uninsdeletevalue
+Root: HKLM; Subkey: SOFTWARE\Agile Innovative Ltd\BlinkStick; ValueType: string; ValueName: Version; ValueData: {#AppFullVersion}; Flags: uninsdeletevalue
 
 #include "scripts\products.iss"
 
@@ -80,13 +82,112 @@ Root: HKLM; Subkey: SOFTWARE\Agile Innovative Ltd\BlinkStick; ValueType: string;
 #endif
 
 [Code]
-
 var
   RequireRestart: Boolean;
 
-Function IsGtkNotInstalled() : Boolean;
+// Procedure to split a string into an array of integers 
+procedure Explode(var Dest: TArrayOfInteger; Text: String; Separator: String);
+var
+  i, p: Integer;
+begin
+  i := 0;
+  repeat
+    SetArrayLength(Dest, i+1);
+    p := Pos(Separator,Text);
+    if p > 0 then begin
+      Dest[i] := StrToInt(Copy(Text, 1, p-1));
+      Text := Copy(Text, p + Length(Separator), Length(Text));
+      i := i + 1;
+    end else begin
+      Dest[i] := StrToInt(Text);
+      Text := '';
+    end;
+  until Length(Text)=0;
+end;
+
+// Function compares version strings numerically:
+//     * when v1 = v2, result = 0  
+//     * when v1 < v2, result = -1  
+//     * when v1 > v2, result = 1
+//
+// Supports version numbers with trailing zeroes, for example 1.02.05.
+// Supports comparison of two version number of different lengths, for example
+//     CompareVersions('1.2', '2.0.3')
+// When any of the parameters is '' (empty string) it considers version number as 0
+function CompareVersions(v1: String; v2: String): Integer;
+var
+  v1parts: TArrayOfInteger;
+  v2parts: TArrayOfInteger;
+  i: Integer;
+begin
+  if v1 = '' then
+  begin
+    v1 := '0';
+  end;
+
+  if v2 = '' then
+  begin
+    v2 := '0';
+  end;
+
+  Explode(v1parts, v1, '.');
+  Explode(v2parts, v2, '.');
+  
+  if (GetArrayLength(v1parts) > GetArrayLength(v2parts)) then
+  begin
+    SetArrayLength(v2parts, GetArrayLength(v1parts)) 
+  end else if (GetArrayLength(v2parts) > GetArrayLength(v1parts)) then
+  begin
+    SetArrayLength(v1parts, GetArrayLength(v2parts)) 
+  end; 
+  
+  for i := 0 to GetArrayLength(v1parts) - 1 do 
+  begin
+    if v1parts[i] > v2parts[i] then
+    begin
+      { v1 is greater }
+      Result := 1;
+      exit;
+    end else if v1parts[i] < v2parts[i] then
+    begin
+      { v2 is greater }
+      Result := -1;
+      exit;
+    end;
+  end;
+  
+  { Are Equal }
+  Result := 0;
+end;
+
+{ Debug code
+procedure TestVersions(v1: String; v2: String);
+begin
+  Log(v1 + ' : ' + v2 + ' = ' + IntToStr(CompareVersions(v1, v2)));
+end;
+{ }
+
+Function GtkNeedsInstallOrUpgrade() : Boolean;
+var
+  gtkVersion: String;
 begin
   Result := Not RegKeyExists(HKLM, 'SOFTWARE\Xamarin\GtkSharp\InstallFolder');
+  
+  // If Gtk is installed, check the version number to upgrade if necessary
+  if not Result then
+  begin
+    gtkVersion := '';
+    
+    RegQueryStringValue(HKLM, 'SOFTWARE\Xamarin\GtkSharp\Version', '', gtkVersion);
+
+    Result := CompareVersions(gtkVersion, '2.12.25') = -1;
+  end;
+  
+  if (Result) then begin
+    Log('Gtk-Sharp needs upgrade');    
+  end else begin
+    Log('Gtk-Sharp ' + gtkVersion + ' does not need upgrade');    
+  end;
 end;
 
 Function GtkInstallDir(param: String) : String;
@@ -113,8 +214,22 @@ end;
 
 function InitializeSetup(): Boolean;
 begin
-  RequireRestart := IsGtkNotInstalled;
+  RequireRestart := GtkNeedsInstallOrUpgrade;
+{ Debug code
+  TestVersions('1', '2');
+  TestVersions('2', '1');
+  TestVersions('3', '3');
+  
+  TestVersions('1.1', '1');
+  TestVersions('2.1', '1');
+  TestVersions('1.1', '2');
 
+  TestVersions('2.12.11', '2.12.25');
+  TestVersions('', '2.12.25');
+  TestVersions('2.12.25', '');
+  TestVersions('', '');
+  TestVersions('2.12.11', '2.012.11');
+{ }
 	//init windows version
 	initwinversion();
 	
@@ -139,4 +254,3 @@ begin
   if (delayedReboot Or RequireRestart) then
 		Result := true;
 end;
-
