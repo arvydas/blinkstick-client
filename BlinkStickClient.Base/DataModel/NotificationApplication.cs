@@ -12,7 +12,9 @@ namespace BlinkStickClient.DataModel
 
         public static ActiveWindowMonitor _WindowMonitor;
 
-        public ActiveWindowMonitor WindowMonitor
+		private DateTime LastEventTime;
+
+		public ActiveWindowMonitor WindowMonitor
         {
             get
             {
@@ -80,18 +82,28 @@ namespace BlinkStickClient.DataModel
 
         void WindowTextChanged (object sender, WindowTextChangedEventArgs e)
         {
-            if (e.WindowText.ToLower().Contains(this.SearchString.ToLower()))
+			if (e.WindowText.ToLower().Contains(this.SearchString.ToLower()))
             {
-                OnTriggered(String.Format("{0} found in {1}", this.SearchString, e.WindowText));
+				if (LastEventTime.AddMilliseconds(100) < DateTime.Now) 
+				{
+					OnTriggered (String.Format ("{0} found in {1}", this.SearchString, e.WindowText));
+				}
             }
+
+			LastEventTime = DateTime.Now;
         }
 
         void ProcessChanged (object sender, ProcessChangedEventArgs e)
         {
             if (Path.GetFileName(e.ExecutableFileName).ToLower().Contains(this.SearchString.ToLower()))
             {
-                OnTriggered(String.Format("{0} found in {1}", this.SearchString, Path.GetFileName(e.ExecutableFileName)));
+				if (LastEventTime.AddMilliseconds (100) < DateTime.Now) 
+				{
+					OnTriggered (String.Format ("{0} found in {1}", this.SearchString, Path.GetFileName (e.ExecutableFileName)));
+				}
             }
+
+			LastEventTime = DateTime.Now;
         }
 
         public override void Stop()
