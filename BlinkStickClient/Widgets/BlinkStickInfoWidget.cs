@@ -92,7 +92,7 @@ namespace BlinkStickClient
                 {
                     labelManufacturerInfo.Text = "";
                     labelProductInfo.Text = "";
-                    labelModeInfo.Text = "RGB";
+                    labelModeInfo.Text = "";
                 }
             }
         }
