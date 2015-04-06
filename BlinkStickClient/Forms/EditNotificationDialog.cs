@@ -171,7 +171,18 @@ namespace BlinkStickClient
 
             if (Notification is DeviceNotification)
             {
-                deviceComboboxWidget.SelectBySerial(((DeviceNotification)Notification).BlinkStickSerial);
+                if (((DeviceNotification)Notification).BlinkStickSerial == "")
+                {
+                    if (this.DataModel.Devices.Count == 1)
+                    {
+                        deviceComboboxWidget.SelectBySerial(this.DataModel.Devices[0].Serial);
+                    }
+                }
+                else
+                {
+                    deviceComboboxWidget.SelectBySerial(((DeviceNotification)Notification).BlinkStickSerial);
+                }
+                    
                 spinbuttonLedsFrom.Value = ((DeviceNotification)Notification).LedFirstIndex;
                 spinbuttonLedsTo.Value = ((DeviceNotification)Notification).LedLastIndex;
             }
