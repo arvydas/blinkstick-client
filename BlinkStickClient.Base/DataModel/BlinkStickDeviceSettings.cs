@@ -25,6 +25,8 @@ namespace BlinkStickClient.DataModel
 
         private BackgroundWorker patternAnimator;
 
+		public BlinkStickDeviceEnum BlinkStickDevice;
+
         [JsonIgnore]
         public Queue<TriggeredEvent> EventQueue = new Queue<TriggeredEvent>();
 
@@ -37,15 +39,6 @@ namespace BlinkStickClient.DataModel
         private Boolean[] LedBusy = new Boolean[64];
         private byte[] LedFrame = new byte[64 * 3];
         private Boolean NeedsLedUpdate = false;
-
-        [JsonIgnore]
-        public BlinkStickDeviceEnum BlinkStickDevice
-        {
-            get
-            {
-                return BlinkStick.BlinkStickDeviceFromSerial(this.Serial);
-            }
-        }
 
         public BlinkStickDeviceSettings()
         {
@@ -82,6 +75,8 @@ namespace BlinkStickClient.DataModel
 			default:
 				break;
 			}
+
+			this.BlinkStickDevice = led.BlinkStickDevice;
         }
 
         public override string ToString()

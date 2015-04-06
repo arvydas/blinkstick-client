@@ -78,14 +78,8 @@ namespace BlinkStickClient
             buttonDelete.Sensitive = deviceComboboxWidget.SelectedBlinkStick != null && deviceComboboxWidget.SelectedBlinkStick.Led == null;
             blinkstickinfowidget2.UpdateUI(deviceComboboxWidget.SelectedBlinkStick);
 
-            if (deviceComboboxWidget.SelectedBlinkStick != null && deviceComboboxWidget.SelectedBlinkStick.Led != null)
-            {
-                blinkstickemulatorwidget1.EmulatedDevice = deviceComboboxWidget.SelectedBlinkStick.Led.BlinkStickDevice;
-            }
-            else
-            {
-                blinkstickemulatorwidget1.EmulatedDevice = BlinkStickDeviceEnum.Unknown;
-            }
+            blinkstickemulatorwidget1.EmulatedDevice = deviceComboboxWidget.SelectedBlinkStick == null ? 
+                BlinkStickDeviceEnum.Unknown : deviceComboboxWidget.SelectedBlinkStick.BlinkStickDevice;
         }
 
         protected void OnButtonRefreshClicked (object sender, EventArgs e)

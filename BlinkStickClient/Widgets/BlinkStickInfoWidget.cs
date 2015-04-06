@@ -29,29 +29,31 @@ namespace BlinkStickClient
                 labelConnectedInfo.Text = settings.Led != null ? "Yes" : "No";
                 labelSerialNumberInfo.Text = settings.Serial;
 
+                switch (settings.BlinkStickDevice)
+                {
+                    case BlinkStickDeviceEnum.Unknown:
+                        labelProductInfo.Text = "Unknown";
+                        break;
+                    case BlinkStickDeviceEnum.BlinkStick:
+                        labelProductInfo.Text = "BlinkStick";
+                        break;
+                    case BlinkStickDeviceEnum.BlinkStickPro:
+                        labelProductInfo.Text = "BlinkStick Pro";
+                        break;
+                    case BlinkStickDeviceEnum.BlinkStickStrip:
+                        labelProductInfo.Text = "BlinkStick Strip";
+                        break;
+                    case BlinkStickDeviceEnum.BlinkStickSquare:
+                        labelProductInfo.Text = "BlinkStick Square";
+                        break;
+                    default:
+                        break;
+                }
+
+
                 if (settings.Led != null)
                 {
                     labelManufacturerInfo.Text = settings.Led.ManufacturerName;
-                    switch (settings.Led.BlinkStickDevice)
-                    {
-                        case BlinkStickDeviceEnum.Unknown:
-                            labelProductInfo.Text = "Unknown";
-                            break;
-                        case BlinkStickDeviceEnum.BlinkStick:
-                            labelProductInfo.Text = "BlinkStick";
-                            break;
-                        case BlinkStickDeviceEnum.BlinkStickPro:
-                            labelProductInfo.Text = "BlinkStick Pro";
-                            break;
-                        case BlinkStickDeviceEnum.BlinkStickStrip:
-                            labelProductInfo.Text = "BlinkStick Strip";
-                            break;
-                        case BlinkStickDeviceEnum.BlinkStickSquare:
-                            labelProductInfo.Text = "BlinkStick Square";
-                            break;
-                        default:
-                            break;
-                    }
 
                     if (settings.Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStick)
                     {
@@ -90,6 +92,7 @@ namespace BlinkStickClient
                 {
                     labelManufacturerInfo.Text = "";
                     labelProductInfo.Text = "";
+                    labelModeInfo.Text = "RGB";
                 }
             }
         }
