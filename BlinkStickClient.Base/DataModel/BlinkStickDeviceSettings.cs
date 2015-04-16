@@ -197,6 +197,24 @@ namespace BlinkStickClient.DataModel
             OnSendColor(0, 0, r, g, b);
         }
 
+        public void TurnOff()
+        {
+            for (byte i = 0; i < LedsR; i++)
+            {
+                this.SetColor(0, i, 0, 0, 0);
+            }
+
+            for (byte i = 0; i < LedsG; i++)
+            {
+                this.SetColor(0, i, 0, 0, 0);
+            }
+
+            for (byte i = 0; i < LedsB; i++)
+            {
+                this.SetColor(0, i, 0, 0, 0);
+            }
+        }
+
         public void Start()
         {
             if (Running)
