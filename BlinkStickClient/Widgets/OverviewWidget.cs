@@ -40,6 +40,13 @@ namespace BlinkStickClient
                 }
             };
 
+            colorPaletteWidget.AllOffClicked += (object sender, EventArgs e) => {
+                if (deviceComboboxWidget.SelectedBlinkStick != null && deviceComboboxWidget.SelectedBlinkStick.Led != null)
+                {
+                    deviceComboboxWidget.SelectedBlinkStick.TurnOff();
+                }
+            };
+
             deviceComboboxWidget.DeviceChanged += (object sender, EventArgs e) => {
                 if (PreviousDeviceSettings != null && PreviousDeviceSettings.Led != null)
                 {

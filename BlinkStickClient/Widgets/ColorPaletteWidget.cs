@@ -18,6 +18,16 @@ namespace BlinkStickClient
                 ColorClicked(this, new ColorClickedEventArgs(color));
             }
         }
+
+        public event EventHandler<EventArgs> AllOffClicked;
+
+        protected void OnAllOffClicked()
+        {
+            if (AllOffClicked != null)
+            {
+                AllOffClicked(this, new EventArgs());
+            }
+        }
         #endregion
 
 
@@ -30,6 +40,10 @@ namespace BlinkStickClient
 
         public int TileSize { set; get; }
         public int TileSpacing { set; get; }
+
+        private PointD allOffCoords;
+        private RectangleInt allOffPosition;
+        private Boolean allOffSelected = false;
 
         public ColorPaletteWidget()
         {
@@ -82,9 +96,9 @@ namespace BlinkStickClient
                 cr.Stroke ();
             }
 
-            PointD coords = drawButton(cr, TileSpacing + (TileSize + TileSpacing) * ColorList.Length, TileSpacing, "All Off", false);
+            allOffCoords = drawButton(cr, TileSpacing + (TileSize + TileSpacing) * ColorList.Length, TileSpacing, "All Off", allOffSelected);
 
-            coords = drawButton(cr, coords.X, TileSpacing, "Custom", false);
+            //coords = drawButton(cr, coords.X, TileSpacing, "Custom", false);
 
             ((IDisposable) cr.GetTarget()).Dispose();                                      
             ((IDisposable) cr).Dispose();
@@ -96,11 +110,12 @@ namespace BlinkStickClient
         {
             cr.SetSourceRGB(0, 0, 0);
             cr.SelectFontFace("Georgia", FontSlant.Normal, FontWeight.Bold);
-            cr.SetFontSize(11);
+            int grow = selected ? 3 : 0;
+
+            cr.SetFontSize(11 + grow);
             TextExtents te = cr.TextExtents(text);
 
             int spacing = 5;
-            int grow = selected ? 3 : 0;
             DrawRoundedRectangle(cr, 
                 x - grow,
                 y - grow, 
@@ -117,6 +132,14 @@ namespace BlinkStickClient
                 x + spacing  - te.XBearing,
                 y - te.YBearing + (TileSize - te.Height) / 2);
             cr.ShowText(text);
+
+            if (allOffPosition.X == 0)
+            {
+                allOffPosition.X = (int)x;
+                allOffPosition.Y = (int)y;
+                allOffPosition.Width = (int)(te.Width + spacing * 2);
+                allOffPosition.Height = TileSize;
+            }
 
             return new PointD(x + te.Width + spacing * 2 + TileSpacing, 0);
         }
@@ -156,6 +179,10 @@ namespace BlinkStickClient
             {
                 OnColorClicked(CachedColors[SelectedIndex]);
             }
+            else if (allOffSelected)
+            {
+                OnAllOffClicked();
+            }
 
             return base.OnButtonReleaseEvent(evnt);
         }
@@ -166,14 +193,23 @@ namespace BlinkStickClient
 
             if (index < ColorList.Length && evnt.Y >= TileSpacing && evnt.Y <= TileSize + TileSpacing)
             {
+                allOffSelected = false;
                 if (SelectedIndex != index)
                 {
                     SelectedIndex = index;
                     QueueDraw();
                 }
             }
-            else if (SelectedIndex != -1)
+            else if (evnt.Y >= allOffPosition.Y && evnt.Y <= allOffPosition.Y + allOffPosition.Height &&
+                evnt.X >= allOffPosition.X && evnt.X <= allOffPosition.X + allOffPosition.Width)
             {
+                allOffSelected = true;
+                SelectedIndex = -1;
+                QueueDraw();
+            }
+            else if (SelectedIndex != -1 || allOffSelected)
+            {
+                allOffSelected = false;
                 SelectedIndex = -1;
                 QueueDraw();
             }
