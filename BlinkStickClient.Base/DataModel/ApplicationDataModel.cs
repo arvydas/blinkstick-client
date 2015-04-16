@@ -211,13 +211,13 @@ namespace BlinkStickClient.DataModel
                 Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
                     AnimationType = AnimationTypeEnum.Blink,
                     ColorString = "#FF0000",
-                    DurationBlink = 50,
+                    DurationBlink = 100,
                     RepeatBlink = 2
                 });
                 Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
                     AnimationType = AnimationTypeEnum.Blink,
                     ColorString = "#0000FF",
-                    DurationBlink = 50,
+                    DurationBlink = 100,
                     RepeatBlink = 2
                 });
                 Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
@@ -231,7 +231,7 @@ namespace BlinkStickClient.DataModel
                 Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
                     AnimationType = AnimationTypeEnum.Blink,
                     ColorString = "#FFFF00",
-                    DurationBlink = 50,
+                    DurationBlink = 100,
                     RepeatBlink = 3
                 });
                 Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
@@ -242,7 +242,7 @@ namespace BlinkStickClient.DataModel
                 Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
                     AnimationType = AnimationTypeEnum.Blink,
                     ColorString = "#FFFF00",
-                    DurationBlink = 50,
+                    DurationBlink = 100,
                     RepeatBlink = 2
                 });
                 Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
@@ -253,7 +253,7 @@ namespace BlinkStickClient.DataModel
                 Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
                     AnimationType = AnimationTypeEnum.Blink,
                     ColorString = "#FFFF00",
-                    DurationBlink = 50,
+                    DurationBlink = 100,
                     RepeatBlink = 1
                 });
                 Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
