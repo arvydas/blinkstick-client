@@ -84,7 +84,15 @@ namespace BlinkStickClient.DataModel
             }
 
             if (!File.Exists(FileName))
+            {
                 Save();
+            }
+
+            //Prepopulate with standard patterns
+            if (Patterns.Count == 0)
+            {
+                BuildStandardPatterns();
+            }
         }
 
         private Boolean Load(String SettingsFileName)
@@ -145,6 +153,150 @@ namespace BlinkStickClient.DataModel
             }
 
             return false;
+        }
+
+        private void BuildStandardPatterns()
+        {
+            if (Patterns.Count == 0)
+            {
+                // ---- pulse - ["red", "green", "blue"] (x3)
+                foreach (String color in new String[] {"red", "green", "blue"})
+                {
+                    Patterns.Add(new Pattern() { Name = "pulse - " + color + " (x3)" });
+                    Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                        AnimationType = AnimationTypeEnum.Pulse,
+                        Color = RgbColor.FromString(color),
+                        DurationPulse = 500,
+                        RepeatPulse = 3
+                    });
+                }
+
+                // ---- alert - ["white", "red", "green", "blue", "yellow"]
+                foreach (String color in new String[] {"white", "red", "green", "blue", "yellow"})
+                {
+                    Patterns.Add(new Pattern() { Name = "alert - " + color });
+                    Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                        AnimationType = AnimationTypeEnum.Blink,
+                        Color = RgbColor.FromString(color),
+                        DurationBlink = 100,
+                        RepeatBlink = 5
+                    });
+                    Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                        AnimationType = AnimationTypeEnum.SetColor,
+                        ColorString = "#000000",
+                        DelaySetColor = 1000
+                    });
+                }
+
+                // ---- color - cycle
+                Patterns.Add(new Pattern() { Name = "color - cycle" });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.Morph,
+                    ColorString = "#FF0000",
+                    DurationMorph = 1000
+                });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.Morph,
+                    ColorString = "#00FF00",
+                    DurationMorph = 1000
+                });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.Morph,
+                    ColorString = "#0000FF",
+                    DurationMorph = 1000
+                });
+
+                // ---- police
+                Patterns.Add(new Pattern() { Name = "police" });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.Blink,
+                    ColorString = "#FF0000",
+                    DurationBlink = 50,
+                    RepeatBlink = 2
+                });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.Blink,
+                    ColorString = "#0000FF",
+                    DurationBlink = 50,
+                    RepeatBlink = 2
+                });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.SetColor,
+                    ColorString = "#000000",
+                    DelaySetColor = 500
+                });
+
+                // ---- ambulance
+                Patterns.Add(new Pattern() { Name = "ambulance" });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.Blink,
+                    ColorString = "#FFFF00",
+                    DurationBlink = 50,
+                    RepeatBlink = 3
+                });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.SetColor,
+                    ColorString = "#000000",
+                    DelaySetColor = 500
+                });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.Blink,
+                    ColorString = "#FFFF00",
+                    DurationBlink = 50,
+                    RepeatBlink = 2
+                });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.SetColor,
+                    ColorString = "#000000",
+                    DelaySetColor = 500
+                });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.Blink,
+                    ColorString = "#FFFF00",
+                    DurationBlink = 50,
+                    RepeatBlink = 1
+                });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.SetColor,
+                    ColorString = "#000000",
+                    DelaySetColor = 500
+                });
+
+                // ---- status - available
+                Patterns.Add(new Pattern() { Name = "status - available" });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.Morph,
+                    ColorString = "#00FF00",
+                    DelaySetColor = 1000
+                });
+
+                // ---- status - away
+                Patterns.Add(new Pattern() { Name = "status - away" });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.Morph,
+                    ColorString = "#FFFF00",
+                    DelaySetColor = 1000
+                });
+
+                // ---- status - busy
+                Patterns.Add(new Pattern() { Name = "status - busy" });
+                Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                    AnimationType = AnimationTypeEnum.Morph,
+                    ColorString = "#FF0000",
+                    DelaySetColor = 1000
+                });
+
+                // ---- color - ["white", "red", "green", "blue", "yellow", "black"]
+                foreach (String color in new String[] {"white", "red", "green", "blue", "yellow", "black"})
+                {
+                    Patterns.Add(new Pattern() { Name = "color - " + color });
+                    Patterns[Patterns.Count - 1].Animations.Add(new Animation() { 
+                        AnimationType = AnimationTypeEnum.SetColor,
+                        Color = RgbColor.FromString(color),
+                        DelaySetColor = 1000
+                    });
+                }
+            }
         }
         #endregion
 
