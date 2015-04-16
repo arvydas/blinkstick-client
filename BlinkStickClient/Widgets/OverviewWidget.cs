@@ -43,14 +43,14 @@ namespace BlinkStickClient
             deviceComboboxWidget.DeviceChanged += (object sender, EventArgs e) => {
                 if (PreviousDeviceSettings != null && PreviousDeviceSettings.Led != null)
                 {
-                    PreviousDeviceSettings.Led.SendColor -= BlinkStickSendColor;
+                    PreviousDeviceSettings.SendColor -= BlinkStickSendColor;
                 }
 
                 PreviousDeviceSettings = deviceComboboxWidget.SelectedBlinkStick;
 
                 if (PreviousDeviceSettings != null && PreviousDeviceSettings.Led != null)
                 {
-                    PreviousDeviceSettings.Led.SendColor += BlinkStickSendColor;
+                    PreviousDeviceSettings.SendColor += BlinkStickSendColor;
                 }
 
                 UpdateUI();

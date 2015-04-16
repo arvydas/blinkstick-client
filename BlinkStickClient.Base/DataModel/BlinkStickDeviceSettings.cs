@@ -10,6 +10,18 @@ namespace BlinkStickClient.DataModel
 {
     public class BlinkStickDeviceSettings
     {
+        public event SendColorEventHandler SendColor;
+
+        public Boolean OnSendColor(byte channel, byte index, byte r, byte g, byte b)
+        {
+            if (SendColor != null)
+            {
+                SendColor(this, new SendColorEventArgs(channel, index, r, g, b));
+            }
+
+            return true;
+        }
+
         protected static readonly ILog log = LogManager.GetLogger("BlinkStickDeviceSettings");  
 
         [JsonIgnore]
@@ -100,10 +112,21 @@ namespace BlinkStickClient.DataModel
                 b = (byte)(BrightnessLimit / 100.0 * b);
             }
 
-            if (Led != null)
+            lock (this)
             {
-                Led.SetColor(channel, index, r, g, b);
+                LedFrame[index * 3 + 0] = g;
+                LedFrame[index * 3 + 1] = r;
+                LedFrame[index * 3 + 2] = b;
+
+                NeedsLedUpdate = true;
             }
+
+            if (!Running)
+            {
+                this.Start();
+            }
+
+            OnSendColor(channel, index, r, g, b);
         }
 
         public void SetColor(DeviceNotification notification, byte r, byte g, byte b)
@@ -123,6 +146,7 @@ namespace BlinkStickClient.DataModel
                     LedFrame[i * 3] = g;
                     LedFrame[i * 3 + 1] = r;
                     LedFrame[i * 3 + 2] = b;
+                    OnSendColor(0, (byte)i, r, g, b);
                 }
 
                 NeedsLedUpdate = true;
@@ -132,6 +156,7 @@ namespace BlinkStickClient.DataModel
             {
                 this.Start();
             }
+
         }
 
         public RgbColor GetColor(CustomNotification notification)
@@ -157,12 +182,19 @@ namespace BlinkStickClient.DataModel
 
             lock (this)
             {
-                NeedsLedUpdate = false;
+                NeedsLedUpdate = true;
 
                 LedFrame[0] = g;
                 LedFrame[1] = r;
                 LedFrame[2] = b;
             }
+
+            if (!Running)
+            {
+                this.Start();
+            }
+
+            OnSendColor(0, 0, r, g, b);
         }
 
         public void Start()
