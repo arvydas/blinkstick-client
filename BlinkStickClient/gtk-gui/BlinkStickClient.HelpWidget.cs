@@ -4,16 +4,136 @@ namespace BlinkStickClient
 {
 	public partial class HelpWidget
 	{
+		private global::Gtk.VBox vbox2;
+		
+		private global::Gtk.Image imageLogo;
+		
+		private global::Gtk.Alignment alignment2;
+		
+		private global::Gtk.VBox vboxInfo;
+		
+		private global::Gtk.Label labelVersionInfo;
+		
+		private global::Gtk.Label label4;
+		
+		private global::Gtk.Button buttonBlinkStickDotComLink;
+		
+		private global::Gtk.Button buttonSupportForums;
+		
+		private global::Gtk.Button buttonSupportEmail;
+		
+		private global::Gtk.Label labelCopyright;
+
 		protected virtual void Build ()
 		{
 			global::Stetic.Gui.Initialize (this);
 			// Widget BlinkStickClient.HelpWidget
 			global::Stetic.BinContainer.Attach (this);
 			this.Name = "BlinkStickClient.HelpWidget";
+			// Container child BlinkStickClient.HelpWidget.Gtk.Container+ContainerChild
+			this.vbox2 = new global::Gtk.VBox ();
+			this.vbox2.Name = "vbox2";
+			this.vbox2.Spacing = 6;
+			this.vbox2.BorderWidth = ((uint)(12));
+			// Container child vbox2.Gtk.Box+BoxChild
+			this.imageLogo = new global::Gtk.Image ();
+			this.imageLogo.Name = "imageLogo";
+			this.vbox2.Add (this.imageLogo);
+			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.imageLogo]));
+			w1.Position = 0;
+			w1.Expand = false;
+			w1.Fill = false;
+			// Container child vbox2.Gtk.Box+BoxChild
+			this.alignment2 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
+			this.alignment2.Name = "alignment2";
+			this.alignment2.LeftPadding = ((uint)(200));
+			// Container child alignment2.Gtk.Container+ContainerChild
+			this.vboxInfo = new global::Gtk.VBox ();
+			this.vboxInfo.Name = "vboxInfo";
+			this.vboxInfo.Spacing = 24;
+			// Container child vboxInfo.Gtk.Box+BoxChild
+			this.labelVersionInfo = new global::Gtk.Label ();
+			this.labelVersionInfo.Name = "labelVersionInfo";
+			this.labelVersionInfo.Xalign = 1F;
+			this.labelVersionInfo.LabelProp = global::Mono.Unix.Catalog.GetString ("[labelVersionInfo]");
+			this.labelVersionInfo.UseMarkup = true;
+			this.vboxInfo.Add (this.labelVersionInfo);
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vboxInfo [this.labelVersionInfo]));
+			w2.Position = 0;
+			w2.Expand = false;
+			w2.Fill = false;
+			// Container child vboxInfo.Gtk.Box+BoxChild
+			this.label4 = new global::Gtk.Label ();
+			this.label4.Name = "label4";
+			this.label4.Xalign = 0F;
+			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString ("BlinkStick Client application is designed in UK\nby Agile Innovative Ltd.");
+			this.label4.UseMarkup = true;
+			this.vboxInfo.Add (this.label4);
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vboxInfo [this.label4]));
+			w3.Position = 1;
+			w3.Expand = false;
+			w3.Fill = false;
+			// Container child vboxInfo.Gtk.Box+BoxChild
+			this.buttonBlinkStickDotComLink = new global::Gtk.Button ();
+			this.buttonBlinkStickDotComLink.CanFocus = true;
+			this.buttonBlinkStickDotComLink.Name = "buttonBlinkStickDotComLink";
+			this.buttonBlinkStickDotComLink.UseUnderline = true;
+			this.buttonBlinkStickDotComLink.Relief = ((global::Gtk.ReliefStyle)(2));
+			this.buttonBlinkStickDotComLink.Label = global::Mono.Unix.Catalog.GetString ("www.blinkstick.com");
+			this.vboxInfo.Add (this.buttonBlinkStickDotComLink);
+			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.vboxInfo [this.buttonBlinkStickDotComLink]));
+			w4.Position = 2;
+			w4.Expand = false;
+			w4.Fill = false;
+			// Container child vboxInfo.Gtk.Box+BoxChild
+			this.buttonSupportForums = new global::Gtk.Button ();
+			this.buttonSupportForums.CanFocus = true;
+			this.buttonSupportForums.Name = "buttonSupportForums";
+			this.buttonSupportForums.UseUnderline = true;
+			this.buttonSupportForums.Relief = ((global::Gtk.ReliefStyle)(2));
+			this.buttonSupportForums.Label = global::Mono.Unix.Catalog.GetString ("Support Forums");
+			this.vboxInfo.Add (this.buttonSupportForums);
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.vboxInfo [this.buttonSupportForums]));
+			w5.Position = 3;
+			w5.Expand = false;
+			w5.Fill = false;
+			// Container child vboxInfo.Gtk.Box+BoxChild
+			this.buttonSupportEmail = new global::Gtk.Button ();
+			this.buttonSupportEmail.CanFocus = true;
+			this.buttonSupportEmail.Name = "buttonSupportEmail";
+			this.buttonSupportEmail.UseUnderline = true;
+			this.buttonSupportEmail.Relief = ((global::Gtk.ReliefStyle)(2));
+			this.buttonSupportEmail.Label = global::Mono.Unix.Catalog.GetString ("Support email");
+			this.vboxInfo.Add (this.buttonSupportEmail);
+			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.vboxInfo [this.buttonSupportEmail]));
+			w6.Position = 4;
+			w6.Expand = false;
+			w6.Fill = false;
+			this.alignment2.Add (this.vboxInfo);
+			this.vbox2.Add (this.alignment2);
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.alignment2]));
+			w8.Position = 1;
+			w8.Padding = ((uint)(10));
+			// Container child vbox2.Gtk.Box+BoxChild
+			this.labelCopyright = new global::Gtk.Label ();
+			this.labelCopyright.Name = "labelCopyright";
+			this.labelCopyright.Xalign = 1F;
+			this.labelCopyright.LabelProp = global::Mono.Unix.Catalog.GetString ("Copyright (c) Agile Innovative Ltd 2013-x");
+			this.labelCopyright.UseMarkup = true;
+			this.labelCopyright.Justify = ((global::Gtk.Justification)(1));
+			this.vbox2.Add (this.labelCopyright);
+			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.labelCopyright]));
+			w9.Position = 2;
+			w9.Expand = false;
+			w9.Fill = false;
+			this.Add (this.vbox2);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}
 			this.Hide ();
+			this.buttonBlinkStickDotComLink.Clicked += new global::System.EventHandler (this.OnButtonBlinkStickDotComLinkClicked);
+			this.buttonSupportForums.Clicked += new global::System.EventHandler (this.OnButtonSupportForumsClicked);
+			this.buttonSupportEmail.Clicked += new global::System.EventHandler (this.OnButtonSupportEmailClicked);
 		}
 	}
 }
