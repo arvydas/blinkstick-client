@@ -127,7 +127,10 @@ namespace BlinkStickClient
         protected void OnTreeviewEventsCursorChanged (object sender, EventArgs e)
         {
             if (ignoreNexClick)
+            {
+                ignoreNexClick = false;
                 return;
+            }
 
             TreeModel model;
             TreeIter iter;
@@ -143,9 +146,13 @@ namespace BlinkStickClient
 
                 if (column == (sender as TreeView).Columns[6]) //Delete clicked
                 {
-                    DataModel.Notifications.Remove(SelectedNotification);
-                    NotificationListStore.Remove(ref iter);
-                    DataModel.Save();
+                    if (MainWindow.ConfirmDelete())
+                    {
+                        ignoreNexClick = true;
+                        DataModel.Notifications.Remove(SelectedNotification);
+                        NotificationListStore.Remove(ref iter);
+                        DataModel.Save();
+                    }
                 }
                 else if (column == (sender as TreeView).Columns[5]) //Copy clicked
                 {
@@ -156,7 +163,7 @@ namespace BlinkStickClient
                     }
 
                     CustomNotification notification = SelectedNotification.Copy();
-                    notification.Name = DataModel.GetNotificationName(notification.Name, 2);
+                    notification.Name = DataModel.GetNotificationName(SelectedNotification.Name, 2);
 
                     if (EditNotification(notification, "Copy Notification"))
                     {
@@ -164,7 +171,6 @@ namespace BlinkStickClient
                         DataModel.Notifications.Add(notification);
                         ignoreNexClick = true;
                         SelectNotificationInTree(notification);
-                        ignoreNexClick = false;
                     }
                 }
                 else if (column == (sender as TreeView).Columns[4]) //Edit clicked

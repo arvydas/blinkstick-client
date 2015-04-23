@@ -172,10 +172,13 @@ namespace BlinkStickClient
             widget.AnimationObject = animation;
 
             widget.DeleteAnimation += (sender, e) => {
-                AnimationWidget w = (AnimationWidget)sender;
-                SelectedPattern.Animations.Remove(w.AnimationObject);
-                w.Destroy();
-                ReorderAnimations();
+                if (MainWindow.ConfirmDelete())
+                {
+                    AnimationWidget w = (AnimationWidget)sender;
+                    SelectedPattern.Animations.Remove(w.AnimationObject);
+                    w.Destroy();
+                    ReorderAnimations();
+                }
             };
 
             widget.MoveUp += (sender, e) => {
@@ -242,10 +245,13 @@ namespace BlinkStickClient
 
                 if (column == (sender as TreeView).Columns[4]) //Delete clicked
                 {
-                    ignoreNextClick = true;
-                    PatternListStore.Remove(ref iter);
-                    DataModel.Patterns.Remove(SelectedPattern);
-                    SelectedPattern = null;
+                    if (MainWindow.ConfirmDelete())
+                    {
+                        ignoreNextClick = true;
+                        PatternListStore.Remove(ref iter);
+                        DataModel.Patterns.Remove(SelectedPattern);
+                        SelectedPattern = null;
+                    }
                 }
                 else if (column == (sender as TreeView).Columns[3]) //Copy clicked
                 {

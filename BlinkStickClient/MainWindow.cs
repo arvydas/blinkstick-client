@@ -40,6 +40,8 @@ public partial class MainWindow: Gtk.Window
 
     ApplicationDataModel DataModel = new ApplicationDataModel();
 
+    public static MainWindow Instance;
+
     List<Widget> Pages = new List<Widget>();
     Widget _VisiblePage;
     Widget VisiblePage {
@@ -112,6 +114,8 @@ public partial class MainWindow: Gtk.Window
 	
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
+        MainWindow.Instance = this;
+
         if (HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Windows)
 		{
 			SetupSingleInstanceEvent();
@@ -453,6 +457,18 @@ public partial class MainWindow: Gtk.Window
     protected void ToolbarButtonToggled (object sender, EventArgs e)
     {
         VisiblePage = Pages[(sender as RadioAction).Value];
+    }
+    #endregion
+
+    #region Helper functions
+    public static Boolean ConfirmDelete()
+    {
+        return MessageBox.Show(
+            MainWindow.Instance, 
+            "Are you sure you want to delete?", 
+            MessageType.Question, 
+            ButtonsType.OkCancel) == ResponseType.Ok;
+
     }
     #endregion
 

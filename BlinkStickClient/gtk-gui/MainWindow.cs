@@ -38,15 +38,15 @@ public partial class MainWindow
 		this.NotificationsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Notifications");
 		w1.Add (this.NotificationsAction, null);
 		this.HelpAction1 = new global::Gtk.RadioAction ("HelpAction1", global::Mono.Unix.Catalog.GetString ("Help"), null, "blinkstick-help", 4);
-		this.HelpAction1.Group = this.OverviewAction.Group;
+		this.HelpAction1.Group = this.NotificationsAction.Group;
 		this.HelpAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Help");
 		w1.Add (this.HelpAction1, null);
 		this.PatternsAction1 = new global::Gtk.RadioAction ("PatternsAction1", global::Mono.Unix.Catalog.GetString ("Patterns"), null, "blinkstick-patterns", 2);
-		this.PatternsAction1.Group = this.HelpAction1.Group;
+		this.PatternsAction1.Group = this.NotificationsAction.Group;
 		this.PatternsAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Patterns");
 		w1.Add (this.PatternsAction1, null);
 		this.EventsAction = new global::Gtk.RadioAction ("EventsAction", global::Mono.Unix.Catalog.GetString ("Events"), null, "blinkstick-events", 3);
-		this.EventsAction.Group = this.HelpAction1.Group;
+		this.EventsAction.Group = this.NotificationsAction.Group;
 		this.EventsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Events");
 		w1.Add (this.EventsAction, null);
 		this.UIManager.InsertActionGroup (w1, 0);

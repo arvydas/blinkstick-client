@@ -89,6 +89,10 @@ namespace BlinkStickClient
             treeviewNotifications.Model = filter;
 
             UpdateUI();
+
+            #if !DEBUG
+            vbox2.Remove(checkbuttonDisplayOnlySupported);
+            #endif
         }
 
         private bool FilterTree (Gtk.TreeModel model, Gtk.TreeIter iter)

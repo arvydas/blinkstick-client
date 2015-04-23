@@ -1,6 +1,7 @@
 ﻿using System;
 using Gtk;
 using BlinkStickClient.DataModel;
+using BlinkStickClient.Utils;
 using BlinkStickDotNet;
 
 namespace BlinkStickClient
@@ -96,8 +97,11 @@ namespace BlinkStickClient
 
         protected void OnButtonDeleteClicked (object sender, EventArgs e)
         {
-            DataModel.Devices.Remove(deviceComboboxWidget.SelectedBlinkStick);
-            deviceComboboxWidget.LoadDevices(DataModel);
+            if (MainWindow.ConfirmDelete())
+            {
+                DataModel.Devices.Remove(deviceComboboxWidget.SelectedBlinkStick);
+                deviceComboboxWidget.LoadDevices(DataModel);
+            }
         }
 
         protected void OnButtonConfigureClicked (object sender, EventArgs e)
