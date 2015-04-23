@@ -44,15 +44,20 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: dep\gtk-sharp-2.12.25.msi; DestDir: "{tmp}"; Check: GtkNeedsInstallOrUpgrade; AfterInstall: InstallGtkSharp
+Source: "dep\gtk-sharp-2.12.25.msi"; DestDir: "{tmp}"; Check: GtkNeedsInstallOrUpgrade; AfterInstall: InstallGtkSharp
 Source: "ClearLooks\*"; DestDir: "{app}\Theme\ClearLooks"; Flags: ignoreversion recursesubdirs
-Source: "theme\*"; DestDir: "{code:GtkInstallDir}"; Flags: ignoreversion recursesubdirs
+Source: "theme\*"; DestDir: "{code:GtkInstallDir}"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall recursesubdirs
 Source: "..\BlinkStickClient\bin\Release\*.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\BlinkStickClient\bin\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\BlinkStickClient\bin\Release\*.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\BlinkStickClient\bin\Release\icon.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\BlinkStickClient\bin\Release\icon.png"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\BlinkStickClient\bin\Release\logo.png"; DestDir: "{app}"; Flags: ignoreversion
+; dll used to check running notepad at install time
+Source: "util\psvince.dll"; flags: dontcopy
+;psvince is installed in {app} folder, so it will be
+;loaded at uninstall time ;to check if client is running
+Source: "util\psvince.dll"; DestDir: {app}
 
 [Icons]
 Name: "{group}\{#AppName}"; Filename: "{app}\{#AppExeName}"
@@ -82,6 +87,16 @@ Root: HKLM; Subkey: SOFTWARE\Agile Innovative Ltd\BlinkStick; ValueType: string;
 #endif
 
 [Code]
+// function IsModuleLoaded to call at install time
+// added also setuponly flag
+function IsModuleLoadedI(modulename: String ):  Boolean;
+external 'IsModuleLoaded@files:psvince.dll stdcall setuponly';
+
+// function IsModuleLoadedU to call at uninstall time
+// added also uninstallonly flag
+function IsModuleLoadedU(modulename: String ):  Boolean;
+external 'IsModuleLoaded@{app}\psvince.dll stdcall uninstallonly' ;
+
 var
   RequireRestart: Boolean;
 
@@ -214,39 +229,66 @@ end;
 
 function InitializeSetup(): Boolean;
 begin
-  RequireRestart := GtkNeedsInstallOrUpgrade;
+  // check if client is running
+  if IsModuleLoadedI( 'BlinkStickClient.exe' ) Or IsModuleLoadedI( 'BlinkStick.exe' ) then
+  begin
+    MsgBox( 'BlinkStick Client is running, please close it and run again setup.', mbError, MB_OK );
+    Result := false;
+  end
+  else 
+  begin
+    RequireRestart := GtkNeedsInstallOrUpgrade;
 { Debug code
-  TestVersions('1', '2');
-  TestVersions('2', '1');
-  TestVersions('3', '3');
-  
-  TestVersions('1.1', '1');
-  TestVersions('2.1', '1');
-  TestVersions('1.1', '2');
+    TestVersions('1', '2');
+    TestVersions('2', '1');
+    TestVersions('3', '3');
 
-  TestVersions('2.12.11', '2.12.25');
-  TestVersions('', '2.12.25');
-  TestVersions('2.12.25', '');
-  TestVersions('', '');
-  TestVersions('2.12.11', '2.012.11');
+    TestVersions('1.1', '1');
+    TestVersions('2.1', '1');
+    TestVersions('1.1', '2');
+
+    TestVersions('2.12.11', '2.12.25');
+    TestVersions('', '2.12.25');
+    TestVersions('2.12.25', '');
+    TestVersions('', '');
+    TestVersions('2.12.11', '2.012.11');
 { }
-	//init windows version
-	initwinversion();
+  	//init windows version
+  	initwinversion();
 	
-	if not minwinspversion(5, 1, 3) then begin
-		MsgBox(FmtMessage(CustomMessage('depinstall_missing'), [CustomMessage('winxpsp3_title')]), mbError, MB_OK);
-		exit;
-	end;
+  	if not minwinspversion(5, 1, 3) then begin
+  		MsgBox(FmtMessage(CustomMessage('depinstall_missing'), [CustomMessage('winxpsp3_title')]), mbError, MB_OK);
+  		exit;
+  	end;
 
 #ifdef use_dotnetfx40
-	if (not netfxinstalled(NetFx40Full, '')) then
-  begin
-		RequireRestart := true;
-    dotnetfx40full();
-  end;
+  	if (not netfxinstalled(NetFx40Full, '')) then
+    begin
+  		RequireRestart := true;
+      dotnetfx40full();
+    end;
 #endif
   
-  Result := true; 
+    Result := true; 
+  end;
+end;
+
+function InitializeUninstall(): Boolean;
+begin
+  // check if client is running
+  if IsModuleLoadedU( 'BlinkStickClient.exe' ) then
+  begin
+    MsgBox( 'BlinkStick Client is running, please close it and run again uninstall.', mbError, MB_OK );
+    Result := false;
+  end
+  else
+  begin 
+    Result := true;
+  end;
+
+  // Unload the DLL, otherwise the dll psvince is not deleted
+  UnloadDLL(ExpandConstant('{app}\psvince.dll'));
+
 end;
 
 function NeedRestart(): Boolean;
@@ -254,3 +296,64 @@ begin
   if (delayedReboot Or RequireRestart) then
 		Result := true;
 end;
+
+
+// Code below taken from 
+// http://stackoverflow.com/questions/2000296/innosetup-how-to-automatically-uninstall-previous-installed-version
+
+function GetUninstallString(): String;
+var
+  sUnInstPath: String;
+  sUnInstallString: String;
+begin
+  sUnInstPath := ExpandConstant('Software\Microsoft\Windows\CurrentVersion\Uninstall\{#emit SetupSetting("AppId")}_is1');
+  sUnInstallString := '';
+  if not RegQueryStringValue(HKLM, sUnInstPath, 'UninstallString', sUnInstallString) then
+    RegQueryStringValue(HKCU, sUnInstPath, 'UninstallString', sUnInstallString);
+  Result := sUnInstallString;
+end;
+
+
+function IsUpgrade(): Boolean;
+begin
+  Result := (GetUninstallString() <> '');
+end;
+
+
+function UnInstallOldVersion(): Integer;
+var
+  sUnInstallString: String;
+  iResultCode: Integer;
+begin
+// Return Values:
+// 1 - uninstall string is empty
+// 2 - error executing the UnInstallString
+// 3 - successfully executed the UnInstallString
+
+  // default return value
+  Result := 0;
+
+  // get the uninstall string of the old app
+  sUnInstallString := GetUninstallString();
+  if sUnInstallString <> '' then begin
+    sUnInstallString := RemoveQuotes(sUnInstallString);
+    if Exec(sUnInstallString, '/SILENT /NORESTART /SUPPRESSMSGBOXES','', SW_HIDE, ewWaitUntilTerminated, iResultCode) then
+      Result := 3
+    else
+      Result := 2;
+  end else
+    Result := 1;
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if (CurStep=ssInstall) then
+  begin
+    if (IsUpgrade()) then
+    begin
+      UnInstallOldVersion();
+    end;
+  end;
+end;
+
+//End of code snippet from stackoverflow.com
