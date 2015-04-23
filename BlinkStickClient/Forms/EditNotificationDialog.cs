@@ -171,7 +171,7 @@ namespace BlinkStickClient
 
             if (Notification is DeviceNotification)
             {
-                if (((DeviceNotification)Notification).BlinkStickSerial == "")
+                if (((DeviceNotification)Notification).BlinkStickSerial == "" || ((DeviceNotification)Notification).BlinkStickSerial == null)
                 {
                     if (this.DataModel.Devices.Count == 1)
                     {
