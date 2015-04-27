@@ -124,7 +124,14 @@ namespace BlinkStickClient.Utils
         void HandleFullScreenApplicationChanged (object sender, ChangedEventArgs e)
         {
             Process p = Process.GetProcessById((int)e.ProcessId);
-            String processFileName = Path.GetFileName(p.MainModule.FileName).ToLower();
+            String processFileName = "";
+
+            /*
+            if (e.ProcessId != 0)
+            {
+                processFileName = Path.GetFileName(p.MainModule.FileName).ToLower();
+            }
+            */
 
             if (e.FullScreen && !processFileName.Contains("powerptn.exe"))
             {
@@ -226,54 +233,68 @@ namespace BlinkStickClient.Utils
                 {
                     if (CaptureMode == CaptureModeEnum.Desktop)
                     {
-                        Surface s = sc.CaptureScreen();
-                        DataRectangle dr = s.LockRectangle(LockFlags.None);
-                        DataStream gs = dr.Data;
-
-                        byte[] bu = new byte[4];
-                        uint r = 0;
-                        uint g = 0;
-                        uint b = 0;
-                        const int Bpp = 4; //Bytes per pixel
-
-                        int count = 0;
-
-                        int step = 4;
-
-                        for (int j = 0; j < Screen.PrimaryScreen.Bounds.Height / step; j++)
+                        /*
+                        Surface s = null;
+                        try
                         {
-                            for (int i = 0; i < Screen.PrimaryScreen.Bounds.Width / step; i++)
-                            {
-                                gs.Position = (j * step * Screen.PrimaryScreen.Bounds.Width + i * step) * Bpp;
-
-                                gs.Read(bu, 0, 4);
-
-                                r += bu[2];
-                                g += bu[1];
-                                b += bu[0];
-
-                                count++;
-                            }
+                            s = sc.CaptureScreen();
+                        }
+                        catch (Exception ex)
+                        {
+                            log.ErrorFormat("Failed to capture screen {0}", ex);
                         }
 
-                        s.UnlockRectangle();
-                        s.Dispose();
-
-                        if (pipeClient != null)
+                        if (s != null)
                         {
-                            if (pipeClient.IsConnected)
+                            DataRectangle dr = s.LockRectangle(LockFlags.None);
+                            DataStream gs = dr.Data;
+
+                            byte[] bu = new byte[4];
+                            uint r = 0;
+                            uint g = 0;
+                            uint b = 0;
+                            const int Bpp = 4; //Bytes per pixel
+
+                            int count = 0;
+
+                            int step = 4;
+
+                            for (int j = 0; j < Screen.PrimaryScreen.Bounds.Height / step; j++)
                             {
-                                pipeClient.Write(new byte[] { (byte)(r / count), (byte)(g / count), (byte)(b / count) }, 0, 3);
-                            }
-                            else
-                            {
-                                if (!ignorePipeError)
+                                for (int i = 0; i < Screen.PrimaryScreen.Bounds.Width / step; i++)
                                 {
-                                    log.Info("Client disconnected. Exiting...");
-                                    return;
+                                    gs.Position = (j * step * Screen.PrimaryScreen.Bounds.Width + i * step) * Bpp;
+
+                                    gs.Read(bu, 0, 4);
+
+                                    r += bu[2];
+                                    g += bu[1];
+                                    b += bu[0];
+
+                                    count++;
+                                }
+                            }
+
+                            s.UnlockRectangle();
+                            s.Dispose();
+
+                            if (pipeClient != null)
+                            {
+                                if (pipeClient.IsConnected)
+                                {
+                                    pipeClient.Write(new byte[] { (byte)(r / count), (byte)(g / count), (byte)(b / count) }, 0, 3);
+                                }
+                                else
+                                {
+                                    if (!ignorePipeError)
+                                    {
+                                        log.Info("Client disconnected. Exiting...");
+                                        return;
+                                    }
                                 }
                             }
                         }
+                        */
                     }
                     else if (CaptureMode == CaptureModeEnum.Application)
                     {
