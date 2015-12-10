@@ -200,6 +200,7 @@ namespace BlinkStickClient.CLI
             Console.WriteLine ("    Manufacturer: " + device.ManufacturerName);
             Console.WriteLine ("    Product Name: " + device.ProductName);
             Console.WriteLine ("    Mode:         " + device.GetMode());
+            PrintDeviceInfoBlock(device, 2);
             PrintDeviceInfoBlock(device, 3);
         }
 
