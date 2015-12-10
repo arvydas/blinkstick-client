@@ -379,7 +379,6 @@ namespace BlinkStickClient
 			this.radiobuttonModeInverse = new global::Gtk.RadioButton (global::Mono.Unix.Catalog.GetString ("Inverse"));
 			this.radiobuttonModeInverse.CanFocus = true;
 			this.radiobuttonModeInverse.Name = "radiobuttonModeInverse";
-			this.radiobuttonModeInverse.Active = true;
 			this.radiobuttonModeInverse.DrawIndicator = true;
 			this.radiobuttonModeInverse.UseUnderline = true;
 			this.radiobuttonModeInverse.Group = new global::GLib.SList (global::System.IntPtr.Zero);

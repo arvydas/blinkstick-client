@@ -1,6 +1,7 @@
 ﻿using System;
 using BlinkStickClient.DataModel;
 using BlinkStickClient.Utils;
+using BlinkStickClient.Classes;
 using log4net;
 using Gtk;
 using Gdk;
@@ -11,6 +12,7 @@ namespace BlinkStickClient
     public partial class NotificationsWidget : Gtk.Bin
     {
         public ApplicationDataModel DataModel;
+        public ApplicationSettings ApplicationSettings;
 
         protected static readonly ILog log = LogManager.GetLogger("Main");  
 
@@ -19,6 +21,8 @@ namespace BlinkStickClient
         private CustomNotification _SelectedNotification = null;
 
         Boolean ignoreNexClick = false;
+
+        int DeleteColumnIndex = 6;
 
         public CustomNotification SelectedNotification {
             get {
@@ -37,67 +41,74 @@ namespace BlinkStickClient
         public NotificationsWidget()
         {
             this.Build();
+        }
 
-            log.Debug( "Setting up treeview");
+        public void Initialize()
+        {
+            log.Debug("Setting up treeview");
 
-            Gtk.TreeViewColumn enabledColumn = new Gtk.TreeViewColumn ();
+            Gtk.TreeViewColumn enabledColumn = new Gtk.TreeViewColumn();
             enabledColumn.Title = "";
 
-            Gtk.TreeViewColumn nameColumn = new Gtk.TreeViewColumn ();
+            Gtk.TreeViewColumn nameColumn = new Gtk.TreeViewColumn();
             nameColumn.Title = "Name";
 
-            Gtk.TreeViewColumn blinkStickColumn = new Gtk.TreeViewColumn ();
+            Gtk.TreeViewColumn blinkStickColumn = new Gtk.TreeViewColumn();
             blinkStickColumn.Title = "BlinkStick";
 
-            Gtk.TreeViewColumn patternColumn = new Gtk.TreeViewColumn ();
+            Gtk.TreeViewColumn patternColumn = new Gtk.TreeViewColumn();
             patternColumn.Title = "Pattern";
 
-            Gtk.CellRendererPixbuf enabledCell = new Gtk.CellRendererPixbuf ();
-            Gtk.CellRendererText nameCell = new Gtk.CellRendererText ();
-            Gtk.CellRendererText typeCell = new Gtk.CellRendererText ();
-            Gtk.CellRendererText blinkStickCell = new Gtk.CellRendererText ();
-            Gtk.CellRendererText patternCell = new Gtk.CellRendererText ();
+            Gtk.CellRendererPixbuf enabledCell = new Gtk.CellRendererPixbuf();
+            Gtk.CellRendererText nameCell = new Gtk.CellRendererText();
+            Gtk.CellRendererText typeCell = new Gtk.CellRendererText();
+            Gtk.CellRendererText blinkStickCell = new Gtk.CellRendererText();
+            Gtk.CellRendererText patternCell = new Gtk.CellRendererText();
 
             CellRendererPixbuf iconCell = new CellRendererPixbuf();
             nameColumn.PackStart(iconCell, false);
             nameColumn.AddAttribute(iconCell, "pixbuf", 4);
 
-            enabledColumn.PackEnd (enabledCell, false);
-            blinkStickColumn.PackEnd (blinkStickCell, false);
-            nameColumn.PackEnd (nameCell, true);
-            patternColumn.PackEnd (patternCell, false);
+            enabledColumn.PackEnd(enabledCell, false);
+            blinkStickColumn.PackEnd(blinkStickCell, false);
+            nameColumn.PackEnd(nameCell, true);
+            patternColumn.PackEnd(patternCell, false);
 
-            enabledColumn.SetCellDataFunc (enabledCell, new Gtk.TreeCellDataFunc (RenderEnabledCell));
-            nameColumn.SetCellDataFunc (nameCell, new Gtk.TreeCellDataFunc (RenderNameCell));
-            blinkStickColumn.SetCellDataFunc (blinkStickCell, new Gtk.TreeCellDataFunc (RenderBlinkStickCell));
-            patternColumn.SetCellDataFunc (patternCell, new Gtk.TreeCellDataFunc (RenderPatternCell));
+            enabledColumn.SetCellDataFunc(enabledCell, new Gtk.TreeCellDataFunc(RenderEnabledCell));
+            nameColumn.SetCellDataFunc(nameCell, new Gtk.TreeCellDataFunc(RenderNameCell));
+            blinkStickColumn.SetCellDataFunc(blinkStickCell, new Gtk.TreeCellDataFunc(RenderBlinkStickCell));
+            patternColumn.SetCellDataFunc(patternCell, new Gtk.TreeCellDataFunc(RenderPatternCell));
 
-            treeviewEvents.AppendColumn (nameColumn);
+            treeviewEvents.AppendColumn(nameColumn);
             treeviewEvents.Columns[0].Expand = true;
+            treeviewEvents.AppendColumn(patternColumn);
 
-            treeviewEvents.AppendColumn (patternColumn);
-            treeviewEvents.AppendColumn (blinkStickColumn);
-            treeviewEvents.AppendColumn (enabledColumn);
-            treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 1);
-            treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 2);
-            treeviewEvents.AppendColumn ("", new Gtk.CellRendererPixbuf(), "stock_id", 3);
+            if (this.ApplicationSettings.SingleBlinkStickMode)
+            {
+                DeleteColumnIndex = 5;
+            }
+            else
+            {
+                treeviewEvents.AppendColumn(blinkStickColumn);
+                DeleteColumnIndex = 6;
+            }
 
-            NotificationListStore.SetSortFunc(0, delegate(TreeModel model, TreeIter a, TreeIter b) {
+            treeviewEvents.AppendColumn(enabledColumn);
+            treeviewEvents.AppendColumn("", new Gtk.CellRendererPixbuf(), "stock_id", 1);
+            treeviewEvents.AppendColumn("", new Gtk.CellRendererPixbuf(), "stock_id", 2);
+            treeviewEvents.AppendColumn("", new Gtk.CellRendererPixbuf(), "stock_id", 3);
+            NotificationListStore.SetSortFunc(0, delegate(TreeModel model, TreeIter a, TreeIter b)
+            {
                 CustomNotification n1 = (CustomNotification)model.GetValue(a, 0);
                 CustomNotification n2 = (CustomNotification)model.GetValue(b, 0);
-                if (n1 == null || n2 == null) 
+                if (n1 == null || n2 == null)
                     return 0;
                 return String.Compare(n1.Name, n2.Name);
             });
 
             NotificationListStore.SetSortColumnId(0, SortType.Ascending);
-
-
             treeviewEvents.Model = NotificationListStore;
-        }
 
-        public void Initialize()
-        {
             log.Debug("Adding notifications to the tree");
             foreach (CustomNotification e in DataModel.Notifications) {
                 NotificationListStore.AppendValues (e, "gtk-edit", "gtk-copy", "gtk-delete", NotificationRegistry.FindIcon(e.GetType()));
@@ -144,7 +155,7 @@ namespace BlinkStickClient
                 TreeViewColumn column;
                 (sender as TreeView).GetCursor(out path, out column);
 
-                if (column == (sender as TreeView).Columns[6]) //Delete clicked
+                if (column == (sender as TreeView).Columns[DeleteColumnIndex]) //Delete clicked
                 {
                     if (MainWindow.ConfirmDelete())
                     {
@@ -154,7 +165,7 @@ namespace BlinkStickClient
                         DataModel.Save();
                     }
                 }
-                else if (column == (sender as TreeView).Columns[5]) //Copy clicked
+                else if (column == (sender as TreeView).Columns[DeleteColumnIndex - 1]) //Copy clicked
                 {
                     if (SelectedNotification.IsUnique())
                     {
@@ -173,7 +184,7 @@ namespace BlinkStickClient
                         SelectNotificationInTree(notification);
                     }
                 }
-                else if (column == (sender as TreeView).Columns[4]) //Edit clicked
+                else if (column == (sender as TreeView).Columns[DeleteColumnIndex - 2]) //Edit clicked
                 {
                     EditNotification();
                 }
@@ -194,7 +205,7 @@ namespace BlinkStickClient
             int response;
 
             using (EditNotificationDialog editDialog = 
-                new EditNotificationDialog(title, this.ParentForm, this.DataModel, notification))
+                new EditNotificationDialog(title, this.ParentForm, this.DataModel, notification, this.ApplicationSettings))
             {
                 response = editDialog.Run();
                 editDialog.Destroy();

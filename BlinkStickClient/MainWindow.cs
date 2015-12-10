@@ -27,6 +27,7 @@ using BlinkStickClient.DataModel;
 using BlinkStickDotNet;
 using BlinkStickClient.Utils;
 using MonoDevelop.MacInterop;
+using BlinkStickClient.Classes;
 #if LINUX
 using AppIndicator;
 #endif
@@ -39,6 +40,7 @@ public partial class MainWindow: Gtk.Window
     public BlinkStickClient.Utils.EventSignalledHandler eventSignalled;
 
     ApplicationDataModel DataModel = new ApplicationDataModel();
+    ApplicationSettings ApplicationSettings = new ApplicationSettings();
 
     public static MainWindow Instance;
 
@@ -71,7 +73,7 @@ public partial class MainWindow: Gtk.Window
         }
     }
 
-    OverviewWidget overviewWidget;
+    Widget overviewWidget;
     NotificationsWidget notificationsWidget;
     EventsWidget eventsWidget;
 
@@ -123,7 +125,26 @@ public partial class MainWindow: Gtk.Window
 
 		Build ();
 
-		this.Title = "BlinkStick " + ApplicationDataModel.ApplicationVersion;
+        String brandingPath = global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "branding.png");
+
+        if (File.Exists(brandingPath))
+        {
+            this.imageBranding.File = brandingPath;
+
+            this.SetSizeRequest(500, this.imageBranding.Pixbuf.Height + 500);
+        }
+
+        log.Info("Loading settings");
+        ApplicationSettings.Load();
+
+        if (ApplicationSettings.ApplicationTitle != "")
+        {
+            this.Title = String.Format(ApplicationSettings.ApplicationTitle, ApplicationDataModel.ApplicationVersion);
+        }
+        else
+        {
+            this.Title = "BlinkStick " + ApplicationDataModel.ApplicationVersion;
+        }
 
         log.Info("Loading data");
         DataModel.Load();
@@ -317,14 +338,25 @@ public partial class MainWindow: Gtk.Window
             typeof(NotificationIfttt), 
             null);
 
-        overviewWidget = new OverviewWidget();
-        hbox1.PackEnd(overviewWidget, true, true, 0);
-        Pages.Add(overviewWidget);
-        VisiblePage = overviewWidget;
+        if (ApplicationSettings.SingleBlinkStickMode)
+        {
+            overviewWidget = new OverviewSingleWidget();
+            hbox1.PackEnd(overviewWidget, true, true, 0);
+            Pages.Add(overviewWidget);
+            VisiblePage = overviewWidget;
+        }
+        else
+        {
+            overviewWidget = new OverviewWidget();
+            hbox1.PackEnd(overviewWidget, true, true, 0);
+            Pages.Add(overviewWidget);
+            VisiblePage = overviewWidget;
+        }
 
         notificationsWidget = new NotificationsWidget();
         notificationsWidget.ParentForm = this;
         notificationsWidget.DataModel = DataModel;
+        notificationsWidget.ApplicationSettings = this.ApplicationSettings;
         notificationsWidget.Initialize();
         hbox1.PackEnd(notificationsWidget, true, true, 0);
         Pages.Add(notificationsWidget);
@@ -343,8 +375,18 @@ public partial class MainWindow: Gtk.Window
         hbox1.PackEnd(helpWidget, true, true, 0);
         Pages.Add(helpWidget);
 
-        overviewWidget.DataModel = this.DataModel;
+        if (overviewWidget is OverviewWidget)
+        {
+            ((OverviewWidget)overviewWidget).DataModel = this.DataModel;
+        }
+        else
+        {
+            ((OverviewSingleWidget)overviewWidget).DataModel = this.DataModel;
+            ((OverviewSingleWidget)overviewWidget).ApplicationSettings = this.ApplicationSettings;
+            ((OverviewSingleWidget)overviewWidget).UpdateUI();
+        }
         notificationsWidget.DataModel = this.DataModel;
+        notificationsWidget.ApplicationSettings = this.ApplicationSettings;
 
         RefreshDevices();
 
@@ -364,7 +406,14 @@ public partial class MainWindow: Gtk.Window
         }
         DataModel.ProcessUntouched();
 
-        overviewWidget.RefreshDevices();
+        if (overviewWidget is OverviewWidget)
+        {
+            ((OverviewWidget)overviewWidget).RefreshDevices();
+        }
+        else
+        {
+            ((OverviewSingleWidget)overviewWidget).UpdateUI();
+        }
     }
 
 	private void ToggleMainWindow (object sender, EventArgs e)
@@ -379,6 +428,8 @@ public partial class MainWindow: Gtk.Window
         notificationService.Stop();
 
         DataModel.Save();
+
+        ApplicationSettings.Save();
 		
 #if !LINUX
 		trayIcon.Visible = false;

@@ -30,7 +30,7 @@ namespace BlinkStickClient.DataModel
         private String BackupFileName;
 
         [JsonIgnore]
-        public String DefaultSettingsFolder
+        public static String DefaultSettingsFolder
         {
             get 
             { 

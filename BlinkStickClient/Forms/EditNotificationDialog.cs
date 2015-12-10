@@ -1,6 +1,7 @@
 ﻿using System;
 using BlinkStickClient.DataModel;
 using BlinkStickClient.Utils;
+using BlinkStickClient.Classes;
 using BlinkStickDotNet;
 using Gtk;
 
@@ -8,6 +9,8 @@ namespace BlinkStickClient
 {
     public partial class EditNotificationDialog : Gtk.Dialog
     {
+        public ApplicationSettings ApplicationSettings;
+
         private CustomNotification _Notification;
         public CustomNotification Notification { 
             get
@@ -51,12 +54,13 @@ namespace BlinkStickClient
             this.Build();
         }
 
-        public EditNotificationDialog(String title, Gtk.Window parent, ApplicationDataModel dataModel, CustomNotification notification) 
+        public EditNotificationDialog(String title, Gtk.Window parent, ApplicationDataModel dataModel, CustomNotification notification, ApplicationSettings settings) 
             : base (title, parent, Gtk.DialogFlags.Modal, new object[0])
         {
             this.Build();
 
             this.Title = title;
+            this.ApplicationSettings = settings;
 
             this.deviceComboboxWidget.DeviceChanged += OnDeviceComboboxWidgetDeviceChanged;
 
@@ -240,6 +244,8 @@ namespace BlinkStickClient
             hseparator = new HSeparator();
             vbox3.PackEnd(hseparator);
             hseparator.ShowAll();
+
+            deviceComboboxWidget.Sensitive = this.ApplicationSettings.AllowModeChange;
         }
 
         void LoadPatterns(Pattern selectedPattern)

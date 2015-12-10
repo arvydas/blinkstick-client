@@ -1,5 +1,6 @@
 ﻿using System;
 using BlinkStickClient.DataModel;
+using BlinkStickClient.Classes;
 using BlinkStickDotNet;
 
 namespace BlinkStickClient
@@ -7,6 +8,7 @@ namespace BlinkStickClient
     public partial class ConfigureBlinkStickDialog : Gtk.Dialog
     {
         public BlinkStickDeviceSettings DeviceSettings { get; set; }
+        public ApplicationSettings ApplicationSettings;
 
         int mode = -1;
 
@@ -90,6 +92,14 @@ namespace BlinkStickClient
                 spinbuttonChannelR.Sensitive = DeviceSettings.Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro && radiobuttonModeMultiLED.Active;
                 spinbuttonChannelG.Sensitive = DeviceSettings.Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro && radiobuttonModeMultiLED.Active;
                 spinbuttonChannelB.Sensitive = DeviceSettings.Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro && radiobuttonModeMultiLED.Active;
+
+                if (!ApplicationSettings.AllowModeChange)
+                {
+                    radiobuttonModeRGB.Sensitive = false;
+                    radiobuttonModeInverse.Sensitive = false;
+                    radiobuttonModeMultiLED.Sensitive = false;
+                    radiobuttonModeMultiLEDMirror.Sensitive = false;
+                }
             }
         }
 
