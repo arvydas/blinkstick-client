@@ -85,6 +85,32 @@ namespace BlinkStickClient
                             radiobuttonModeMultiLEDMirror.Active = mode == 3;
                         }
                         break;
+                    case BlinkStickDeviceEnum.BlinkStickNano:
+
+                        spinbuttonChannelR.Value = 2;
+                        spinbuttonChannelG.Value = 0;
+                        spinbuttonChannelB.Value = 0;
+
+                        radiobuttonModeRGB.Sensitive = false;
+                        radiobuttonModeInverse.Sensitive = false;
+                        radiobuttonModeMultiLED.Sensitive = true;
+                        radiobuttonModeMultiLEDMirror.Sensitive = false;
+
+                        radiobuttonModeMultiLED.Active = true;
+                        break;
+                    case BlinkStickDeviceEnum.BlinkStickFlex:
+
+                        spinbuttonChannelR.Value = 32;
+                        spinbuttonChannelG.Value = 0;
+                        spinbuttonChannelB.Value = 0;
+
+                        radiobuttonModeRGB.Sensitive = false;
+                        radiobuttonModeInverse.Sensitive = false;
+                        radiobuttonModeMultiLED.Sensitive = true;
+                        radiobuttonModeMultiLEDMirror.Sensitive = false;
+
+                        radiobuttonModeMultiLED.Active = true;
+                        break;
                     default:
                         break;
                 }
@@ -93,7 +119,7 @@ namespace BlinkStickClient
                 spinbuttonChannelG.Sensitive = DeviceSettings.Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro && radiobuttonModeMultiLED.Active;
                 spinbuttonChannelB.Sensitive = DeviceSettings.Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro && radiobuttonModeMultiLED.Active;
 
-                if (!ApplicationSettings.AllowModeChange)
+                if (ApplicationSettings != null && !ApplicationSettings.AllowModeChange)
                 {
                     radiobuttonModeRGB.Sensitive = false;
                     radiobuttonModeInverse.Sensitive = false;

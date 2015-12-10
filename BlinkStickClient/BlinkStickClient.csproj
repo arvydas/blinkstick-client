@@ -100,6 +100,8 @@
     <EmbeddedResource Include="Resources\notifications\group-services.png" />
     <EmbeddedResource Include="Resources\notifications\group-test.png" />
     <EmbeddedResource Include="Resources\notifications\group-email.png" />
+    <EmbeddedResource Include="Resources\blinkstick-nano.png" />
+    <EmbeddedResource Include="Resources\blinkstick-flex.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />

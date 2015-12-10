@@ -283,6 +283,8 @@ namespace BlinkStickClient
                 case BlinkStickDeviceEnum.BlinkStickPro:
                 case BlinkStickDeviceEnum.BlinkStickSquare:
                 case BlinkStickDeviceEnum.BlinkStickStrip:
+                case BlinkStickDeviceEnum.BlinkStickNano:
+                case BlinkStickDeviceEnum.BlinkStickFlex:
                     spinbuttonLedsTo.Sensitive = true;
                     spinbuttonLedsFrom.Sensitive = true;
                     break;

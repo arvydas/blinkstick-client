@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Gtk;
 using Gdk;
@@ -155,6 +156,29 @@ namespace BlinkStickClient
 
             LedDefinitions[BlinkStickDeviceEnum.BlinkStickSquare] = blinkstickSquareDefinition;
 
+            LedDefinition blinkstickNanoDefinition = new LedDefinition();
+            blinkstickNanoDefinition.AddLed(195, 52);
+            blinkstickNanoDefinition.AddLed(195, 187);
+
+            LedDefinitions[BlinkStickDeviceEnum.BlinkStickNano] = blinkstickNanoDefinition;
+
+            LedDefinition blinkstickFlexDefinition = new LedDefinition();
+
+            foreach (int i in new List<int>() { 70, 249, 429, 610 })
+            {
+                blinkstickFlexDefinition.AddLed(290, i);
+                blinkstickFlexDefinition.AddLed(587, i);
+                blinkstickFlexDefinition.AddLed(884, i);
+                blinkstickFlexDefinition.AddLed(1182, i);
+                blinkstickFlexDefinition.AddLed(1482, i);
+                blinkstickFlexDefinition.AddLed(1779, i);
+                blinkstickFlexDefinition.AddLed(2075, i);
+                blinkstickFlexDefinition.AddLed(2372, i);
+            }
+
+
+            LedDefinitions[BlinkStickDeviceEnum.BlinkStickFlex] = blinkstickFlexDefinition;
+
             LedDefinitions[BlinkStickDeviceEnum.Unknown] = new LedDefinition();
 
             drawingareaMain.ExposeEvent += HandleExposeEvent;
@@ -252,28 +276,43 @@ namespace BlinkStickClient
         public void LoadDisplay()
         {
             ColorBuffer.Clear();
-            while (ColorBuffer.Count < 8)
-            {
-                ColorBuffer.Add(new LedColor());
-            }
+
+            int numberOfLeds = 64;
 
             switch (EmulatedDevice)
             {
                 case BlinkStickDeviceEnum.BlinkStick:
                     display = Gdk.Pixbuf.LoadFromResource("BlinkStickClient.Resources.blinkstick.png");
+                    numberOfLeds = 1;
                     break;
                 case BlinkStickDeviceEnum.BlinkStickPro:
                     display = Gdk.Pixbuf.LoadFromResource("BlinkStickClient.Resources.blinkstick-pro.png");
+                    numberOfLeds = 64;
                     break;
                 case BlinkStickDeviceEnum.BlinkStickSquare:
                     display = Gdk.Pixbuf.LoadFromResource("BlinkStickClient.Resources.blinkstick-square.png");
+                    numberOfLeds = 8;
                     break;
                 case BlinkStickDeviceEnum.BlinkStickStrip:
                     display = Gdk.Pixbuf.LoadFromResource("BlinkStickClient.Resources.blinkstick-strip.png");
+                    numberOfLeds = 8;
+                    break;
+                case BlinkStickDeviceEnum.BlinkStickNano:
+                    display = Gdk.Pixbuf.LoadFromResource("BlinkStickClient.Resources.blinkstick-nano.png");
+                    numberOfLeds = 2;
+                    break;
+                case BlinkStickDeviceEnum.BlinkStickFlex:
+                    display = Gdk.Pixbuf.LoadFromResource("BlinkStickClient.Resources.blinkstick-flex.png");
+                    numberOfLeds = 32;
                     break;
                 default:
                     display = null;
                     break;
+            }
+
+            while (ColorBuffer.Count < numberOfLeds)
+            {
+                ColorBuffer.Add(new LedColor());
             }
 
             drawingareaMain.QueueDraw();

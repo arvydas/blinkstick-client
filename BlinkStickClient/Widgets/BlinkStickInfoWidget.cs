@@ -46,6 +46,12 @@ namespace BlinkStickClient
                     case BlinkStickDeviceEnum.BlinkStickSquare:
                         labelProductInfo.Text = "BlinkStick Square";
                         break;
+                    case BlinkStickDeviceEnum.BlinkStickNano:
+                        labelProductInfo.Text = "BlinkStick Nano";
+                        break;
+                    case BlinkStickDeviceEnum.BlinkStickFlex:
+                        labelProductInfo.Text = "BlinkStick Flex";
+                        break;
                     default:
                         break;
                 }
