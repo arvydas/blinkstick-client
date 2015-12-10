@@ -42,8 +42,25 @@ namespace BlinkStickClient.DataModel
         [JsonIgnore]
         public Queue<TriggeredEvent> EventQueue = new Queue<TriggeredEvent>();
 
+        private BlinkStick _Led;
+
         [JsonIgnore]
-        public BlinkStick Led;
+        public BlinkStick Led
+        {
+            get
+            {
+                return _Led;
+            }
+            set
+            {
+                if (_Led != value)
+                {
+                    _Led = value;
+
+                    ApplyProperties();
+                }
+            }
+        }
 
         [JsonIgnore]
         public Boolean Touched { get; set; }
@@ -62,33 +79,52 @@ namespace BlinkStickClient.DataModel
         public BlinkStickDeviceSettings(BlinkStick led)
         {
             this.Led = led;
-            this.Serial = led.Serial;
             this.Touched = true;
-            this.BrightnessLimit = 100;
             this.Running = false;
+            this.BrightnessLimit = 100;
+        }
 
-			switch (this.Led.BlinkStickDevice) {
-			case BlinkStickDeviceEnum.BlinkStick:
-				this.LedsR = 1;
-				this.LedsG = 1;
-				this.LedsB = 1;
-				break;
-			case BlinkStickDeviceEnum.BlinkStickPro:
-				this.LedsR = 64;
-				this.LedsG = 64;
-				this.LedsB = 64;
-				break;
-			case BlinkStickDeviceEnum.BlinkStickSquare:
-			case BlinkStickDeviceEnum.BlinkStickStrip:
-				this.LedsR = 8;
-				this.LedsG = 0;
-				this.LedsB = 0;
-				break;
-			default:
-				break;
-			}
+        private void ApplyProperties()
+        {
+            if (Led == null)
+            {
+                return;
+            }
 
-			this.BlinkStickDevice = led.BlinkStickDevice;
+            this.Serial = Led.Serial;
+
+            switch (this.Led.BlinkStickDevice) {
+                case BlinkStickDeviceEnum.BlinkStick:
+                    this.LedsR = 1;
+                    this.LedsG = 1;
+                    this.LedsB = 1;
+                    break;
+                case BlinkStickDeviceEnum.BlinkStickPro:
+                    this.LedsR = 64;
+                    this.LedsG = 64;
+                    this.LedsB = 64;
+                    break;
+                case BlinkStickDeviceEnum.BlinkStickSquare:
+                case BlinkStickDeviceEnum.BlinkStickStrip:
+                    this.LedsR = 8;
+                    this.LedsG = 0;
+                    this.LedsB = 0;
+                    break;
+                case BlinkStickDeviceEnum.BlinkStickNano:
+                    this.LedsR = 2;
+                    this.LedsG = 0;
+                    this.LedsB = 0;
+                    break;
+                case BlinkStickDeviceEnum.BlinkStickFlex:
+                    this.LedsR = 32;
+                    this.LedsG = 0;
+                    this.LedsB = 0;
+                    break;
+                default:
+                    break;
+            }
+
+            this.BlinkStickDevice = Led.BlinkStickDevice;
         }
 
         public override string ToString()
