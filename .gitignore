@@ -120,3 +120,8 @@ UpgradeLog*.XML
 !/Install/theme/*/*/*/*/*
 
 /Install/version.iss
+
+/Install/branding/*
+/Install/branding/*/*
+/Install/BlinkStick-*.iss
+
