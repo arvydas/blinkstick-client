@@ -6,7 +6,7 @@
   </configuration>
   <import>
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <widget-library name="../bin/Debug/BlinkStickClient.exe" internal="true" />
+    <widget-library name="../bin/Release/BlinkStickClient.exe" internal="true" />
   </import>
   <icon-factory>
     <icon-set id="blinkstick-patterns">
@@ -104,6 +104,13 @@
         <property name="Group">selection</property>
         <signal name="Toggled" handler="ToolbarButtonToggled" />
       </action>
+      <action id="quitAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Quit</property>
+        <property name="ShortLabel" translatable="yes">Quit</property>
+        <property name="StockId">gtk-quit</property>
+        <signal name="Activated" handler="OnQuitActionActivated" />
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="Visible">False</property>
@@ -151,6 +158,7 @@
                           <node type="Toolitem" action="EventsAction" />
                           <node type="Toolitem" action="preferencesAction" />
                           <node type="Toolitem" action="HelpAction1" />
+                          <node type="Toolitem" action="quitAction" />
                         </node>
                       </widget>
                       <packing>

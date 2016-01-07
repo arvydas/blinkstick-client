@@ -17,6 +17,8 @@ public partial class MainWindow
 	
 	private global::Gtk.RadioAction preferencesAction;
 	
+	private global::Gtk.Action quitAction;
+	
 	private global::Gtk.VBox vbox2;
 	
 	private global::Gtk.VBox vbox3;
@@ -48,17 +50,20 @@ public partial class MainWindow
 		this.HelpAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Help");
 		w1.Add (this.HelpAction1, null);
 		this.PatternsAction1 = new global::Gtk.RadioAction ("PatternsAction1", global::Mono.Unix.Catalog.GetString ("Patterns"), null, "blinkstick-patterns", 2);
-		this.PatternsAction1.Group = this.OverviewAction.Group;
+		this.PatternsAction1.Group = this.HelpAction1.Group;
 		this.PatternsAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Patterns");
 		w1.Add (this.PatternsAction1, null);
 		this.EventsAction = new global::Gtk.RadioAction ("EventsAction", global::Mono.Unix.Catalog.GetString ("Events"), null, "blinkstick-events", 3);
-		this.EventsAction.Group = this.OverviewAction.Group;
+		this.EventsAction.Group = this.HelpAction1.Group;
 		this.EventsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Events");
 		w1.Add (this.EventsAction, null);
 		this.preferencesAction = new global::Gtk.RadioAction ("preferencesAction", global::Mono.Unix.Catalog.GetString ("Settings"), null, "gtk-preferences", 4);
-		this.preferencesAction.Group = this.OverviewAction.Group;
+		this.preferencesAction.Group = this.HelpAction1.Group;
 		this.preferencesAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Settings");
 		w1.Add (this.preferencesAction, null);
+		this.quitAction = new global::Gtk.Action ("quitAction", global::Mono.Unix.Catalog.GetString ("Quit"), null, "gtk-quit");
+		this.quitAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Quit");
+		w1.Add (this.quitAction, null);
 		this.UIManager.InsertActionGroup (w1, 0);
 		this.AddAccelGroup (this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -89,7 +94,7 @@ public partial class MainWindow
 		w2.Expand = false;
 		w2.Fill = false;
 		// Container child vbox4.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString (@"<ui><toolbar name='toolbar2'><toolitem name='OverviewAction' action='OverviewAction'/><toolitem name='NotificationsAction' action='NotificationsAction'/><toolitem name='PatternsAction1' action='PatternsAction1'/><toolitem name='EventsAction' action='EventsAction'/><toolitem name='preferencesAction' action='preferencesAction'/><toolitem name='HelpAction1' action='HelpAction1'/></toolbar></ui>");
+		this.UIManager.AddUiFromString (@"<ui><toolbar name='toolbar2'><toolitem name='OverviewAction' action='OverviewAction'/><toolitem name='NotificationsAction' action='NotificationsAction'/><toolitem name='PatternsAction1' action='PatternsAction1'/><toolitem name='EventsAction' action='EventsAction'/><toolitem name='preferencesAction' action='preferencesAction'/><toolitem name='HelpAction1' action='HelpAction1'/><toolitem name='quitAction' action='quitAction'/></toolbar></ui>");
 		this.toolbar2 = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/toolbar2")));
 		this.toolbar2.Name = "toolbar2";
 		this.toolbar2.Orientation = ((global::Gtk.Orientation)(1));
@@ -124,5 +129,6 @@ public partial class MainWindow
 		this.PatternsAction1.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
 		this.EventsAction.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
 		this.preferencesAction.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
+		this.quitAction.Activated += new global::System.EventHandler (this.OnQuitActionActivated);
 	}
 }
