@@ -111,6 +111,8 @@ namespace BlinkStickClient
             dialog.UpdateUI();
             dialog.Run();
             dialog.Destroy();
+
+            UpdateUI();
         }
     }
 }
