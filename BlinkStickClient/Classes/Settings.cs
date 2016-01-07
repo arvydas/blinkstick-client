@@ -12,6 +12,10 @@ namespace BlinkStickClient.Classes
         public String ApplicationTitle = "";
         public Boolean AllowModeChange = true;
 
+        public String Theme = "Clearlooks";
+        public String LogLevel = "Off";
+
+        public Boolean StartWithWindows = true;
 
         private String FileName;
         private String BackupFileName;
@@ -89,8 +93,12 @@ namespace BlinkStickClient.Classes
             this.ApplicationTitle = settings.ApplicationTitle;
             this.SingleBlinkStickMode = settings.SingleBlinkStickMode;
             this.AllowModeChange = settings.AllowModeChange;
+            this.Theme = settings.Theme;
+            this.LogLevel = settings.LogLevel;
+            this.StartWithWindows = settings.StartWithWindows;
         }
         #endregion
+
     }
 }
 

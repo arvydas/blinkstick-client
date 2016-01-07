@@ -173,6 +173,10 @@
     <Compile Include="Classes\Settings.cs" />
     <Compile Include="Widgets\OverviewSingleWidget.cs" />
     <Compile Include="gtk-gui\BlinkStickClient.OverviewSingleWidget.cs" />
+    <Compile Include="Widgets\SettingsWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.SettingsWidget.cs" />
+    <Compile Include="Classes\Logger.cs" />
+    <Compile Include="Classes\StartupManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

@@ -25,6 +25,7 @@ using BlinkStickClient.Utils;
 using BlinkStickClient.DataModel;
 using System.Reflection;
 using System.Diagnostics;
+using BlinkStickClient.Classes;
 
 namespace BlinkStickClient
 {
@@ -59,35 +60,35 @@ namespace BlinkStickClient
                 return 0;
             }
 
-            Boolean ambilightMode = args.Length > 0 && args[0] == "--ambilight";
+            ApplicationSettings applicationSettings = new ApplicationSettings();
+            applicationSettings.Load();
 
-            string logFileConfigPath = System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "log4net.config");
-            FileInfo finfo = new FileInfo(logFileConfigPath);
-            log4net.Config.XmlConfigurator.ConfigureAndWatch(finfo); 
-
-            //Create log files in the application data folder
-            if (!Directory.Exists(MainWindow.LogFolder))
+            if (args.Length > 0 && args[0] == "--register")
             {
-                Directory.CreateDirectory(MainWindow.LogFolder);
+                MainWindow.RegisterStartup(true);
+
+                applicationSettings.StartWithWindows = true;
+                applicationSettings.Save();
+                return 0;
+            }
+            else if (args.Length > 0 && args[0] == "--unregister")
+            {
+                MainWindow.RegisterStartup(false);
+
+                applicationSettings.StartWithWindows = false;
+                applicationSettings.Save();
+                return 0;
             }
 
-            //Update file appender to log to the correct location
-            foreach (log4net.Appender.IAppender appender in log4net.LogManager.GetRepository().GetAppenders())
-            {
-                if (appender is log4net.Appender.FileAppender)
-                {
-                    if (ambilightMode)
-                    {
-                        ((log4net.Appender.FileAppender)appender).File = Path.Combine(MainWindow.LogFolder, "ambilight.log");
-                    }
-                    else
-                    {
-                        ((log4net.Appender.FileAppender)appender).File = MainWindow.LogFile;
-                    }
-                    ((log4net.Appender.FileAppender)appender).ActivateOptions();
+            Boolean ambilightMode = args.Length > 0 && args[0] == "--ambilight";
 
-                    break;
-                }
+            if (ambilightMode)
+            {
+                Logger.Setup(Path.Combine(MainWindow.LogFolder, "ambilight.log"), applicationSettings.LogLevel);
+            }
+            else
+            {
+                Logger.Setup(MainWindow.LogFile, applicationSettings.LogLevel);
             }
 
             log = LogManager.GetLogger("Main");    
@@ -99,6 +100,7 @@ namespace BlinkStickClient
             {
                 AmbilightWindowsService service = new AmbilightWindowsService();
                 service.Run();
+                Logger.Stop();
                 return 0;
             }
 
@@ -130,14 +132,20 @@ namespace BlinkStickClient
             if (!CheckWindowsGtk ())
                 return 1;
 
-            Environment.SetEnvironmentVariable("GTK2_RC_FILES", Path.Combine(MainWindow.ExecutableFolder, "Theme", "Clearlooks", "gtk-2.0", "gtkrc"));
+            Environment.SetEnvironmentVariable("GTK2_RC_FILES", Path.Combine(MainWindow.ExecutableFolder, "Theme", applicationSettings.Theme, "gtk-2.0", "gtkrc"));
 
             Application.Init ();
             MainWindow win = new MainWindow ();
-			win.Show ();
+            win.ApplicationSettings = applicationSettings;
+            win.LoadEverything();
+            if (!(args.Length > 0 && args[0] == "--tray"))
+            {
+                win.Show ();
+            }
 			Application.Run ();
 
             HidSharp.HidDeviceLoader.FreeUsbResources();
+            Logger.Stop();
 
             return 0;
 		}

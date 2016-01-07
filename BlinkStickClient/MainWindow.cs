@@ -40,7 +40,7 @@ public partial class MainWindow: Gtk.Window
     public BlinkStickClient.Utils.EventSignalledHandler eventSignalled;
 
     ApplicationDataModel DataModel = new ApplicationDataModel();
-    ApplicationSettings ApplicationSettings = new ApplicationSettings();
+    public ApplicationSettings ApplicationSettings;
 
     public static MainWindow Instance;
 
@@ -98,6 +98,12 @@ public partial class MainWindow: Gtk.Window
 		}
 	}
 
+    public static String ExecutableFile {
+        get {
+            return Environment.GetCommandLineArgs()[0];
+        }
+    }
+
     public static String LogFolder
     {
         get
@@ -116,14 +122,19 @@ public partial class MainWindow: Gtk.Window
 	
 	public MainWindow (): base (Gtk.WindowType.Toplevel)
 	{
+
+	}
+
+    public void LoadEverything()
+    {
         MainWindow.Instance = this;
 
         if (HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Windows)
-		{
-			SetupSingleInstanceEvent();
-		}
+        {
+            SetupSingleInstanceEvent();
+        }
 
-		Build ();
+        Build ();
 
         String brandingPath = global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "branding.png");
 
@@ -133,9 +144,6 @@ public partial class MainWindow: Gtk.Window
 
             this.SetSizeRequest(500, this.imageBranding.Pixbuf.Height + 500);
         }
-
-        log.Info("Loading settings");
-        ApplicationSettings.Load();
 
         if (ApplicationSettings.ApplicationTitle != "")
         {
@@ -149,60 +157,60 @@ public partial class MainWindow: Gtk.Window
         log.Info("Loading data");
         DataModel.Load();
 
-		log.Debug("Setting up controls");
+        log.Debug("Registering/Unregistering startup");
+        RegisterStartup(ApplicationSettings.StartWithWindows);
 
+        log.Debug ("Loading main form icon");
+        this.Icon = new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "icon.png"));
 
-		log.Debug ("Loading main form icon");
-		this.Icon = new global::Gdk.Pixbuf (global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "icon.png"));
-
-		DeviceMonitor = new UsbMonitor();
+        DeviceMonitor = new UsbMonitor();
         DeviceMonitor.UsbDevicesChanged += (object sender, EventArgs e) => {
-			Gtk.Application.Invoke (delegate {
+            Gtk.Application.Invoke (delegate {
                 RefreshDevices();
-			});
-		};
-		DeviceMonitor.Start ();
+            });
+        };
+        DeviceMonitor.Start ();
 
-		log.Debug ("Building popup menu");
-		//Build Popup Menu for TrayIcon
-		popupMenu = new Menu ();
+        log.Debug ("Building popup menu");
+        //Build Popup Menu for TrayIcon
+        popupMenu = new Menu ();
 
-		//Settings menu item
-		ImageMenuItem menuItemSettings = new ImageMenuItem ("Settings");
-		menuItemSettings.Image = new Gtk.Image(Stock.Preferences, IconSize.Menu);
-		menuItemSettings.Activated += ToggleMainWindow;
-		popupMenu.Append(menuItemSettings);
+        //Settings menu item
+        ImageMenuItem menuItemSettings = new ImageMenuItem ("Settings");
+        menuItemSettings.Image = new Gtk.Image(Stock.Preferences, IconSize.Menu);
+        menuItemSettings.Activated += ToggleMainWindow;
+        popupMenu.Append(menuItemSettings);
 
-		popupMenu.Append(new SeparatorMenuItem());
+        popupMenu.Append(new SeparatorMenuItem());
 
-		//Quit menu item
-		ImageMenuItem menuItemQuit = new ImageMenuItem ("Quit");
-		menuItemQuit.Image = new Gtk.Image (Stock.Quit, IconSize.Menu);
-		menuItemQuit.Activated += OnQuitActionActivated;
-		popupMenu.Append (menuItemQuit);
+        //Quit menu item
+        ImageMenuItem menuItemQuit = new ImageMenuItem ("Quit");
+        menuItemQuit.Image = new Gtk.Image (Stock.Quit, IconSize.Menu);
+        menuItemQuit.Activated += OnQuitActionActivated;
+        popupMenu.Append (menuItemQuit);
 
-		log.Debug("Showing popup menu");
-		popupMenu.ShowAll();
+        log.Debug("Showing popup menu");
+        popupMenu.ShowAll();
         //TODO: Remove ifdef and use platform detection
-#if LINUX
-		indicator = new ApplicationIndicator ("blinkstick", "icon", Category.ApplicationStatus, ExecutableFolder);	
-		indicator.Menu = popupMenu;
-		indicator.Status = AppIndicator.Status.Active;	
-#else
+        #if LINUX
+        indicator = new ApplicationIndicator ("blinkstick", "icon", Category.ApplicationStatus, ExecutableFolder);  
+        indicator.Menu = popupMenu;
+        indicator.Status = AppIndicator.Status.Active;  
+        #else
 
-		log.Debug ("Setting up tray icon");
-		trayIcon = new StatusIcon (new Pixbuf (System.IO.Path.Combine(ExecutableFolder, "icon.ico")));
-		trayIcon.Tooltip = this.Title;
-		trayIcon.Visible = true;
+        log.Debug ("Setting up tray icon");
+        trayIcon = new StatusIcon (new Pixbuf (System.IO.Path.Combine(ExecutableFolder, "icon.ico")));
+        trayIcon.Tooltip = this.Title;
+        trayIcon.Visible = true;
 
-		// Show/Hide the window (even from the Panel/Taskbar) when the TrayIcon has been clicked.
-		trayIcon.Activate += ToggleMainWindow;
+        // Show/Hide the window (even from the Panel/Taskbar) when the TrayIcon has been clicked.
+        trayIcon.Activate += ToggleMainWindow;
 
-		trayIcon.PopupMenu += delegate {
-			popupMenu.ShowAll ();
-			popupMenu.Popup ();
-		};
-#endif
+        trayIcon.PopupMenu += delegate {
+            popupMenu.ShowAll ();
+            popupMenu.Popup ();
+        };
+        #endif
         if (HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Mac) {
             //enable the global key handler for keyboard shortcuts
             MacMenu.GlobalKeyHandlerEnabled = true;
@@ -371,6 +379,11 @@ public partial class MainWindow: Gtk.Window
         hbox1.PackEnd(eventsWidget, true, true, 0);
         Pages.Add(eventsWidget);
 
+        SettingsWidget settingsWidget = new SettingsWidget();
+        settingsWidget.LoadSettings(ApplicationSettings);
+        hbox1.PackEnd(settingsWidget, true, true, 0);
+        Pages.Add(settingsWidget);
+
         HelpWidget helpWidget = new HelpWidget();
         hbox1.PackEnd(helpWidget, true, true, 0);
         Pages.Add(helpWidget);
@@ -394,8 +407,8 @@ public partial class MainWindow: Gtk.Window
         notificationService.DataModel = this.DataModel;
         notificationService.Start();
 
-		log.Debug("Initialization done");
-	}
+        log.Debug("Initialization done");
+    }
 
     void RefreshDevices()
     {
@@ -523,6 +536,10 @@ public partial class MainWindow: Gtk.Window
     }
     #endregion
 
+    public static void RegisterStartup(Boolean register)
+    {
+        StartupManager.RegisterStartup(register, "BlinkStickClient", ExecutableFile, "--tray");
+    }
 }
 
 
