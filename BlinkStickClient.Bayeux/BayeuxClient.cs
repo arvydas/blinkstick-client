@@ -98,6 +98,13 @@ namespace BlinkStickClient.Bayeux
 				{
 					_ClientState = value;
 					log.DebugFormat("ClientState changed to {0}", _ClientState.ToString());
+
+                    if (_ClientState == ClientStateEnum.Disconnected && ChannelSubscriptions.Count > 0)
+                    {
+                        log.Debug("Clearing channel subscriptions");
+
+                        ChannelSubscriptions.Clear();
+                    }
 				}
 			}
 		}
@@ -496,7 +503,7 @@ namespace BlinkStickClient.Bayeux
 		#region Methods
 		public Boolean Connect ()
 		{
-			if (Working)
+            if (ClientState != ClientStateEnum.Disconnected)
 				return false;
 
 			lock (this) {
@@ -557,6 +564,11 @@ namespace BlinkStickClient.Bayeux
 			lock (PendingChannelSubscriptions) {
 				PendingChannelSubscriptions.Remove (channelName);
 			}
+
+            if (ClientState == ClientStateEnum.Disconnected || ClientState == ClientStateEnum.Disconnecting)
+            {
+                ChannelSubscriptions.Remove(channelName);
+            }
 
 			if (LongPolling) {
 				client.Close();

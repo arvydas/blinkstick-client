@@ -72,7 +72,7 @@ namespace BlinkStickClient.DataModel
 
             ClientRefCounter++;
 
-            if (!Client.Working)
+            if (Client.ClientState == BayeuxClient.ClientStateEnum.Disconnected)
             {
                 Client.Connect();
             }
@@ -125,6 +125,11 @@ namespace BlinkStickClient.DataModel
             if (ClientRefCounter == 0)
             {
                 Client.Disconnect();
+
+                while (Client.ClientState != BayeuxClient.ClientStateEnum.Disconnected)
+                {
+                    System.Threading.Thread.Sleep(50);
+                }
             }
 
             base.Stop();
