@@ -19,9 +19,6 @@ namespace BlinkStickClient.DataModel
                 if (_client == null)
                 {
                     _client = new BayeuxClient(DataModel.CurrentApiAccessAddress);
-                    _client.Disconnected += (object sender, EventArgs e) => {
-                        _client.CloseThread();
-                    };
                 }
 
                 return _client;
