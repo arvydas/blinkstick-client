@@ -510,7 +510,9 @@ public partial class MainWindow: Gtk.Window
 	
 	public void evnt_EventSignalled()
 	{
-		this.Visible = true;
+        Gtk.Application.Invoke (delegate {
+            this.Show();
+        });
 	} 
 
     protected void OnPatternsActionActivated (object sender, EventArgs e)
