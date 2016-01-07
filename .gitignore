@@ -113,11 +113,11 @@ UpgradeLog*.XML
 
 /=*
 
-!/Install/theme/*
-!/Install/theme/*/*
-!/Install/theme/*/*/*
-!/Install/theme/*/*/*/*
-!/Install/theme/*/*/*/*/*
+!/Install/gtk-libs/*
+!/Install/gtk-libs/*/*
+!/Install/gtk-libs/*/*/*
+!/Install/gtk-libs/*/*/*/*
+!/Install/gtk-libs/*/*/*/*/*
 
 /Install/version.iss
 

@@ -45,8 +45,8 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 [Files]
 Source: "dep\gtk-sharp-2.12.25.msi"; DestDir: "{tmp}"; Check: GtkNeedsInstallOrUpgrade; AfterInstall: InstallGtkSharp
-Source: "ClearLooks\*"; DestDir: "{app}\Theme\ClearLooks"; Flags: ignoreversion recursesubdirs
-Source: "theme\*"; DestDir: "{code:GtkInstallDir}"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall recursesubdirs
+Source: "theme\*"; DestDir: "{app}\Theme"; Flags: ignoreversion recursesubdirs
+Source: "gtk-libs\*"; DestDir: "{code:GtkInstallDir}"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall recursesubdirs
 Source: "..\BlinkStickClient\bin\Release\*.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\BlinkStickClient\bin\Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\BlinkStickClient\bin\Release\*.config"; DestDir: "{app}"; Flags: ignoreversion
