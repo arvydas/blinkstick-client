@@ -32,7 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.3.0.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -43,9 +43,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\BlinkStickClient.Base\BlinkStickClient.Base.csproj">
       <Project>{3655D94E-C564-4993-9D53-20EF5E934F91}</Project>
       <Name>BlinkStickClient.Base</Name>
@@ -54,5 +51,8 @@
       <Project>{7AAEBEBE-E38D-47B1-A04C-A055DCEB0757}</Project>
       <Name>BlinkStickDotNet</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

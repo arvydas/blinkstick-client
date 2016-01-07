@@ -31,15 +31,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="ImapX">
-      <HintPath>..\packages\ImapX.2.0.0.16\lib\net40\ImapX.dll</HintPath>
-    </Reference>
     <Reference Include="OpenPop">
       <HintPath>..\packages\OpenPop.2.0.6.2\lib\net20\OpenPop.dll</HintPath>
     </Reference>
@@ -48,6 +42,12 @@
     <Reference Include="System.Management" />
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.5\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="ImapX">
+      <HintPath>..\packages\ImapX.2.0.0.18\lib\net40\ImapX.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
