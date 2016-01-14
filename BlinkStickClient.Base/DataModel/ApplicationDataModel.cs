@@ -48,6 +48,7 @@ namespace BlinkStickClient.DataModel
 
         private const String DefaultApiAccessAddress = "http://live.blinkstick.com:9292/faye";
 
+        [JsonIgnore]
         public String CurrentApiAccessAddress {
             get {
                 if (ApiAccessAddress == "" || ApiAccessAddress == null)
@@ -320,6 +321,8 @@ namespace BlinkStickClient.DataModel
             {
                 this.TriggeredEvents.Add(ev);
             }
+
+            this.ApiAccessAddress = data.ApiAccessAddress;
         }
         #endregion
 
