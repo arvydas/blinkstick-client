@@ -213,19 +213,21 @@ namespace BlinkStickClient.Utils
                 NamedPipeClientStream pipeClient = new NamedPipeClientStream(".", "blinkstick_ambilight_local",
                                                        PipeDirection.Out,
                                                        PipeOptions.Asynchronous);
-                try
+                while (!pipeClient.IsConnected && !worker.CancellationPending)
                 {
-                    log.Info("Connecting to pipe");
-                    pipeClient.Connect(2000);
-                    log.Info("Conection to pipe established");
-                }
-                catch (Exception ex)
-                {
-                    pipeClient = null;
-                    log.Error("Failed to connect to pipe server: {0}", ex);
-                    if (!ignorePipeError)
+                    try
                     {
-                        return;
+                        log.Info("Connecting to pipe");
+                        pipeClient.Connect(2000);
+                        log.Info("Conection to pipe established");
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("Failed to connect to pipe server: {0}", ex);
+                        if (!ignorePipeError)
+                        {
+                            return;
+                        }
                     }
                 }
 
@@ -233,7 +235,6 @@ namespace BlinkStickClient.Utils
                 {
                     if (CaptureMode == CaptureModeEnum.Desktop)
                     {
-                        /*
                         Surface s = null;
                         try
                         {
@@ -282,6 +283,7 @@ namespace BlinkStickClient.Utils
                             {
                                 if (pipeClient.IsConnected)
                                 {
+                                    log.DebugFormat("Color: {0:X2}{1:X2}{2:X2}", (byte)(r / count), (byte)(g / count), (byte)(b / count));
                                     pipeClient.Write(new byte[] { (byte)(r / count), (byte)(g / count), (byte)(b / count) }, 0, 3);
                                 }
                                 else
@@ -294,7 +296,6 @@ namespace BlinkStickClient.Utils
                                 }
                             }
                         }
-                        */
                     }
                     else if (CaptureMode == CaptureModeEnum.Application)
                     {
@@ -304,44 +305,52 @@ namespace BlinkStickClient.Utils
                             return;
                         }
 
-                        log.Info("Request on top");
-                        captureProcess.BringProcessWindowToFront();
+                        if (captureProcess == null)
+                        {
+                            log.Error("Capture process not initialized, falling back to desktop");
+                            CaptureMode = CaptureModeEnum.Desktop;
+                        }
+                        else
+                        {
+                            log.Info("Request on top");
+                            captureProcess.BringProcessWindowToFront();
 
-                        log.Info("Begin screenshot");
-                        captureProcess.CaptureInterface.BeginGetScreenshot(
-                            new System.Drawing.Rectangle(0, 0, 0, 0), 
-                            new TimeSpan(0, 0, 2), 
-                            //Callback, 
-                            (IAsyncResult Result) => {
-                                try
-                                {
-                                    if (captureProcess == null)
-                                        return;
-
-                                    using (Screenshot screenshot = captureProcess.CaptureInterface.EndGetScreenshot(Result))
+                            log.Info("Begin screenshot");
+                            captureProcess.CaptureInterface.BeginGetScreenshot(
+                                new System.Drawing.Rectangle(0, 0, 0, 0), 
+                                new TimeSpan(0, 0, 2), 
+                                //Callback, 
+                                (IAsyncResult Result) => {
+                                    try
                                     {
+                                        if (captureProcess == null)
+                                            return;
+
+                                        using (Screenshot screenshot = captureProcess.CaptureInterface.EndGetScreenshot(Result))
+                                        {
                                             if (screenshot == null)
                                             {
                                                 log.Info("Callback received: null");
                                             }
                                             else
                                             {
-                                                log.InfoFormat("Callback received: {0},{1},{2}", screenshot.R, screenshot.G, screenshot.B);
+                                                log.DebugFormat("Callback received: {0:X2},{1:X2},{2:X2}", (byte)screenshot.R, (byte)screenshot.G, (byte)screenshot.B);
                 
                                                 if (pipeClient != null && pipeClient.IsConnected)
                                                 {
                                                     pipeClient.Write(new byte[] { screenshot.R, screenshot.G, screenshot.B }, 0, 3);
                                                 }
                                             }
+                                        }
                                     }
-                                }
-                                catch (Exception ex)
-                                {
-                                    log.ErrorFormat("Unable to process captured data {0}", ex);
-                                }
-                            },
-                            null, 
-                            ImageFormat.AverageColor);
+                                    catch (Exception ex)
+                                    {
+                                        log.ErrorFormat("Unable to process captured data {0}", ex);
+                                    }
+                                },
+                                null, 
+                                ImageFormat.AverageColor);
+                        }
                     }
 
                     Thread.Sleep(RefreshPeriod);
