@@ -232,6 +232,11 @@ namespace BlinkStickClient.Bayeux
 						catch (Exception ex)
 						{
 							log.InfoFormat("Failed to disconnect: {0}", ex.Message);
+
+                            lock(this)
+                            {
+                                ClientState = ClientStateEnum.Disconnected;
+                            }
 						}
 
 						OnDisconnected();	
