@@ -71,6 +71,11 @@ namespace BlinkStickClient.Classes
 
         public void Save ()
         {
+            if (!Directory.Exists(Path.GetDirectoryName(FileName)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(FileName));
+            }
+
             JsonSerializer serializer = new JsonSerializer ();
             serializer.TypeNameHandling = TypeNameHandling.Auto;
             serializer.Formatting = Formatting.Indented;
