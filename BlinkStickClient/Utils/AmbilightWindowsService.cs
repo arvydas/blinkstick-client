@@ -205,6 +205,8 @@ namespace BlinkStickClient.Utils
 
         protected virtual void AnalyzeBackgroundColor (object sender, DoWorkEventArgs e)
         {
+            Boolean responseReceived = true;
+
             try
             {
                 BackgroundWorker worker = (BackgroundWorker)sender;
@@ -318,19 +320,14 @@ namespace BlinkStickClient.Utils
                             log.Error("Capture process not initialized, falling back to desktop");
                             CaptureMode = CaptureModeEnum.Desktop;
                         }
-                        else
+                        else if (captureProcess.CaptureInterface == null)
                         {
-                            log.Info("Request on top");
-                            try
-                            {
-                                captureProcess.BringProcessWindowToFront();
-                            }
-                            catch (Exception ex)
-                            {
-                                log.ErrorFormat("Failed to bring capture window to front, failing back to desktop capture mode: {0}", ex);
-                                CaptureMode = CaptureModeEnum.Desktop;
-                                continue;
-                            }
+                            log.Error("Capture process interface failed, reverting to desktop capture");
+                            CaptureMode = CaptureModeEnum.Desktop;
+                        } 
+                        else if (responseReceived)
+                        {
+                            responseReceived = false;
 
                             log.Info("Begin screenshot");
                             captureProcess.CaptureInterface.BeginGetScreenshot(
@@ -341,7 +338,10 @@ namespace BlinkStickClient.Utils
                                     try
                                     {
                                         if (captureProcess == null)
+                                        {
+                                            responseReceived = true;
                                             return;
+                                        }
 
                                         using (Screenshot screenshot = captureProcess.CaptureInterface.EndGetScreenshot(Result))
                                         {
@@ -364,6 +364,8 @@ namespace BlinkStickClient.Utils
                                     {
                                         log.ErrorFormat("Unable to process captured data {0}", ex);
                                     }
+                                    
+                                    responseReceived = true;
                                 },
                                 null, 
                                 ImageFormat.AverageColor);
