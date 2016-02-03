@@ -125,3 +125,4 @@ UpgradeLog*.XML
 /Install/branding/*/*
 /Install/BlinkStick-*.iss
 
+!/Components/EasyHook/*
