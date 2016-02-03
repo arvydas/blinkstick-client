@@ -445,7 +445,8 @@ namespace Capture.Hook
                                 try
                                 {
                                     DataBox db = default(DataBox);
-                                    if (_requestCopy.Format == ImageFormat.PixelData)
+                                    //Arvy added to support features required by average color capture
+                                    if (_requestCopy.Format == ImageFormat.PixelData || _requestCopy.Format == ImageFormat.AverageColor)
                                     {
                                         db = _finalRT.Device.ImmediateContext.MapSubresource(_finalRT, 0, MapMode.Read, SharpDX.Direct3D11.MapFlags.DoNotWait);
                                         _finalRTMapped = true;
@@ -468,6 +469,8 @@ namespace Capture.Hook
                                                     Texture2D.ToStream(_finalRT.Device.ImmediateContext, _finalRT, ImageFileFormat.Png, ms);
                                                     break;
                                                 case ImageFormat.PixelData:
+                                                //Arvy added to support features required by average color capture
+                                                case ImageFormat.AverageColor:
                                                     if (db.DataPointer != IntPtr.Zero)
                                                     {
                                                         ProcessCapture(_finalRT.Description.Width, _finalRT.Description.Height, db.RowPitch, System.Drawing.Imaging.PixelFormat.Format32bppArgb, db.DataPointer, _requestCopy);

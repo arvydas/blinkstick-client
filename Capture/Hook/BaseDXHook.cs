@@ -188,10 +188,54 @@ namespace Capture.Hook
             var data = new byte[size];
             Marshal.Copy(pBits, data, 0, size);
 
-            // Prepare the response
-            Screenshot response = null;
+			// Prepare the response
+			Screenshot response = null;
 
-            if (request.Format == Capture.Interface.ImageFormat.PixelData)
+			if (request.Format == Capture.Interface.ImageFormat.AverageColor) 
+			{
+				DebugMessage(String.Format("AVG: Request {0} w:{1} h:{2}", data.Length, width, height));
+				try
+				{
+					uint r = 0;
+					uint g = 0;
+					uint b = 0;
+
+					const int Bpp = 4; //Bytes per pixel
+
+					int count = 0;
+
+					int step = 4;
+
+					for (int j = 0; j < height / step; j++)
+					{
+						for (int i = 0; i < width / step; i++)
+						{
+							int position = (j * step * width + i * step) * Bpp;
+
+							r += data[position + 2];
+							g += data[position + 1];
+							b += data[position + 0];
+
+							count++;
+						}
+					}
+
+					response = new Screenshot(request.RequestId, (byte)(r / count), (byte)(g / count), (byte)(b / count))
+					{
+						Format = request.Format,
+						PixelFormat = format,
+						Height = height,
+						Width = width,
+						Stride = pitch
+					};
+
+					DebugMessage(String.Format("AVG: {0},{1},{2}", response.R, response.G, response.B));
+				}
+				catch (Exception e) {
+					DebugMessage(String.Format("AVG: Error {0}", e.Message));
+				}
+			}
+			else if (request.Format == Capture.Interface.ImageFormat.PixelData)
             {
                 // Return the raw data
                 response = new Screenshot(request.RequestId, data)
