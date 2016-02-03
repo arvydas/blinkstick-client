@@ -27,9 +27,6 @@ namespace Capture.Interface
         public int Stride { get; set; }
         public int Height { get; set; }
         public int Width { get; set; }
-		public byte R { get; set; }
-		public byte G { get; set; }
-		public byte B { get; set; }
 
         byte[] _data;
         public byte[] Data
@@ -48,14 +45,6 @@ namespace Capture.Interface
             _data = data;
         }
 
-		public Screenshot(Guid requestId, byte r, byte g, byte b)
-		{
-			_requestId = requestId;
-			R = r;
-			G = g;
-			B = b;
-		}
-
         ~Screenshot()
         {
             Dispose(false);
@@ -67,11 +56,11 @@ namespace Capture.Interface
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposeManagedResources)
         {
             if (!_disposed)
             {
-                if (disposing)
+                if (disposeManagedResources)
                 {
                     Disconnect();
                 }

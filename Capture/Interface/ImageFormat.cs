@@ -11,6 +11,5 @@ namespace Capture.Interface
         Jpeg,
         Png,
         PixelData,
-		AverageColor
     }
 }
