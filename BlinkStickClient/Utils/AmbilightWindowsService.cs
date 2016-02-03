@@ -284,7 +284,15 @@ namespace BlinkStickClient.Utils
                                 if (pipeClient.IsConnected)
                                 {
                                     log.DebugFormat("Color: {0:X2}{1:X2}{2:X2}", (byte)(r / count), (byte)(g / count), (byte)(b / count));
-                                    pipeClient.Write(new byte[] { (byte)(r / count), (byte)(g / count), (byte)(b / count) }, 0, 3);
+                                    try
+                                    {
+                                        pipeClient.Write(new byte[] { (byte)(r / count), (byte)(g / count), (byte)(b / count) }, 0, 3);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        log.ErrorFormat("Failed to write to pipe, exiting... {0}", ex);
+                                        return;
+                                    }
                                 }
                                 else
                                 {
