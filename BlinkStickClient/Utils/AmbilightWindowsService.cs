@@ -313,7 +313,16 @@ namespace BlinkStickClient.Utils
                         else
                         {
                             log.Info("Request on top");
-                            captureProcess.BringProcessWindowToFront();
+                            try
+                            {
+                                captureProcess.BringProcessWindowToFront();
+                            }
+                            catch (Exception ex)
+                            {
+                                log.ErrorFormat("Failed to bring capture window to front, failing back to desktop capture mode: {0}", ex);
+                                CaptureMode = CaptureModeEnum.Desktop;
+                                continue;
+                            }
 
                             log.Info("Begin screenshot");
                             captureProcess.CaptureInterface.BeginGetScreenshot(
