@@ -8,11 +8,15 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Alignment GtkAlignment;
 		
-		private global::Gtk.HBox hbox1;
+		private global::Gtk.Table table1;
+		
+		private global::Gtk.ComboBox comboboxAnimationSpeed;
+		
+		private global::Gtk.ComboBox comboboxTransitionSpeed;
 		
 		private global::Gtk.Label label1;
 		
-		private global::Gtk.ComboBox comboboxTransitionSpeed;
+		private global::Gtk.Label label2;
 		
 		private global::Gtk.Label GtkLabel;
 
@@ -31,30 +35,55 @@ namespace BlinkStickClient
 			this.GtkAlignment.Name = "GtkAlignment";
 			this.GtkAlignment.LeftPadding = ((uint)(12));
 			// Container child GtkAlignment.Gtk.Container+ContainerChild
-			this.hbox1 = new global::Gtk.HBox ();
-			this.hbox1.Name = "hbox1";
-			this.hbox1.Spacing = 6;
-			// Container child hbox1.Gtk.Box+BoxChild
-			this.label1 = new global::Gtk.Label ();
-			this.label1.Name = "label1";
-			this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("Transition speed:");
-			this.hbox1.Add (this.label1);
-			global::Gtk.Box.BoxChild w1 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.label1]));
-			w1.Position = 0;
-			w1.Expand = false;
-			w1.Fill = false;
-			// Container child hbox1.Gtk.Box+BoxChild
+			this.table1 = new global::Gtk.Table (((uint)(3)), ((uint)(2)), false);
+			this.table1.Name = "table1";
+			this.table1.RowSpacing = ((uint)(6));
+			this.table1.ColumnSpacing = ((uint)(6));
+			// Container child table1.Gtk.Table+TableChild
+			this.comboboxAnimationSpeed = global::Gtk.ComboBox.NewText ();
+			this.comboboxAnimationSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Slow"));
+			this.comboboxAnimationSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Normal"));
+			this.comboboxAnimationSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Fast"));
+			this.comboboxAnimationSpeed.Name = "comboboxAnimationSpeed";
+			this.table1.Add (this.comboboxAnimationSpeed);
+			global::Gtk.Table.TableChild w1 = ((global::Gtk.Table.TableChild)(this.table1 [this.comboboxAnimationSpeed]));
+			w1.TopAttach = ((uint)(1));
+			w1.BottomAttach = ((uint)(2));
+			w1.LeftAttach = ((uint)(1));
+			w1.RightAttach = ((uint)(2));
+			w1.XOptions = ((global::Gtk.AttachOptions)(4));
+			w1.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
 			this.comboboxTransitionSpeed = global::Gtk.ComboBox.NewText ();
 			this.comboboxTransitionSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Slow"));
 			this.comboboxTransitionSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Normal"));
 			this.comboboxTransitionSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Fast"));
 			this.comboboxTransitionSpeed.Name = "comboboxTransitionSpeed";
-			this.hbox1.Add (this.comboboxTransitionSpeed);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.comboboxTransitionSpeed]));
-			w2.Position = 1;
-			w2.Expand = false;
-			w2.Fill = false;
-			this.GtkAlignment.Add (this.hbox1);
+			this.table1.Add (this.comboboxTransitionSpeed);
+			global::Gtk.Table.TableChild w2 = ((global::Gtk.Table.TableChild)(this.table1 [this.comboboxTransitionSpeed]));
+			w2.LeftAttach = ((uint)(1));
+			w2.RightAttach = ((uint)(2));
+			w2.XOptions = ((global::Gtk.AttachOptions)(4));
+			w2.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
+			this.label1 = new global::Gtk.Label ();
+			this.label1.Name = "label1";
+			this.label1.LabelProp = global::Mono.Unix.Catalog.GetString ("Transition speed:");
+			this.table1.Add (this.label1);
+			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table1 [this.label1]));
+			w3.XOptions = ((global::Gtk.AttachOptions)(4));
+			w3.YOptions = ((global::Gtk.AttachOptions)(4));
+			// Container child table1.Gtk.Table+TableChild
+			this.label2 = new global::Gtk.Label ();
+			this.label2.Name = "label2";
+			this.label2.LabelProp = global::Mono.Unix.Catalog.GetString ("Animation speed:");
+			this.table1.Add (this.label2);
+			global::Gtk.Table.TableChild w4 = ((global::Gtk.Table.TableChild)(this.table1 [this.label2]));
+			w4.TopAttach = ((uint)(1));
+			w4.BottomAttach = ((uint)(2));
+			w4.XOptions = ((global::Gtk.AttachOptions)(4));
+			w4.YOptions = ((global::Gtk.AttachOptions)(4));
+			this.GtkAlignment.Add (this.table1);
 			this.frame1.Add (this.GtkAlignment);
 			this.GtkLabel = new global::Gtk.Label ();
 			this.GtkLabel.Name = "GtkLabel";

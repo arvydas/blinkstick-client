@@ -2,9 +2,11 @@
 
 namespace BlinkStickClient.DataModel
 {
-    public class NotificationMood : DeviceNotification
+    public class NotificationMood : PatternNotification
     {
         public MoodlightSpeedEnum MoodlightSpeed;
+
+        public MoodlightSpeedEnum AnimationSpeed;
 
         private uint RefreshTimer;
 
@@ -28,6 +30,24 @@ namespace BlinkStickClient.DataModel
             }
         }
 
+        private int TransitionPeriod 
+        {
+            get
+            {
+                switch (AnimationSpeed)
+                {
+                    case MoodlightSpeedEnum.Fast:
+                        return 500;
+                    case MoodlightSpeedEnum.Normal:
+                        return 2000;
+                    case MoodlightSpeedEnum.Slow:
+                        return 5000;
+                    default:
+                        return 5000;
+                }
+            }
+        }
+
         public override string GetTypeName()
         {
             return "Moodlight";
@@ -36,6 +56,19 @@ namespace BlinkStickClient.DataModel
         public NotificationMood()
         {
             this.MoodlightSpeed = MoodlightSpeedEnum.Normal;
+            this.AnimationSpeed = MoodlightSpeedEnum.Normal;
+            this.PatterConfigurable = false;
+
+            CreateTemporaryPattern();
+        }
+
+        private void CreateTemporaryPattern()
+        {
+            this.Pattern = new Pattern("Mood");
+            Animation animation = new Animation();
+            animation.AnimationType = AnimationTypeEnum.Morph;
+            animation.DurationMorph = 1000;
+            this.Pattern.Animations.Add(animation);
         }
 
         public override CustomNotification Copy(CustomNotification notification)
@@ -46,6 +79,7 @@ namespace BlinkStickClient.DataModel
             }
 
             ((NotificationMood)notification).MoodlightSpeed = this.MoodlightSpeed;
+            ((NotificationMood)notification).AnimationSpeed = this.AnimationSpeed;
 
             return base.Copy(notification);
         }
@@ -68,6 +102,8 @@ namespace BlinkStickClient.DataModel
 
             log.DebugFormat("Starting timer at {0} ms", this.SwitchPeriod);
             RefreshTimer = GLib.Timeout.Add(this.SwitchPeriod, new GLib.TimeoutHandler(SwitchColor));
+
+            SwitchColor();
 
             log.DebugFormat("{0} started", GetTypeName());
         }
@@ -94,7 +130,14 @@ namespace BlinkStickClient.DataModel
         {
             byte[] colors = new byte[3];
             random.NextBytes(colors);
-            OnColorSend(colors[0], colors[1], colors[2]);
+            if (this.Pattern == null || this.Pattern.Animations.Count != 1)
+            {
+                CreateTemporaryPattern();
+            }
+
+            this.Pattern.Animations[0].DurationMorph = TransitionPeriod;
+            this.Pattern.Animations[0].Color = BlinkStickDotNet.RgbColor.FromRgb(colors[0], colors[1], colors[2]);
+            OnTriggered();
 
             return true;
         }

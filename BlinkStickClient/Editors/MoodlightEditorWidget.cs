@@ -20,6 +20,7 @@ namespace BlinkStickClient
             this.Notification = (NotificationMood)notification;
 
             comboboxTransitionSpeed.Active = (int)this.Notification.MoodlightSpeed;
+            comboboxAnimationSpeed.Active = (int)this.Notification.AnimationSpeed;
         }
 
         public bool IsValid(Gtk.Window window)
@@ -30,6 +31,7 @@ namespace BlinkStickClient
         public void UpdateNotification()
         {
             this.Notification.MoodlightSpeed = (MoodlightSpeedEnum)comboboxTransitionSpeed.Active;
+            this.Notification.AnimationSpeed = (MoodlightSpeedEnum)comboboxAnimationSpeed.Active;
         }
         #endregion
 

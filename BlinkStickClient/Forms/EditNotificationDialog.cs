@@ -108,7 +108,7 @@ namespace BlinkStickClient
                 return;
             }
 
-            if (Notification is PatternNotification && SelectedPattern == null)
+            if (Notification is PatternNotification && (Notification as PatternNotification).PatterConfigurable && SelectedPattern == null)
             {
                 MessageBox.Show(this, "Please select a pattern", Gtk.MessageType.Error);
                 return;
@@ -141,7 +141,7 @@ namespace BlinkStickClient
                 ((DeviceNotification)Notification).LedLastIndex = spinbuttonLedsTo.ValueAsInt;
             }
 
-            if (Notification is PatternNotification)
+            if (Notification is PatternNotification && (Notification as PatternNotification).PatterConfigurable)
             {
                 ((PatternNotification)Notification).Pattern = SelectedPattern;
             }
@@ -157,7 +157,7 @@ namespace BlinkStickClient
             checkbuttonEnabled.Active = Notification.Enabled;
             entryName.Text = Notification.Name;
 
-            if (Notification is PatternNotification)
+            if (Notification is PatternNotification && (Notification as PatternNotification).PatterConfigurable)
             {
                 LoadPatterns((Notification as PatternNotification).Pattern);
             }

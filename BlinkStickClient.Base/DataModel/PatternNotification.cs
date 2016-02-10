@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace BlinkStickClient.DataModel
 {
@@ -8,8 +9,11 @@ namespace BlinkStickClient.DataModel
 
         public Byte LedIndex { get; set; }
 
+        public Boolean PatterConfigurable { get; protected set; }
+
         public PatternNotification()
         {
+            PatterConfigurable = true;
         }
 
         public override CustomNotification Copy(CustomNotification notification)
