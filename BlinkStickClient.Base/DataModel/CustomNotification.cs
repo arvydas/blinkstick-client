@@ -35,11 +35,11 @@ namespace BlinkStickClient.DataModel
 
         public event EventHandler<ColorSendEventArgs> ColorSend;
 
-        protected void OnColorSend(byte r, byte g, byte b)
+        protected void OnColorSend(byte r, byte g, byte b, BlinkStickDeviceSettings settings = null)
         {
             if (ColorSend != null)
             {
-                ColorSend(this, new ColorSendEventArgs(r, g, b));
+                ColorSend(this, new ColorSendEventArgs(r, g, b, settings));
             }
         }
         #endregion
@@ -134,12 +134,14 @@ namespace BlinkStickClient.DataModel
         public byte R;
         public byte G;
         public byte B;
+        public BlinkStickDeviceSettings Device;
 
-        public ColorSendEventArgs(byte r, byte g, byte b)
+        public ColorSendEventArgs(byte r, byte g, byte b, BlinkStickDeviceSettings device)
         {
             this.R = r;
             this.G = g;
             this.B = b;
+            this.Device = device;
         }
     }
 }
