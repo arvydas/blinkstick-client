@@ -109,6 +109,8 @@ UpgradeLog*.XML
 
 *.userprefs
 
+/nuget.exe
+
 /Install/setup/*
 
 /=*
