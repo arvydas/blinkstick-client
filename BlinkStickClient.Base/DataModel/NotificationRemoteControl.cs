@@ -116,7 +116,83 @@ namespace BlinkStickClient.DataModel
                         }
                     }
 
-                    OnColorSend(c.R, c.G, c.B);
+                    int channel = 0;
+                    int ledStart = 0;
+                    int ledEnd = 0;
+
+                    for (int i = 0; i < e.Context.Request.QueryString.AllKeys.Length; i++)
+                    {
+                        string key = e.Context.Request.QueryString.AllKeys[i];
+
+                        if (key.ToLower() == "channel")
+                        {
+                            try
+                            {
+                                channel = Convert.ToInt32(e.Context.Request.QueryString.GetValues(i));
+
+                                if (channel < 0 || channel > 2)
+                                    throw new Exception("not within range of 0..2");
+                            }
+                            catch (Exception ex)
+                            {
+                                server.SendResponseJson(422, 
+                                    new ErrorResponse() { error = String.Format("Invalid channel parameter: {0}", ex.Message) }, 
+                                    e.Context.Response);
+
+                                e.Handled = true;
+                                return;
+                            }
+                        } 
+                        else if (key.ToLower() == "ledstart")
+                        {
+                            try
+                            {
+                                ledStart = Convert.ToInt32(e.Context.Request.QueryString.GetValues(i));
+
+                                if (ledStart < 0 || ledStart > 63)
+                                    throw new Exception("not within range of 0..63");
+                            }
+                            catch (Exception ex)
+                            {
+                                server.SendResponseJson(422, 
+                                    new ErrorResponse() { error = String.Format("Invalid ledStart parameter: {0}", ex.Message) }, 
+                                    e.Context.Response);
+
+                                e.Handled = true;
+                                return;
+                            }
+                        } 
+                        else if (key.ToLower() == "ledend")
+                        {
+                            try
+                            {
+                                ledEnd = Convert.ToInt32(e.Context.Request.QueryString.GetValues(i));
+
+                                if (ledEnd < 0 || ledEnd > 63)
+                                    throw new Exception("not within range of 0..63");
+                            }
+                            catch (Exception ex)
+                            {
+                                server.SendResponseJson(422, 
+                                    new ErrorResponse() { error = String.Format("Invalid ledEnd parameter: {0}", ex.Message) }, 
+                                    e.Context.Response);
+
+                                e.Handled = true;
+                                return;
+                            }
+                        } 
+
+
+                    }
+
+                    try
+                    {
+                        OnColorSend(c.R, c.G, c.B, ledSettings);
+                    }
+                    catch (Exception ex)
+                    {
+                        log.ErrorFormat("Failed to send color {0}", ex);
+                    }
 
                     server.SendResponseJson(200, null, e.Context.Response);
 
