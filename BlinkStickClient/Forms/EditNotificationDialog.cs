@@ -39,6 +39,8 @@ namespace BlinkStickClient
 
         IEditorInterface editorInterface;
 
+        private Boolean IgnoreComponentChange = true;
+
         public Pattern SelectedPattern
         {
             get
@@ -139,6 +141,7 @@ namespace BlinkStickClient
                 ((DeviceNotification)Notification).BlinkStickSerial = deviceComboboxWidget.SelectedBlinkStick.Serial;
                 ((DeviceNotification)Notification).LedFirstIndex = spinbuttonLedsFrom.ValueAsInt;
                 ((DeviceNotification)Notification).LedLastIndex = spinbuttonLedsTo.ValueAsInt;
+                ((DeviceNotification)Notification).LedChannel = comboboxChannel.Active;
             }
 
             if (Notification is PatternNotification && (Notification as PatternNotification).PatterConfigurable)
@@ -154,6 +157,8 @@ namespace BlinkStickClient
 
         private void ObjectToControls()
         {
+            IgnoreComponentChange = true;
+
             checkbuttonEnabled.Active = Notification.Enabled;
             entryName.Text = Notification.Name;
 
@@ -189,6 +194,7 @@ namespace BlinkStickClient
                     
                 spinbuttonLedsFrom.Value = ((DeviceNotification)Notification).LedFirstIndex;
                 spinbuttonLedsTo.Value = ((DeviceNotification)Notification).LedLastIndex;
+                comboboxChannel.Active = ((DeviceNotification)Notification).LedChannel;
             }
             else
             {
@@ -196,7 +202,9 @@ namespace BlinkStickClient
                 table2.Remove(deviceComboboxWidget);
                 table2.Remove(labelLeds);
                 table2.Remove(hboxLedConfiguration);
-                table2.NRows -= 3;
+                table2.Remove(labelChannel);
+                table2.Remove(hboxChannel);
+                table2.NRows -= 4;
             }
 
             HSeparator hseparator;
@@ -246,6 +254,8 @@ namespace BlinkStickClient
             hseparator.ShowAll();
 
             deviceComboboxWidget.Sensitive = this.ApplicationSettings.AllowModeChange;
+
+            IgnoreComponentChange = false;
         }
 
         void LoadPatterns(Pattern selectedPattern)
@@ -268,6 +278,8 @@ namespace BlinkStickClient
             {
                 spinbuttonLedsTo.Sensitive = false;
                 spinbuttonLedsFrom.Sensitive = false;
+                comboboxChannel.Sensitive = false;
+                comboboxChannel.Active = 0;
                 return;
             }
 
@@ -288,6 +300,13 @@ namespace BlinkStickClient
                     spinbuttonLedsTo.Sensitive = true;
                     spinbuttonLedsFrom.Sensitive = true;
                     break;
+            }
+
+            comboboxChannel.Sensitive = deviceComboboxWidget.SelectedBlinkStick.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro;
+
+            if (!comboboxChannel.Sensitive)
+            {
+                comboboxChannel.Active = 0;
             }
         }
 

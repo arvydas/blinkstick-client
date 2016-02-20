@@ -50,15 +50,15 @@ public partial class MainWindow
 		this.HelpAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Help");
 		w1.Add (this.HelpAction1, null);
 		this.PatternsAction1 = new global::Gtk.RadioAction ("PatternsAction1", global::Mono.Unix.Catalog.GetString ("Patterns"), null, "blinkstick-patterns", 2);
-		this.PatternsAction1.Group = this.HelpAction1.Group;
+		this.PatternsAction1.Group = this.OverviewAction.Group;
 		this.PatternsAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Patterns");
 		w1.Add (this.PatternsAction1, null);
 		this.EventsAction = new global::Gtk.RadioAction ("EventsAction", global::Mono.Unix.Catalog.GetString ("Events"), null, "blinkstick-events", 3);
-		this.EventsAction.Group = this.HelpAction1.Group;
+		this.EventsAction.Group = this.OverviewAction.Group;
 		this.EventsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Events");
 		w1.Add (this.EventsAction, null);
 		this.preferencesAction = new global::Gtk.RadioAction ("preferencesAction", global::Mono.Unix.Catalog.GetString ("Settings"), null, "gtk-preferences", 4);
-		this.preferencesAction.Group = this.HelpAction1.Group;
+		this.preferencesAction.Group = this.OverviewAction.Group;
 		this.preferencesAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Settings");
 		w1.Add (this.preferencesAction, null);
 		this.quitAction = new global::Gtk.Action ("quitAction", global::Mono.Unix.Catalog.GetString ("Quit"), null, "gtk-quit");
