@@ -133,7 +133,17 @@ namespace BlinkStickClient.DataModel
         {
             DeviceNotification notification = sender as DeviceNotification;
 
-            BlinkStickDeviceSettings settings = DataModel.FindBySerial(notification.BlinkStickSerial);
+            BlinkStickDeviceSettings settings = null;
+
+            if (notification == null)
+            {
+                settings = e.Device;
+            }
+            else
+            {
+                settings = DataModel.FindBySerial(notification.BlinkStickSerial);
+            }
+
 
             if (settings == null)
             {
