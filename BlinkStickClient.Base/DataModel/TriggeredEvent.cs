@@ -24,6 +24,9 @@ namespace BlinkStickClient.DataModel
         [JsonIgnore]
         public List<Animation> Animations = new List<Animation>();
 
+        [JsonIgnore]
+        public CustomNotification NotificationSnapshot;
+
         public TriggeredEvent()
         {
         }
@@ -32,6 +35,7 @@ namespace BlinkStickClient.DataModel
         {
             this.TimeStamp = DateTime.Now;
             this.Notification = notification;
+            this.NotificationSnapshot = notification.Copy();
             this.Message = message;
         }
     }

@@ -65,8 +65,8 @@ namespace BlinkStickClient.DataModel
         [JsonIgnore]
         public Boolean Touched { get; set; }
 
-        private Boolean[] LedBusy = new Boolean[64];
-        private byte[] LedFrame = new byte[64 * 3];
+        private Boolean[][] LedBusy = new Boolean[3][];
+        private byte[][] LedFrame = new byte[3][];
         private Boolean NeedsLedUpdate = false;
 
         public BlinkStickDeviceSettings()
@@ -74,6 +74,14 @@ namespace BlinkStickClient.DataModel
             this.Touched = true;
             this.BrightnessLimit = 100;
             this.Running = false;
+
+            this.LedFrame[0] = new byte[64 * 3];
+            this.LedFrame[1] = new byte[64 * 3];
+            this.LedFrame[2] = new byte[64 * 3];
+
+            this.LedBusy[0] = new Boolean[64];
+            this.LedBusy[1] = new Boolean[64];
+            this.LedBusy[2] = new Boolean[64];
         }
 
         public BlinkStickDeviceSettings(BlinkStick led)
@@ -150,9 +158,9 @@ namespace BlinkStickClient.DataModel
 
             lock (this)
             {
-                LedFrame[index * 3 + 0] = g;
-                LedFrame[index * 3 + 1] = r;
-                LedFrame[index * 3 + 2] = b;
+                LedFrame[channel][index * 3 + 0] = g;
+                LedFrame[channel][index * 3 + 1] = r;
+                LedFrame[channel][index * 3 + 2] = b;
 
                 NeedsLedUpdate = true;
             }
@@ -176,13 +184,14 @@ namespace BlinkStickClient.DataModel
 
             lock (this)
             {
+                int channel = notification.GetValidChannel();
                 //TODO: Copy first and last indexes to event
                 for (int i = notification.LedFirstIndex; i <= notification.LedLastIndex; i++)
                 {
-                    LedFrame[i * 3] = g;
-                    LedFrame[i * 3 + 1] = r;
-                    LedFrame[i * 3 + 2] = b;
-                    OnSendColor(0, (byte)i, r, g, b);
+                    LedFrame[channel][i * 3] = g;
+                    LedFrame[channel][i * 3 + 1] = r;
+                    LedFrame[channel][i * 3 + 2] = b;
+                    OnSendColor((byte)channel, (byte)i, r, g, b);
                 }
 
                 NeedsLedUpdate = true;
@@ -198,13 +207,15 @@ namespace BlinkStickClient.DataModel
         public RgbColor GetColor(CustomNotification notification)
         {
             int index = 0;
+            int channel = 0;
 
             if (notification is DeviceNotification)
             {
                 index = ((DeviceNotification)notification).LedFirstIndex * 3;
+                channel = ((DeviceNotification)notification).GetValidChannel();
             }
 
-            return RgbColor.FromRgb(LedFrame[index + 1], LedFrame[index], LedFrame[index + 2]);
+            return RgbColor.FromRgb(LedFrame[channel][index + 1], LedFrame[channel][index], LedFrame[channel][index + 2]);
         }
 
         public void SetColor(byte r, byte g, byte b)
@@ -220,9 +231,9 @@ namespace BlinkStickClient.DataModel
             {
                 NeedsLedUpdate = true;
 
-                LedFrame[0] = g;
-                LedFrame[1] = r;
-                LedFrame[2] = b;
+                LedFrame[0][0] = g;
+                LedFrame[0][1] = r;
+                LedFrame[0][2] = b;
             }
 
             if (!Running)
@@ -242,12 +253,12 @@ namespace BlinkStickClient.DataModel
 
             for (byte i = 0; i < LedsG; i++)
             {
-                this.SetColor(0, i, 0, 0, 0);
+                this.SetColor(1, i, 0, 0, 0);
             }
 
             for (byte i = 0; i < LedsB; i++)
             {
-                this.SetColor(0, i, 0, 0, 0);
+                this.SetColor(2, i, 0, 0, 0);
             }
         }
 
@@ -296,11 +307,11 @@ namespace BlinkStickClient.DataModel
                         }
                     }
 
-                    if (ev != null && ev.Notification is PatternNotification)
+                    if (ev != null && ev.NotificationSnapshot is PatternNotification)
                     {
                         ev.Started = DateTime.Now;
 
-                        PatternNotification notification = ev.Notification as PatternNotification;
+                        PatternNotification notification = ev.NotificationSnapshot as PatternNotification;
                         foreach (Animation animation in notification.Pattern.Animations)
                         {
                             Animation copyAnimation = new Animation();
@@ -308,7 +319,7 @@ namespace BlinkStickClient.DataModel
                             ev.Animations.Add(copyAnimation);
                         }
 
-                        ev.Animations[0].ReferenceColor = GetColor(ev.Notification);
+                        ev.Animations[0].ReferenceColor = GetColor(ev.NotificationSnapshot);
 
                         AssignBusyLeds(ev, true);
                         eventsPlaying.Add(ev);
@@ -321,7 +332,7 @@ namespace BlinkStickClient.DataModel
 
                         RgbColor color = evnt.Animations[evnt.AnimationIndex].GetColor(evnt.Started.Value, DateTime.Now, evnt.Animations[evnt.AnimationIndex].ReferenceColor);
 
-                        PatternNotification notification = evnt.Notification as PatternNotification;
+                        PatternNotification notification = evnt.NotificationSnapshot as PatternNotification;
 
                         lock (this)
                         {
@@ -338,7 +349,7 @@ namespace BlinkStickClient.DataModel
                             }
                             else
                             {
-                                evnt.Animations[evnt.AnimationIndex].ReferenceColor = GetColor(evnt.Notification);
+                                evnt.Animations[evnt.AnimationIndex].ReferenceColor = GetColor(evnt.NotificationSnapshot);
                                 evnt.Started = DateTime.Now;
                             }
                         }
@@ -354,15 +365,24 @@ namespace BlinkStickClient.DataModel
                         if (Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStick || 
                             Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro && Led.Mode < 2)
                         {
-                            Led.SetColor(LedFrame[1], LedFrame[0], LedFrame[2]);
+                            Led.SetColor(LedFrame[0][1], LedFrame[0][0], LedFrame[0][2]);
                         }
                         else
                         {
                             byte[] frame = new byte[this.LedsR * 3];
-
-                            Array.Copy(LedFrame, 0, frame, 0, frame.Length); 
-
+                            Array.Copy(LedFrame[0], 0, frame, 0, frame.Length); 
                             Led.SetColors(0, frame);
+
+                            if (Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro)
+                            {
+                                frame = new byte[this.LedsG * 3];
+                                Array.Copy(LedFrame[1], 0, frame, 0, frame.Length); 
+                                Led.SetColors(1, frame);
+
+                                frame = new byte[this.LedsB * 3];
+                                Array.Copy(LedFrame[2], 0, frame, 0, frame.Length); 
+                                Led.SetColors(2, frame);
+                            }
                         }
                     }
 
@@ -381,11 +401,12 @@ namespace BlinkStickClient.DataModel
 
         Boolean CanPlayEvent(TriggeredEvent ev)
         {
-            PatternNotification notification = (PatternNotification)ev.Notification;
+            PatternNotification notification = (PatternNotification)ev.NotificationSnapshot;
+            int channel = notification.GetValidChannel();
             for (int i = notification.LedFirstIndex; i <= notification.LedLastIndex; i++)
             {
                 //If there is at least one LED currently in use, event needs to wait
-                if (LedBusy[i])
+                if (LedBusy[channel][i])
                     return false;
             }
 
@@ -394,10 +415,11 @@ namespace BlinkStickClient.DataModel
 
         void AssignBusyLeds(TriggeredEvent ev, Boolean busy)
         {
-            PatternNotification notification = (PatternNotification)ev.Notification;
+            PatternNotification notification = (PatternNotification)ev.NotificationSnapshot;
+            int channel = notification.GetValidChannel();
             for (int i = notification.LedFirstIndex; i <= notification.LedLastIndex; i++)
             {
-                LedBusy[i] = busy;
+                LedBusy[channel][i] = busy;
             }
         }
 
