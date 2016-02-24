@@ -147,7 +147,7 @@ namespace BlinkStickClient.DataModel
                         {
                             try
                             {
-                                ledStart = Convert.ToInt32(e.Context.Request.QueryString.GetValues(i));
+                                ledStart = Convert.ToInt32(e.Context.Request.QueryString.GetValues(i)[0]);
 
                                 if (ledStart < 0 || ledStart > 63)
                                     throw new Exception("not within range of 0..63");
@@ -166,7 +166,7 @@ namespace BlinkStickClient.DataModel
                         {
                             try
                             {
-                                ledEnd = Convert.ToInt32(e.Context.Request.QueryString.GetValues(i));
+                                ledEnd = Convert.ToInt32(e.Context.Request.QueryString.GetValues(i)[0]);
 
                                 if (ledEnd < 0 || ledEnd > 63)
                                     throw new Exception("not within range of 0..63");
@@ -181,13 +181,17 @@ namespace BlinkStickClient.DataModel
                                 return;
                             }
                         } 
-
-
                     }
 
                     try
                     {
-                        OnColorSend(c.R, c.G, c.B, ledSettings);
+                        Pattern pattern = new Pattern();
+                        pattern.Animations.Add(new Animation());
+                        pattern.Animations[0].AnimationType = AnimationTypeEnum.SetColor;
+                        pattern.Animations[0].DelaySetColor = 0;
+                        pattern.Animations[0].Color = c;
+
+                        OnPatternSend((byte)ledStart, (byte)ledEnd, ledSettings, pattern);
                     }
                     catch (Exception ex)
                     {

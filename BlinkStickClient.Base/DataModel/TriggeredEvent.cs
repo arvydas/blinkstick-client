@@ -27,6 +27,18 @@ namespace BlinkStickClient.DataModel
         [JsonIgnore]
         public CustomNotification NotificationSnapshot;
 
+        [JsonIgnore]
+        public byte LedFirst;
+
+        [JsonIgnore]
+        public byte LedLast;
+
+        [JsonIgnore]
+        public Pattern Pattern;
+
+        [JsonIgnore]
+        public BlinkStickDeviceSettings Device;
+
         public TriggeredEvent()
         {
         }
@@ -37,6 +49,17 @@ namespace BlinkStickClient.DataModel
             this.Notification = notification;
             this.NotificationSnapshot = notification.Copy();
             this.Message = message;
+        }
+
+        public TriggeredEvent(CustomNotification notification, byte ledFirst, byte ledLast, BlinkStickDeviceSettings device, Pattern pattern)
+        {
+            this.TimeStamp = DateTime.Now;
+            this.Notification = notification;
+            this.NotificationSnapshot = notification.Copy();
+            this.LedFirst = ledFirst;
+            this.LedLast = ledLast;
+            this.Device = device;
+            this.Pattern = pattern;
         }
     }
 }

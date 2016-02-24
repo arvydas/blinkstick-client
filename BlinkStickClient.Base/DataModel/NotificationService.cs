@@ -25,6 +25,7 @@ namespace BlinkStickClient.DataModel
             {
                 n.Triggered += NotificationTriggered;
                 n.ColorSend += NotificationColor;
+                n.PatternSend += NotificationPattern;
             }
 
             DataModel.Notifications.CollectionChanged += NotificationListChanged;
@@ -105,6 +106,7 @@ namespace BlinkStickClient.DataModel
                 {
                     n.Triggered += NotificationTriggered;
                     n.ColorSend += NotificationColor;
+                    n.PatternSend += NotificationPattern;
                     n.DataModel = DataModel;
 
                     if (n.RequiresMonitoring() && n.Enabled)
@@ -119,6 +121,7 @@ namespace BlinkStickClient.DataModel
                 {
                     n.Triggered -= NotificationTriggered;
                     n.ColorSend -= NotificationColor;
+                    n.PatternSend -= NotificationPattern;
                     n.DataModel = null;;
 
                     if (n.RequiresMonitoring() && n.Enabled)
@@ -158,6 +161,39 @@ namespace BlinkStickClient.DataModel
             }
 
             settings.SetColor(notification, e.R, e.G, e.B);
+        }
+
+        void NotificationPattern (object sender, PatternSendEventArgs e)
+        {
+            Boolean found = false;
+
+            TriggeredEvent ev = new TriggeredEvent(sender as CustomNotification, e.LedFirst, e.LedLast, e.Device, e.Pattern);
+
+            lock (e.Device.EventQueue)
+            {
+                foreach (TriggeredEvent pendingEvent in e.Device.EventQueue.ToArray())
+                {
+                    if (pendingEvent.Notification == sender)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (found)
+                {
+                    log.InfoFormat("Notification {0} already pending to play. Skipping.", (sender as CustomNotification).Name);
+                }
+                else
+                {
+                    e.Device.EventQueue.Enqueue(ev);
+                }
+            }
+
+            if (!found)
+            {
+                e.Device.Start();
+            }
         }
 
         private void NotificationTriggered (object sender, TriggeredEventArgs e)

@@ -42,6 +42,16 @@ namespace BlinkStickClient.DataModel
                 ColorSend(this, new ColorSendEventArgs(r, g, b, settings));
             }
         }
+
+        public event EventHandler<PatternSendEventArgs> PatternSend;
+
+        protected void OnPatternSend(byte ledFirst, byte ledLast, BlinkStickDeviceSettings device, Pattern pattern)
+        {
+            if (PatternSend != null)
+            {
+                PatternSend(this, new PatternSendEventArgs(ledFirst, ledLast, device, pattern));
+            }
+        }
         #endregion
 
         [JsonIgnore]
@@ -142,6 +152,22 @@ namespace BlinkStickClient.DataModel
             this.G = g;
             this.B = b;
             this.Device = device;
+        }
+    }
+
+    public class PatternSendEventArgs: EventArgs
+    {
+        public byte LedFirst;
+        public byte LedLast;
+        public BlinkStickDeviceSettings Device;
+        public Pattern Pattern;
+
+        public PatternSendEventArgs(byte ledFirst, byte ledLast, BlinkStickDeviceSettings device, Pattern pattern)
+        {
+            this.LedFirst = ledFirst;
+            this.LedLast = ledLast;
+            this.Device = device;
+            this.Pattern = pattern;
         }
     }
 }
