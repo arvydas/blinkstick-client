@@ -68,6 +68,7 @@ namespace BlinkStickClient.DataModel
         }
 
 		public static String ApplicationVersion;
+        public static String ApplicationFullVersion;
 
         public ApplicationDataModel()
         {

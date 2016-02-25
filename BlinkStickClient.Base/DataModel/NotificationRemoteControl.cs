@@ -71,7 +71,7 @@ namespace BlinkStickClient.DataModel
                 if (e.Context.Request.Url.AbsolutePath == "/api/v1/test")
                 {
                     server.SendResponseJson(200, 
-                        new InfoResponse() { name = "BlinkStick Client", version = ApplicationDataModel.ApplicationVersion }, 
+                        new InfoResponse() { name = "BlinkStick Client", version = ApplicationDataModel.ApplicationVersion, versionFull = ApplicationDataModel.ApplicationFullVersion }, 
                         e.Context.Response);
                     e.Handled = true;
                 }
@@ -363,6 +363,7 @@ namespace BlinkStickClient.DataModel
         {
             public String name;
             public String version;
+            public String versionFull;
         }
 
         class ErrorResponse

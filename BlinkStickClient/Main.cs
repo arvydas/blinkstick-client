@@ -51,6 +51,7 @@ namespace BlinkStickClient
             }
 
             ApplicationDataModel.ApplicationVersion = versionName;
+            ApplicationDataModel.ApplicationFullVersion = version;
 
             if (args.Length > 1 && args[0] == "--build-config")
             {
