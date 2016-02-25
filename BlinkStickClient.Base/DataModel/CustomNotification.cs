@@ -45,11 +45,11 @@ namespace BlinkStickClient.DataModel
 
         public event EventHandler<PatternSendEventArgs> PatternSend;
 
-        protected void OnPatternSend(byte ledFirst, byte ledLast, BlinkStickDeviceSettings device, Pattern pattern)
+        protected void OnPatternSend(byte channel, byte ledFirst, byte ledLast, BlinkStickDeviceSettings device, Pattern pattern)
         {
             if (PatternSend != null)
             {
-                PatternSend(this, new PatternSendEventArgs(ledFirst, ledLast, device, pattern));
+                PatternSend(this, new PatternSendEventArgs(channel, ledFirst, ledLast, device, pattern));
             }
         }
         #endregion
@@ -157,13 +157,15 @@ namespace BlinkStickClient.DataModel
 
     public class PatternSendEventArgs: EventArgs
     {
+        public byte Channel;
         public byte LedFirst;
         public byte LedLast;
         public BlinkStickDeviceSettings Device;
         public Pattern Pattern;
 
-        public PatternSendEventArgs(byte ledFirst, byte ledLast, BlinkStickDeviceSettings device, Pattern pattern)
+        public PatternSendEventArgs(byte channel, byte ledFirst, byte ledLast, BlinkStickDeviceSettings device, Pattern pattern)
         {
+            this.Channel = channel;
             this.LedFirst = ledFirst;
             this.LedLast = ledLast;
             this.Device = device;

@@ -496,7 +496,7 @@ namespace BlinkStickClient.DataModel
             {
                 for (int i = ev.LedFirst; i <= ev.LedLast; i++)
                 {
-                    if (LedBusy[0][i])
+                    if (LedBusy[ev.Channel][i])
                         return false;
                 }
             }
@@ -519,8 +519,7 @@ namespace BlinkStickClient.DataModel
             {
                 for (int i = ev.LedFirst; i <= ev.LedLast; i++)
                 {
-                    //TODO: Get channel from event
-                    LedBusy[0][i] = busy;
+                    LedBusy[ev.Channel][i] = busy;
                 }
             }
         }
