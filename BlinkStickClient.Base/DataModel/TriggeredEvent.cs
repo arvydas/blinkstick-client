@@ -28,16 +28,16 @@ namespace BlinkStickClient.DataModel
         public CustomNotification NotificationSnapshot;
 
         [JsonIgnore]
-        public byte LedFirst;
+        public int LedFirst;
 
         [JsonIgnore]
-        public byte LedLast;
+        public int LedLast;
 
         [JsonIgnore]
         public Pattern Pattern;
 
         [JsonIgnore]
-        public Pattern Channel;
+        public int Channel;
 
         [JsonIgnore]
         public BlinkStickDeviceSettings Device;
@@ -54,7 +54,7 @@ namespace BlinkStickClient.DataModel
             this.Message = message;
         }
 
-        public TriggeredEvent(CustomNotification notification, byte channel, byte ledFirst, byte ledLast, BlinkStickDeviceSettings device, Pattern pattern)
+        public TriggeredEvent(CustomNotification notification, int channel, int ledFirst, int ledLast, BlinkStickDeviceSettings device, Pattern pattern)
         {
             this.Channel = channel;
             this.TimeStamp = DateTime.Now;

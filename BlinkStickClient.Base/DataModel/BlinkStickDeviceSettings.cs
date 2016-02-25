@@ -239,8 +239,7 @@ namespace BlinkStickClient.DataModel
             }
             else
             {
-                //TODO: get channel from event
-                channel = 0;
+                channel = evnt.Channel;
                 ledStart = evnt.LedFirst;
                 ledEnd = evnt.LedLast;
             }

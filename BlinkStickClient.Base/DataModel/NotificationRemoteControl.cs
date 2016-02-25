@@ -128,7 +128,7 @@ namespace BlinkStickClient.DataModel
                         {
                             try
                             {
-                                channel = Convert.ToInt32(e.Context.Request.QueryString.GetValues(i));
+                                channel = Convert.ToInt32(e.Context.Request.QueryString.GetValues(i)[0]);
 
                                 if (channel < 0 || channel > 2)
                                     throw new Exception("not within range of 0..2");
@@ -191,7 +191,7 @@ namespace BlinkStickClient.DataModel
                         pattern.Animations[0].DelaySetColor = 0;
                         pattern.Animations[0].Color = c;
 
-                        OnPatternSend((byte)ledStart, (byte)ledEnd, ledSettings, pattern);
+                        OnPatternSend(channel, (byte)ledStart, (byte)ledEnd, ledSettings, pattern);
                     }
                     catch (Exception ex)
                     {
