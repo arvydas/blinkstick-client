@@ -228,25 +228,25 @@ namespace BlinkStickClient.DataModel
             }
 
             int channel = 0;
-            int ledStart = 0;
-            int ledEnd = 0;
+            int firstLed = 0;
+            int lastLed = 0;
 
             if (evnt.Notification is DeviceNotification)
             {
                 channel = (evnt.Notification as DeviceNotification).GetValidChannel();
-                ledStart = (evnt.Notification as DeviceNotification).LedFirstIndex;
-                ledEnd = (evnt.Notification as DeviceNotification).LedLastIndex;
+                firstLed = (evnt.Notification as DeviceNotification).LedFirstIndex;
+                lastLed = (evnt.Notification as DeviceNotification).LedLastIndex;
             }
             else
             {
                 channel = evnt.Channel;
-                ledStart = evnt.LedFirst;
-                ledEnd = evnt.LedLast;
+                firstLed = evnt.FirstLed;
+                lastLed = evnt.LastLed;
             }
 
             lock (this)
             {
-                for (int i = ledStart; i <= ledEnd; i++)
+                for (int i = firstLed; i <= lastLed; i++)
                 {
                     LedFrame[channel][i * 3] = g;
                     LedFrame[channel][i * 3 + 1] = r;
@@ -499,7 +499,7 @@ namespace BlinkStickClient.DataModel
             }
             else
             {
-                for (int i = ev.LedFirst; i <= ev.LedLast; i++)
+                for (int i = ev.FirstLed; i <= ev.LastLed; i++)
                 {
                     if (LedBusy[ev.Channel][i])
                         return false;
@@ -522,7 +522,7 @@ namespace BlinkStickClient.DataModel
             }
             else
             {
-                for (int i = ev.LedFirst; i <= ev.LedLast; i++)
+                for (int i = ev.FirstLed; i <= ev.LastLed; i++)
                 {
                     LedBusy[ev.Channel][i] = busy;
                 }

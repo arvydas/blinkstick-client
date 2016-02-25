@@ -139,13 +139,13 @@ namespace BlinkStickClient.DataModel
         {
             RgbColor color = RgbColor.Black();
             int channel = 0;
-            int ledStart = 0;
-            int ledEnd = 0;
+            int firstLed = 0;
+            int lastLed = 0;
 
             for (int i = 0; i < e.Context.Request.QueryString.AllKeys.Length; i++)
             {
-                string key = e.Context.Request.QueryString.AllKeys[i];
-                string value = e.Context.Request.QueryString.GetValues(i)[0].ToLower();
+                string key = e.Context.Request.QueryString.AllKeys[i].ToLower();
+                string value = e.Context.Request.QueryString.GetValues(i)[0];
 
                 if (key == "channel")
                 {
@@ -164,12 +164,12 @@ namespace BlinkStickClient.DataModel
                         return;
                     }
                 }
-                else if (key == "ledstart")
+                else if (key == "firstled")
                 {
                     try
                     {
-                        ledStart = Convert.ToInt32(value);
-                        if (ledStart < 0 || ledStart > 63)
+                        firstLed = Convert.ToInt32(value);
+                        if (firstLed < 0 || firstLed > 63)
                             throw new Exception("not within range of 0..63");
                     }
                     catch (Exception ex)
@@ -181,12 +181,12 @@ namespace BlinkStickClient.DataModel
                         return;
                     }
                 }
-                else if (key == "ledend")
+                else if (key == "lastled")
                 {
                     try
                     {
-                        ledEnd = Convert.ToInt32(value);
-                        if (ledEnd < 0 || ledEnd > 63)
+                        lastLed = Convert.ToInt32(value);
+                        if (lastLed < 0 || lastLed > 63)
                             throw new Exception("not within range of 0..63");
                     }
                     catch (Exception ex)
@@ -229,7 +229,7 @@ namespace BlinkStickClient.DataModel
                 pattern.Animations[0].AnimationType = AnimationTypeEnum.SetColor;
                 pattern.Animations[0].DelaySetColor = 0;
                 pattern.Animations[0].Color = color;
-                OnPatternSend(channel, (byte)ledStart, (byte)ledEnd, ledSettings, pattern);
+                OnPatternSend(channel, (byte)firstLed, (byte)lastLed, ledSettings, pattern);
             }
             catch (Exception ex)
             {
@@ -269,7 +269,7 @@ namespace BlinkStickClient.DataModel
                         return;
                     }
                 }
-                else if (key == "ledstart")
+                else if (key == "firstled")
                 {
                     try
                     {
@@ -286,7 +286,7 @@ namespace BlinkStickClient.DataModel
                         return;
                     }
                 }
-                else if (key == "ledend")
+                else if (key == "lastled")
                 {
                     try
                     {
