@@ -66,7 +66,7 @@ namespace BlinkStickClient.DataModel
                     e.Handled = true;
                 }
 
-                Regex r = new Regex(@"^\/api\/v1\/color/([A-Za-z\-\.0-9]+)/([a-zA-z0-9]+)$");
+                Regex r = new Regex(@"^\/api\/v1\/color\/([A-Za-z\-\.0-9]+)\/([a-zA-z0-9]+)[\/]*$");
 
                 Match m = r.Match(e.Context.Request.Url.AbsolutePath);
 
