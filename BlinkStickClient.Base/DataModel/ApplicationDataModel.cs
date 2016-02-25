@@ -461,6 +461,20 @@ namespace BlinkStickClient.DataModel
         }
         #endregion
 
+        #region Pattern helpers
+        public Pattern FindPatternByName(String name)
+        {
+            foreach (Pattern p in this.Patterns)
+            {
+                if (p.Name == name)
+                {
+                    return p;
+                }
+            }
+
+            return null;
+        }
+        #endregion
         public Boolean CanAddNotification(NotificationRegistry.NotificationRegistryEntry entry)
         {
             foreach (CustomNotification notification in Notifications)

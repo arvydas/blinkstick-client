@@ -452,20 +452,26 @@ namespace BlinkStickClient.DataModel
                             Array.Copy(LedFrame[0], 0, frame, 0, frame.Length); 
                             Led.SetColors(0, frame);
 
+                            int sleep = Math.Max(2, (int)(this.LedsR * 3 * 8f / 400f * 1.2)); //number of LEDs times 3 color elements times 8 bytes divided by speed
+                            Thread.Sleep(sleep);
+
                             if (Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro)
                             {
                                 frame = new byte[this.LedsG * 3];
                                 Array.Copy(LedFrame[1], 0, frame, 0, frame.Length); 
                                 Led.SetColors(1, frame);
+                                sleep = Math.Max(2, (int)(this.LedsG * 3 * 8f / 400f * 1.2));
+                                Thread.Sleep(sleep);
 
                                 frame = new byte[this.LedsB * 3];
                                 Array.Copy(LedFrame[2], 0, frame, 0, frame.Length); 
                                 Led.SetColors(2, frame);
+
+                                sleep = Math.Max(2, (int)(this.LedsB * 3 * 8f / 400f * 1.2));
+                                Thread.Sleep(sleep);
                             }
                         }
                     }
-
-                    Thread.Sleep(40);
                 }
             }
             catch (Exception ex)
