@@ -400,9 +400,12 @@ namespace BlinkStickClient.DataModel
                         if (evnt.Animations[evnt.AnimationIndex].AnimationFinished)
                         {
                             evnt.AnimationIndex += 1;
+
                             if (evnt.AnimationIndex == evnt.Animations.Count)
                             {
-                                if (evnt.Repeat < 0)
+                                evnt.RepeatCount += 1;
+
+                                if (evnt.Repeat < 0 || evnt.RepeatCount < evnt.Repeat)
                                 {
                                     evnt.Started = DateTime.Now;
                                     evnt.AnimationIndex = 0;

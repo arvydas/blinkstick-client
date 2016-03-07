@@ -43,6 +43,9 @@ namespace BlinkStickClient.DataModel
         public int Repeat;
 
         [JsonIgnore]
+        public int RepeatCount;
+
+        [JsonIgnore]
         public BlinkStickDeviceSettings Device;
 
         public TriggeredEvent()
