@@ -181,6 +181,11 @@ namespace BlinkStickClient.DataModel
 
 			return this.Color;
 		}
+
+        public void Reset()
+        {
+            this.AnimationFinished = false;
+        }
     }
 
     public enum AnimationTypeEnum {

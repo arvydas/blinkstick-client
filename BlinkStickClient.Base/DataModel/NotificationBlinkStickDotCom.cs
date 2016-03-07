@@ -91,11 +91,10 @@ namespace BlinkStickClient.DataModel
             if (m.Success) {
                 if (m.Groups[1].Value == this.AccessCode)
                 {
-                    BlinkStickDeviceSettings settings = this.DataModel.FindBySerial(this.BlinkStickSerial);
-
                     int channel = this.LedChannel;
                     int ledStart = this.LedFirstIndex;
                     int ledEnd = this.LedLastIndex;
+                    int repeat = 1;
 
                     if (e.Data.ContainsKey("channel"))
                     {
@@ -151,19 +150,54 @@ namespace BlinkStickClient.DataModel
                         }
                     }
 
+                    if (e.Data.ContainsKey("repeat"))
+                    {
+                        if (e.Data["repeat"] == "loop")
+                        {
+                            repeat = -1;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                repeat = Convert.ToInt32((string)e.Data["repeat"]);
+                            }
+                            catch (Exception ex)
+                            {
+                                log.WarnFormat("Failed to convert repeat parameter {0}", ex);
+                            }
+                        }
+                    }
+
                     if (e.Data.ContainsKey ("status") && (String)e.Data ["status"] == "off") {
                         log.InfoFormat("Blinkstick device {0} turned off", this.Name);
 
-                        OnColorSend(channel, ledStart, ledEnd, 0, 0, 0, this.Device);
-                    } else if (e.Data.ContainsKey("color"))
+                        Pattern pattern = new Pattern();
+                        Animation animation = new Animation();
+                        pattern.Animations.Add(animation);
+                        animation.Color = RgbColor.Black();
+                        animation.DelaySetColor = 1;
+
+                        OnPatternSend(channel, ledStart, ledEnd, this.Device, pattern, 1);
+
+                        //OnColorSend(channel, ledStart, ledEnd, 0, 0, 0, this.Device);
+                    } 
+                    else if (e.Data.ContainsKey("color"))
                     {
                         String color = (String)e.Data ["color"];
 
                         log.InfoFormat ("New color received for Blinkstick device {0} - {1}", color, this.Name);
 
-                        RgbColor c = RgbColor.FromString (color);
+                        Pattern pattern = new Pattern();
+                        Animation animation = new Animation();
+                        pattern.Animations.Add(animation);
+                        animation.Color = RgbColor.FromString (color);
+                        animation.DelaySetColor = 1;
 
-                        OnColorSend(channel, ledStart, ledEnd, c.R, c.G, c.B, this.Device);
+                        OnPatternSend(channel, ledStart, ledEnd, this.Device, pattern, 1);
+
+                        //RgbColor c = RgbColor.FromString (color);
+                        //OnColorSend(channel, ledStart, ledEnd, c.R, c.G, c.B, this.Device);
                     }
                     else if (e.Data.ContainsKey("pattern"))
                     {
@@ -173,7 +207,7 @@ namespace BlinkStickClient.DataModel
 
                         if (pattern != null)
                         {
-                            OnPatternSend(channel, ledStart, ledEnd, settings, pattern);
+                            OnPatternSend(channel, ledStart, ledEnd, this.Device, pattern, repeat);
                         }
                         else
                         {

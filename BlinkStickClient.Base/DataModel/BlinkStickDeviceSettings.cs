@@ -211,35 +211,19 @@ namespace BlinkStickClient.DataModel
                 b = (byte)(BrightnessLimit / 100.0 * b);
             }
 
-            int channel = 0;
-            int firstLed = 0;
-            int lastLed = 0;
-
-            if (evnt.Notification is DeviceNotification)
-            {
-                channel = (evnt.Notification as DeviceNotification).GetValidChannel();
-                firstLed = (evnt.Notification as DeviceNotification).LedFirstIndex;
-                lastLed = (evnt.Notification as DeviceNotification).LedLastIndex;
-            }
-            else
-            {
-                channel = evnt.Channel;
-                firstLed = evnt.FirstLed;
-                lastLed = evnt.LastLed;
-            }
-
             lock (this)
             {
-                for (int i = firstLed; i <= lastLed; i++)
+                for (int i = evnt.FirstLed; i <= evnt.LastLed; i++)
                 {
-                    LedFrame[channel][i * 3] = g;
-                    LedFrame[channel][i * 3 + 1] = r;
-                    LedFrame[channel][i * 3 + 2] = b;
-                    OnSendColor((byte)channel, (byte)i, r, g, b);
+                    LedFrame[evnt.Channel][i * 3] = g;
+                    LedFrame[evnt.Channel][i * 3 + 1] = r;
+                    LedFrame[evnt.Channel][i * 3 + 2] = b;
+                    OnSendColor((byte)evnt.Channel, (byte)i, r, g, b);
                 }
 
                 NeedsLedUpdate = true;
             }
+
 
             if (!Running)
             {
@@ -339,6 +323,17 @@ namespace BlinkStickClient.DataModel
                         {
                             ev = EventQueue.Dequeue();
 
+                            for (int j = eventsPlaying.Count - 1; j >= 0; j--)
+                            {
+                                if (ev.Notification == eventsPlaying[j].Notification && eventsPlaying[j].Repeat < 0)
+                                {
+                                    log.DebugFormat("Removing infinite playback notifications as there is another pending");
+                                    TriggeredEvent evPlaying = eventsPlaying[j];
+                                    eventsPlaying.RemoveAt(j);
+                                    AssignBusyLeds(evPlaying, false);
+                                }
+                            }
+
                             if (CanPlayEvent(ev))
                             {
                                 break;
@@ -407,8 +402,18 @@ namespace BlinkStickClient.DataModel
                             evnt.AnimationIndex += 1;
                             if (evnt.AnimationIndex == evnt.Animations.Count)
                             {
-                                eventsPlaying.RemoveAt(ii);
-                                AssignBusyLeds(evnt, false);
+                                if (evnt.Repeat < 0)
+                                {
+                                    evnt.Started = DateTime.Now;
+                                    evnt.AnimationIndex = 0;
+
+                                    evnt.Animations.ForEach( delegate(Animation a) { a.Reset(); });
+                                }
+                                else
+                                {
+                                    eventsPlaying.RemoveAt(ii);
+                                    AssignBusyLeds(evnt, false);
+                                }
                             }
                             else
                             {

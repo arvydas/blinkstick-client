@@ -23,7 +23,10 @@ namespace BlinkStickClient.DataModel
             log.Info("Starting notification monitoring...");
             foreach (CustomNotification n in DataModel.Notifications)
             {
-                n.Triggered += NotificationTriggered;
+                if (n is PatternNotification)
+                {
+                    (n as PatternNotification).Triggered += NotificationTriggered;
+                }
                 n.ColorSend += NotificationColor;
                 n.PatternSend += NotificationPattern;
             }
@@ -75,7 +78,10 @@ namespace BlinkStickClient.DataModel
             log.Info("Stopping monitor...");
             foreach (CustomNotification n in DataModel.Notifications)
             {
-                n.Triggered -= NotificationTriggered;
+                if (n is PatternNotification)
+                {
+                    (n as PatternNotification).Triggered -= NotificationTriggered;
+                }
             }
 
             DataModel.Notifications.CollectionChanged -= NotificationListChanged;
@@ -104,7 +110,11 @@ namespace BlinkStickClient.DataModel
             {
                 foreach (CustomNotification n in e.NewItems)
                 {
-                    n.Triggered += NotificationTriggered;
+                    if (n is PatternNotification)
+                    {
+                        (n as PatternNotification).Triggered += NotificationTriggered;
+                    }
+
                     n.ColorSend += NotificationColor;
                     n.PatternSend += NotificationPattern;
                     n.DataModel = DataModel;
@@ -119,7 +129,11 @@ namespace BlinkStickClient.DataModel
             {
                 foreach (CustomNotification n in e.OldItems)
                 {
-                    n.Triggered -= NotificationTriggered;
+                    if (n is PatternNotification)
+                    {
+                        (n as PatternNotification).Triggered -= NotificationTriggered;
+                    }
+
                     n.ColorSend -= NotificationColor;
                     n.PatternSend -= NotificationPattern;
                     n.DataModel = null;;
@@ -155,7 +169,7 @@ namespace BlinkStickClient.DataModel
         {
             Boolean found = false;
 
-            TriggeredEvent ev = new TriggeredEvent(sender as CustomNotification, e.Channel, e.FirstLed, e.LastLed, e.Device, e.Pattern);
+            TriggeredEvent ev = new TriggeredEvent(sender as CustomNotification, e.Channel, e.FirstLed, e.LastLed, e.Device, e.Pattern, e.Repeat);
 
             lock (e.Device.EventQueue)
             {

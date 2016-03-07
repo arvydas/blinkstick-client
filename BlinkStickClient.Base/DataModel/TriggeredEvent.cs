@@ -40,21 +40,31 @@ namespace BlinkStickClient.DataModel
         public int Channel;
 
         [JsonIgnore]
+        public int Repeat;
+
+        [JsonIgnore]
         public BlinkStickDeviceSettings Device;
 
         public TriggeredEvent()
         {
         }
 
-        public TriggeredEvent(CustomNotification notification, String message)
+        public TriggeredEvent(PatternNotification notification, String message)
         {
             this.TimeStamp = DateTime.Now;
             this.Notification = notification;
-            this.NotificationSnapshot = notification.Copy();
+            this.NotificationSnapshot = ((CustomNotification)notification).Copy();
             this.Message = message;
+
+            this.FirstLed = notification.LedFirstIndex;
+            this.LastLed = notification.LedLastIndex;
+            this.Device = notification.Device;
+            this.Pattern = notification.Pattern;
+            this.Repeat = 1;
         }
 
-        public TriggeredEvent(CustomNotification notification, int channel, int firstLed, int lastLed, BlinkStickDeviceSettings device, Pattern pattern)
+        public TriggeredEvent(CustomNotification notification, int channel, int firstLed, int lastLed, 
+            BlinkStickDeviceSettings device, Pattern pattern, int repeat)
         {
             this.Channel = channel;
             this.TimeStamp = DateTime.Now;
@@ -64,6 +74,7 @@ namespace BlinkStickClient.DataModel
             this.LastLed = lastLed;
             this.Device = device;
             this.Pattern = pattern;
+            this.Repeat = repeat;
         }
     }
 }

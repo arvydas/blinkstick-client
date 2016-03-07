@@ -23,16 +23,6 @@ namespace BlinkStickClient.DataModel
         }
 
         #region Events
-        public event EventHandler<TriggeredEventArgs> Triggered;
-
-        protected void OnTriggered(String message = "")
-        {
-            if (Triggered != null)
-            {
-                Triggered(this, new TriggeredEventArgs(message));
-            }
-        }
-
         public event EventHandler<ColorSendEventArgs> ColorSend;
 
         protected void OnColorSend(int channel, int firstLed, int lastLed, byte r, byte g, byte b, BlinkStickDeviceSettings settings)
@@ -45,11 +35,11 @@ namespace BlinkStickClient.DataModel
 
         public event EventHandler<PatternSendEventArgs> PatternSend;
 
-        protected void OnPatternSend(int channel, int firstLed, int lastLed, BlinkStickDeviceSettings device, Pattern pattern)
+        protected void OnPatternSend(int channel, int firstLed, int lastLed, BlinkStickDeviceSettings device, Pattern pattern, int repeat)
         {
             if (PatternSend != null)
             {
-                PatternSend(this, new PatternSendEventArgs(channel, firstLed, lastLed, device, pattern));
+                PatternSend(this, new PatternSendEventArgs(channel, firstLed, lastLed, device, pattern, repeat));
             }
         }
         #endregion
@@ -168,14 +158,16 @@ namespace BlinkStickClient.DataModel
         public int LastLed;
         public BlinkStickDeviceSettings Device;
         public Pattern Pattern;
+        public int Repeat;
 
-        public PatternSendEventArgs(int channel, int firstLed, int lastLed, BlinkStickDeviceSettings device, Pattern pattern)
+        public PatternSendEventArgs(int channel, int firstLed, int lastLed, BlinkStickDeviceSettings device, Pattern pattern, int repeat)
         {
             this.Channel = channel;
             this.FirstLed = firstLed;
             this.LastLed = lastLed;
             this.Device = device;
             this.Pattern = pattern;
+            this.Repeat = repeat;
         }
     }
 }

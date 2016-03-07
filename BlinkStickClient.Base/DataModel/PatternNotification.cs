@@ -5,6 +5,18 @@ namespace BlinkStickClient.DataModel
 {
     public abstract class PatternNotification : DeviceNotification
     {
+        #region Events
+        public event EventHandler<TriggeredEventArgs> Triggered;
+
+        protected void OnTriggered(String message = "")
+        {
+            if (Triggered != null)
+            {
+                Triggered(this, new TriggeredEventArgs(message));
+            }
+        }
+        #endregion
+
         public Pattern Pattern { get; set; }
 
         public Byte LedIndex { get; set; }
