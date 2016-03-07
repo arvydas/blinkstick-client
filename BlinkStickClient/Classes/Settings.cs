@@ -17,6 +17,8 @@ namespace BlinkStickClient.Classes
 
         public Boolean StartWithWindows = true;
 
+        public Boolean ExitTurnOffAllBlinkSticks = true;
+
         private String FileName;
         private String BackupFileName;
 
@@ -101,6 +103,7 @@ namespace BlinkStickClient.Classes
             this.Theme = settings.Theme;
             this.LogLevel = settings.LogLevel;
             this.StartWithWindows = settings.StartWithWindows;
+            this.ExitTurnOffAllBlinkSticks = settings.ExitTurnOffAllBlinkSticks;
         }
         #endregion
 

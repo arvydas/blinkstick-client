@@ -40,7 +40,13 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Label GtkLabel2;
 		
-		private global::Gtk.Alignment alignment1;
+		private global::Gtk.Frame frame4;
+		
+		private global::Gtk.Alignment GtkAlignment3;
+		
+		private global::Gtk.CheckButton checkbuttonTurnOff;
+		
+		private global::Gtk.Label GtkLabel5;
 		
 		private global::Gtk.Label labelRestartWarning;
 
@@ -186,11 +192,32 @@ namespace BlinkStickClient
 			w14.Expand = false;
 			w14.Fill = false;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.alignment1 = new global::Gtk.Alignment (0.5F, 0.5F, 1F, 1F);
-			this.alignment1.Name = "alignment1";
-			this.vbox2.Add (this.alignment1);
-			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.alignment1]));
-			w15.Position = 3;
+			this.frame4 = new global::Gtk.Frame ();
+			this.frame4.Name = "frame4";
+			this.frame4.ShadowType = ((global::Gtk.ShadowType)(0));
+			// Container child frame4.Gtk.Container+ContainerChild
+			this.GtkAlignment3 = new global::Gtk.Alignment (0F, 0F, 1F, 1F);
+			this.GtkAlignment3.Name = "GtkAlignment3";
+			this.GtkAlignment3.LeftPadding = ((uint)(12));
+			// Container child GtkAlignment3.Gtk.Container+ContainerChild
+			this.checkbuttonTurnOff = new global::Gtk.CheckButton ();
+			this.checkbuttonTurnOff.CanFocus = true;
+			this.checkbuttonTurnOff.Name = "checkbuttonTurnOff";
+			this.checkbuttonTurnOff.Label = global::Mono.Unix.Catalog.GetString ("Turn off all BlinkSticks when exiting application");
+			this.checkbuttonTurnOff.DrawIndicator = true;
+			this.checkbuttonTurnOff.UseUnderline = true;
+			this.GtkAlignment3.Add (this.checkbuttonTurnOff);
+			this.frame4.Add (this.GtkAlignment3);
+			this.GtkLabel5 = new global::Gtk.Label ();
+			this.GtkLabel5.Name = "GtkLabel5";
+			this.GtkLabel5.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>Devices</b>");
+			this.GtkLabel5.UseMarkup = true;
+			this.frame4.LabelWidget = this.GtkLabel5;
+			this.vbox2.Add (this.frame4);
+			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.frame4]));
+			w17.Position = 3;
+			w17.Expand = false;
+			w17.Fill = false;
 			// Container child vbox2.Gtk.Box+BoxChild
 			this.labelRestartWarning = new global::Gtk.Label ();
 			this.labelRestartWarning.Name = "labelRestartWarning";
@@ -198,10 +225,10 @@ namespace BlinkStickClient
 			"/span>");
 			this.labelRestartWarning.UseMarkup = true;
 			this.vbox2.Add (this.labelRestartWarning);
-			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.labelRestartWarning]));
-			w16.Position = 4;
-			w16.Expand = false;
-			w16.Fill = false;
+			global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.labelRestartWarning]));
+			w18.Position = 5;
+			w18.Expand = false;
+			w18.Fill = false;
 			this.Add (this.vbox2);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
@@ -212,6 +239,7 @@ namespace BlinkStickClient
 			this.comboboxTheme.Changed += new global::System.EventHandler (this.OnComboboxThemeChanged);
 			this.comboboxLogging.Changed += new global::System.EventHandler (this.OnComboboxLoggingChanged);
 			this.buttonOpenLogFolder.Clicked += new global::System.EventHandler (this.OnButtonOpenLogFolderClicked);
+			this.checkbuttonTurnOff.Toggled += new global::System.EventHandler (this.OnCheckbuttonTurnOffToggled);
 		}
 	}
 }

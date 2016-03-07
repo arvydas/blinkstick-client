@@ -468,6 +468,16 @@ public partial class MainWindow: Gtk.Window
 		if (ApplicationIsClosing) {
 			DestroyEnvironment();
 
+            if (ApplicationSettings.ExitTurnOffAllBlinkSticks)
+            {
+                this.DataModel.Devices.ForEach(delegate(BlinkStickDeviceSettings device) { 
+                    if (device.Led != null && device.Led.Connected)
+                    {
+                        device.TurnOff(); 
+                    }
+                });
+            }
+
 			Application.Quit ();
 		}
 

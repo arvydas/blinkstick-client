@@ -52,6 +52,8 @@ namespace BlinkStickClient
                 comboboxLogging.Active = 0;
             }
 
+            checkbuttonTurnOff.Active = ApplicationSettings.ExitTurnOffAllBlinkSticks;
+
             IgnoreControlChanges = false;
         }
 
@@ -110,6 +112,15 @@ namespace BlinkStickClient
 
             ApplicationSettings.StartWithWindows = (sender as Gtk.CheckButton).Active;
             MainWindow.RegisterStartup(ApplicationSettings.StartWithWindows);
+            ApplicationSettings.Save();
+        }
+
+        protected void OnCheckbuttonTurnOffToggled(object sender, EventArgs e)
+        {
+            if (IgnoreControlChanges)
+                return;
+
+            ApplicationSettings.ExitTurnOffAllBlinkSticks = checkbuttonTurnOff.Active;
             ApplicationSettings.Save();
         }
     }

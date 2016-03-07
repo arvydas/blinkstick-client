@@ -2145,6 +2145,7 @@ by Agile Innovative Ltd.</property>
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Label" translatable="yes">Inverse</property>
+                <property name="Active">True</property>
                 <property name="DrawIndicator">True</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>
@@ -5242,7 +5243,7 @@ Search is case insensitive.
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="BlinkStickClient.SettingsWidget" design-size="408 350">
+  <widget class="Gtk.Bin" id="BlinkStickClient.SettingsWidget" design-size="408 358">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -5477,16 +5478,48 @@ Full</property>
           </packing>
         </child>
         <child>
-          <widget class="Gtk.Alignment" id="alignment1">
+          <widget class="Gtk.Frame" id="frame4">
             <property name="MemberName" />
+            <property name="ShadowType">None</property>
             <child>
-              <placeholder />
+              <widget class="Gtk.Alignment" id="GtkAlignment3">
+                <property name="MemberName" />
+                <property name="Xalign">0</property>
+                <property name="Yalign">0</property>
+                <property name="LeftPadding">12</property>
+                <child>
+                  <widget class="Gtk.CheckButton" id="checkbuttonTurnOff">
+                    <property name="MemberName" />
+                    <property name="CanFocus">True</property>
+                    <property name="Label" translatable="yes">Turn off all BlinkSticks when exiting application</property>
+                    <property name="DrawIndicator">True</property>
+                    <property name="HasLabel">True</property>
+                    <property name="UseUnderline">True</property>
+                    <signal name="Toggled" handler="OnCheckbuttonTurnOffToggled" />
+                  </widget>
+                </child>
+              </widget>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="GtkLabel5">
+                <property name="MemberName" />
+                <property name="LabelProp" translatable="yes">&lt;b&gt;Devices&lt;/b&gt;</property>
+                <property name="UseMarkup">True</property>
+              </widget>
+              <packing>
+                <property name="type">label_item</property>
+              </packing>
             </child>
           </widget>
           <packing>
             <property name="Position">3</property>
-            <property name="AutoSize">False</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
           </packing>
+        </child>
+        <child>
+          <placeholder />
         </child>
         <child>
           <widget class="Gtk.Label" id="labelRestartWarning">
@@ -5496,7 +5529,7 @@ Full</property>
             <property name="UseMarkup">True</property>
           </widget>
           <packing>
-            <property name="Position">4</property>
+            <property name="Position">5</property>
             <property name="AutoSize">True</property>
             <property name="Expand">False</property>
             <property name="Fill">False</property>
