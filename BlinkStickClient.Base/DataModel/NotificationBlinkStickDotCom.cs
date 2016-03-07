@@ -91,21 +91,95 @@ namespace BlinkStickClient.DataModel
             if (m.Success) {
                 if (m.Groups[1].Value == this.AccessCode)
                 {
-                    if (e.Data.ContainsKey ("status")) {
-                        if ((String)e.Data ["status"] == "off") {
-                            log.InfoFormat("Blinkstick device {0} turned off", this.Name);
-                            OnColorSend(0, 0, 0);
-                            return;
+                    BlinkStickDeviceSettings settings = this.DataModel.FindBySerial(this.BlinkStickSerial);
+
+                    int channel = this.LedChannel;
+                    int ledStart = this.LedFirstIndex;
+                    int ledEnd = this.LedLastIndex;
+
+                    if (e.Data.ContainsKey("channel"))
+                    {
+                        try
+                        {
+                            channel = Convert.ToInt32((string)e.Data["channel"]);
+                        }
+                        catch (Exception ex)
+                        {
+                            log.WarnFormat("Failed to convert channel parameter {0}", ex);
+                        }
+
+                        if (channel < 0 || channel > 2)
+                        {
+                            log.Warn("Invalid channel parameter, defaulting to 0");
+                            channel = 0;
                         }
                     }
 
-                    // Handle the message
-                    String color = (String)e.Data ["color"];
+                    if (e.Data.ContainsKey("firstLed"))
+                    {
+                        try
+                        {
+                            ledStart = Convert.ToInt32((string)e.Data["firstLed"]);
+                        }
+                        catch (Exception ex)
+                        {
+                            log.WarnFormat("Failed to convert firstLed parameter {0}", ex);
+                        }
 
-                    log.InfoFormat ("New color received for Blinkstick device {0} - {1}", color, this.Name);
-                    RgbColor c = RgbColor.FromString (color);
+                        if (ledStart < 0 || ledStart > 63)
+                        {
+                            log.Warn("Invalid firstLed parameter, defaulting to 0");
+                            ledStart = 0;
+                        }
+                    }
 
-                    OnColorSend(c.R, c.G, c.B);
+                    if (e.Data.ContainsKey("lastLed"))
+                    {
+                        try
+                        {
+                            ledEnd = Convert.ToInt32((string)e.Data["lastLed"]);
+                        }
+                        catch (Exception ex)
+                        {
+                            log.WarnFormat("Failed to convert lastLed parameter {0}", ex);
+                        }
+
+                        if (ledEnd < 0 || ledEnd > 63)
+                        {
+                            log.Warn("Invalid lastLed parameter, defaulting to 0");
+                            ledEnd = 0;
+                        }
+                    }
+
+                    if (e.Data.ContainsKey ("status") && (String)e.Data ["status"] == "off") {
+                        log.InfoFormat("Blinkstick device {0} turned off", this.Name);
+
+                        OnColorSend(channel, ledStart, ledEnd, 0, 0, 0, this.Device);
+                    } else if (e.Data.ContainsKey("color"))
+                    {
+                        String color = (String)e.Data ["color"];
+
+                        log.InfoFormat ("New color received for Blinkstick device {0} - {1}", color, this.Name);
+
+                        RgbColor c = RgbColor.FromString (color);
+
+                        OnColorSend(channel, ledStart, ledEnd, c.R, c.G, c.B, this.Device);
+                    }
+                    else if (e.Data.ContainsKey("pattern"))
+                    {
+                        String patternName = (String)e.Data ["pattern"];
+
+                        Pattern pattern = this.DataModel.FindPatternByName(patternName);
+
+                        if (pattern != null)
+                        {
+                            OnPatternSend(channel, ledStart, ledEnd, settings, pattern);
+                        }
+                        else
+                        {
+                            log.ErrorFormat ("Pattern request received for Blinkstick device {0} - {1}, but pattern not found", patternName, this.Name);
+                        }
+                    }
                 }
             }
         }
