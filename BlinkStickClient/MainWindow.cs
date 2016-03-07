@@ -324,6 +324,12 @@ public partial class MainWindow: Gtk.Window
             typeof(DiskSpaceEditorWidget),
             Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.notifications.notification-hdd.png"));
 
+        NotificationRegistry.Register("Hardware", 
+            "Activate pattern when keyboard key combination is pressed", 
+            typeof(NotificationKeyboard), 
+            typeof(KeyboardEditorWidget),
+            Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.notifications.notification-key.png"));
+
         NotificationRegistry.Register("Services", 
             "Creates a remote control server accessible via HTTP.", 
             typeof(NotificationRemoteControl), 

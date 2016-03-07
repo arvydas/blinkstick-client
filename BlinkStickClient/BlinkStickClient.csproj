@@ -114,6 +114,7 @@
     <EmbeddedResource Include="Resources\notifications\group-email.png" />
     <EmbeddedResource Include="Resources\blinkstick-nano.png" />
     <EmbeddedResource Include="Resources\blinkstick-flex.png" />
+    <EmbeddedResource Include="Resources\notifications\notification-key.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -189,6 +190,8 @@
     <Compile Include="gtk-gui\BlinkStickClient.SettingsWidget.cs" />
     <Compile Include="Classes\Logger.cs" />
     <Compile Include="Classes\StartupManager.cs" />
+    <Compile Include="Editors\KeyboardEditorWidget.cs" />
+    <Compile Include="gtk-gui\BlinkStickClient.KeyboardEditorWidget.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
