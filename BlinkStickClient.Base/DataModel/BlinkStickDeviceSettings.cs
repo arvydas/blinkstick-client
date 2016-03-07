@@ -173,7 +173,7 @@ namespace BlinkStickClient.DataModel
             OnSendColor(channel, index, r, g, b);
         }
 
-        public void SetColor(DeviceNotification notification, byte r, byte g, byte b)
+        public void SetColor(int channel, int firstLed, int lastLed, byte r, byte g, byte b)
         {
             if (BrightnessLimit < 100 && BrightnessLimit >= 0)
             {
@@ -184,28 +184,12 @@ namespace BlinkStickClient.DataModel
 
             lock (this)
             {
-                if (notification == null)
+                for (int i = firstLed; i <= lastLed; i++)
                 {
-                    int channel = 0;
-                    for (int i = 0; i < this.LedsR; i++)
-                    {
-                        LedFrame[channel][i * 3] = g;
-                        LedFrame[channel][i * 3 + 1] = r;
-                        LedFrame[channel][i * 3 + 2] = b;
-                        OnSendColor((byte)channel, (byte)i, r, g, b);
-                    }
-                }
-                else
-                {
-                    int channel = notification.GetValidChannel();
-                    //TODO: Copy first and last indexes to event
-                    for (int i = notification.LedFirstIndex; i <= notification.LedLastIndex; i++)
-                    {
-                        LedFrame[channel][i * 3] = g;
-                        LedFrame[channel][i * 3 + 1] = r;
-                        LedFrame[channel][i * 3 + 2] = b;
-                        OnSendColor((byte)channel, (byte)i, r, g, b);
-                    }
+                    LedFrame[channel][i * 3] = g;
+                    LedFrame[channel][i * 3 + 1] = r;
+                    LedFrame[channel][i * 3 + 2] = b;
+                    OnSendColor((byte)channel, (byte)i, r, g, b);
                 }
 
                 NeedsLedUpdate = true;

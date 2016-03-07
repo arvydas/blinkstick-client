@@ -123,7 +123,7 @@ namespace BlinkStickClient.DataModel
                     n.ColorSend -= NotificationColor;
                     n.PatternSend -= NotificationPattern;
                     n.DataModel = null;;
-
+    
                     if (n.RequiresMonitoring() && n.Enabled)
                     {
                         n.Stop();
@@ -134,33 +134,21 @@ namespace BlinkStickClient.DataModel
 
         void NotificationColor (object sender, ColorSendEventArgs e)
         {
-            DeviceNotification notification = sender as DeviceNotification;
+            CustomNotification notification = sender as CustomNotification;
 
-            BlinkStickDeviceSettings settings = null;
-
-            if (notification == null)
+            if (e.Device == null)
             {
-                settings = e.Device;
-            }
-            else
-            {
-                settings = DataModel.FindBySerial(notification.BlinkStickSerial);
-            }
-
-
-            if (settings == null)
-            {
-                log.WarnFormat("({0}) BlinkStick with serial {1} not known", notification.Name, notification.BlinkStickSerial);
+                log.WarnFormat("({0}) Device for notification not found", notification.Name);
                 return;
             }
 
-            if (settings.Led == null)
+            if (e.Device.Led == null)
             {
-                log.WarnFormat("({0}) BlinkStick with serial {1} is not connected", notification.Name, notification.BlinkStickSerial);
+                log.WarnFormat("({0}) BlinkStick is not connected", notification.Name);
                 return;
             }
 
-            settings.SetColor(notification, e.R, e.G, e.B);
+            e.Device.SetColor(e.Channel, e.FirstLed, e.LastLed, e.R, e.G, e.B);
         }
 
         void NotificationPattern (object sender, PatternSendEventArgs e)

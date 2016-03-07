@@ -1,14 +1,45 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace BlinkStickClient.DataModel
 {
     public abstract class DeviceNotification : CustomNotification
     {
-        public String BlinkStickSerial { get; set; }
+        private String _BlinkStickSerial;
+        public String BlinkStickSerial { 
+            get
+            {
+                return _BlinkStickSerial;
+            }
+            set
+            {
+                if (_BlinkStickSerial != value)
+                {
+                    _BlinkStickSerial = value;
+                    _Device = null;
+                }
+            }
+        }
 
         public int LedFirstIndex { get; set; }
         public int LedLastIndex { get; set; }
         public int LedChannel { get; set; }
+
+        private BlinkStickDeviceSettings _Device;
+
+        [JsonIgnore]
+        public BlinkStickDeviceSettings Device 
+        {
+            get 
+            {
+                if (_Device == null)
+                {
+                    _Device = DataModel.FindBySerial(this.BlinkStickSerial);
+                }
+
+                return _Device;
+            }
+        }
 
         public DeviceNotification()
         {
@@ -35,6 +66,11 @@ namespace BlinkStickClient.DataModel
         public int GetValidChannel()
         {
             return this.LedChannel >= 0 && this.LedChannel <= 2 ? this.LedChannel : 0;
+        }
+
+        public void OnColorSend(int r, int g, int b)
+        {
+            OnColorSend(this.LedChannel, this.LedFirstIndex, this.LedLastIndex, (byte)r, (byte)g, (byte)b, this.Device);
         }
     }
 }

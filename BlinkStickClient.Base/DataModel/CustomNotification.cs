@@ -35,11 +35,11 @@ namespace BlinkStickClient.DataModel
 
         public event EventHandler<ColorSendEventArgs> ColorSend;
 
-        protected void OnColorSend(byte r, byte g, byte b, BlinkStickDeviceSettings settings = null)
+        protected void OnColorSend(int channel, int firstLed, int lastLed, byte r, byte g, byte b, BlinkStickDeviceSettings settings)
         {
             if (ColorSend != null)
             {
-                ColorSend(this, new ColorSendEventArgs(r, g, b, settings));
+                ColorSend(this, new ColorSendEventArgs(channel, firstLed, lastLed, r, g, b, settings));
             }
         }
 
@@ -144,13 +144,19 @@ namespace BlinkStickClient.DataModel
         public byte R;
         public byte G;
         public byte B;
+        public int Channel;
+        public int FirstLed;
+        public int LastLed;
         public BlinkStickDeviceSettings Device;
 
-        public ColorSendEventArgs(byte r, byte g, byte b, BlinkStickDeviceSettings device)
+        public ColorSendEventArgs(int channel, int firstLed, int lastLed, byte r, byte g, byte b, BlinkStickDeviceSettings device)
         {
             this.R = r;
             this.G = g;
             this.B = b;
+            this.Channel = channel;
+            this.FirstLed = firstLed;
+            this.LastLed = lastLed;
             this.Device = device;
         }
     }
