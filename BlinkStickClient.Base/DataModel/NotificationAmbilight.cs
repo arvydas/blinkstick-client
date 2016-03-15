@@ -75,6 +75,7 @@ namespace BlinkStickClient.DataModel
             BackgroundWorker worker = (BackgroundWorker)sender;
 
             Byte[] bytes = new Byte[BufferSize];
+            Byte[] previousBytes = new Byte[BufferSize];
             char[] chars = new char[BufferSize];
             int numBytes = 0;
             try
@@ -92,13 +93,29 @@ namespace BlinkStickClient.DataModel
                     do
                     {
                         numBytes = pipeServer.Read(bytes, 0, BufferSize);
+
                         if (numBytes > 0)
                         {
-                            OnColorSend(bytes[0], bytes[1], bytes[2]);
+                            Boolean send = false;
+
+                            for (int i = 0; i < BufferSize; i++)
+                            {
+                                if (previousBytes[i] != bytes[i])
+                                {
+                                    previousBytes[i] = bytes[i];
+                                    send = true;
+                                }
+                            }
+
+                            if (send)
+                            {
+                                OnColorSend(bytes[0], bytes[1], bytes[2]);
+                            }
                         }
                     } 
                     while (numBytes > 0 && !pipeServer.IsMessageComplete && pipeServer.IsConnected && !worker.CancellationPending);
 
+                    Thread.Sleep(1);
                 } 
                 while (numBytes != 0 && !worker.CancellationPending);
 
