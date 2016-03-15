@@ -69,8 +69,14 @@ namespace BlinkStickClient.DataModel
         private byte[][] LedFrame = new byte[3][];
         private Boolean NeedsLedUpdate = false;
 
-        public BlinkStickDeviceSettings()
+        public BlinkStickDeviceSettings() : this(null)
         {
+        }
+
+        public BlinkStickDeviceSettings(BlinkStick led)
+        {
+            this.Led = led;
+
             this.Touched = true;
             this.BrightnessLimit = 100;
             this.Running = false;
@@ -82,14 +88,6 @@ namespace BlinkStickClient.DataModel
             this.LedBusy[0] = new Boolean[64];
             this.LedBusy[1] = new Boolean[64];
             this.LedBusy[2] = new Boolean[64];
-        }
-
-        public BlinkStickDeviceSettings(BlinkStick led)
-        {
-            this.Led = led;
-            this.Touched = true;
-            this.Running = false;
-            this.BrightnessLimit = 100;
         }
 
         private void ApplyProperties()
