@@ -16,7 +16,10 @@ namespace BlinkStickClient.DataModel
         public String LastDisplay;
 
         [JsonIgnore]
-        public DateTime? Started;
+        public DateTime? EventStarted;
+
+        [JsonIgnore]
+        public DateTime? AnimationStarted;
 
         [JsonIgnore]
         public int AnimationIndex;
@@ -46,6 +49,9 @@ namespace BlinkStickClient.DataModel
         public int RepeatCount;
 
         [JsonIgnore]
+        public int Duration;
+
+        [JsonIgnore]
         public BlinkStickDeviceSettings Device;
 
         public TriggeredEvent()
@@ -64,10 +70,11 @@ namespace BlinkStickClient.DataModel
             this.Device = notification.Device;
             this.Pattern = notification.Pattern;
             this.Repeat = 1;
+            this.Duration = 0;
         }
 
         public TriggeredEvent(CustomNotification notification, int channel, int firstLed, int lastLed, 
-            BlinkStickDeviceSettings device, Pattern pattern, int repeat)
+            BlinkStickDeviceSettings device, Pattern pattern, int repeat, int duration)
         {
             this.Channel = channel;
             this.TimeStamp = DateTime.Now;
@@ -78,6 +85,7 @@ namespace BlinkStickClient.DataModel
             this.Device = device;
             this.Pattern = pattern;
             this.Repeat = repeat;
+            this.Duration = duration;
         }
     }
 }

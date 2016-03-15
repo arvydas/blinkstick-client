@@ -169,7 +169,7 @@ namespace BlinkStickClient.DataModel
         {
             Boolean found = false;
 
-            TriggeredEvent ev = new TriggeredEvent(sender as CustomNotification, e.Channel, e.FirstLed, e.LastLed, e.Device, e.Pattern, e.Repeat);
+            TriggeredEvent ev = new TriggeredEvent(sender as CustomNotification, e.Channel, e.FirstLed, e.LastLed, e.Device, e.Pattern, e.Repeat, e.Duration);
 
             lock (e.Device.EventQueue)
             {

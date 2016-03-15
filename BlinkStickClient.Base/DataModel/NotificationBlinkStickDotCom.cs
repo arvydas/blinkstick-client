@@ -95,6 +95,7 @@ namespace BlinkStickClient.DataModel
                     int ledStart = this.LedFirstIndex;
                     int ledEnd = this.LedLastIndex;
                     int repeat = 1;
+                    int duration = 0;
 
                     if (e.Data.ContainsKey("channel"))
                     {
@@ -169,6 +170,19 @@ namespace BlinkStickClient.DataModel
                         }
                     }
 
+                    if (e.Data.ContainsKey("duration"))
+                    {
+                        try
+                        {
+                            duration = Convert.ToInt32((string)e.Data["duration"]);
+                        }
+                        catch (Exception ex)
+                        {
+                            log.WarnFormat("Failed to convert duration parameter {0}", ex);
+                        }
+                    }
+
+
                     if (e.Data.ContainsKey ("status") && (String)e.Data ["status"] == "off") {
                         log.InfoFormat("Blinkstick device {0} turned off", this.Name);
 
@@ -178,7 +192,7 @@ namespace BlinkStickClient.DataModel
                         animation.Color = RgbColor.Black();
                         animation.DelaySetColor = 1;
 
-                        OnPatternSend(channel, ledStart, ledEnd, this.Device, pattern, 1);
+                        OnPatternSend(channel, ledStart, ledEnd, this.Device, pattern, 1, 0);
 
                         //OnColorSend(channel, ledStart, ledEnd, 0, 0, 0, this.Device);
                     } 
@@ -194,7 +208,7 @@ namespace BlinkStickClient.DataModel
                         animation.Color = RgbColor.FromString (color);
                         animation.DelaySetColor = 1;
 
-                        OnPatternSend(channel, ledStart, ledEnd, this.Device, pattern, 1);
+                        OnPatternSend(channel, ledStart, ledEnd, this.Device, pattern, 1, 0);
 
                         //RgbColor c = RgbColor.FromString (color);
                         //OnColorSend(channel, ledStart, ledEnd, c.R, c.G, c.B, this.Device);
@@ -207,7 +221,7 @@ namespace BlinkStickClient.DataModel
 
                         if (pattern != null)
                         {
-                            OnPatternSend(channel, ledStart, ledEnd, this.Device, pattern, repeat);
+                            OnPatternSend(channel, ledStart, ledEnd, this.Device, pattern, repeat, duration);
                         }
                         else
                         {

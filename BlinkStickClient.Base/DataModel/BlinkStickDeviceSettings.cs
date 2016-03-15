@@ -323,7 +323,7 @@ namespace BlinkStickClient.DataModel
 
                             for (int j = eventsPlaying.Count - 1; j >= 0; j--)
                             {
-                                if (ev.Notification == eventsPlaying[j].Notification && eventsPlaying[j].Repeat < 0)
+                                if (ev.Notification == eventsPlaying[j].Notification && (eventsPlaying[j].Repeat < 0 || eventsPlaying[j].Duration > 0))
                                 {
                                     log.DebugFormat("Removing infinite playback notifications as there is another pending");
                                     TriggeredEvent evPlaying = eventsPlaying[j];
@@ -348,7 +348,8 @@ namespace BlinkStickClient.DataModel
                     {
                         if (ev.NotificationSnapshot is PatternNotification)
                         {
-                            ev.Started = DateTime.Now;
+                            ev.EventStarted = DateTime.Now;
+                            ev.AnimationStarted = DateTime.Now;
 
                             PatternNotification notification = ev.NotificationSnapshot as PatternNotification;
                             foreach (Animation animation in notification.Pattern.Animations)
@@ -365,7 +366,8 @@ namespace BlinkStickClient.DataModel
                         }
                         else
                         {
-                            ev.Started = DateTime.Now;
+                            ev.AnimationStarted = DateTime.Now;
+                            ev.EventStarted = DateTime.Now;
 
                             foreach (Animation animation in ev.Pattern.Animations)
                             {
@@ -386,7 +388,7 @@ namespace BlinkStickClient.DataModel
                     {
                         TriggeredEvent evnt = eventsPlaying[ii];
 
-                        RgbColor color = evnt.Animations[evnt.AnimationIndex].GetColor(evnt.Started.Value, DateTime.Now, evnt.Animations[evnt.AnimationIndex].ReferenceColor);
+                        RgbColor color = evnt.Animations[evnt.AnimationIndex].GetColor(evnt.AnimationStarted.Value, DateTime.Now, evnt.Animations[evnt.AnimationIndex].ReferenceColor);
 
                         PatternNotification notification = evnt.NotificationSnapshot as PatternNotification;
 
@@ -399,13 +401,18 @@ namespace BlinkStickClient.DataModel
                         {
                             evnt.AnimationIndex += 1;
 
-                            if (evnt.AnimationIndex == evnt.Animations.Count)
+                            if (evnt.Duration > 0 && evnt.EventStarted.Value.AddMilliseconds(evnt.Duration) <= DateTime.Now)
+                            {
+                                eventsPlaying.RemoveAt(ii);
+                                AssignBusyLeds(evnt, false);
+                            }
+                            else if (evnt.AnimationIndex == evnt.Animations.Count)
                             {
                                 evnt.RepeatCount += 1;
 
-                                if (evnt.Repeat < 0 || evnt.RepeatCount < evnt.Repeat)
+                                if (evnt.Duration > 0 || evnt.Repeat < 0 || evnt.RepeatCount < evnt.Repeat)
                                 {
-                                    evnt.Started = DateTime.Now;
+                                    evnt.AnimationStarted = DateTime.Now;
                                     evnt.AnimationIndex = 0;
 
                                     evnt.Animations.ForEach( delegate(Animation a) { a.Reset(); });
@@ -419,7 +426,7 @@ namespace BlinkStickClient.DataModel
                             else
                             {
                                 evnt.Animations[evnt.AnimationIndex].ReferenceColor = GetColor(evnt.NotificationSnapshot);
-                                evnt.Started = DateTime.Now;
+                                evnt.AnimationStarted = DateTime.Now;
                             }
                         }
                     }

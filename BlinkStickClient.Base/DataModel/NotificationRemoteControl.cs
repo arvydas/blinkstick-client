@@ -229,7 +229,7 @@ namespace BlinkStickClient.DataModel
                 pattern.Animations[0].AnimationType = AnimationTypeEnum.SetColor;
                 pattern.Animations[0].DelaySetColor = 0;
                 pattern.Animations[0].Color = color;
-                OnPatternSend(channel, (byte)firstLed, (byte)lastLed, ledSettings, pattern, 1);
+                OnPatternSend(channel, (byte)firstLed, (byte)lastLed, ledSettings, pattern, 1, 0);
             }
             catch (Exception ex)
             {
@@ -329,7 +329,7 @@ namespace BlinkStickClient.DataModel
 
             try
             {
-                OnPatternSend(channel, (byte)ledStart, (byte)ledEnd, ledSettings, pattern, 1);
+                OnPatternSend(channel, (byte)ledStart, (byte)ledEnd, ledSettings, pattern, 1, 0);
             }
             catch (Exception ex)
             {
