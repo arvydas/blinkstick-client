@@ -462,6 +462,10 @@ namespace BlinkStickClient.DataModel
                             }
                         }
                     }
+                    else
+                    {
+                        Thread.Sleep(1);
+                    }
                 }
             }
             catch (Exception ex)
