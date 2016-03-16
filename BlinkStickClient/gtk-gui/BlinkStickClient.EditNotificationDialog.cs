@@ -175,11 +175,11 @@ namespace BlinkStickClient
 			this.hboxLedConfiguration.Name = "hboxLedConfiguration";
 			this.hboxLedConfiguration.Spacing = 6;
 			// Container child hboxLedConfiguration.Gtk.Box+BoxChild
-			this.spinbuttonLedsFrom = new global::Gtk.SpinButton (0D, 63D, 1D);
+			this.spinbuttonLedsFrom = new global::Gtk.SpinButton (0, 63, 1);
 			this.spinbuttonLedsFrom.CanFocus = true;
 			this.spinbuttonLedsFrom.Name = "spinbuttonLedsFrom";
-			this.spinbuttonLedsFrom.Adjustment.PageIncrement = 10D;
-			this.spinbuttonLedsFrom.ClimbRate = 1D;
+			this.spinbuttonLedsFrom.Adjustment.PageIncrement = 10;
+			this.spinbuttonLedsFrom.ClimbRate = 1;
 			this.spinbuttonLedsFrom.Numeric = true;
 			this.hboxLedConfiguration.Add (this.spinbuttonLedsFrom);
 			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hboxLedConfiguration [this.spinbuttonLedsFrom]));
@@ -196,11 +196,11 @@ namespace BlinkStickClient
 			w11.Expand = false;
 			w11.Fill = false;
 			// Container child hboxLedConfiguration.Gtk.Box+BoxChild
-			this.spinbuttonLedsTo = new global::Gtk.SpinButton (0D, 63D, 1D);
+			this.spinbuttonLedsTo = new global::Gtk.SpinButton (0, 63, 1);
 			this.spinbuttonLedsTo.CanFocus = true;
 			this.spinbuttonLedsTo.Name = "spinbuttonLedsTo";
-			this.spinbuttonLedsTo.Adjustment.PageIncrement = 10D;
-			this.spinbuttonLedsTo.ClimbRate = 1D;
+			this.spinbuttonLedsTo.Adjustment.PageIncrement = 10;
+			this.spinbuttonLedsTo.ClimbRate = 1;
 			this.spinbuttonLedsTo.Numeric = true;
 			this.hboxLedConfiguration.Add (this.spinbuttonLedsTo);
 			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.hboxLedConfiguration [this.spinbuttonLedsTo]));

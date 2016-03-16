@@ -131,11 +131,11 @@ namespace BlinkStickClient
 			this.hbox3.Name = "hbox3";
 			this.hbox3.Spacing = 6;
 			// Container child hbox3.Gtk.Box+BoxChild
-			this.spinbuttonPort = new global::Gtk.SpinButton (0D, 65535D, 1D);
+			this.spinbuttonPort = new global::Gtk.SpinButton (0, 65535, 1);
 			this.spinbuttonPort.CanFocus = true;
 			this.spinbuttonPort.Name = "spinbuttonPort";
-			this.spinbuttonPort.Adjustment.PageIncrement = 10D;
-			this.spinbuttonPort.ClimbRate = 1D;
+			this.spinbuttonPort.Adjustment.PageIncrement = 10;
+			this.spinbuttonPort.ClimbRate = 1;
 			this.spinbuttonPort.Numeric = true;
 			this.hbox3.Add (this.spinbuttonPort);
 			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox3 [this.spinbuttonPort]));
@@ -258,13 +258,13 @@ namespace BlinkStickClient
 			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.labelCheck]));
 			w16.Position = 0;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.spinbuttonCheckPeriod = new global::Gtk.SpinButton (1D, 120D, 1D);
+			this.spinbuttonCheckPeriod = new global::Gtk.SpinButton (1, 120, 1);
 			this.spinbuttonCheckPeriod.CanFocus = true;
 			this.spinbuttonCheckPeriod.Name = "spinbuttonCheckPeriod";
-			this.spinbuttonCheckPeriod.Adjustment.PageIncrement = 10D;
-			this.spinbuttonCheckPeriod.ClimbRate = 1D;
+			this.spinbuttonCheckPeriod.Adjustment.PageIncrement = 10;
+			this.spinbuttonCheckPeriod.ClimbRate = 1;
 			this.spinbuttonCheckPeriod.Numeric = true;
-			this.spinbuttonCheckPeriod.Value = 1D;
+			this.spinbuttonCheckPeriod.Value = 1;
 			this.hbox2.Add (this.spinbuttonCheckPeriod);
 			global::Gtk.Box.BoxChild w17 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.spinbuttonCheckPeriod]));
 			w17.Position = 1;

@@ -48,18 +48,7 @@ namespace BlinkStickClient
 			this.labelSearchStringHint = new global::Gtk.Label ();
 			this.labelSearchStringHint.Name = "labelSearchStringHint";
 			this.labelSearchStringHint.Xalign = 0F;
-			this.labelSearchStringHint.LabelProp = global::Mono.Unix.Catalog.GetString (@"<i>Search for this string in application executable name or active window title when active application changes.</i>
-
-<i>Examples:</i>
-
-<i>firefox.exe - pattern will be triggered every time Firefox browser is activated</i>
-
-<i>google - pattern will be triggered every time a window which contains google in the title is activated</i>
-
-<i>Notepad - pattern will be triggered every time a window which contains Notepad in the title is activated</i>
-
-Search is case insensitive.
-");
+			this.labelSearchStringHint.LabelProp = global::Mono.Unix.Catalog.GetString ("<i>Search for this string in application executable name or active window title when active application changes.</i>\n\n<i>Examples:</i>\n\n<i>firefox.exe - pattern will be triggered every time Firefox browser is activated</i>\n\n<i>google - pattern will be triggered every time a window which contains google in the title is activated</i>\n\n<i>Notepad - pattern will be triggered every time a window which contains Notepad in the title is activated</i>\n\nSearch is case insensitive.\n");
 			this.labelSearchStringHint.UseMarkup = true;
 			this.labelSearchStringHint.Wrap = true;
 			this.table1.Add (this.labelSearchStringHint);

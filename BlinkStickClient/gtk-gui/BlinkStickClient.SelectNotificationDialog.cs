@@ -172,8 +172,7 @@ namespace BlinkStickClient
 			this.labelUniqueWarning = new global::Gtk.Label ();
 			this.labelUniqueWarning.WidthRequest = 200;
 			this.labelUniqueWarning.Name = "labelUniqueWarning";
-			this.labelUniqueWarning.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>You already have this notification configured. This type of notification can o" +
-			"nly be added once.</b>");
+			this.labelUniqueWarning.LabelProp = global::Mono.Unix.Catalog.GetString ("<b>You already have this notification configured. This type of notification can only be added once.</b>");
 			this.labelUniqueWarning.UseMarkup = true;
 			this.labelUniqueWarning.Wrap = true;
 			this.table1.Add (this.labelUniqueWarning);

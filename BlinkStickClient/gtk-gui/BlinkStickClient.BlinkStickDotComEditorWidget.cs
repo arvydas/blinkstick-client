@@ -95,8 +95,7 @@ namespace BlinkStickClient
 			this.labelMonitorHint = new global::Gtk.Label ();
 			this.labelMonitorHint.Name = "labelMonitorHint";
 			this.labelMonitorHint.Xalign = 0F;
-			this.labelMonitorHint.LabelProp = global::Mono.Unix.Catalog.GetString ("<i>Connects to BlinkStick.com via the access code and allows remote control from " +
-			"any device with Internet connection.</i>");
+			this.labelMonitorHint.LabelProp = global::Mono.Unix.Catalog.GetString ("<i>Connects to BlinkStick.com via the access code and allows remote control from any device with Internet connection.</i>");
 			this.labelMonitorHint.UseMarkup = true;
 			this.labelMonitorHint.Wrap = true;
 			this.table1.Add (this.labelMonitorHint);
@@ -111,8 +110,7 @@ namespace BlinkStickClient
 			this.labelMonitorHint1 = new global::Gtk.Label ();
 			this.labelMonitorHint1.Name = "labelMonitorHint1";
 			this.labelMonitorHint1.Xalign = 0F;
-			this.labelMonitorHint1.LabelProp = global::Mono.Unix.Catalog.GetString ("<i>Click the button on the right to register a new device on BlinkStick.com and g" +
-			"et the access code.</i>");
+			this.labelMonitorHint1.LabelProp = global::Mono.Unix.Catalog.GetString ("<i>Click the button on the right to register a new device on BlinkStick.com and get the access code.</i>");
 			this.labelMonitorHint1.UseMarkup = true;
 			this.labelMonitorHint1.Wrap = true;
 			this.table1.Add (this.labelMonitorHint1);

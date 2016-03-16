@@ -151,13 +151,13 @@ namespace BlinkStickClient
 			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.labelCheck]));
 			w8.Position = 0;
 			// Container child hbox2.Gtk.Box+BoxChild
-			this.spinbuttonCheckPeriod = new global::Gtk.SpinButton (1D, 120D, 1D);
+			this.spinbuttonCheckPeriod = new global::Gtk.SpinButton (1, 120, 1);
 			this.spinbuttonCheckPeriod.CanFocus = true;
 			this.spinbuttonCheckPeriod.Name = "spinbuttonCheckPeriod";
-			this.spinbuttonCheckPeriod.Adjustment.PageIncrement = 10D;
-			this.spinbuttonCheckPeriod.ClimbRate = 1D;
+			this.spinbuttonCheckPeriod.Adjustment.PageIncrement = 10;
+			this.spinbuttonCheckPeriod.ClimbRate = 1;
 			this.spinbuttonCheckPeriod.Numeric = true;
-			this.spinbuttonCheckPeriod.Value = 1D;
+			this.spinbuttonCheckPeriod.Value = 1;
 			this.hbox2.Add (this.spinbuttonCheckPeriod);
 			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.spinbuttonCheckPeriod]));
 			w9.Position = 1;

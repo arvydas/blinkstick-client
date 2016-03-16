@@ -92,9 +92,7 @@ namespace BlinkStickClient
 			this.labelMonitorHint.Name = "labelMonitorHint";
 			this.labelMonitorHint.Xpad = 20;
 			this.labelMonitorHint.Xalign = 0F;
-			this.labelMonitorHint.LabelProp = global::Mono.Unix.Catalog.GetString ("<i>Uses pattern\'s first animation color to display 0% and second to transition to" +
-			" 100%. Define a pattern with two Set Color animations for this to take effect</i" +
-			">");
+			this.labelMonitorHint.LabelProp = global::Mono.Unix.Catalog.GetString ("<i>Uses pattern's first animation color to display 0% and second to transition to 100%. Define a pattern with two Set Color animations for this to take effect</i>");
 			this.labelMonitorHint.UseMarkup = true;
 			this.labelMonitorHint.Wrap = true;
 			this.vbox3.Add (this.labelMonitorHint);
@@ -192,13 +190,13 @@ namespace BlinkStickClient
 			w9.XOptions = ((global::Gtk.AttachOptions)(4));
 			w9.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
-			this.spinbuttonCheckPeriod = new global::Gtk.SpinButton (1D, 120D, 1D);
+			this.spinbuttonCheckPeriod = new global::Gtk.SpinButton (1, 120, 1);
 			this.spinbuttonCheckPeriod.CanFocus = true;
 			this.spinbuttonCheckPeriod.Name = "spinbuttonCheckPeriod";
-			this.spinbuttonCheckPeriod.Adjustment.PageIncrement = 10D;
-			this.spinbuttonCheckPeriod.ClimbRate = 1D;
+			this.spinbuttonCheckPeriod.Adjustment.PageIncrement = 10;
+			this.spinbuttonCheckPeriod.ClimbRate = 1;
 			this.spinbuttonCheckPeriod.Numeric = true;
-			this.spinbuttonCheckPeriod.Value = 1D;
+			this.spinbuttonCheckPeriod.Value = 1;
 			this.table1.Add (this.spinbuttonCheckPeriod);
 			global::Gtk.Table.TableChild w10 = ((global::Gtk.Table.TableChild)(this.table1 [this.spinbuttonCheckPeriod]));
 			w10.TopAttach = ((uint)(1));
@@ -208,11 +206,11 @@ namespace BlinkStickClient
 			w10.XOptions = ((global::Gtk.AttachOptions)(4));
 			w10.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
-			this.spinbuttonCpuPercent = new global::Gtk.SpinButton (0D, 100D, 1D);
+			this.spinbuttonCpuPercent = new global::Gtk.SpinButton (0, 100, 1);
 			this.spinbuttonCpuPercent.CanFocus = true;
 			this.spinbuttonCpuPercent.Name = "spinbuttonCpuPercent";
-			this.spinbuttonCpuPercent.Adjustment.PageIncrement = 10D;
-			this.spinbuttonCpuPercent.ClimbRate = 1D;
+			this.spinbuttonCpuPercent.Adjustment.PageIncrement = 10;
+			this.spinbuttonCpuPercent.ClimbRate = 1;
 			this.spinbuttonCpuPercent.Numeric = true;
 			this.table1.Add (this.spinbuttonCpuPercent);
 			global::Gtk.Table.TableChild w11 = ((global::Gtk.Table.TableChild)(this.table1 [this.spinbuttonCpuPercent]));

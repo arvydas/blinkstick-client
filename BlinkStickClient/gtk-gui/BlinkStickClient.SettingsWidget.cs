@@ -221,8 +221,7 @@ namespace BlinkStickClient
 			// Container child vbox2.Gtk.Box+BoxChild
 			this.labelRestartWarning = new global::Gtk.Label ();
 			this.labelRestartWarning.Name = "labelRestartWarning";
-			this.labelRestartWarning.LabelProp = global::Mono.Unix.Catalog.GetString ("<span foreground=\"red\">Please restart application for the changes to take effect<" +
-			"/span>");
+			this.labelRestartWarning.LabelProp = global::Mono.Unix.Catalog.GetString ("<span foreground=\"red\">Please restart application for the changes to take effect</span>");
 			this.labelRestartWarning.UseMarkup = true;
 			this.vbox2.Add (this.labelRestartWarning);
 			global::Gtk.Box.BoxChild w18 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.labelRestartWarning]));
