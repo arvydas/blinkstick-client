@@ -29,19 +29,44 @@ namespace BlinkStickClient.DataModel
 
         public override bool IsSupported()
         {
-            return HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Windows;
+			return HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Windows || 
+				HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Mac;
         }
 
         #region implemented abstract members of HardwareNotification
 
         public override int GetValue()
         {
-            Int64 phav = GetPhysicalAvailableMemoryInMiB();
-            Int64 tot = GetTotalMemoryInMiB();
-            decimal percentFree = ((decimal)phav / (decimal)tot) * 100;
-            decimal percentOccupied = 100 - percentFree;
+			if (HidSharp.PlatformDetector.RunningPlatform () == HidSharp.PlatformDetector.Platform.Windows) 
+			{
+				Int64 phav = GetPhysicalAvailableMemoryInMiB ();
+				Int64 tot = GetTotalMemoryInMiB ();
+				decimal percentFree = ((decimal)phav / (decimal)tot) * 100;
+				decimal percentOccupied = 100 - percentFree;
 
-            return (int)percentOccupied;
+				return (int)percentOccupied;
+			}
+			else if (HidSharp.PlatformDetector.RunningPlatform () == HidSharp.PlatformDetector.Platform.Mac) 
+			{
+				var psi = new ProcessStartInfo(global::System.IO.Path.Combine (global::System.AppDomain.CurrentDomain.BaseDirectory, "scripts", "osx-ram.sh"))
+				{
+					RedirectStandardOutput = true,
+					UseShellExecute = false
+				};
+				Process p = Process.Start(psi);
+				string outString = p.StandardOutput.ReadToEnd();
+				p.WaitForExit();
+				try
+				{
+					return (int)Math.Round(Convert.ToDouble(outString.Trim ()));
+				}
+				catch (Exception e) {
+					log.ErrorFormat ("Failed to convert string \"{0}\" to int: {1}", outString, e);
+					return 0;
+				}
+			}
+
+			return 0;
         }
 
         #endregion
