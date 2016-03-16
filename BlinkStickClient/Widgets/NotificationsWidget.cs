@@ -79,8 +79,10 @@ namespace BlinkStickClient
             blinkStickColumn.SetCellDataFunc(blinkStickCell, new Gtk.TreeCellDataFunc(RenderBlinkStickCell));
             patternColumn.SetCellDataFunc(patternCell, new Gtk.TreeCellDataFunc(RenderPatternCell));
 
+            treeviewEvents.AppendColumn(enabledColumn);
+
             treeviewEvents.AppendColumn(nameColumn);
-            treeviewEvents.Columns[0].Expand = true;
+            treeviewEvents.Columns[1].Expand = true;
             treeviewEvents.AppendColumn(patternColumn);
 
             if (this.ApplicationSettings.SingleBlinkStickMode)
@@ -93,7 +95,6 @@ namespace BlinkStickClient
                 DeleteColumnIndex = 6;
             }
 
-            treeviewEvents.AppendColumn(enabledColumn);
             treeviewEvents.AppendColumn("", new Gtk.CellRendererPixbuf(), "stock_id", 1);
             treeviewEvents.AppendColumn("", new Gtk.CellRendererPixbuf(), "stock_id", 2);
             treeviewEvents.AppendColumn("", new Gtk.CellRendererPixbuf(), "stock_id", 3);
@@ -106,7 +107,7 @@ namespace BlinkStickClient
                 return String.Compare(n1.Name, n2.Name);
             });
 
-            NotificationListStore.SetSortColumnId(0, SortType.Ascending);
+            NotificationListStore.SetSortColumnId(1, SortType.Ascending);
             treeviewEvents.Model = NotificationListStore;
 
             log.Debug("Adding notifications to the tree");
@@ -187,6 +188,12 @@ namespace BlinkStickClient
                 else if (column == (sender as TreeView).Columns[DeleteColumnIndex - 2]) //Edit clicked
                 {
                     EditNotification();
+                }
+                else if (column == (sender as TreeView).Columns[0]) //Enabled-Disabled clicked
+                {
+                    SelectedNotification.Enabled = !SelectedNotification.Enabled;
+                    DataModel.Save();
+                    DataModel.Notifications.NotifyUpdate(SelectedNotification);
                 }
             }
         }
