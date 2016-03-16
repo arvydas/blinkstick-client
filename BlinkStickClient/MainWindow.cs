@@ -458,6 +458,17 @@ public partial class MainWindow: Gtk.Window
 		{
 			instanceExistsEvent.Cancel();
 		}
+
+        if (ApplicationSettings.ExitTurnOffAllBlinkSticks)
+        {
+            this.DataModel.Devices.ForEach(delegate(BlinkStickDeviceSettings device) { 
+                if (device.Led != null && device.Led.Connected)
+                {
+                    device.TurnOff(); 
+                    device.Led.CloseDevice();
+                }
+            });
+        }
 	}
 	
 	protected void OnDeleteEvent (object sender, DeleteEventArgs a)
@@ -467,18 +478,6 @@ public partial class MainWindow: Gtk.Window
 #endif 
 		if (ApplicationIsClosing) {
 			DestroyEnvironment();
-
-            if (ApplicationSettings.ExitTurnOffAllBlinkSticks)
-            {
-                this.DataModel.Devices.ForEach(delegate(BlinkStickDeviceSettings device) { 
-                    if (device.Led != null && device.Led.Connected)
-                    {
-                        device.TurnOff(); 
-						device.Led.CloseDevice();
-                    }
-                });
-            }
-
 			Application.Quit ();
 		}
 
@@ -488,9 +487,9 @@ public partial class MainWindow: Gtk.Window
 
 	protected void OnQuitActionActivated (object sender, EventArgs e)
 	{
-		ApplicationIsClosing = true;
-		DestroyEnvironment();
-        Gtk.Application.Quit ();
+        ApplicationIsClosing = true;
+        DestroyEnvironment();
+        Application.Quit ();
 	}
 
 	protected void OnHideActionActivated (object sender, EventArgs e)
