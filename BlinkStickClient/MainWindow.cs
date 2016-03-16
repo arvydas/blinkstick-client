@@ -474,6 +474,7 @@ public partial class MainWindow: Gtk.Window
                     if (device.Led != null && device.Led.Connected)
                     {
                         device.TurnOff(); 
+						device.Led.CloseDevice();
                     }
                 });
             }
