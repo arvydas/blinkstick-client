@@ -44,7 +44,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked; OnlyBelowVersion: 0,6.1
 
 [Files]
-Source: "dep\gtk-sharp-2.12.25.msi"; DestDir: "{tmp}"; Check: GtkNeedsInstallOrUpgrade; AfterInstall: InstallGtkSharp
+Source: "dep\gtk-sharp-2.12.30.msi"; DestDir: "{tmp}"; Check: GtkNeedsInstallOrUpgrade; AfterInstall: InstallGtkSharp
 Source: "theme\*"; DestDir: "{app}\Theme"; Flags: ignoreversion recursesubdirs
 Source: "gtk-libs\*"; DestDir: "{code:GtkInstallDir}"; Flags: ignoreversion onlyifdoesntexist uninsneveruninstall recursesubdirs
 Source: "..\BlinkStickClient\bin\Release\*.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -195,7 +195,7 @@ begin
     
     RegQueryStringValue(HKLM, 'SOFTWARE\Xamarin\GtkSharp\Version', '', gtkVersion);
 
-    Result := CompareVersions(gtkVersion, '2.12.25') = -1;
+    Result := CompareVersions(gtkVersion, '2.12.30') = -1;
   end;
   
   if (Result) then begin
@@ -219,7 +219,7 @@ procedure InstallGtkSharp;
 var
   ResultCode: Integer;
 begin
-  if not Exec('msiexec.exe', ExpandConstant('/i "{tmp}\gtk-sharp-2.12.25.msi" /PASSIVE /NORESTART'), '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
+  if not Exec('msiexec.exe', ExpandConstant('/i "{tmp}\gtk-sharp-2.12.30.msi" /PASSIVE /NORESTART'), '', SW_SHOW, ewWaitUntilTerminated, ResultCode) then
   begin
     // you can interact with the user that the installation failed
     MsgBox('GtkSharp installation failed with code: ' + IntToStr(ResultCode) + '.',
@@ -247,9 +247,9 @@ begin
     TestVersions('2.1', '1');
     TestVersions('1.1', '2');
 
-    TestVersions('2.12.11', '2.12.25');
-    TestVersions('', '2.12.25');
-    TestVersions('2.12.25', '');
+    TestVersions('2.12.11', '2.12.30');
+    TestVersions('', '2.12.30');
+    TestVersions('2.12.30', '');
     TestVersions('', '');
     TestVersions('2.12.11', '2.012.11');
 { }
