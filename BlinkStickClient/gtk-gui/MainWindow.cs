@@ -9,15 +9,15 @@ public partial class MainWindow
 	
 	private global::Gtk.RadioAction NotificationsAction;
 	
-	private global::Gtk.RadioAction HelpAction1;
+	private global::Gtk.RadioAction HelpAction;
 	
-	private global::Gtk.RadioAction PatternsAction1;
+	private global::Gtk.RadioAction PatternsAction;
 	
 	private global::Gtk.RadioAction EventsAction;
 	
-	private global::Gtk.RadioAction preferencesAction;
+	private global::Gtk.RadioAction SettingsAction;
 	
-	private global::Gtk.Action quitAction;
+	private global::Gtk.Action QuitAction;
 	
 	private global::Gtk.VBox vbox2;
 	
@@ -37,33 +37,33 @@ public partial class MainWindow
 		// Widget MainWindow
 		this.UIManager = new global::Gtk.UIManager ();
 		global::Gtk.ActionGroup w1 = new global::Gtk.ActionGroup ("Default");
-		this.OverviewAction = new global::Gtk.RadioAction ("OverviewAction", global::Mono.Unix.Catalog.GetString ("Overview"), global::Mono.Unix.Catalog.GetString ("Overview"), "blinkstick-overview", 0);
+		this.OverviewAction = new global::Gtk.RadioAction ("OverviewAction", global::Mono.Unix.Catalog.GetString ("Overview"), global::Mono.Unix.Catalog.GetString ("Overview"), "icon-dark-usb", 0);
 		this.OverviewAction.Group = new global::GLib.SList (global::System.IntPtr.Zero);
 		this.OverviewAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Overview");
 		w1.Add (this.OverviewAction, null);
-		this.NotificationsAction = new global::Gtk.RadioAction ("NotificationsAction", global::Mono.Unix.Catalog.GetString ("Notifications"), null, "blinkstick-notifications", 1);
+		this.NotificationsAction = new global::Gtk.RadioAction ("NotificationsAction", global::Mono.Unix.Catalog.GetString ("Notifications"), null, "icon-dark-bell", 1);
 		this.NotificationsAction.Group = this.OverviewAction.Group;
 		this.NotificationsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Notifications");
 		w1.Add (this.NotificationsAction, null);
-		this.HelpAction1 = new global::Gtk.RadioAction ("HelpAction1", global::Mono.Unix.Catalog.GetString ("Help"), null, "blinkstick-help", 5);
-		this.HelpAction1.Group = this.OverviewAction.Group;
-		this.HelpAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Help");
-		w1.Add (this.HelpAction1, null);
-		this.PatternsAction1 = new global::Gtk.RadioAction ("PatternsAction1", global::Mono.Unix.Catalog.GetString ("Patterns"), null, "blinkstick-patterns", 2);
-		this.PatternsAction1.Group = this.HelpAction1.Group;
-		this.PatternsAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Patterns");
-		w1.Add (this.PatternsAction1, null);
-		this.EventsAction = new global::Gtk.RadioAction ("EventsAction", global::Mono.Unix.Catalog.GetString ("Events"), null, "blinkstick-events", 3);
-		this.EventsAction.Group = this.HelpAction1.Group;
+		this.HelpAction = new global::Gtk.RadioAction ("HelpAction", global::Mono.Unix.Catalog.GetString ("Help"), null, "icon-dark-question-circle", 5);
+		this.HelpAction.Group = this.OverviewAction.Group;
+		this.HelpAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Help");
+		w1.Add (this.HelpAction, null);
+		this.PatternsAction = new global::Gtk.RadioAction ("PatternsAction", global::Mono.Unix.Catalog.GetString ("Patterns"), null, "icon-dark-th", 2);
+		this.PatternsAction.Group = this.HelpAction.Group;
+		this.PatternsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Patterns");
+		w1.Add (this.PatternsAction, null);
+		this.EventsAction = new global::Gtk.RadioAction ("EventsAction", global::Mono.Unix.Catalog.GetString ("Events"), null, "icon-dark-calendar", 3);
+		this.EventsAction.Group = this.HelpAction.Group;
 		this.EventsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Events");
 		w1.Add (this.EventsAction, null);
-		this.preferencesAction = new global::Gtk.RadioAction ("preferencesAction", global::Mono.Unix.Catalog.GetString ("Settings"), null, "gtk-preferences", 4);
-		this.preferencesAction.Group = this.HelpAction1.Group;
-		this.preferencesAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Settings");
-		w1.Add (this.preferencesAction, null);
-		this.quitAction = new global::Gtk.Action ("quitAction", global::Mono.Unix.Catalog.GetString ("Quit"), null, "gtk-quit");
-		this.quitAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Quit");
-		w1.Add (this.quitAction, null);
+		this.SettingsAction = new global::Gtk.RadioAction ("SettingsAction", global::Mono.Unix.Catalog.GetString ("Settings"), null, "icon-dark-cog", 4);
+		this.SettingsAction.Group = this.HelpAction.Group;
+		this.SettingsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Settings");
+		w1.Add (this.SettingsAction, null);
+		this.QuitAction = new global::Gtk.Action ("QuitAction", global::Mono.Unix.Catalog.GetString ("Quit"), null, "icon-dark-sign-out");
+		this.QuitAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Quit");
+		w1.Add (this.QuitAction, null);
 		this.UIManager.InsertActionGroup (w1, 0);
 		this.AddAccelGroup (this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -94,7 +94,7 @@ public partial class MainWindow
 		w2.Expand = false;
 		w2.Fill = false;
 		// Container child vbox4.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString (@"<ui><toolbar name='toolbar2'><toolitem name='OverviewAction' action='OverviewAction'/><toolitem name='NotificationsAction' action='NotificationsAction'/><toolitem name='PatternsAction1' action='PatternsAction1'/><toolitem name='EventsAction' action='EventsAction'/><toolitem name='preferencesAction' action='preferencesAction'/><toolitem name='HelpAction1' action='HelpAction1'/><toolitem name='quitAction' action='quitAction'/></toolbar></ui>");
+		this.UIManager.AddUiFromString (@"<ui><toolbar name='toolbar2'><toolitem name='OverviewAction' action='OverviewAction'/><toolitem name='NotificationsAction' action='NotificationsAction'/><toolitem name='PatternsAction' action='PatternsAction'/><toolitem name='EventsAction' action='EventsAction'/><toolitem name='SettingsAction' action='SettingsAction'/><toolitem name='HelpAction' action='HelpAction'/><toolitem name='QuitAction' action='QuitAction'/></toolbar></ui>");
 		this.toolbar2 = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/toolbar2")));
 		this.toolbar2.Name = "toolbar2";
 		this.toolbar2.Orientation = ((global::Gtk.Orientation)(1));
@@ -125,10 +125,10 @@ public partial class MainWindow
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		this.OverviewAction.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
 		this.NotificationsAction.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
-		this.HelpAction1.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
-		this.PatternsAction1.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
+		this.HelpAction.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
+		this.PatternsAction.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
 		this.EventsAction.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
-		this.preferencesAction.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
-		this.quitAction.Activated += new global::System.EventHandler (this.OnQuitActionActivated);
+		this.SettingsAction.Toggled += new global::System.EventHandler (this.ToolbarButtonToggled);
+		this.QuitAction.Activated += new global::System.EventHandler (this.OnQuitActionActivated);
 	}
 }

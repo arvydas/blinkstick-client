@@ -40,7 +40,7 @@ namespace BlinkStickClient
 			this.buttonRefresh.Name = "buttonRefresh";
 			this.buttonRefresh.UseUnderline = true;
 			global::Gtk.Image w1 = new global::Gtk.Image ();
-			w1.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-refresh", global::Gtk.IconSize.Menu);
+			w1.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-refresh.png");
 			this.buttonRefresh.Image = w1;
 			this.alignment1.Add (this.buttonRefresh);
 			this.hboxMiniMenu.Add (this.alignment1);
@@ -54,7 +54,7 @@ namespace BlinkStickClient
 			this.buttonConfigure.Name = "buttonConfigure";
 			this.buttonConfigure.UseUnderline = true;
 			global::Gtk.Image w4 = new global::Gtk.Image ();
-			w4.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-preferences", global::Gtk.IconSize.Menu);
+			w4.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-cog-small.png");
 			this.buttonConfigure.Image = w4;
 			this.hboxMiniMenu.Add (this.buttonConfigure);
 			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.buttonConfigure]));

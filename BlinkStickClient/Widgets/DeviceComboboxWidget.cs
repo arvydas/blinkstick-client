@@ -126,7 +126,7 @@ namespace BlinkStickClient
             BlinkStickDeviceSettings myclass = model.GetValue(iter, 0) as BlinkStickDeviceSettings;
             if (myclass != null)
             {
-                (cell as CellRendererPixbuf).StockId = myclass.Led == null ? "gtk-no" : "gtk-yes";
+                (cell as CellRendererPixbuf).StockId = myclass.Led == null ? "" : "icon-dark-usb-small";
             }
         }
 

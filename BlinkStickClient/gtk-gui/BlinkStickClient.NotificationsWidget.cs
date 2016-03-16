@@ -41,7 +41,7 @@ namespace BlinkStickClient
 			this.buttonAddNotification.Name = "buttonAddNotification";
 			this.buttonAddNotification.UseUnderline = true;
 			global::Gtk.Image w3 = new global::Gtk.Image ();
-			w3.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.Menu);
+			w3.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-plus.png");
 			this.buttonAddNotification.Image = w3;
 			this.hbox1.Add (this.buttonAddNotification);
 			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hbox1 [this.buttonAddNotification]));

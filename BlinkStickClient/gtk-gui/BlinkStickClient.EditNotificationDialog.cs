@@ -86,7 +86,7 @@ namespace BlinkStickClient
 			this.buttonEditPatterns.Name = "buttonEditPatterns";
 			this.buttonEditPatterns.UseUnderline = true;
 			global::Gtk.Image w2 = new global::Gtk.Image ();
-			w2.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-edit", global::Gtk.IconSize.Menu);
+			w2.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-pencil-square-o.png");
 			this.buttonEditPatterns.Image = w2;
 			this.table2.Add (this.buttonEditPatterns);
 			global::Gtk.Table.TableChild w3 = ((global::Gtk.Table.TableChild)(this.table2 [this.buttonEditPatterns]));

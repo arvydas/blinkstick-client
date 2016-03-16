@@ -11,16 +11,48 @@ namespace Stetic
 			if ((Stetic.Gui.initialized == false)) {
 				Stetic.Gui.initialized = true;
 				global::Gtk.IconFactory w1 = new global::Gtk.IconFactory ();
-				global::Gtk.IconSet w2 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.blinkstick-patterns.png"));
-				w1.Add ("blinkstick-patterns", w2);
-				global::Gtk.IconSet w3 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.blinkstick-notifications.png"));
-				w1.Add ("blinkstick-notifications", w3);
-				global::Gtk.IconSet w4 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.blinkstick-overview.png"));
-				w1.Add ("blinkstick-overview", w4);
-				global::Gtk.IconSet w5 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.blinkstick-events.png"));
-				w1.Add ("blinkstick-events", w5);
-				global::Gtk.IconSet w6 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.blinkstick-help.png"));
-				w1.Add ("blinkstick-help", w6);
+				global::Gtk.IconSet w2 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-bell.png"));
+				w1.Add ("icon-dark-bell", w2);
+				global::Gtk.IconSet w3 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-calendar.png"));
+				w1.Add ("icon-dark-calendar", w3);
+				global::Gtk.IconSet w4 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-cog.png"));
+				w1.Add ("icon-dark-cog", w4);
+				global::Gtk.IconSet w5 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-question-circle.png"));
+				w1.Add ("icon-dark-question-circle", w5);
+				global::Gtk.IconSet w6 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-sign-out.png"));
+				w1.Add ("icon-dark-sign-out", w6);
+				global::Gtk.IconSet w7 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-usb.png"));
+				w1.Add ("icon-dark-usb", w7);
+				global::Gtk.IconSet w8 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-plus.png"));
+				w1.Add ("icon-dark-plus", w8);
+				global::Gtk.IconSet w9 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-refresh.png"));
+				w1.Add ("icon-dark-refresh", w9);
+				global::Gtk.IconSet w10 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-cog-small.png"));
+				w1.Add ("icons-dark-cog-small", w10);
+				global::Gtk.IconSet w11 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-trash.png"));
+				w1.Add ("icon-dark-trash", w11);
+				global::Gtk.IconSet w12 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-clipboard.png"));
+				w1.Add ("icon-dark-clipboard", w12);
+				global::Gtk.IconSet w13 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-clone.png"));
+				w1.Add ("icon-dark-clone", w13);
+				global::Gtk.IconSet w14 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-pencil-square-o.png"));
+				w1.Add ("icon-dark-pencil-square-o", w14);
+				global::Gtk.IconSet w15 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-play.png"));
+				w1.Add ("icon-dark-play", w15);
+				global::Gtk.IconSet w16 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-stop.png"));
+				w1.Add ("icon-dark-stop", w16);
+				global::Gtk.IconSet w17 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-arrow-down.png"));
+				w1.Add ("icon-dark-arrow-down", w17);
+				global::Gtk.IconSet w18 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-arrow-up.png"));
+				w1.Add ("icon-dark-arrow-up", w18);
+				global::Gtk.IconSet w19 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-check-square-o.png"));
+				w1.Add ("icon-dark-check-square-o", w19);
+				global::Gtk.IconSet w20 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-usb-small.png"));
+				w1.Add ("icon-dark-usb-small", w20);
+				global::Gtk.IconSet w21 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-square-o.png"));
+				w1.Add ("icon-dark-square-o", w21);
+				global::Gtk.IconSet w22 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-th.png"));
+				w1.Add ("icon-dark-th", w22);
 				w1.AddDefault ();
 			}
 		}
@@ -75,44 +107,6 @@ namespace Stetic
 				    && typeof(Gtk.Window).IsInstanceOfType (w))) {
 					((Gtk.Window)(w)).AddAccelGroup (this.uimanager.AccelGroup);
 					this.uimanager = null;
-				}
-			}
-		}
-	}
-
-	internal class IconLoader
-	{
-		public static Gdk.Pixbuf LoadIcon (Gtk.Widget widget, string name, Gtk.IconSize size)
-		{
-			Gdk.Pixbuf res = widget.RenderIcon (name, size, null);
-			if ((res != null)) {
-				return res;
-			} else {
-				int sz;
-				int sy;
-				global::Gtk.Icon.SizeLookup (size, out sz, out sy);
-				try {
-					return Gtk.IconTheme.Default.LoadIcon (name, sz, 0);
-				} catch (System.Exception) {
-					if ((name != "gtk-missing-image")) {
-						return Stetic.IconLoader.LoadIcon (widget, "gtk-missing-image", size);
-					} else {
-						Gdk.Pixmap pmap = new Gdk.Pixmap (Gdk.Screen.Default.RootWindow, sz, sz);
-						Gdk.GC gc = new Gdk.GC (pmap);
-						gc.RgbFgColor = new Gdk.Color (255, 255, 255);
-						pmap.DrawRectangle (gc, true, 0, 0, sz, sz);
-						gc.RgbFgColor = new Gdk.Color (0, 0, 0);
-						pmap.DrawRectangle (gc, false, 0, 0, (sz - 1), (sz - 1));
-						gc.SetLineAttributes (3, Gdk.LineStyle.Solid, Gdk.CapStyle.Round, Gdk.JoinStyle.Round);
-						gc.RgbFgColor = new Gdk.Color (255, 0, 0);
-						pmap.DrawLine (gc, (sz / 4), (sz / 4), ((sz - 1)
-						- (sz / 4)), ((sz - 1)
-						- (sz / 4)));
-						pmap.DrawLine (gc, ((sz - 1)
-						- (sz / 4)), (sz / 4), (sz / 4), ((sz - 1)
-						- (sz / 4)));
-						return Gdk.Pixbuf.FromDrawable (pmap, pmap.Colormap, 0, 0, 0, 0, sz, sz);
-					}
 				}
 			}
 		}

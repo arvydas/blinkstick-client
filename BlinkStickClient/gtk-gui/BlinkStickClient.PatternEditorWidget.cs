@@ -64,7 +64,7 @@ namespace BlinkStickClient
 			this.buttonAddPattern.Name = "buttonAddPattern";
 			this.buttonAddPattern.UseUnderline = true;
 			global::Gtk.Image w2 = new global::Gtk.Image ();
-			w2.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.Menu);
+			w2.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-plus.png");
 			this.buttonAddPattern.Image = w2;
 			this.hboxNewPatternButtons.Add (this.buttonAddPattern);
 			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hboxNewPatternButtons [this.buttonAddPattern]));
@@ -113,7 +113,7 @@ namespace BlinkStickClient
 			this.buttonAddAnimation.Name = "buttonAddAnimation";
 			this.buttonAddAnimation.UseUnderline = true;
 			global::Gtk.Image w9 = new global::Gtk.Image ();
-			w9.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-add", global::Gtk.IconSize.Menu);
+			w9.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-plus.png");
 			this.buttonAddAnimation.Image = w9;
 			this.hboxAnimationsTitle.Add (this.buttonAddAnimation);
 			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.hboxAnimationsTitle [this.buttonAddAnimation]));
@@ -134,7 +134,7 @@ namespace BlinkStickClient
 			w12.Fill = false;
 			// Container child vboxRight.Gtk.Box+BoxChild
 			this.scrolledwindowAnimations = new global::Gtk.ScrolledWindow ();
-			this.scrolledwindowAnimations.WidthRequest = 300;
+			this.scrolledwindowAnimations.WidthRequest = 310;
 			this.scrolledwindowAnimations.CanFocus = true;
 			this.scrolledwindowAnimations.Name = "scrolledwindowAnimations";
 			this.scrolledwindowAnimations.HscrollbarPolicy = ((global::Gtk.PolicyType)(2));

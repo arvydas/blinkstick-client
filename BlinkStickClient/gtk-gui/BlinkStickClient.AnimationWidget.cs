@@ -127,7 +127,7 @@ namespace BlinkStickClient
 			this.buttonUp.Name = "buttonUp";
 			this.buttonUp.UseUnderline = true;
 			global::Gtk.Image w6 = new global::Gtk.Image ();
-			w6.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-go-up", global::Gtk.IconSize.Menu);
+			w6.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-arrow-up.png");
 			this.buttonUp.Image = w6;
 			this.hboxColor.Add (this.buttonUp);
 			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.hboxColor [this.buttonUp]));
@@ -140,7 +140,7 @@ namespace BlinkStickClient
 			this.buttonDown.Name = "buttonDown";
 			this.buttonDown.UseUnderline = true;
 			global::Gtk.Image w8 = new global::Gtk.Image ();
-			w8.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-go-down", global::Gtk.IconSize.Menu);
+			w8.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-arrow-down.png");
 			this.buttonDown.Image = w8;
 			this.hboxColor.Add (this.buttonDown);
 			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.hboxColor [this.buttonDown]));
@@ -153,7 +153,7 @@ namespace BlinkStickClient
 			this.buttonDelete.Name = "buttonDelete";
 			this.buttonDelete.UseUnderline = true;
 			global::Gtk.Image w10 = new global::Gtk.Image ();
-			w10.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-delete", global::Gtk.IconSize.Menu);
+			w10.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-trash.png");
 			this.buttonDelete.Image = w10;
 			this.hboxColor.Add (this.buttonDelete);
 			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.hboxColor [this.buttonDelete]));
@@ -166,7 +166,7 @@ namespace BlinkStickClient
 			this.buttonProperties.Name = "buttonProperties";
 			this.buttonProperties.UseUnderline = true;
 			global::Gtk.Image w12 = new global::Gtk.Image ();
-			w12.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-edit", global::Gtk.IconSize.Menu);
+			w12.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-pencil-square-o.png");
 			this.buttonProperties.Image = w12;
 			this.hboxColor.Add (this.buttonProperties);
 			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.hboxColor [this.buttonProperties]));

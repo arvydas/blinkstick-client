@@ -125,7 +125,7 @@ namespace BlinkStickClient
             PatternListStore.Clear();
             foreach (Pattern pattern in DataModel.Patterns)
             {
-                TreeIter iter = PatternListStore.AppendValues("gtk-media-play", pattern, "gtk-edit", "gtk-copy", "gtk-delete");
+                TreeIter iter = PatternListStore.AppendValues("icon-dark-play", pattern, "icon-dark-pencil-square-o", "icon-dark-clone", "icon-dark-trash");
 
                 if (pattern == PreselectedPattern)
                 {
@@ -277,7 +277,7 @@ namespace BlinkStickClient
                     else
                     {
                         PlayPattern(SelectedPattern);
-                        model.SetValue(iter, 0, "gtk-media-stop");
+                        model.SetValue(iter, 0, "icon-dark-stop");
                     }
                 }
             }
@@ -315,7 +315,7 @@ namespace BlinkStickClient
 
         private void AddPattern(Pattern pattern)
         {
-            PatternListStore.AppendValues("gtk-media-play", pattern, "gtk-edit", "gtk-copy", "gtk-delete");
+            PatternListStore.AppendValues("icon-dark-play", pattern, "icon-dark-pencil-square-o", "icon-dark-clone", "icon-dark-trash");
             pattern.Animations.Add(new Animation());
             DataModel.Patterns.Add(pattern);
 
@@ -429,7 +429,7 @@ namespace BlinkStickClient
             {
                 if (pattern == (Pattern)PatternListStore.GetValue(iterator, PatternColumn))
                 {
-                    PatternListStore.SetValue(iterator, 0, "gtk-media-play");
+                    PatternListStore.SetValue(iterator, 0, "icon-dark-play");
                     break;
                 }
             } 

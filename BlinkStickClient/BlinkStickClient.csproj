@@ -90,11 +90,6 @@
     <EmbeddedResource Include="Resources\blinkstick-pro.png" />
     <EmbeddedResource Include="Resources\blinkstick-square.png" />
     <EmbeddedResource Include="Resources\blinkstick-strip.png" />
-    <EmbeddedResource Include="Resources\icons\blinkstick-patterns.png" />
-    <EmbeddedResource Include="Resources\icons\blinkstick-notifications.png" />
-    <EmbeddedResource Include="Resources\icons\blinkstick-overview.png" />
-    <EmbeddedResource Include="Resources\icons\blinkstick-events.png" />
-    <EmbeddedResource Include="Resources\icons\blinkstick-help.png" />
     <EmbeddedResource Include="Resources\notifications\notification-ambilight.png" />
     <EmbeddedResource Include="Resources\notifications\notification-moodlight.png" />
     <EmbeddedResource Include="Resources\notifications\notification-application.png" />
@@ -115,6 +110,39 @@
     <EmbeddedResource Include="Resources\blinkstick-nano.png" />
     <EmbeddedResource Include="Resources\blinkstick-flex.png" />
     <EmbeddedResource Include="Resources\notifications\notification-key.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-bell.png">
+      <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icons\icon-dark-calendar.png">
+      <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icons\icon-dark-cog.png">
+      <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icons\icon-dark-question-circle.png">
+      <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icons\icon-dark-sign-out.png">
+      <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icons\icon-dark-usb.png">
+      <DeployService-UseProjectRelativePath>True</DeployService-UseProjectRelativePath>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\icons\icon-dark-refresh.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-plus.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-cog-small.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-clipboard.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-clone.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-pencil-square-o.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-trash.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-play.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-stop.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-arrow-down.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-arrow-up.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-check-square-o.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-usb-small.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-square-o.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-th.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />

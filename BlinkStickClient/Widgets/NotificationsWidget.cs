@@ -111,7 +111,7 @@ namespace BlinkStickClient
 
             log.Debug("Adding notifications to the tree");
             foreach (CustomNotification e in DataModel.Notifications) {
-                NotificationListStore.AppendValues (e, "gtk-edit", "gtk-copy", "gtk-delete", NotificationRegistry.FindIcon(e.GetType()));
+                NotificationListStore.AppendValues (e, "icon-dark-pencil-square-o", "icon-dark-clone", "icon-dark-trash", NotificationRegistry.FindIcon(e.GetType()));
             } 
         }
 
@@ -178,7 +178,7 @@ namespace BlinkStickClient
 
                     if (EditNotification(notification, "Copy Notification"))
                     {
-                        NotificationListStore.AppendValues(notification, "gtk-edit", "gtk-copy", "gtk-delete", NotificationRegistry.FindIcon(notification.GetType()));
+                        NotificationListStore.AppendValues(notification, "icon-dark-pencil-square-o", "icon-dark-clone", "icon-dark-trash", NotificationRegistry.FindIcon(notification.GetType()));
                         DataModel.Notifications.Add(notification);
                         ignoreNexClick = true;
                         SelectNotificationInTree(notification);
@@ -220,7 +220,7 @@ namespace BlinkStickClient
         {
             if (model.GetValue (iter, 0) is CustomNotification) {
                 CustomNotification notification = (CustomNotification)model.GetValue (iter, 0);
-                (cell as Gtk.CellRendererPixbuf).StockId = notification.Enabled ? "gtk-yes" : "gtk-no";
+                (cell as Gtk.CellRendererPixbuf).StockId = notification.Enabled ? "icon-dark-check-square-o" : "icon-dark-square-o";
             }
         }
 
@@ -282,7 +282,7 @@ namespace BlinkStickClient
 
                 if (EditNotification(notification, "New Notification"))
                 {
-                    NotificationListStore.AppendValues(notification, "gtk-edit", "gtk-copy", "gtk-delete", NotificationRegistry.FindIcon(notification.GetType()));
+                    NotificationListStore.AppendValues(notification, "icon-dark-pencil-square-o", "icon-dark-clone", "icon-dark-trash", NotificationRegistry.FindIcon(notification.GetType()));
                     DataModel.Notifications.Add(notification);
                     DataModel.Save();
 

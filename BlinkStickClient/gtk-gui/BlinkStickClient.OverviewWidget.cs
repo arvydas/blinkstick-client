@@ -72,7 +72,7 @@ namespace BlinkStickClient
 			this.buttonRefresh.Name = "buttonRefresh";
 			this.buttonRefresh.UseUnderline = true;
 			global::Gtk.Image w3 = new global::Gtk.Image ();
-			w3.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-refresh", global::Gtk.IconSize.Menu);
+			w3.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-refresh.png");
 			this.buttonRefresh.Image = w3;
 			this.hboxMiniMenu.Add (this.buttonRefresh);
 			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.buttonRefresh]));
@@ -85,7 +85,7 @@ namespace BlinkStickClient
 			this.buttonConfigure.Name = "buttonConfigure";
 			this.buttonConfigure.UseUnderline = true;
 			global::Gtk.Image w5 = new global::Gtk.Image ();
-			w5.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-preferences", global::Gtk.IconSize.Menu);
+			w5.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-cog-small.png");
 			this.buttonConfigure.Image = w5;
 			this.hboxMiniMenu.Add (this.buttonConfigure);
 			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.buttonConfigure]));
@@ -98,7 +98,7 @@ namespace BlinkStickClient
 			this.buttonDelete.Name = "buttonDelete";
 			this.buttonDelete.UseUnderline = true;
 			global::Gtk.Image w7 = new global::Gtk.Image ();
-			w7.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-delete", global::Gtk.IconSize.Menu);
+			w7.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-trash.png");
 			this.buttonDelete.Image = w7;
 			this.hboxMiniMenu.Add (this.buttonDelete);
 			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.buttonDelete]));

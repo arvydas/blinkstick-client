@@ -39,7 +39,7 @@ namespace BlinkStickClient
 			this.buttonPaste.UseUnderline = true;
 			this.buttonPaste.Label = global::Mono.Unix.Catalog.GetString ("Paste");
 			global::Gtk.Image w1 = new global::Gtk.Image ();
-			w1.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-paste", global::Gtk.IconSize.Menu);
+			w1.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-clipboard.png");
 			this.buttonPaste.Image = w1;
 			this.table1.Add (this.buttonPaste);
 			global::Gtk.Table.TableChild w2 = ((global::Gtk.Table.TableChild)(this.table1 [this.buttonPaste]));

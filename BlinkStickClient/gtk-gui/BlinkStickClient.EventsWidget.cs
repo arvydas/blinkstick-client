@@ -36,7 +36,7 @@ namespace BlinkStickClient
 			this.buttonClear.Name = "buttonClear";
 			this.buttonClear.UseUnderline = true;
 			global::Gtk.Image w1 = new global::Gtk.Image ();
-			w1.Pixbuf = global::Stetic.IconLoader.LoadIcon (this, "gtk-clear", global::Gtk.IconSize.Menu);
+			w1.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-trash.png");
 			this.buttonClear.Image = w1;
 			this.hbox2.Add (this.buttonClear);
 			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hbox2 [this.buttonClear]));
