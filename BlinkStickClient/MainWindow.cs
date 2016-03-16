@@ -199,7 +199,14 @@ public partial class MainWindow: Gtk.Window
         #else
 
         log.Debug ("Setting up tray icon");
-        trayIcon = new StatusIcon (new Pixbuf (System.IO.Path.Combine(ExecutableFolder, "icon.ico")));
+        if (HidSharp.PlatformDetector.RunningPlatform () == HidSharp.PlatformDetector.Platform.Windows) 
+        {
+            trayIcon = new StatusIcon (new Pixbuf (System.IO.Path.Combine(ExecutableFolder, "icon.ico")));
+        }
+        else if (HidSharp.PlatformDetector.RunningPlatform () == HidSharp.PlatformDetector.Platform.Mac) 
+        {
+            trayIcon = new StatusIcon (new Pixbuf (System.IO.Path.Combine(ExecutableFolder, "icon-osx.ico")));
+        }
         trayIcon.Tooltip = this.Title;
         trayIcon.Visible = true;
 
