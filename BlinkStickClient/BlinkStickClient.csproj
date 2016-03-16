@@ -264,6 +264,9 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="icon-osx.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
