@@ -128,3 +128,7 @@ UpgradeLog*.XML
 /Install/BlinkStick-*.iss
 
 !/Components/EasyHook/*
+
+/util/icon-generator/exported/*
+/util/icon-generator/font*
+
