@@ -129,8 +129,7 @@ namespace BlinkStickClient
 			};
             #endif
 
-            //TODO: Check if platform is Windows
-            if (!CheckWindowsGtk ())
+            if (HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Windows && !CheckWindowsGtk ())
                 return 1;
 
             Environment.SetEnvironmentVariable("GTK2_RC_FILES", Path.Combine(MainWindow.ExecutableFolder, "Theme", applicationSettings.Theme, "gtk-2.0", "gtkrc"));

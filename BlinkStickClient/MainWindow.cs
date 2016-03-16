@@ -556,7 +556,10 @@ public partial class MainWindow: Gtk.Window
 
     public static void RegisterStartup(Boolean register)
     {
-        StartupManager.RegisterStartup(register, "BlinkStickClient", ExecutableFile, "--tray");
+		if (HidSharp.PlatformDetector.RunningPlatform () == HidSharp.PlatformDetector.Platform.Windows) 
+		{
+			StartupManager.RegisterStartup (register, "BlinkStickClient", ExecutableFile, "--tray");
+		}
     }
 }
 
