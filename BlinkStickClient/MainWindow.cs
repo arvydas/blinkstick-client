@@ -28,6 +28,7 @@ using BlinkStickDotNet;
 using BlinkStickClient.Utils;
 using MonoDevelop.MacInterop;
 using BlinkStickClient.Classes;
+using System.Threading;
 #if LINUX
 using AppIndicator;
 #endif
@@ -472,6 +473,7 @@ public partial class MainWindow: Gtk.Window
                 if (device.Led != null && device.Led.Connected)
                 {
                     device.TurnOff(); 
+                    Thread.Sleep(50);
                     device.Led.CloseDevice();
                 }
             });
