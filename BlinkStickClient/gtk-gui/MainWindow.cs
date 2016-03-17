@@ -58,7 +58,7 @@ public partial class MainWindow
 		this.EventsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Events");
 		w1.Add (this.EventsAction, null);
 		this.SettingsAction = new global::Gtk.RadioAction ("SettingsAction", global::Mono.Unix.Catalog.GetString ("Settings"), null, "icon-dark-cog", 4);
-		this.SettingsAction.Group = this.EventsAction.Group;
+		this.SettingsAction.Group = this.HelpAction.Group;
 		this.SettingsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Settings");
 		w1.Add (this.SettingsAction, null);
 		this.QuitAction = new global::Gtk.Action ("QuitAction", global::Mono.Unix.Catalog.GetString ("Quit"), null, "icon-dark-sign-out");

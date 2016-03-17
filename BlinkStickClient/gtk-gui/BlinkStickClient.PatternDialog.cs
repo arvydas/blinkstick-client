@@ -25,7 +25,9 @@ namespace BlinkStickClient
 			this.vbox2.Name = "vbox2";
 			this.vbox2.Spacing = 6;
 			// Container child vbox2.Gtk.Box+BoxChild
-			this.patternEditorWidget = null;
+			this.patternEditorWidget = new global::BlinkStickClient.PatternEditorWidget ();
+			this.patternEditorWidget.Events = ((global::Gdk.EventMask)(256));
+			this.patternEditorWidget.Name = "patternEditorWidget";
 			this.vbox2.Add (this.patternEditorWidget);
 			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.patternEditorWidget]));
 			w2.Position = 0;
