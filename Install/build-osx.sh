@@ -23,3 +23,8 @@ cp ../BlinkStickClient/bin/Release/*.ico build/$APP_NAME/Contents/MacOS
 cp ../BlinkStickClient/bin/Release/*.png build/$APP_NAME/Contents/MacOS
 cp -a theme build/$APP_NAME/Contents/MacOS/Theme
 cp -a ../scripts build/$APP_NAME/Contents/MacOS/scripts
+
+#pkgbuild --analyze --root ./build/BlinkStickClient.app BlinkStickClient.plist
+#pkgbuild --identifier com.aginno.BlinkStickClient --root ./build/BlinkStickClient.app --install-location /Applications blinkstick-client.pkg
+
+
