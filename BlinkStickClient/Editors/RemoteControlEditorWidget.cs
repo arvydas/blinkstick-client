@@ -13,6 +13,12 @@ namespace BlinkStickClient
         public RemoteControlEditorWidget()
         {
             this.Build();
+
+            if (HidSharp.PlatformDetector.RunningPlatform () != HidSharp.PlatformDetector.Platform.Windows)
+            {
+                buttonFixPermissions.Visible = false;
+                buttonFixPermissions.NoShowAll = true;
+            }
         }
 
         #region IEditorInterface implementation
