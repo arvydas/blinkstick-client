@@ -122,6 +122,7 @@ UpgradeLog*.XML
 !/Install/gtk-libs/*/*/*/*/*
 
 /Install/version.iss
+/Install/build
 
 /Install/branding/*
 /Install/branding/*/*
