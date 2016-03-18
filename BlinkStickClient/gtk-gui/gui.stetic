@@ -286,14 +286,7 @@
             <property name="MemberName" />
             <property name="Spacing">6</property>
             <child>
-              <widget class="BlinkStickClient.PatternEditorWidget" id="patternEditorWidget">
-                <property name="MemberName" />
-                <property name="Events">ButtonPressMask</property>
-              </widget>
-              <packing>
-                <property name="Position">0</property>
-                <property name="AutoSize">True</property>
-              </packing>
+              <placeholder />
             </child>
           </widget>
           <packing>
@@ -1126,17 +1119,7 @@ Pulse</property>
               </packing>
             </child>
             <child>
-              <widget class="BlinkStickClient.DeviceComboboxWidget" id="deviceComboboxWidget">
-                <property name="MemberName" />
-                <property name="Events">ButtonPressMask</property>
-                <property name="AutoSelectDevice">True</property>
-              </widget>
-              <packing>
-                <property name="Position">1</property>
-                <property name="AutoSize">True</property>
-                <property name="Expand">False</property>
-                <property name="Fill">False</property>
-              </packing>
+              <placeholder />
             </child>
             <child>
               <widget class="Gtk.Button" id="buttonRefresh">
@@ -1201,15 +1184,7 @@ Pulse</property>
           </packing>
         </child>
         <child>
-          <widget class="BlinkStickClient.BlinkStickEmulatorWidget" id="blinkstickemulatorwidget1">
-            <property name="MemberName" />
-            <property name="HeightRequest">200</property>
-            <property name="Events">ButtonPressMask</property>
-          </widget>
-          <packing>
-            <property name="Position">1</property>
-            <property name="AutoSize">True</property>
-          </packing>
+          <placeholder />
         </child>
         <child>
           <widget class="Gtk.Frame" id="frame2">
@@ -1266,16 +1241,7 @@ Pulse</property>
           </packing>
         </child>
         <child>
-          <widget class="BlinkStickClient.BlinkStickInfoWidget" id="blinkstickinfowidget2">
-            <property name="MemberName" />
-            <property name="Events">ButtonPressMask</property>
-          </widget>
-          <packing>
-            <property name="Position">4</property>
-            <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
+          <placeholder />
         </child>
       </widget>
     </child>
@@ -2811,6 +2777,9 @@ by Agile Innovative Ltd.</property>
                           <placeholder />
                         </child>
                         <child>
+                          <placeholder />
+                        </child>
+                        <child>
                           <widget class="Gtk.Button" id="buttonEditPatterns">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
@@ -2868,28 +2837,6 @@ by Agile Innovative Ltd.</property>
                           <packing>
                             <property name="TopAttach">5</property>
                             <property name="BottomAttach">6</property>
-                            <property name="LeftAttach">1</property>
-                            <property name="RightAttach">2</property>
-                            <property name="AutoSize">True</property>
-                            <property name="XOptions">Fill</property>
-                            <property name="YOptions">Fill</property>
-                            <property name="XExpand">False</property>
-                            <property name="XFill">True</property>
-                            <property name="XShrink">False</property>
-                            <property name="YExpand">False</property>
-                            <property name="YFill">True</property>
-                            <property name="YShrink">False</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="BlinkStickClient.DeviceComboboxWidget" id="deviceComboboxWidget">
-                            <property name="MemberName" />
-                            <property name="Events">ButtonPressMask</property>
-                            <property name="AutoSelectDevice">False</property>
-                          </widget>
-                          <packing>
-                            <property name="TopAttach">2</property>
-                            <property name="BottomAttach">3</property>
                             <property name="LeftAttach">1</property>
                             <property name="RightAttach">2</property>
                             <property name="AutoSize">True</property>
@@ -5119,7 +5066,7 @@ Search is case insensitive.
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="BlinkStickClient.RemoteControlEditorWidget" design-size="252 70">
+  <widget class="Gtk.Bin" id="BlinkStickClient.RemoteControlEditorWidget" design-size="275 78">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -5306,16 +5253,7 @@ Search is case insensitive.
           </packing>
         </child>
         <child>
-          <widget class="BlinkStickClient.BlinkStickInfoWidget" id="blinkstickinfowidget2">
-            <property name="MemberName" />
-            <property name="Events">ButtonPressMask</property>
-          </widget>
-          <packing>
-            <property name="Position">1</property>
-            <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
+          <placeholder />
         </child>
         <child>
           <placeholder />

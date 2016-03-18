@@ -10,15 +10,11 @@ namespace BlinkStickClient
 		
 		private global::Gtk.Label labelSelectBlinkStick;
 		
-		private global::BlinkStickClient.DeviceComboboxWidget deviceComboboxWidget;
-		
 		private global::Gtk.Button buttonRefresh;
 		
 		private global::Gtk.Button buttonConfigure;
 		
 		private global::Gtk.Button buttonDelete;
-		
-		private global::BlinkStickClient.BlinkStickEmulatorWidget blinkstickemulatorwidget1;
 		
 		private global::Gtk.Frame frame2;
 		
@@ -29,8 +25,6 @@ namespace BlinkStickClient
 		private global::Gtk.Label GtkLabel11;
 		
 		private global::Gtk.HSeparator hseparator1;
-		
-		private global::BlinkStickClient.BlinkStickInfoWidget blinkstickinfowidget2;
 
 		protected virtual void Build ()
 		{
@@ -57,67 +51,49 @@ namespace BlinkStickClient
 			w1.Expand = false;
 			w1.Fill = false;
 			// Container child hboxMiniMenu.Gtk.Box+BoxChild
-			this.deviceComboboxWidget = new global::BlinkStickClient.DeviceComboboxWidget ();
-			this.deviceComboboxWidget.Events = ((global::Gdk.EventMask)(256));
-			this.deviceComboboxWidget.Name = "deviceComboboxWidget";
-			this.deviceComboboxWidget.AutoSelectDevice = true;
-			this.hboxMiniMenu.Add (this.deviceComboboxWidget);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.deviceComboboxWidget]));
-			w2.Position = 1;
-			w2.Expand = false;
-			w2.Fill = false;
-			// Container child hboxMiniMenu.Gtk.Box+BoxChild
 			this.buttonRefresh = new global::Gtk.Button ();
 			this.buttonRefresh.CanFocus = true;
 			this.buttonRefresh.Name = "buttonRefresh";
 			this.buttonRefresh.UseUnderline = true;
-			global::Gtk.Image w3 = new global::Gtk.Image ();
-			w3.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-refresh.png");
-			this.buttonRefresh.Image = w3;
+			global::Gtk.Image w2 = new global::Gtk.Image ();
+			w2.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-refresh.png");
+			this.buttonRefresh.Image = w2;
 			this.hboxMiniMenu.Add (this.buttonRefresh);
-			global::Gtk.Box.BoxChild w4 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.buttonRefresh]));
-			w4.Position = 2;
-			w4.Expand = false;
-			w4.Fill = false;
+			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.buttonRefresh]));
+			w3.Position = 2;
+			w3.Expand = false;
+			w3.Fill = false;
 			// Container child hboxMiniMenu.Gtk.Box+BoxChild
 			this.buttonConfigure = new global::Gtk.Button ();
 			this.buttonConfigure.CanFocus = true;
 			this.buttonConfigure.Name = "buttonConfigure";
 			this.buttonConfigure.UseUnderline = true;
-			global::Gtk.Image w5 = new global::Gtk.Image ();
-			w5.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-cog-small.png");
-			this.buttonConfigure.Image = w5;
+			global::Gtk.Image w4 = new global::Gtk.Image ();
+			w4.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-cog-small.png");
+			this.buttonConfigure.Image = w4;
 			this.hboxMiniMenu.Add (this.buttonConfigure);
-			global::Gtk.Box.BoxChild w6 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.buttonConfigure]));
-			w6.Position = 3;
-			w6.Expand = false;
-			w6.Fill = false;
+			global::Gtk.Box.BoxChild w5 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.buttonConfigure]));
+			w5.Position = 3;
+			w5.Expand = false;
+			w5.Fill = false;
 			// Container child hboxMiniMenu.Gtk.Box+BoxChild
 			this.buttonDelete = new global::Gtk.Button ();
 			this.buttonDelete.CanFocus = true;
 			this.buttonDelete.Name = "buttonDelete";
 			this.buttonDelete.UseUnderline = true;
-			global::Gtk.Image w7 = new global::Gtk.Image ();
-			w7.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-trash.png");
-			this.buttonDelete.Image = w7;
+			global::Gtk.Image w6 = new global::Gtk.Image ();
+			w6.Pixbuf = global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-trash.png");
+			this.buttonDelete.Image = w6;
 			this.hboxMiniMenu.Add (this.buttonDelete);
-			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.buttonDelete]));
-			w8.Position = 4;
+			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.buttonDelete]));
+			w7.Position = 4;
+			w7.Expand = false;
+			w7.Fill = false;
+			this.vbox4.Add (this.hboxMiniMenu);
+			global::Gtk.Box.BoxChild w8 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.hboxMiniMenu]));
+			w8.Position = 0;
 			w8.Expand = false;
 			w8.Fill = false;
-			this.vbox4.Add (this.hboxMiniMenu);
-			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.hboxMiniMenu]));
-			w9.Position = 0;
-			w9.Expand = false;
-			w9.Fill = false;
-			// Container child vbox4.Gtk.Box+BoxChild
-			this.blinkstickemulatorwidget1 = new global::BlinkStickClient.BlinkStickEmulatorWidget ();
-			this.blinkstickemulatorwidget1.HeightRequest = 200;
-			this.blinkstickemulatorwidget1.Events = ((global::Gdk.EventMask)(256));
-			this.blinkstickemulatorwidget1.Name = "blinkstickemulatorwidget1";
-			this.vbox4.Add (this.blinkstickemulatorwidget1);
-			global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.blinkstickemulatorwidget1]));
-			w10.Position = 1;
 			// Container child vbox4.Gtk.Box+BoxChild
 			this.frame2 = new global::Gtk.Frame ();
 			this.frame2.Name = "frame2";
@@ -138,25 +114,16 @@ namespace BlinkStickClient
 			this.GtkLabel11.UseMarkup = true;
 			this.frame2.LabelWidget = this.GtkLabel11;
 			this.vbox4.Add (this.frame2);
-			global::Gtk.Box.BoxChild w13 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.frame2]));
-			w13.Position = 2;
+			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.frame2]));
+			w11.Position = 2;
 			// Container child vbox4.Gtk.Box+BoxChild
 			this.hseparator1 = new global::Gtk.HSeparator ();
 			this.hseparator1.Name = "hseparator1";
 			this.vbox4.Add (this.hseparator1);
-			global::Gtk.Box.BoxChild w14 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.hseparator1]));
-			w14.Position = 3;
-			w14.Expand = false;
-			w14.Fill = false;
-			// Container child vbox4.Gtk.Box+BoxChild
-			this.blinkstickinfowidget2 = new global::BlinkStickClient.BlinkStickInfoWidget ();
-			this.blinkstickinfowidget2.Events = ((global::Gdk.EventMask)(256));
-			this.blinkstickinfowidget2.Name = "blinkstickinfowidget2";
-			this.vbox4.Add (this.blinkstickinfowidget2);
-			global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.blinkstickinfowidget2]));
-			w15.Position = 4;
-			w15.Expand = false;
-			w15.Fill = false;
+			global::Gtk.Box.BoxChild w12 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.hseparator1]));
+			w12.Position = 3;
+			w12.Expand = false;
+			w12.Fill = false;
 			this.Add (this.vbox4);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

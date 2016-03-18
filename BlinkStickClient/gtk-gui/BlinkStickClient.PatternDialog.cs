@@ -6,8 +6,6 @@ namespace BlinkStickClient
 	{
 		private global::Gtk.VBox vbox2;
 		
-		private global::BlinkStickClient.PatternEditorWidget patternEditorWidget;
-		
 		private global::Gtk.Button buttonCancel;
 
 		protected virtual void Build ()
@@ -24,22 +22,15 @@ namespace BlinkStickClient
 			this.vbox2 = new global::Gtk.VBox ();
 			this.vbox2.Name = "vbox2";
 			this.vbox2.Spacing = 6;
-			// Container child vbox2.Gtk.Box+BoxChild
-			this.patternEditorWidget = new global::BlinkStickClient.PatternEditorWidget ();
-			this.patternEditorWidget.Events = ((global::Gdk.EventMask)(256));
-			this.patternEditorWidget.Name = "patternEditorWidget";
-			this.vbox2.Add (this.patternEditorWidget);
-			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.vbox2 [this.patternEditorWidget]));
-			w2.Position = 0;
 			w1.Add (this.vbox2);
-			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
-			w3.Position = 0;
+			global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(w1 [this.vbox2]));
+			w2.Position = 0;
 			// Internal child BlinkStickClient.PatternDialog.ActionArea
-			global::Gtk.HButtonBox w4 = this.ActionArea;
-			w4.Name = "dialog_actions";
-			w4.Spacing = 10;
-			w4.BorderWidth = ((uint)(5));
-			w4.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
+			global::Gtk.HButtonBox w3 = this.ActionArea;
+			w3.Name = "dialog_actions";
+			w3.Spacing = 10;
+			w3.BorderWidth = ((uint)(5));
+			w3.LayoutStyle = ((global::Gtk.ButtonBoxStyle)(4));
 			// Container child dialog_actions.Gtk.ButtonBox+ButtonBoxChild
 			this.buttonCancel = new global::Gtk.Button ();
 			this.buttonCancel.CanDefault = true;
@@ -49,9 +40,9 @@ namespace BlinkStickClient
 			this.buttonCancel.UseUnderline = true;
 			this.buttonCancel.Label = "gtk-close";
 			this.AddActionWidget (this.buttonCancel, -7);
-			global::Gtk.ButtonBox.ButtonBoxChild w5 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w4 [this.buttonCancel]));
-			w5.Expand = false;
-			w5.Fill = false;
+			global::Gtk.ButtonBox.ButtonBoxChild w4 = ((global::Gtk.ButtonBox.ButtonBoxChild)(w3 [this.buttonCancel]));
+			w4.Expand = false;
+			w4.Fill = false;
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();
 			}

@@ -13,8 +13,6 @@ namespace BlinkStickClient
 		private global::Gtk.Button buttonRefresh;
 		
 		private global::Gtk.Button buttonConfigure;
-		
-		private global::BlinkStickClient.BlinkStickInfoWidget blinkstickinfowidget2;
 
 		protected virtual void Build ()
 		{
@@ -66,15 +64,6 @@ namespace BlinkStickClient
 			w6.Position = 0;
 			w6.Expand = false;
 			w6.Fill = false;
-			// Container child vbox3.Gtk.Box+BoxChild
-			this.blinkstickinfowidget2 = new global::BlinkStickClient.BlinkStickInfoWidget ();
-			this.blinkstickinfowidget2.Events = ((global::Gdk.EventMask)(256));
-			this.blinkstickinfowidget2.Name = "blinkstickinfowidget2";
-			this.vbox3.Add (this.blinkstickinfowidget2);
-			global::Gtk.Box.BoxChild w7 = ((global::Gtk.Box.BoxChild)(this.vbox3 [this.blinkstickinfowidget2]));
-			w7.Position = 1;
-			w7.Expand = false;
-			w7.Fill = false;
 			this.Add (this.vbox3);
 			if ((this.Child != null)) {
 				this.Child.ShowAll ();

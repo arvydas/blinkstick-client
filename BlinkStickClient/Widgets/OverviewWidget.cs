@@ -17,9 +17,47 @@ namespace BlinkStickClient
 
         private BlinkStickDeviceSettings PreviousDeviceSettings;
 
+        private global::BlinkStickClient.DeviceComboboxWidget deviceComboboxWidget;
+        private global::BlinkStickClient.BlinkStickEmulatorWidget blinkstickemulatorwidget1;
+        private global::BlinkStickClient.BlinkStickInfoWidget blinkstickinfowidget2;
+
+
         public OverviewWidget()
         {
             this.Build();
+
+            this.deviceComboboxWidget = new global::BlinkStickClient.DeviceComboboxWidget ();
+            this.deviceComboboxWidget.Events = ((global::Gdk.EventMask)(256));
+            this.deviceComboboxWidget.Name = "deviceComboboxWidget";
+            this.deviceComboboxWidget.AutoSelectDevice = true;
+            this.hboxMiniMenu.Add (this.deviceComboboxWidget);
+            global::Gtk.Box.BoxChild w2 = ((global::Gtk.Box.BoxChild)(this.hboxMiniMenu [this.deviceComboboxWidget]));
+            w2.Position = 1;
+            w2.Expand = false;
+            w2.Fill = false;
+
+            this.blinkstickemulatorwidget1 = new global::BlinkStickClient.BlinkStickEmulatorWidget ();
+            this.blinkstickemulatorwidget1.HeightRequest = 200;
+            this.blinkstickemulatorwidget1.Events = ((global::Gdk.EventMask)(256));
+            this.blinkstickemulatorwidget1.Name = "blinkstickemulatorwidget1";
+
+            this.blinkstickemulatorwidget1 = new global::BlinkStickClient.BlinkStickEmulatorWidget ();
+            this.blinkstickemulatorwidget1.HeightRequest = 200;
+            this.blinkstickemulatorwidget1.Events = ((global::Gdk.EventMask)(256));
+            this.blinkstickemulatorwidget1.Name = "blinkstickemulatorwidget1";
+            this.vbox4.Add (this.blinkstickemulatorwidget1);
+            global::Gtk.Box.BoxChild w10 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.blinkstickemulatorwidget1]));
+            w10.Position = 1;
+
+            this.blinkstickinfowidget2 = new global::BlinkStickClient.BlinkStickInfoWidget ();
+            this.blinkstickinfowidget2.Events = ((global::Gdk.EventMask)(256));
+            this.blinkstickinfowidget2.Name = "blinkstickinfowidget2";
+
+            this.vbox4.Add (this.blinkstickinfowidget2);
+            global::Gtk.Box.BoxChild w15 = ((global::Gtk.Box.BoxChild)(this.vbox4 [this.blinkstickinfowidget2]));
+            w15.Position = 4;
+            w15.Expand = false;
+            w15.Fill = false;
 
             hbox1.PackStart(colorPaletteWidget);
 

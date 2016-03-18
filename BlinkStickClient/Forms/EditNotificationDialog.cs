@@ -41,6 +41,8 @@ namespace BlinkStickClient
 
         private Boolean IgnoreComponentChange = true;
 
+        private global::BlinkStickClient.DeviceComboboxWidget deviceComboboxWidget;
+
         public Pattern SelectedPattern
         {
             get
@@ -60,6 +62,20 @@ namespace BlinkStickClient
             : base (title, parent, Gtk.DialogFlags.Modal, new object[0])
         {
             this.Build();
+
+            this.deviceComboboxWidget = new global::BlinkStickClient.DeviceComboboxWidget ();
+            this.deviceComboboxWidget.Events = ((global::Gdk.EventMask)(256));
+            this.deviceComboboxWidget.Name = "deviceComboboxWidget";
+            this.deviceComboboxWidget.AutoSelectDevice = false;
+            this.table2.Add (this.deviceComboboxWidget);
+            global::Gtk.Table.TableChild w6 = ((global::Gtk.Table.TableChild)(this.table2 [this.deviceComboboxWidget]));
+            w6.TopAttach = ((uint)(2));
+            w6.BottomAttach = ((uint)(3));
+            w6.LeftAttach = ((uint)(1));
+            w6.RightAttach = ((uint)(2));
+            w6.XOptions = ((global::Gtk.AttachOptions)(4));
+            w6.YOptions = ((global::Gtk.AttachOptions)(4));
+            this.deviceComboboxWidget.Show();
 
             this.Title = title;
             this.ApplicationSettings = settings;
