@@ -21,6 +21,7 @@ mkdir -p ./setup
 mkdir -p ./build
 
 printf "Clean up if left over build exists..."
+rm $OUTPUT
 rm -rf "./build/$APP_NAME"
 printf "$GREEN Done$NC\n"
 
@@ -32,7 +33,7 @@ mkdir -p "./build/$APP_NAME/Contents/Resources"
 printf "$GREEN Done$NC\n"
 
 printf "Copy contents..."
-cp -a ./osx/. "./build/$APP_NAME/Contents"
+cp -a ./osx/app-template/. "./build/$APP_NAME/Contents"
 cp $BINARY/*.dll "./build/$APP_NAME/Contents/MacOS"
 cp $BINARY/*.exe "./build/$APP_NAME/Contents/MacOS"
 cp $BINARY/*.config "./build/$APP_NAME/Contents/MacOS"
@@ -48,11 +49,21 @@ sed -i '' -e "s/{VERSION_STRING}/$VERSION_STRING/g" "./build/$APP_NAME/Contents/
 printf "$GREEN Done$NC\n"
 
 printf "Building PKG..."
-pkgbuild --quiet --identifier com.agileinnovative.BlinkStickClient --root ./build --install-location /Applications $OUTPUT
+pkgbuild --quiet --identifier com.agileinnovative.BlinkStickClient --root ./build --install-location /Applications ./build/installer.pkg
+printf "$GREEN Done$NC\n"
+
+
+printf "Building Installer.."
+cp ./osx/*.html "./build"
+cp ./osx/*.xml "./build"
+
+sed -i '' -e "s/{VERSION_STRING}/$VERSION_STRING/g" "./build/welcome.html"
+
+productbuild --quiet --distribution ./build/distribution.xml --resources ./build --package-path ./build $OUTPUT
 printf "$GREEN Done$NC\n"
 
 printf "Clean up..."
-rm -rf "build/$APP_NAME"
+rm -rf "./build"
 printf "$GREEN Done$NC\n"
 
 echo "\r\n\r\nBuild complete!"

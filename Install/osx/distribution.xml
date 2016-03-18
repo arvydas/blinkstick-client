@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<installer-gui-script minSpecVersion="1">
+    <title>BlinkStick Client</title>
+    <welcome file="welcome.html" />
+    <!--
+    <readme file="readme.html" />
+    -->
+    <license file="license.html" />
+    <conclusion file="conclusion.html" />
+
+    <options customize="never" require-scripts="false"/>
+
+    <pkg-ref id="com.agileinnovative.BlinkStickClient"/>
+    <options customize="never" require-scripts="false"/>
+    <choices-outline>
+        <line choice="default">
+            <line choice="com.agileinnovative.BlinkStickClient"/>
+        </line>
+    </choices-outline>
+    <choice id="default"/>
+    <choice id="com.agileinnovative.BlinkStickClient" visible="false">
+        <pkg-ref id="com.agileinnovative.BlinkStickClient"/>
+    </choice>
+    <pkg-ref id="com.agileinnovative.BlinkStickClient" version="0" onConclusion="none">installer.pkg</pkg-ref>
+</installer-gui-script>
