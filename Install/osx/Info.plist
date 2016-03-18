@@ -7,10 +7,16 @@
     <key>CFBundleExecutable</key>
     <string>BlinkStickClient</string>
     <key>CFBundleIdentifier</key>
-    <string>com.aginno.BlinkStickClient</string>
+    <string>com.agileinnovative.BlinkStickClient</string>
     <key>CFBundleName</key>
     <string>BlinkStick Client</string>
     <key>CFBundleIconFile</key>
     <string>icon</string>
+    <key>CFBundleVersion</key>
+    <string>{VERSION}</string>
+    <key>CFBundleShortVersionString</key>
+    <string>{VERSION}</string>
+    <key>CFBundleGetInfoString</key>
+    <string>Blinkstick Client version {VERSION_STRING}, Copyright 2016 by Agile Innovative Ltd.</string>
 </dict>
 </plist>
