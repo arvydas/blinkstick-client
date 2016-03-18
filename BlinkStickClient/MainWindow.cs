@@ -212,7 +212,10 @@ public partial class MainWindow: Gtk.Window
         trayIcon.Visible = true;
 
         // Show/Hide the window (even from the Panel/Taskbar) when the TrayIcon has been clicked.
-        trayIcon.Activate += ToggleMainWindow;
+        if (HidSharp.PlatformDetector.RunningPlatform () == HidSharp.PlatformDetector.Platform.Windows) 
+        {
+            trayIcon.Activate += ToggleMainWindow;
+        }
 
         trayIcon.PopupMenu += delegate {
             popupMenu.ShowAll ();
