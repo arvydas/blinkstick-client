@@ -1,0 +1,11 @@
+#!/bin/sh
+
+#Script is compatible with Windows paths
+
+SOURCE="$1"
+SOURCE=${SOURCE//\\/\/}
+
+DESTINATION="$2"
+DESTINATION=${DESTINATION//\\/\/}
+
+test -d "$DESTINATION" || mkdir -p "$DESTINATION" && cp -a $SOURCE $DESTINATION
