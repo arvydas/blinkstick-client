@@ -15,6 +15,12 @@ namespace BlinkStickClient
         public SettingsWidget()
         {
             this.Build();
+
+            if (HidSharp.PlatformDetector.RunningPlatform () != HidSharp.PlatformDetector.Platform.Windows)
+            {
+                frame1.Visible = false;
+                frame1.NoShowAll = true;
+            }
         }
 
         public void LoadSettings(ApplicationSettings applicationSettings)
