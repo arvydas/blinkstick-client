@@ -138,11 +138,15 @@ namespace BlinkStickClient
             MainWindow win = new MainWindow ();
             win.ApplicationSettings = applicationSettings;
             win.LoadEverything();
-            if (!(args.Length > 0 && args[0] == "--tray"))
+#if DEBUG
+            win.Show ();
+#else
+            if (HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Windows && !(args.Length > 0 && args[0] == "--tray"))
             {
                 win.Show ();
             }
-			Application.Run ();
+#endif
+            Application.Run ();
 
             HidSharp.HidDeviceLoader.FreeUsbResources();
             Logger.Stop();
