@@ -178,7 +178,7 @@ public partial class MainWindow: Gtk.Window
 
         //Settings menu item
         ImageMenuItem menuItemSettings = new ImageMenuItem ("Settings");
-        menuItemSettings.Image = new Gtk.Image(Stock.Preferences, IconSize.Menu);
+        menuItemSettings.Image = new Gtk.Image("icons-dark-cog-small", IconSize.Menu);
         menuItemSettings.Activated += ToggleMainWindow;
         popupMenu.Append(menuItemSettings);
 
@@ -186,7 +186,7 @@ public partial class MainWindow: Gtk.Window
 
         //Quit menu item
         ImageMenuItem menuItemQuit = new ImageMenuItem ("Quit");
-        menuItemQuit.Image = new Gtk.Image (Stock.Quit, IconSize.Menu);
+        menuItemQuit.Image = new Gtk.Image ("icon-dark-sign-out-small", IconSize.Menu);
         menuItemQuit.Activated += OnQuitActionActivated;
         popupMenu.Append (menuItemQuit);
 

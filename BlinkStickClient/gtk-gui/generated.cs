@@ -53,6 +53,8 @@ namespace Stetic
 				w1.Add ("icon-dark-square-o", w21);
 				global::Gtk.IconSet w22 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-th.png"));
 				w1.Add ("icon-dark-th", w22);
+				global::Gtk.IconSet w23 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-sign-out-small.png"));
+				w1.Add ("icon-dark-sign-out-small", w23);
 				w1.AddDefault ();
 			}
 		}

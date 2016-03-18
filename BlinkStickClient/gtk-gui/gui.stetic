@@ -114,6 +114,11 @@
         <property name="Image">resource:BlinkStickClient.Resources.icons.icon-dark-th.png</property>
       </source>
     </icon-set>
+    <icon-set id="icon-dark-sign-out-small">
+      <source>
+        <property name="Image">resource:BlinkStickClient.Resources.icons.icon-dark-sign-out-small.png</property>
+      </source>
+    </icon-set>
   </icon-factory>
   <widget class="Gtk.Window" id="MainWindow" design-size="706 584">
     <action-group name="Default">
