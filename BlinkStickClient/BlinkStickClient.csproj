@@ -25,8 +25,8 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CustomCommands>
       <CustomCommands>
-        <Command type="AfterBuild" command="postbuild &quot;${SolutionDir}\Install\theme&quot; &quot;${TargetDir}&quot;" workingdir="${SolutionDir}" pauseExternalConsole="True" />
-        <Command type="AfterBuild" command="postbuild &quot;${SolutionDir}\Components\EasyHook&quot; &quot;${TargetDir}&quot;" workingdir="${SolutionDir}" pauseExternalConsole="True" />
+        <Command type="AfterBuild" command="postbuild &quot;${SolutionDir}\Install\theme&quot; &quot;${TargetDir}&quot;" workingdir="${SolutionDir}" externalConsole="True" />
+        <Command type="AfterBuild" command="postbuild &quot;${SolutionDir}\Components\EasyHook&quot; &quot;${TargetDir}&quot;" workingdir="${SolutionDir}" externalConsole="True" />
       </CustomCommands>
     </CustomCommands>
   </PropertyGroup>
@@ -41,8 +41,8 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CustomCommands>
       <CustomCommands>
-        <Command type="AfterBuild" command="postbuild &quot;${SolutionDir}\Install\theme&quot; &quot;${TargetDir}&quot;" workingdir="${SolutionDir}" />
-        <Command type="AfterBuild" command="postbuild &quot;${SolutionDir}\Components\EasyHook&quot; &quot;${TargetDir}&quot;" workingdir="${SolutionDir}" />
+        <Command type="AfterBuild" command="postbuild &quot;${SolutionDir}\Install\theme&quot; &quot;${TargetDir}&quot;" workingdir="${SolutionDir}" externalConsole="True" />
+        <Command type="AfterBuild" command="postbuild &quot;${SolutionDir}\Components\EasyHook&quot; &quot;${TargetDir}&quot;" workingdir="${SolutionDir}" externalConsole="True" />
       </CustomCommands>
     </CustomCommands>
   </PropertyGroup>
