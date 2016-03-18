@@ -231,12 +231,20 @@ public partial class MainWindow: Gtk.Window
 
             //add a new group to the app menu, and add some items to it
             var appGroup = MacMenu.AddAppMenuGroup ();
-            appGroup.AddMenuItem (menuItemQuit, "About BlinkStick Client...");
-            appGroup.AddMenuItem (menuItemQuit, "Preferences...");
+            ImageMenuItem menuItemAbout = new ImageMenuItem ("About");
+            menuItemAbout.Activated += (sender, e) => {
+                this.Show();
+                VisiblePage = this.Pages[this.Pages.Count - 1];
+            };
 
-            //hide the menu bar so it no longer displays within the window
-            //menubar2.Hide ();
+            appGroup.AddMenuItem (menuItemAbout, "About BlinkStick Client...");
 
+            ImageMenuItem menuItemPreferences = new ImageMenuItem ("Preferences");
+            menuItemPreferences.Activated += (sender, e) => {
+                this.Show();
+                VisiblePage = this.Pages[this.Pages.Count - 2];
+            };
+            appGroup.AddMenuItem (menuItemPreferences, "Preferences...");
 
             ApplicationEvents.Quit += delegate(object sender, ApplicationQuitEventArgs e)
             {

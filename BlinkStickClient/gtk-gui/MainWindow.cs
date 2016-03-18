@@ -50,15 +50,15 @@ public partial class MainWindow
 		this.HelpAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Help");
 		w1.Add (this.HelpAction, null);
 		this.PatternsAction = new global::Gtk.RadioAction ("PatternsAction", global::Mono.Unix.Catalog.GetString ("Patterns"), null, "icon-dark-th", 2);
-		this.PatternsAction.Group = this.HelpAction.Group;
+		this.PatternsAction.Group = this.OverviewAction.Group;
 		this.PatternsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Patterns");
 		w1.Add (this.PatternsAction, null);
 		this.EventsAction = new global::Gtk.RadioAction ("EventsAction", global::Mono.Unix.Catalog.GetString ("Events"), null, "icon-dark-calendar", 3);
-		this.EventsAction.Group = this.HelpAction.Group;
+		this.EventsAction.Group = this.OverviewAction.Group;
 		this.EventsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Events");
 		w1.Add (this.EventsAction, null);
 		this.SettingsAction = new global::Gtk.RadioAction ("SettingsAction", global::Mono.Unix.Catalog.GetString ("Settings"), null, "icon-dark-cog", 4);
-		this.SettingsAction.Group = this.HelpAction.Group;
+		this.SettingsAction.Group = this.EventsAction.Group;
 		this.SettingsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Settings");
 		w1.Add (this.SettingsAction, null);
 		this.QuitAction = new global::Gtk.Action ("QuitAction", global::Mono.Unix.Catalog.GetString ("Quit"), null, "icon-dark-sign-out");
