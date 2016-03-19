@@ -6,9 +6,11 @@ using System.Windows.Forms;
 using System.Threading;
 using System.IO.Pipes;
 using log4net;
+#if !__MonoCS__
 using Capture.Interface;
 using Capture.Hook;
 using Capture;
+#endif
 using System.Diagnostics;
 using System.IO;
 
@@ -16,6 +18,7 @@ namespace BlinkStickClient.Utils
 {
     public class AmbilightWindowsService
     {
+        #if !__MonoCS__
         private ILog _log;
 
         protected ILog log 
@@ -429,6 +432,7 @@ namespace BlinkStickClient.Utils
                 return s;
             }
         }
+        #endif
     }
 }
 

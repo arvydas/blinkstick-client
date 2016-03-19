@@ -99,8 +99,10 @@ namespace BlinkStickClient
 
             if (ambilightMode)
             {
+                #if !__MonoCS__
                 AmbilightWindowsService service = new AmbilightWindowsService();
                 service.Run();
+                #endif
                 Logger.Stop();
                 return 0;
             }
