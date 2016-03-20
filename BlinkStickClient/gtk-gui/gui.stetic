@@ -6,7 +6,7 @@
   </configuration>
   <import>
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <widget-library name="../bin/Debug/BlinkStickClient.exe" internal="true" />
+    <widget-library name="../bin/Release/BlinkStickClient.exe" internal="true" />
   </import>
   <icon-factory>
     <icon-set id="icon-dark-bell">
@@ -117,6 +117,21 @@
     <icon-set id="icon-dark-sign-out-small">
       <source>
         <property name="Image">resource:BlinkStickClient.Resources.icons.icon-dark-sign-out-small.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="gtk-dialog-warning">
+      <source>
+        <property name="Image">resource:BlinkStickClient.Resources.icons.icon-dark-exclamation-triangle-large.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="gtk-dialog-question">
+      <source>
+        <property name="Image">resource:BlinkStickClient.Resources.icons.icon-dark-question-circle-large.png</property>
+      </source>
+    </icon-set>
+    <icon-set id="gtk-dialog-error">
+      <source>
+        <property name="Image">resource:BlinkStickClient.Resources.icons.icon-dark-times-circle-large.png</property>
       </source>
     </icon-set>
   </icon-factory>

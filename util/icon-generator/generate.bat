@@ -7,3 +7,7 @@ python generate.py --css font-awesome.css --ttf fontawesome-webfont.ttf --size 1
 python generate.py --css font-awesome.css --ttf fontawesome-webfont.ttf --size 16 --filename icon-dark-usb-small usb
 
 python generate.py --css font-awesome.css --ttf fontawesome-webfont.ttf --size 16 --filename icon-dark-sign-out-small sign-out
+
+python generate.py --css font-awesome.css --ttf fontawesome-webfont.ttf --size 64 --filename icon-dark-exclamation-triangle-large exclamation-triangle
+python generate.py --css font-awesome.css --ttf fontawesome-webfont.ttf --size 64 --filename icon-dark-question-circle-large question-circle
+python generate.py --css font-awesome.css --ttf fontawesome-webfont.ttf --size 64 --filename icon-dark-times-circle-large times-circle

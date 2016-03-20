@@ -144,6 +144,9 @@
     <EmbeddedResource Include="Resources\icons\icon-dark-square-o.png" />
     <EmbeddedResource Include="Resources\icons\icon-dark-th.png" />
     <EmbeddedResource Include="Resources\icons\icon-dark-sign-out-small.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-exclamation-triangle-large.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-question-circle-large.png" />
+    <EmbeddedResource Include="Resources\icons\icon-dark-times-circle-large.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />

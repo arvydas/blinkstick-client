@@ -55,6 +55,12 @@ namespace Stetic
 				w1.Add ("icon-dark-th", w22);
 				global::Gtk.IconSet w23 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-sign-out-small.png"));
 				w1.Add ("icon-dark-sign-out-small", w23);
+				global::Gtk.IconSet w24 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-exclamation-triangle-large.png"));
+				w1.Add ("gtk-dialog-warning", w24);
+				global::Gtk.IconSet w25 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-question-circle-large.png"));
+				w1.Add ("gtk-dialog-question", w25);
+				global::Gtk.IconSet w26 = new global::Gtk.IconSet (global::Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.icons.icon-dark-times-circle-large.png"));
+				w1.Add ("gtk-dialog-error", w26);
 				w1.AddDefault ();
 			}
 		}
