@@ -218,8 +218,14 @@ public partial class MainWindow: Gtk.Window
         }
 
         trayIcon.PopupMenu += delegate {
-            popupMenu.ShowAll ();
-            popupMenu.Popup ();
+            if (HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Mac) {
+                this.Show();
+            }
+            else
+            {
+                popupMenu.ShowAll ();
+                popupMenu.Popup ();
+            }
         };
         #endif
         if (HidSharp.PlatformDetector.RunningPlatform() == HidSharp.PlatformDetector.Platform.Mac) {
