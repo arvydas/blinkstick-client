@@ -1,9 +1,6 @@
-BlinkStick Client
-=================
+![BlinkStick Client](https://www.blinkstick.com/system/resources/logos/blinkstick-client.png)
 
-This is BlinkStick Client application repository.
-
-What is BlinkStick? It's a DIY USB RGB LED device. More info about it here:
+This is client application repository for BlinkStick smart LED controllers with integrated USB firmware. More info about it here:
 
 http://www.blinkstick.com
 
@@ -14,27 +11,33 @@ Binary releases are available here:
 
 http://www.blinkstick.com/help/downloads
 
+Release candidates are available in forums:
+
+https://forums.blinkstick.com/
+
 Overview
 --------
+
+![BlinkStick Client Screenshot](http://www.blinkstick.com/system/resources/screenshots/blinkstick-client.png)
 
 BlinkStick Client application is written in Mono/.NET 4.0 C# using Gtk#.
 
 Current full list of features in the client application:
 
-* Control any number of BlinkSticks
-* Detects when device is plugged in or unplugged.
-* Check email and get notifications about new email messages
-* Connect to BlinkStick.com and control the LED remotely
-* Visually display CPU usage
-* Use BlinkStick as AmbiLight clone
+* Supports all BlinkStick devices (Original BlinkStick, Pro, Strip, Square, Flex and Nano)
+* Supports all LEDs on devices
+* Completely rewritten LED animation engine
+* Completely rewritten ambilight notification with support for DirectX games
+* New notification types include Moodlight, Application, RAM, Battery, Disk space and ability to remotely control BlinkStick client application via HTTP requests
+* Customization of patterns and pattern animations
+* Ability to select and test LEDs in the GUI for all supported devices
 
 How to build (Windows)
 ----------------------
 
 * Download and install [Microsoft .NET 4.0 Full](http://www.microsoft.com/en-gb/download/details.aspx?id=17718)
-* Download and install [GTK# for .NET 2.12.20](http://download.xamarin.com/Installer/gtk-sharp-2.12.20.msi)
-* Download and install [Xamarin Studio 4](http://monodevelop.com/Download)
-* All dependant libraries are inside the repository
+* Download and install [Xamarin Studio 5](http://monodevelop.com/Download)
+* All dependant libraries are inside the repository or will be restored automatically with NuGet
 
 Clone this repository using Git.
 
@@ -74,7 +77,16 @@ Open BlinkStick.sln in MonoDevelop 4.0 and do a _Build -> Build All_, then _Run 
 How to build (Mac OSX)
 ----------------------
 
-_Will be written once source code is compatible with Mac OSX._
+* Download and install [Xamarin Studio 5](http://monodevelop.com/Download)
+* All dependant libraries are inside the repository or will be restored automatically with NuGet
+
+Clone this repository using Git.
+
+```
+git clone https://github.com/arvydas/blinkstick-client.git
+```
+
+Open BlinkStick.sln in Xamarin Studio and do a _Build -> Build All_, then _Run -> Start Debugging_.
 
 Development
 -----------
