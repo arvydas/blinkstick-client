@@ -438,31 +438,122 @@ namespace BlinkStickClient.DataModel
                             NeedsLedUpdate = false;
                         }
 
+						int retryCount = 5;
+
                         if (Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStick || 
                             Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro && Led.Mode < 2)
                         {
-                            Led.SetColor(LedFrame[0][1], LedFrame[0][0], LedFrame[0][2]);
+
+							while (retryCount > 0)  //Retry loop
+							{
+								try
+								{
+									Led.SetColor(LedFrame[0][1], LedFrame[0][0], LedFrame[0][2]);	
+									retryCount = 0;
+								}
+								catch (Exception ex)
+								{
+									retryCount--;
+									log.ErrorFormat("Failed to set color: {0}", ex);
+									if (retryCount > 0)
+									{
+										Thread.Sleep(20);
+										log.InfoFormat("Retry set color #{0}", 5 - retryCount);
+									}
+									else
+									{
+										log.Warn("Failed to set color 5 times, giving up...");
+									}
+								}
+							}
                         }
                         else
                         {
                             byte[] frame = new byte[this.LedsR * 3];
                             Array.Copy(LedFrame[0], 0, frame, 0, frame.Length); 
-                            Led.SetColors(0, frame);
+
+							while (retryCount > 0) //Retry loop
+							{
+								try
+								{
+									Led.SetColors(0, frame);
+									retryCount = 0;
+								}
+								catch (Exception ex)
+								{
+									retryCount--;
+									log.ErrorFormat("Failed to set color: {0}", ex);
+									if (retryCount > 0)
+									{
+										Thread.Sleep(20);
+										log.InfoFormat("Retry set color #{0}", 5 - retryCount);
+									}
+									else
+									{
+										log.Warn("Failed to set color 5 times, giving up...");
+									}
+								}
+							}
 
                             int sleep = Math.Max(2, (int)(this.LedsR * 3 * 8f / 400f * 1.2)); //number of LEDs times 3 color elements times 8 bytes divided by speed
                             Thread.Sleep(sleep);
 
-                            if (Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro)
+                            if (Led != null && Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro)
                             {
                                 frame = new byte[this.LedsG * 3];
                                 Array.Copy(LedFrame[1], 0, frame, 0, frame.Length); 
-                                Led.SetColors(1, frame);
+                                
+								while (retryCount > 0) //Retry loop
+								{
+									try
+									{
+										Led.SetColors(1, frame);
+										retryCount = 0;
+									}
+									catch (Exception ex)
+									{
+										retryCount--;
+										log.ErrorFormat("Failed to set color: {0}", ex);
+										if (retryCount > 0)
+										{
+											Thread.Sleep(20);
+											log.InfoFormat("Retry set color #{0}", 5 - retryCount);
+										}
+										else
+										{
+											log.Warn("Failed to set color 5 times, giving up...");
+										}
+									}
+								}
+
                                 sleep = Math.Max(2, (int)(this.LedsG * 3 * 8f / 400f * 1.2));
                                 Thread.Sleep(sleep);
 
                                 frame = new byte[this.LedsB * 3];
                                 Array.Copy(LedFrame[2], 0, frame, 0, frame.Length); 
-                                Led.SetColors(2, frame);
+
+								while (retryCount > 0) //Retry loop
+								{
+									try
+									{
+										Led.SetColors(2, frame);
+										retryCount = 0;
+									}
+									catch (Exception ex)
+									{
+										retryCount--;
+										log.ErrorFormat("Failed to set color: {0}", ex);
+										if (retryCount > 0)
+										{
+											Thread.Sleep(20);
+											log.InfoFormat("Retry set color #{0}", 5 - retryCount);
+										}
+										else
+										{
+											log.Warn("Failed to set color 5 times, giving up...");
+										}
+									}
+								}
 
                                 sleep = Math.Max(2, (int)(this.LedsB * 3 * 8f / 400f * 1.2));
                                 Thread.Sleep(sleep);
