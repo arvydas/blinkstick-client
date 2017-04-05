@@ -625,7 +625,10 @@ namespace BlinkStickClient.DataModel
         {
             if (patternAnimator != null && patternAnimator.IsBusy)
             {
-                Led.Stop();
+				if (Led != null) 
+				{
+					Led.Stop ();
+				}
                 patternAnimator.CancelAsync();
             }
         }
