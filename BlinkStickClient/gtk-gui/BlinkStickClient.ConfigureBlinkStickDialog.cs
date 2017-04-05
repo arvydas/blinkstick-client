@@ -120,11 +120,11 @@ namespace BlinkStickClient
 			this.hscaleLimitBrightness = new global::Gtk.HScale (null);
 			this.hscaleLimitBrightness.CanFocus = true;
 			this.hscaleLimitBrightness.Name = "hscaleLimitBrightness";
-			this.hscaleLimitBrightness.Adjustment.Lower = 1;
-			this.hscaleLimitBrightness.Adjustment.Upper = 100;
-			this.hscaleLimitBrightness.Adjustment.PageIncrement = 10;
-			this.hscaleLimitBrightness.Adjustment.StepIncrement = 1;
-			this.hscaleLimitBrightness.Adjustment.Value = 100;
+			this.hscaleLimitBrightness.Adjustment.Lower = 1D;
+			this.hscaleLimitBrightness.Adjustment.Upper = 100D;
+			this.hscaleLimitBrightness.Adjustment.PageIncrement = 10D;
+			this.hscaleLimitBrightness.Adjustment.StepIncrement = 1D;
+			this.hscaleLimitBrightness.Adjustment.Value = 100D;
 			this.hscaleLimitBrightness.DrawValue = true;
 			this.hscaleLimitBrightness.Digits = 0;
 			this.hscaleLimitBrightness.ValuePos = ((global::Gtk.PositionType)(3));
@@ -244,7 +244,8 @@ namespace BlinkStickClient
 			this.labelLedConfigurationHint = new global::Gtk.Label ();
 			this.labelLedConfigurationHint.Name = "labelLedConfigurationHint";
 			this.labelLedConfigurationHint.Xalign = 0F;
-			this.labelLedConfigurationHint.LabelProp = global::Mono.Unix.Catalog.GetString ("<i>Configure the number of LEDs connected to the device. The configuration is used by patterns to play multi LED animations.</i>");
+			this.labelLedConfigurationHint.LabelProp = global::Mono.Unix.Catalog.GetString ("<i>Configure the number of LEDs connected to the device. The configuration is use" +
+			"d by patterns to play multi LED animations.</i>");
 			this.labelLedConfigurationHint.UseMarkup = true;
 			this.labelLedConfigurationHint.Wrap = true;
 			this.table1.Add (this.labelLedConfigurationHint);
@@ -436,12 +437,12 @@ namespace BlinkStickClient
 			w27.XOptions = ((global::Gtk.AttachOptions)(4));
 			w27.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
-			this.spinbuttonChannelB = new global::Gtk.SpinButton (0, 64, 1);
+			this.spinbuttonChannelB = new global::Gtk.SpinButton (0D, 64D, 1D);
 			this.spinbuttonChannelB.WidthRequest = 30;
 			this.spinbuttonChannelB.CanFocus = true;
 			this.spinbuttonChannelB.Name = "spinbuttonChannelB";
-			this.spinbuttonChannelB.Adjustment.PageIncrement = 10;
-			this.spinbuttonChannelB.ClimbRate = 1;
+			this.spinbuttonChannelB.Adjustment.PageIncrement = 10D;
+			this.spinbuttonChannelB.ClimbRate = 1D;
 			this.spinbuttonChannelB.Numeric = true;
 			this.table1.Add (this.spinbuttonChannelB);
 			global::Gtk.Table.TableChild w28 = ((global::Gtk.Table.TableChild)(this.table1 [this.spinbuttonChannelB]));
@@ -452,12 +453,12 @@ namespace BlinkStickClient
 			w28.XOptions = ((global::Gtk.AttachOptions)(4));
 			w28.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
-			this.spinbuttonChannelG = new global::Gtk.SpinButton (0, 64, 1);
+			this.spinbuttonChannelG = new global::Gtk.SpinButton (0D, 64D, 1D);
 			this.spinbuttonChannelG.WidthRequest = 30;
 			this.spinbuttonChannelG.CanFocus = true;
 			this.spinbuttonChannelG.Name = "spinbuttonChannelG";
-			this.spinbuttonChannelG.Adjustment.PageIncrement = 10;
-			this.spinbuttonChannelG.ClimbRate = 1;
+			this.spinbuttonChannelG.Adjustment.PageIncrement = 10D;
+			this.spinbuttonChannelG.ClimbRate = 1D;
 			this.spinbuttonChannelG.Numeric = true;
 			this.table1.Add (this.spinbuttonChannelG);
 			global::Gtk.Table.TableChild w29 = ((global::Gtk.Table.TableChild)(this.table1 [this.spinbuttonChannelG]));
@@ -468,12 +469,12 @@ namespace BlinkStickClient
 			w29.XOptions = ((global::Gtk.AttachOptions)(4));
 			w29.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
-			this.spinbuttonChannelR = new global::Gtk.SpinButton (0, 64, 1);
+			this.spinbuttonChannelR = new global::Gtk.SpinButton (0D, 64D, 1D);
 			this.spinbuttonChannelR.WidthRequest = 30;
 			this.spinbuttonChannelR.CanFocus = true;
 			this.spinbuttonChannelR.Name = "spinbuttonChannelR";
-			this.spinbuttonChannelR.Adjustment.PageIncrement = 10;
-			this.spinbuttonChannelR.ClimbRate = 1;
+			this.spinbuttonChannelR.Adjustment.PageIncrement = 10D;
+			this.spinbuttonChannelR.ClimbRate = 1D;
 			this.spinbuttonChannelR.Numeric = true;
 			this.table1.Add (this.spinbuttonChannelR);
 			global::Gtk.Table.TableChild w30 = ((global::Gtk.Table.TableChild)(this.table1 [this.spinbuttonChannelR]));

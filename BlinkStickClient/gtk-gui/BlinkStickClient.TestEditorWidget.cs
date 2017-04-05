@@ -34,15 +34,15 @@ namespace BlinkStickClient
 			w1.Fill = false;
 			// Container child hbox1.Gtk.Box+BoxChild
 			this.comboboxFrequency = global::Gtk.ComboBox.NewText ();
-			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("Disabled"));
-			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("1 second"));
-			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("5 seconds"));
-			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("15 seconds"));
-			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("30 seconds"));
-			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("1 minute"));
-			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("5 minutes"));
-			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("15 minutes"));
-			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("30 minutes"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("Disabled\r"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("1 second\r"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("5 seconds\r"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("15 seconds\r"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("30 seconds\r"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("1 minute\r"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("5 minutes\r"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("15 minutes\r"));
+			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("30 minutes\r"));
 			this.comboboxFrequency.AppendText (global::Mono.Unix.Catalog.GetString ("1 hour"));
 			this.comboboxFrequency.Name = "comboboxFrequency";
 			this.hbox1.Add (this.comboboxFrequency);

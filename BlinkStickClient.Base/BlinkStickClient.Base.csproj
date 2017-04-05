@@ -87,6 +87,8 @@
     <Compile Include="DataModel\DeviceNotification.cs" />
     <Compile Include="DataModel\NotificationKeyboard.cs" />
     <Compile Include="Utils\KeyboardHook.cs" />
+    <Compile Include="DataModel\NotificationStart.cs" />
+    <Compile Include="DataModel\NotificationExit.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

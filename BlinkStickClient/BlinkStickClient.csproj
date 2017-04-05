@@ -105,7 +105,6 @@
     <EmbeddedResource Include="Resources\notifications\group-background.png" />
     <EmbeddedResource Include="Resources\notifications\group-hardware.png" />
     <EmbeddedResource Include="Resources\notifications\group-services.png" />
-    <EmbeddedResource Include="Resources\notifications\group-test.png" />
     <EmbeddedResource Include="Resources\notifications\group-email.png" />
     <EmbeddedResource Include="Resources\blinkstick-nano.png" />
     <EmbeddedResource Include="Resources\blinkstick-flex.png" />
@@ -147,6 +146,7 @@
     <EmbeddedResource Include="Resources\icons\icon-dark-exclamation-triangle-large.png" />
     <EmbeddedResource Include="Resources\icons\icon-dark-question-circle-large.png" />
     <EmbeddedResource Include="Resources\icons\icon-dark-times-circle-large.png" />
+    <EmbeddedResource Include="Resources\notifications\group-utilities.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />

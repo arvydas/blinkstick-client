@@ -77,7 +77,7 @@ namespace BlinkStickClient
 			w1.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.comboboxSizeType = global::Gtk.ComboBox.NewText ();
-			this.comboboxSizeType.AppendText (global::Mono.Unix.Catalog.GetString ("MB"));
+			this.comboboxSizeType.AppendText (global::Mono.Unix.Catalog.GetString ("MB\r"));
 			this.comboboxSizeType.AppendText (global::Mono.Unix.Catalog.GetString ("GB"));
 			this.comboboxSizeType.Name = "comboboxSizeType";
 			this.table1.Add (this.comboboxSizeType);
@@ -133,13 +133,13 @@ namespace BlinkStickClient
 			w6.XOptions = ((global::Gtk.AttachOptions)(4));
 			w6.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
-			this.spinbuttonCheckPeriod = new global::Gtk.SpinButton (1, 120, 1);
+			this.spinbuttonCheckPeriod = new global::Gtk.SpinButton (1D, 120D, 1D);
 			this.spinbuttonCheckPeriod.CanFocus = true;
 			this.spinbuttonCheckPeriod.Name = "spinbuttonCheckPeriod";
-			this.spinbuttonCheckPeriod.Adjustment.PageIncrement = 10;
-			this.spinbuttonCheckPeriod.ClimbRate = 1;
+			this.spinbuttonCheckPeriod.Adjustment.PageIncrement = 10D;
+			this.spinbuttonCheckPeriod.ClimbRate = 1D;
 			this.spinbuttonCheckPeriod.Numeric = true;
-			this.spinbuttonCheckPeriod.Value = 1;
+			this.spinbuttonCheckPeriod.Value = 1D;
 			this.table1.Add (this.spinbuttonCheckPeriod);
 			global::Gtk.Table.TableChild w7 = ((global::Gtk.Table.TableChild)(this.table1 [this.spinbuttonCheckPeriod]));
 			w7.TopAttach = ((uint)(2));
@@ -149,13 +149,13 @@ namespace BlinkStickClient
 			w7.XOptions = ((global::Gtk.AttachOptions)(4));
 			w7.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
-			this.spinbuttonSize = new global::Gtk.SpinButton (1, 1000, 1);
+			this.spinbuttonSize = new global::Gtk.SpinButton (1D, 1000D, 1D);
 			this.spinbuttonSize.CanFocus = true;
 			this.spinbuttonSize.Name = "spinbuttonSize";
-			this.spinbuttonSize.Adjustment.PageIncrement = 10;
-			this.spinbuttonSize.ClimbRate = 1;
+			this.spinbuttonSize.Adjustment.PageIncrement = 10D;
+			this.spinbuttonSize.ClimbRate = 1D;
 			this.spinbuttonSize.Numeric = true;
-			this.spinbuttonSize.Value = 1;
+			this.spinbuttonSize.Value = 1D;
 			this.table1.Add (this.spinbuttonSize);
 			global::Gtk.Table.TableChild w8 = ((global::Gtk.Table.TableChild)(this.table1 [this.spinbuttonSize]));
 			w8.TopAttach = ((uint)(1));

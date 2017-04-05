@@ -277,9 +277,21 @@ public partial class MainWindow: Gtk.Window
 
         }
 
-        NotificationRegistry.Register("Test", 
+        NotificationRegistry.Register("Utilities", 
             "Simple test notification", 
             typeof(NotificationTest),
+            typeof(TestEditorWidget),
+            Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.notifications.notification-test.png"));
+
+        NotificationRegistry.Register("Utilities", 
+            "Play pattern after BlinkStick Client application starts", 
+            typeof(NotificationStart),
+            typeof(TestEditorWidget),
+            Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.notifications.notification-test.png"));
+
+        NotificationRegistry.Register("Utilities", 
+            "Play pattern before BlinkStick Client application exits", 
+            typeof(NotificationExit),
             typeof(TestEditorWidget),
             Gdk.Pixbuf.LoadFromResource ("BlinkStickClient.Resources.notifications.notification-test.png"));
 

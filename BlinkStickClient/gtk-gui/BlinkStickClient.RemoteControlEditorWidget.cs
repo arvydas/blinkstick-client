@@ -74,11 +74,11 @@ namespace BlinkStickClient
 			w4.XOptions = ((global::Gtk.AttachOptions)(4));
 			w4.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
-			this.spinbuttonPort = new global::Gtk.SpinButton (1, 65535, 1);
+			this.spinbuttonPort = new global::Gtk.SpinButton (1D, 65535D, 1D);
 			this.spinbuttonPort.CanFocus = true;
 			this.spinbuttonPort.Name = "spinbuttonPort";
-			this.spinbuttonPort.Adjustment.PageIncrement = 10;
-			this.spinbuttonPort.ClimbRate = 1;
+			this.spinbuttonPort.Adjustment.PageIncrement = 10D;
+			this.spinbuttonPort.ClimbRate = 1D;
 			this.spinbuttonPort.Numeric = true;
 			this.table1.Add (this.spinbuttonPort);
 			global::Gtk.Table.TableChild w5 = ((global::Gtk.Table.TableChild)(this.table1 [this.spinbuttonPort]));

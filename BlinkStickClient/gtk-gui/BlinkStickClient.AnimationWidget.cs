@@ -93,9 +93,9 @@ namespace BlinkStickClient
 			this.alignment2.BottomPadding = ((uint)(3));
 			// Container child alignment2.Gtk.Container+ContainerChild
 			this.comboboxMode = global::Gtk.ComboBox.NewText ();
-			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Set Color"));
-			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Blink"));
-			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Morph"));
+			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Set Color\r"));
+			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Blink\r"));
+			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Morph\r"));
 			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Pulse"));
 			this.comboboxMode.Name = "comboboxMode";
 			this.alignment2.Add (this.comboboxMode);
@@ -195,11 +195,11 @@ namespace BlinkStickClient
 			w15.Expand = false;
 			w15.Fill = false;
 			// Container child hboxSetColor.Gtk.Box+BoxChild
-			this.spinbuttonSetColorDelay = new global::Gtk.SpinButton (0, 10000, 1);
+			this.spinbuttonSetColorDelay = new global::Gtk.SpinButton (0D, 10000D, 1D);
 			this.spinbuttonSetColorDelay.CanFocus = true;
 			this.spinbuttonSetColorDelay.Name = "spinbuttonSetColorDelay";
-			this.spinbuttonSetColorDelay.Adjustment.PageIncrement = 10;
-			this.spinbuttonSetColorDelay.ClimbRate = 1;
+			this.spinbuttonSetColorDelay.Adjustment.PageIncrement = 10D;
+			this.spinbuttonSetColorDelay.ClimbRate = 1D;
 			this.spinbuttonSetColorDelay.Numeric = true;
 			this.hboxSetColor.Add (this.spinbuttonSetColorDelay);
 			global::Gtk.Box.BoxChild w16 = ((global::Gtk.Box.BoxChild)(this.hboxSetColor [this.spinbuttonSetColorDelay]));
@@ -227,13 +227,13 @@ namespace BlinkStickClient
 			w18.Expand = false;
 			w18.Fill = false;
 			// Container child hboxBlink.Gtk.Box+BoxChild
-			this.spinbuttonBlinkDelay = new global::Gtk.SpinButton (10, 10000, 1);
+			this.spinbuttonBlinkDelay = new global::Gtk.SpinButton (10D, 10000D, 1D);
 			this.spinbuttonBlinkDelay.CanFocus = true;
 			this.spinbuttonBlinkDelay.Name = "spinbuttonBlinkDelay";
-			this.spinbuttonBlinkDelay.Adjustment.PageIncrement = 10;
-			this.spinbuttonBlinkDelay.ClimbRate = 1;
+			this.spinbuttonBlinkDelay.Adjustment.PageIncrement = 10D;
+			this.spinbuttonBlinkDelay.ClimbRate = 1D;
 			this.spinbuttonBlinkDelay.Numeric = true;
-			this.spinbuttonBlinkDelay.Value = 10;
+			this.spinbuttonBlinkDelay.Value = 10D;
 			this.hboxBlink.Add (this.spinbuttonBlinkDelay);
 			global::Gtk.Box.BoxChild w19 = ((global::Gtk.Box.BoxChild)(this.hboxBlink [this.spinbuttonBlinkDelay]));
 			w19.Position = 1;
@@ -251,13 +251,13 @@ namespace BlinkStickClient
 			w20.Expand = false;
 			w20.Fill = false;
 			// Container child hboxBlink.Gtk.Box+BoxChild
-			this.spinbuttonBlinkRepeat = new global::Gtk.SpinButton (1, 100, 1);
+			this.spinbuttonBlinkRepeat = new global::Gtk.SpinButton (1D, 100D, 1D);
 			this.spinbuttonBlinkRepeat.CanFocus = true;
 			this.spinbuttonBlinkRepeat.Name = "spinbuttonBlinkRepeat";
-			this.spinbuttonBlinkRepeat.Adjustment.PageIncrement = 10;
-			this.spinbuttonBlinkRepeat.ClimbRate = 1;
+			this.spinbuttonBlinkRepeat.Adjustment.PageIncrement = 10D;
+			this.spinbuttonBlinkRepeat.ClimbRate = 1D;
 			this.spinbuttonBlinkRepeat.Numeric = true;
-			this.spinbuttonBlinkRepeat.Value = 1;
+			this.spinbuttonBlinkRepeat.Value = 1D;
 			this.hboxBlink.Add (this.spinbuttonBlinkRepeat);
 			global::Gtk.Box.BoxChild w21 = ((global::Gtk.Box.BoxChild)(this.hboxBlink [this.spinbuttonBlinkRepeat]));
 			w21.Position = 3;
@@ -284,13 +284,13 @@ namespace BlinkStickClient
 			w23.Expand = false;
 			w23.Fill = false;
 			// Container child hboxPulse.Gtk.Box+BoxChild
-			this.spinbuttonPulseDuration = new global::Gtk.SpinButton (10, 10000, 1);
+			this.spinbuttonPulseDuration = new global::Gtk.SpinButton (10D, 10000D, 1D);
 			this.spinbuttonPulseDuration.CanFocus = true;
 			this.spinbuttonPulseDuration.Name = "spinbuttonPulseDuration";
-			this.spinbuttonPulseDuration.Adjustment.PageIncrement = 10;
-			this.spinbuttonPulseDuration.ClimbRate = 1;
+			this.spinbuttonPulseDuration.Adjustment.PageIncrement = 10D;
+			this.spinbuttonPulseDuration.ClimbRate = 1D;
 			this.spinbuttonPulseDuration.Numeric = true;
-			this.spinbuttonPulseDuration.Value = 10;
+			this.spinbuttonPulseDuration.Value = 10D;
 			this.hboxPulse.Add (this.spinbuttonPulseDuration);
 			global::Gtk.Box.BoxChild w24 = ((global::Gtk.Box.BoxChild)(this.hboxPulse [this.spinbuttonPulseDuration]));
 			w24.Position = 1;
@@ -308,13 +308,13 @@ namespace BlinkStickClient
 			w25.Expand = false;
 			w25.Fill = false;
 			// Container child hboxPulse.Gtk.Box+BoxChild
-			this.spinbuttonPulseRepeat = new global::Gtk.SpinButton (1, 100, 1);
+			this.spinbuttonPulseRepeat = new global::Gtk.SpinButton (1D, 100D, 1D);
 			this.spinbuttonPulseRepeat.CanFocus = true;
 			this.spinbuttonPulseRepeat.Name = "spinbuttonPulseRepeat";
-			this.spinbuttonPulseRepeat.Adjustment.PageIncrement = 10;
-			this.spinbuttonPulseRepeat.ClimbRate = 1;
+			this.spinbuttonPulseRepeat.Adjustment.PageIncrement = 10D;
+			this.spinbuttonPulseRepeat.ClimbRate = 1D;
 			this.spinbuttonPulseRepeat.Numeric = true;
-			this.spinbuttonPulseRepeat.Value = 1;
+			this.spinbuttonPulseRepeat.Value = 1D;
 			this.hboxPulse.Add (this.spinbuttonPulseRepeat);
 			global::Gtk.Box.BoxChild w26 = ((global::Gtk.Box.BoxChild)(this.hboxPulse [this.spinbuttonPulseRepeat]));
 			w26.Position = 3;
@@ -341,13 +341,13 @@ namespace BlinkStickClient
 			w28.Expand = false;
 			w28.Fill = false;
 			// Container child hboxMorph.Gtk.Box+BoxChild
-			this.spinbuttonMorphDuration = new global::Gtk.SpinButton (10, 10000, 1);
+			this.spinbuttonMorphDuration = new global::Gtk.SpinButton (10D, 10000D, 1D);
 			this.spinbuttonMorphDuration.CanFocus = true;
 			this.spinbuttonMorphDuration.Name = "spinbuttonMorphDuration";
-			this.spinbuttonMorphDuration.Adjustment.PageIncrement = 10;
-			this.spinbuttonMorphDuration.ClimbRate = 1;
+			this.spinbuttonMorphDuration.Adjustment.PageIncrement = 10D;
+			this.spinbuttonMorphDuration.ClimbRate = 1D;
 			this.spinbuttonMorphDuration.Numeric = true;
-			this.spinbuttonMorphDuration.Value = 10;
+			this.spinbuttonMorphDuration.Value = 10D;
 			this.hboxMorph.Add (this.spinbuttonMorphDuration);
 			global::Gtk.Box.BoxChild w29 = ((global::Gtk.Box.BoxChild)(this.hboxMorph [this.spinbuttonMorphDuration]));
 			w29.Position = 1;

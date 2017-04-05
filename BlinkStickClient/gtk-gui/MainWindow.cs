@@ -58,7 +58,7 @@ public partial class MainWindow
 		this.EventsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Events");
 		w1.Add (this.EventsAction, null);
 		this.SettingsAction = new global::Gtk.RadioAction ("SettingsAction", global::Mono.Unix.Catalog.GetString ("Settings"), null, "icon-dark-cog", 4);
-		this.SettingsAction.Group = this.EventsAction.Group;
+		this.SettingsAction.Group = this.OverviewAction.Group;
 		this.SettingsAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Settings");
 		w1.Add (this.SettingsAction, null);
 		this.QuitAction = new global::Gtk.Action ("QuitAction", global::Mono.Unix.Catalog.GetString ("Quit"), null, "icon-dark-sign-out");
@@ -94,7 +94,7 @@ public partial class MainWindow
 		w2.Expand = false;
 		w2.Fill = false;
 		// Container child vbox4.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString ("<ui><toolbar name='toolbar2'><toolitem name='OverviewAction' action='OverviewAction'/><toolitem name='NotificationsAction' action='NotificationsAction'/><toolitem name='PatternsAction' action='PatternsAction'/><toolitem name='EventsAction' action='EventsAction'/><toolitem name='SettingsAction' action='SettingsAction'/><toolitem name='HelpAction' action='HelpAction'/><toolitem name='QuitAction' action='QuitAction'/></toolbar></ui>");
+		this.UIManager.AddUiFromString (@"<ui><toolbar name='toolbar2'><toolitem name='OverviewAction' action='OverviewAction'/><toolitem name='NotificationsAction' action='NotificationsAction'/><toolitem name='PatternsAction' action='PatternsAction'/><toolitem name='EventsAction' action='EventsAction'/><toolitem name='SettingsAction' action='SettingsAction'/><toolitem name='HelpAction' action='HelpAction'/><toolitem name='QuitAction' action='QuitAction'/></toolbar></ui>");
 		this.toolbar2 = ((global::Gtk.Toolbar)(this.UIManager.GetWidget ("/toolbar2")));
 		this.toolbar2.Name = "toolbar2";
 		this.toolbar2.Orientation = ((global::Gtk.Orientation)(1));

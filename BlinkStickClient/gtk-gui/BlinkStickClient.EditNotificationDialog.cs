@@ -138,8 +138,8 @@ namespace BlinkStickClient
 			this.hboxChannel.Spacing = 6;
 			// Container child hboxChannel.Gtk.Box+BoxChild
 			this.comboboxChannel = global::Gtk.ComboBox.NewText ();
-			this.comboboxChannel.AppendText (global::Mono.Unix.Catalog.GetString ("R"));
-			this.comboboxChannel.AppendText (global::Mono.Unix.Catalog.GetString ("G"));
+			this.comboboxChannel.AppendText (global::Mono.Unix.Catalog.GetString ("R\r"));
+			this.comboboxChannel.AppendText (global::Mono.Unix.Catalog.GetString ("G\r"));
 			this.comboboxChannel.AppendText (global::Mono.Unix.Catalog.GetString ("B"));
 			this.comboboxChannel.Name = "comboboxChannel";
 			this.hboxChannel.Add (this.comboboxChannel);
@@ -160,11 +160,11 @@ namespace BlinkStickClient
 			this.hboxLedConfiguration.Name = "hboxLedConfiguration";
 			this.hboxLedConfiguration.Spacing = 6;
 			// Container child hboxLedConfiguration.Gtk.Box+BoxChild
-			this.spinbuttonLedsFrom = new global::Gtk.SpinButton (0, 63, 1);
+			this.spinbuttonLedsFrom = new global::Gtk.SpinButton (0D, 63D, 1D);
 			this.spinbuttonLedsFrom.CanFocus = true;
 			this.spinbuttonLedsFrom.Name = "spinbuttonLedsFrom";
-			this.spinbuttonLedsFrom.Adjustment.PageIncrement = 10;
-			this.spinbuttonLedsFrom.ClimbRate = 1;
+			this.spinbuttonLedsFrom.Adjustment.PageIncrement = 10D;
+			this.spinbuttonLedsFrom.ClimbRate = 1D;
 			this.spinbuttonLedsFrom.Numeric = true;
 			this.hboxLedConfiguration.Add (this.spinbuttonLedsFrom);
 			global::Gtk.Box.BoxChild w9 = ((global::Gtk.Box.BoxChild)(this.hboxLedConfiguration [this.spinbuttonLedsFrom]));
@@ -181,11 +181,11 @@ namespace BlinkStickClient
 			w10.Expand = false;
 			w10.Fill = false;
 			// Container child hboxLedConfiguration.Gtk.Box+BoxChild
-			this.spinbuttonLedsTo = new global::Gtk.SpinButton (0, 63, 1);
+			this.spinbuttonLedsTo = new global::Gtk.SpinButton (0D, 63D, 1D);
 			this.spinbuttonLedsTo.CanFocus = true;
 			this.spinbuttonLedsTo.Name = "spinbuttonLedsTo";
-			this.spinbuttonLedsTo.Adjustment.PageIncrement = 10;
-			this.spinbuttonLedsTo.ClimbRate = 1;
+			this.spinbuttonLedsTo.Adjustment.PageIncrement = 10D;
+			this.spinbuttonLedsTo.ClimbRate = 1D;
 			this.spinbuttonLedsTo.Numeric = true;
 			this.hboxLedConfiguration.Add (this.spinbuttonLedsTo);
 			global::Gtk.Box.BoxChild w11 = ((global::Gtk.Box.BoxChild)(this.hboxLedConfiguration [this.spinbuttonLedsTo]));
