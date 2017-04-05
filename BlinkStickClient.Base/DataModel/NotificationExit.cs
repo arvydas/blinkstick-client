@@ -30,7 +30,7 @@ namespace BlinkStickClient.DataModel
 
         public override bool IsSupported()
         {
-            return true;
+            return false;
         }
 
         public override bool RequiresMonitoring()
