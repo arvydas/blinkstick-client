@@ -95,7 +95,7 @@ namespace BlinkStickClient.DataModel
 
         void ProcessChanged (object sender, ProcessChangedEventArgs e)
         {
-            if (Path.GetFileName(e.ExecutableFileName).ToLower().Contains(this.SearchString.ToLower()))
+			if (Path.GetFileName(e.ExecutableFileName).ToLower().Contains(this.SearchString.ToLower()))
             {
 				if (LastEventTime.AddMilliseconds (100) < DateTime.Now) 
 				{

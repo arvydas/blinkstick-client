@@ -30,8 +30,10 @@ namespace BlinkStickClient.Utils
 
         protected void OnWindowTextChanged(String windowText)
         {
-            log.DebugFormat("Window text changed to {0} ", windowText);
-            if (WindowTextChanged != null)
+			log.DebugFormat("Window text changed to {0} ", windowText);
+			lastWindowTitle = windowText;
+
+			if (WindowTextChanged != null)
             {
                 WindowTextChanged(this, new WindowTextChangedEventArgs(windowText));
             }
@@ -42,6 +44,9 @@ namespace BlinkStickClient.Utils
         ILog log = LogManager.GetLogger("ActiveWindowMonitor");
         IntPtr m_hhook = IntPtr.Zero;
         IntPtr OldWindowHandle = IntPtr.Zero;
+
+		uint TitleCheckTimer;
+		String lastWindowTitle = null;
         #endregion
 
         #region Properties
@@ -69,11 +74,20 @@ namespace BlinkStickClient.Utils
         }
 
         public Boolean UseThreadPool = true;
+
+		public int CheckPeriod { set; get; }
         #endregion
 
         #region Win32API
         Win32Api.WinEventDelegate dele;
         #endregion
+
+		#region Constructor
+		public ActiveWindowMonitor()
+		{
+			this.CheckPeriod = 1000;
+		}
+		#endregion
 
         #region Start/Stop
         public void Start()
@@ -84,6 +98,9 @@ namespace BlinkStickClient.Utils
                 CheckTopLevelProcess();
                 dele = new Win32Api.WinEventDelegate(WinEventProc);
                 m_hhook = Win32Api.SetWinEventHook(Win32Api.EVENT_SYSTEM_FOREGROUND, Win32Api.EVENT_SYSTEM_FOREGROUND, IntPtr.Zero, dele, 0, 0, Win32Api.WINEVENT_OUTOFCONTEXT);
+
+				log.DebugFormat("Starting timer at {0} ms", (uint)(this.CheckPeriod));
+				TitleCheckTimer = GLib.Timeout.Add((uint)(this.CheckPeriod), new GLib.TimeoutHandler(CheckTopLevelProcess));
 
                 log.Info("ActiveWindowMonitor started");
             }
@@ -96,6 +113,8 @@ namespace BlinkStickClient.Utils
                 log.Info("Stopping ActiveWindowMonitor...");
                 Win32Api.UnhookWinEvent(m_hhook);
                 m_hhook = IntPtr.Zero;
+				//Stop timer
+				GLib.Source.Remove(TitleCheckTimer);
                 log.Info("ActiveWindowMonitor stopped");
             }
         }
@@ -114,7 +133,7 @@ namespace BlinkStickClient.Utils
             }
         }
 
-        private void CheckTopLevelProcess()
+        private bool CheckTopLevelProcess()
         {
             IntPtr handle = Win32Api.GetForegroundWindow();
 
@@ -123,17 +142,26 @@ namespace BlinkStickClient.Utils
 
             Process process = Process.GetProcessById((int)processID);
 
-            if (handle.ToInt32() != OldWindowHandle.ToInt32())
-            {
-                OldWindowHandle = handle;
-                OnWindowTextChanged(process.MainWindowTitle);
-            }
+			if (handle.ToInt32 () != OldWindowHandle.ToInt32 ()) 
+			{
+				OldWindowHandle = handle;
+				OnWindowTextChanged (process.MainWindowTitle);
+			} 
+			else 
+			{
+				if (process.MainWindowTitle != lastWindowTitle) 
+				{
+					OnWindowTextChanged (process.MainWindowTitle);
+				}
+			}
+
 
             if (ProcessChanged != null)
             {
-
                 ActiveProcess = ProcessExecutablePath(process);
             }
+
+			return true;
         }
 
         private string ProcessExecutablePath(Process process)
