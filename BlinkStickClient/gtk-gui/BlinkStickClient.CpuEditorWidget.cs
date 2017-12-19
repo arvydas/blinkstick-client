@@ -138,7 +138,7 @@ namespace BlinkStickClient
 			this.table1.ColumnSpacing = ((uint)(6));
 			// Container child table1.Gtk.Table+TableChild
 			this.comboboxTriggerType = global::Gtk.ComboBox.NewText ();
-			this.comboboxTriggerType.AppendText (global::Mono.Unix.Catalog.GetString ("increases above\r"));
+			this.comboboxTriggerType.AppendText (global::Mono.Unix.Catalog.GetString ("increases above"));
 			this.comboboxTriggerType.AppendText (global::Mono.Unix.Catalog.GetString ("drops below"));
 			this.comboboxTriggerType.Name = "comboboxTriggerType";
 			this.table1.Add (this.comboboxTriggerType);

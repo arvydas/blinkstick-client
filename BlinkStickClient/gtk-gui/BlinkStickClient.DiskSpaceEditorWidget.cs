@@ -77,7 +77,7 @@ namespace BlinkStickClient
 			w1.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.comboboxSizeType = global::Gtk.ComboBox.NewText ();
-			this.comboboxSizeType.AppendText (global::Mono.Unix.Catalog.GetString ("MB\r"));
+			this.comboboxSizeType.AppendText (global::Mono.Unix.Catalog.GetString ("MB"));
 			this.comboboxSizeType.AppendText (global::Mono.Unix.Catalog.GetString ("GB"));
 			this.comboboxSizeType.Name = "comboboxSizeType";
 			this.table1.Add (this.comboboxSizeType);

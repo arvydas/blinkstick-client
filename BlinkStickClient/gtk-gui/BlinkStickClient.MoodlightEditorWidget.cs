@@ -41,8 +41,8 @@ namespace BlinkStickClient
 			this.table1.ColumnSpacing = ((uint)(6));
 			// Container child table1.Gtk.Table+TableChild
 			this.comboboxAnimationSpeed = global::Gtk.ComboBox.NewText ();
-			this.comboboxAnimationSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Slow\r"));
-			this.comboboxAnimationSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Normal\r"));
+			this.comboboxAnimationSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Slow"));
+			this.comboboxAnimationSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Normal"));
 			this.comboboxAnimationSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Fast"));
 			this.comboboxAnimationSpeed.Name = "comboboxAnimationSpeed";
 			this.table1.Add (this.comboboxAnimationSpeed);
@@ -55,8 +55,8 @@ namespace BlinkStickClient
 			w1.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.comboboxTransitionSpeed = global::Gtk.ComboBox.NewText ();
-			this.comboboxTransitionSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Slow\r"));
-			this.comboboxTransitionSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Normal\r"));
+			this.comboboxTransitionSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Slow"));
+			this.comboboxTransitionSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Normal"));
 			this.comboboxTransitionSpeed.AppendText (global::Mono.Unix.Catalog.GetString ("Fast"));
 			this.comboboxTransitionSpeed.Name = "comboboxTransitionSpeed";
 			this.table1.Add (this.comboboxTransitionSpeed);

@@ -93,9 +93,9 @@ namespace BlinkStickClient
 			this.alignment2.BottomPadding = ((uint)(3));
 			// Container child alignment2.Gtk.Container+ContainerChild
 			this.comboboxMode = global::Gtk.ComboBox.NewText ();
-			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Set Color\r"));
-			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Blink\r"));
-			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Morph\r"));
+			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Set Color"));
+			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Blink"));
+			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Morph"));
 			this.comboboxMode.AppendText (global::Mono.Unix.Catalog.GetString ("Pulse"));
 			this.comboboxMode.Name = "comboboxMode";
 			this.alignment2.Add (this.comboboxMode);

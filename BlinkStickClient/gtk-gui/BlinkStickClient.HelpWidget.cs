@@ -66,7 +66,7 @@ namespace BlinkStickClient
 			this.label4 = new global::Gtk.Label ();
 			this.label4.Name = "label4";
 			this.label4.Xalign = 0F;
-			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString ("BlinkStick Client application is designed in UK\r\nby Agile Innovative Ltd.");
+			this.label4.LabelProp = global::Mono.Unix.Catalog.GetString ("BlinkStick Client application is designed in UK\nby Agile Innovative Ltd.");
 			this.label4.UseMarkup = true;
 			this.vboxInfo.Add (this.label4);
 			global::Gtk.Box.BoxChild w3 = ((global::Gtk.Box.BoxChild)(this.vboxInfo [this.label4]));

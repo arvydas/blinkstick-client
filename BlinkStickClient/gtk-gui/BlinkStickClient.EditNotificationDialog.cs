@@ -138,8 +138,8 @@ namespace BlinkStickClient
 			this.hboxChannel.Spacing = 6;
 			// Container child hboxChannel.Gtk.Box+BoxChild
 			this.comboboxChannel = global::Gtk.ComboBox.NewText ();
-			this.comboboxChannel.AppendText (global::Mono.Unix.Catalog.GetString ("R\r"));
-			this.comboboxChannel.AppendText (global::Mono.Unix.Catalog.GetString ("G\r"));
+			this.comboboxChannel.AppendText (global::Mono.Unix.Catalog.GetString ("R"));
+			this.comboboxChannel.AppendText (global::Mono.Unix.Catalog.GetString ("G"));
 			this.comboboxChannel.AppendText (global::Mono.Unix.Catalog.GetString ("B"));
 			this.comboboxChannel.Name = "comboboxChannel";
 			this.hboxChannel.Add (this.comboboxChannel);

@@ -160,8 +160,8 @@ namespace BlinkStickClient
 			w9.YOptions = ((global::Gtk.AttachOptions)(4));
 			// Container child table1.Gtk.Table+TableChild
 			this.comboboxLogging = global::Gtk.ComboBox.NewText ();
-			this.comboboxLogging.AppendText (global::Mono.Unix.Catalog.GetString ("Off\r"));
-			this.comboboxLogging.AppendText (global::Mono.Unix.Catalog.GetString ("Light\r"));
+			this.comboboxLogging.AppendText (global::Mono.Unix.Catalog.GetString ("Off"));
+			this.comboboxLogging.AppendText (global::Mono.Unix.Catalog.GetString ("Light"));
 			this.comboboxLogging.AppendText (global::Mono.Unix.Catalog.GetString ("Full"));
 			this.comboboxLogging.WidthRequest = 150;
 			this.comboboxLogging.Name = "comboboxLogging";
