@@ -46,7 +46,7 @@ namespace BlinkStickClient.DataModel
             set;
         }
 
-        private const String DefaultApiAccessAddress = "http://live.blinkstick.com:9292/faye";
+        private const String DefaultApiAccessAddress = "https://live.blinkstick.com/faye";
 
         [JsonIgnore]
         public String CurrentApiAccessAddress {
