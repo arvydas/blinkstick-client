@@ -24,6 +24,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Collections.Generic;
+using System.Net.Security;
 using BlinkStickClient.Bayeux.Classes;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
@@ -477,8 +478,19 @@ namespace BlinkStickClient.Bayeux
 
             var hhd = "POST " + ServerUri.PathAndQuery + " HTTP/1.1\r\n" + head + postData;
 
-		    NetworkStream stream = client.GetStream();
-		    byte[] send = Encoding.ASCII.GetBytes(hhd);
+            Stream stream;
+
+            if (ServerUri.Scheme == "https")
+            {
+                stream = new SslStream(client.GetStream());
+                ((SslStream)stream).AuthenticateAsClient(ServerUri.Host);
+            }
+            else
+            {
+                stream = client.GetStream();
+            }
+
+            byte[] send = Encoding.ASCII.GetBytes(hhd);
 		    stream.Write(send, 0, send.Length);
 
 		    byte[] bytes = new byte[client.ReceiveBufferSize];
