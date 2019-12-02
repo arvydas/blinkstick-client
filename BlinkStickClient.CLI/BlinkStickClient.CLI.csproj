@@ -33,11 +33,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="C5">
+      <HintPath>..\packages\C5.1.0.2.0\lib\net40\C5.dll</HintPath>
+    </Reference>
     <Reference Include="Plossum CommandLine">
       <HintPath>..\packages\Plossum.CommandLine.0.3.0.14\lib\net40\Plossum CommandLine.dll</HintPath>
-    </Reference>
-    <Reference Include="C5">
-      <HintPath>..\packages\C5.2.4.5828.26833\lib\net40\C5.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

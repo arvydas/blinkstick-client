@@ -9,7 +9,7 @@ using System.Runtime.CompilerServices;
 #if DEBUG
 [assembly: AssemblyConfiguration("debug")]
 #else
-[assembly: AssemblyConfiguration("rc10")] //Set beta1, beta2, beta3 and etc. Leave empty for release.
+[assembly: AssemblyConfiguration("rc11")] //Set beta1, beta2, beta3 and etc. Leave empty for release.
 #endif
 [assembly: AssemblyCompany("Agile Innovative Ltd")]
 [assembly: AssemblyProduct("BlinkStick")]

@@ -6,7 +6,7 @@
   </configuration>
   <import>
     <widget-library name="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <widget-library name="../bin/Release/BlinkStickClient.exe" internal="true" />
+    <widget-library name="../bin/Debug/BlinkStickClient.exe" internal="true" />
   </import>
   <icon-factory>
     <icon-set id="icon-dark-bell">
@@ -2211,7 +2211,6 @@ by Agile Innovative Ltd.</property>
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="Label" translatable="yes">Inverse</property>
-                <property name="Active">True</property>
                 <property name="DrawIndicator">True</property>
                 <property name="HasLabel">True</property>
                 <property name="UseUnderline">True</property>
