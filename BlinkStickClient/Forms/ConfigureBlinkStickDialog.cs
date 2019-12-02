@@ -2,6 +2,7 @@
 using BlinkStickClient.DataModel;
 using BlinkStickClient.Classes;
 using BlinkStickDotNet;
+using BlinkStickClient.Utils;
 
 namespace BlinkStickClient
 {
@@ -28,6 +29,11 @@ namespace BlinkStickClient
                     entryName.Text = DeviceSettings.Led.InfoBlock1;
                     entryData.Text = DeviceSettings.Led.InfoBlock2;
                     hscaleLimitBrightness.Value = DeviceSettings.BrightnessLimit;
+
+                    if (DeviceSettings.Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickFlex)
+                    {
+                        spinbuttonChannelR.Value = DeviceSettings.Led.GetLedCount();
+                    }
                 }
 
                 switch (DeviceSettings.Led.BlinkStickDevice)
@@ -100,7 +106,6 @@ namespace BlinkStickClient
                         break;
                     case BlinkStickDeviceEnum.BlinkStickFlex:
 
-                        spinbuttonChannelR.Value = 32;
                         spinbuttonChannelG.Value = 0;
                         spinbuttonChannelB.Value = 0;
 
@@ -115,7 +120,8 @@ namespace BlinkStickClient
                         break;
                 }
 
-                spinbuttonChannelR.Sensitive = DeviceSettings.Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro && radiobuttonModeMultiLED.Active;
+                spinbuttonChannelR.Sensitive = (DeviceSettings.Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro 
+                    || DeviceSettings.Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickFlex) && radiobuttonModeMultiLED.Active;
                 spinbuttonChannelG.Sensitive = DeviceSettings.Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro && radiobuttonModeMultiLED.Active;
                 spinbuttonChannelB.Sensitive = DeviceSettings.Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro && radiobuttonModeMultiLED.Active;
 
@@ -136,6 +142,12 @@ namespace BlinkStickClient
 
         protected void OnButtonOkClicked (object sender, EventArgs e)
         {
+            if (DeviceSettings.Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickFlex && (spinbuttonChannelR.Value < 1 || spinbuttonChannelR.Value > 32))
+            {
+                MessageBox.Show(this, "Please specify the number of LEDs in the range (1..32)", Gtk.MessageType.Error, Gtk.ButtonsType.Ok);
+                return;
+            }
+
             DeviceSettings.Led.InfoBlock1 = entryName.Text;
             DeviceSettings.Led.InfoBlock2 = entryData.Text;
 
@@ -172,6 +184,11 @@ namespace BlinkStickClient
                     break;
                 default:
                     break;
+            }
+
+            if (DeviceSettings.Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickFlex)
+            {
+                DeviceSettings.Led.SetLedCount((byte)spinbuttonChannelR.Value);
             }
 
             this.Respond(Gtk.ResponseType.Ok);
