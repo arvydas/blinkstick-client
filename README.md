@@ -36,6 +36,7 @@ How to build (Windows)
 ----------------------
 
 * Download and install [Microsoft .NET 4.0 Full](http://www.microsoft.com/en-gb/download/details.aspx?id=17718)
+* Download and install [Gtk# 2.12.45]https://xamarin.azureedge.net/GTKforWindows/Windows/gtk-sharp-2.12.45.msi
 * Download and install [Xamarin Studio 5](http://download.xamarin.com/studio/Windows/XamarinStudio-5.9.5.9-0.msi)
 * All dependant libraries are inside the repository or will be restored automatically with NuGet
 
