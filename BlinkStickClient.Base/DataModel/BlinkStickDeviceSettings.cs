@@ -498,6 +498,8 @@ namespace BlinkStickClient.DataModel
                             int sleep = Math.Max(2, (int)(this.LedsR * 3 * 8f / 400f * 1.2)); //number of LEDs times 3 color elements times 8 bytes divided by speed
                             Thread.Sleep(sleep);
 
+							retryCount = 5;
+
                             if (Led != null && Led.BlinkStickDevice == BlinkStickDeviceEnum.BlinkStickPro)
                             {
                                 frame = new byte[this.LedsG * 3];
@@ -531,6 +533,8 @@ namespace BlinkStickClient.DataModel
 
                                 frame = new byte[this.LedsB * 3];
                                 Array.Copy(LedFrame[2], 0, frame, 0, frame.Length); 
+
+								retryCount = 5;
 
 								while (retryCount > 0) //Retry loop
 								{

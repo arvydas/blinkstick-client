@@ -69,6 +69,7 @@ namespace BlinkStickClient.DataModel
             this.LastLed = notification.LedLastIndex;
             this.Device = notification.Device;
             this.Pattern = notification.Pattern;
+			this.Channel = notification.LedChannel;
             this.Repeat = 1;
             this.Duration = 0;
         }
