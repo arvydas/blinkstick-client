@@ -197,6 +197,9 @@ namespace BlinkStickClient
 
         public void SetColor(byte index, Gdk.Color color)
         {
+            if (index >= ColorBuffer.Count)
+                return;
+            
             DetermineDisplayColor(ColorBuffer[index], color);
             ColorBuffer[index].Color = color;
             drawingareaMain.QueueDraw();
